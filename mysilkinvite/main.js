@@ -89,7 +89,11 @@
     if (cur === "INR") return "\u20B9" + amount.toLocaleString("en-IN");
     return "Rs " + amount.toLocaleString("en-US");
   }
+  /* The visitor's own detected currency — the assistant reads this so
+     pricing answers quote ONLY this currency, never other countries'. */
+  var currentCurrency = "USD";
   function applyCurrency(cur) {
+    currentCurrency = cur;
     $all("[data-plan]").forEach(function (el) {
       var p = PRICES[el.getAttribute("data-plan")];
       if (p) el.textContent = fmtPrice(cur, p[cur]);
@@ -98,6 +102,111 @@
   }
   applyCurrency(detectCurrency());
   detectCurrencyByIP();
+
+  /* ---------------- Silk Assistant (rule-based chatbox) ----------------
+     No AI API, no keys, no external requests. Answers come from the small
+     built-in knowledge base below (keyword matching). Pricing answers
+     quote ONLY the visitor's own detected currency (currentCurrency) —
+     other countries' prices are never listed. Runs only on pages that
+     have the chat markup (homepage). */
+  var chatFab = $("#chatFab"), chatPanel = $("#chatPanel"), chatLog = $("#chatLog"),
+      chatForm = $("#chatForm"), chatInput = $("#chatInput"), chatClose = $("#chatClose");
+  if (chatFab && chatPanel && chatLog) {
+    var greeted = false;
+    function chatScroll() { chatLog.scrollTop = chatLog.scrollHeight; }
+    function addMsg(text, who, action) {
+      var d = document.createElement("div");
+      d.className = "chat-msg " + who;
+      d.textContent = text; /* textContent, never innerHTML: user input stays inert */
+      chatLog.appendChild(d);
+      if (action) {
+        var a = document.createElement("a");
+        a.className = "btn gold chat-action";
+        a.href = action.href;
+        a.textContent = action.label;
+        if (action.href.charAt(0) === "#") { on(a, "click", function () { closeChat(); }); }
+        chatLog.appendChild(a);
+      }
+      chatScroll();
+    }
+    function priceAnswer() {
+      var cur = currentCurrency;
+      return "For you, Standard is " + fmtPrice(cur, PRICES.standard[cur]) +
+        " and Premium is " + fmtPrice(cur, PRICES.premium[cur]) +
+        " — a one-time payment, no subscription. Right now the builder is free to try; pricing starts at launch.";
+    }
+    function assistantReply(q) {
+      var s = (q || "").toLowerCase();
+      if (/\b(hi|hello|hey|salam|assalam)\b/.test(s)) {
+        return { text: "Hi! I'm Silk Assistant. I can help with creating an invitation, templates, pricing and RSVP. What would you like to make?" };
+      }
+      if (/price|cost|much|charge|\bfee\b|\bplan\b|pay|buy/.test(s)) {
+        return { text: priceAnswer() };
+      }
+      if (/\bhow\b|creat\w*|mak(e|ing)|made|start|build|begin|\bsteps?\b/.test(s)) {
+        return { text: "It's 3 steps: 1) pick a template, 2) add your names, date, time and venue, 3) share your link and QR code. It takes just a few minutes — no sign-up needed to try.", action: { label: "Open the builder", href: "builder.html" } };
+      }
+      if (/template|design|theme|bird|lantern|butterfl/.test(s)) {
+        return { text: "We have two live templates: Golden Birds — tap a bird and it flies away with a chirp; and Royal Night — glowing lanterns and butterflies. Four more are coming soon: Blush Garden, Emerald Palace, Sunset Mehndi and Golden Hour.", action: { label: "See templates", href: "#templates" } };
+      }
+      if (/rsvp|countdown|calendar|qr|guest|nikah|walima|includ|feature/.test(s)) {
+        return { text: "Every invitation includes RSVP with guest count, a live countdown, Add to Calendar, a QR code for your paper card, and per-guest links. A wedding invitation can carry Nikah and Walima on one page." };
+      }
+      if (/launch|when|soon|available|\bready\b/.test(s)) {
+        return { text: "We're preparing for launch. Right now the builder is free to try with your own names, and pricing is coming soon — a one-time payment, no subscription. Card payments will be added later." };
+      }
+      return { text: "I can help with invitations, pricing, templates and RSVP — what would you like to make?", action: { label: "Start in the builder", href: "builder.html" } };
+    }
+    function ask(q) {
+      var text = (q || "").trim();
+      if (!text) return;
+      addMsg(text, "user");
+      if (chatInput) chatInput.value = "";
+      var typing = document.createElement("div");
+      typing.className = "chat-msg bot typing";
+      typing.textContent = "Silk Assistant is typing…";
+      chatLog.appendChild(typing);
+      chatScroll();
+      setTimeout(function () {
+        if (typing.parentNode) typing.parentNode.removeChild(typing);
+        var r = assistantReply(text);
+        addMsg(r.text, "bot", r.action);
+      }, 650);
+    }
+    function openChat() {
+      chatPanel.classList.remove("hidden");
+      chatPanel.setAttribute("aria-hidden", "false");
+      chatFab.setAttribute("aria-expanded", "true");
+      if (!greeted) {
+        greeted = true;
+        addMsg("Hi! I'm Silk Assistant. Ask me about creating an invitation, templates, pricing or RSVP — or tap a suggestion below.", "bot");
+      }
+      if (chatInput) chatInput.focus();
+    }
+    function closeChat() {
+      chatPanel.classList.add("hidden");
+      chatPanel.setAttribute("aria-hidden", "true");
+      chatFab.setAttribute("aria-expanded", "false");
+      chatFab.focus();
+    }
+    on(chatFab, "click", function () {
+      if (chatPanel.classList.contains("hidden")) openChat(); else closeChat();
+    });
+    on(chatClose, "click", closeChat);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !chatPanel.classList.contains("hidden")) closeChat();
+    });
+    $all(".chat-chip", chatPanel).forEach(function (c) {
+      on(c, "click", function () {
+        if (chatPanel.classList.contains("hidden")) openChat();
+        ask(c.getAttribute("data-q"));
+      });
+    });
+    on(chatForm, "submit", function (e) {
+      e.preventDefault();
+      ask(chatInput ? chatInput.value : "");
+    });
+  }
 
   /* ---------------- FAQ accordion ---------------- */
   $all(".faq-item").forEach(function (item) {
