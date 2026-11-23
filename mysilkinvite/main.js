@@ -57,6 +57,33 @@
     if (lang.indexOf("en-pk") === 0 || lang === "ur" || lang.indexOf("ur-") === 0) return "PKR";
     return "USD";
   }
+  /* IP-based geo detection: the visitor's country comes from their IP
+     address, so an Indian visitor sees rupees, a US visitor sees dollars
+     and a Pakistani visitor sees rupees (Rs) — automatically. Runs after
+     first paint so the page never waits for it. A manual currency choice
+     saved in localStorage always wins and is never overridden. Free HTTPS
+     lookup (ipwho.is, no key). If the lookup fails or is blocked, the
+     timezone/language guess above stays in place. */
+  function detectCurrencyByIP() {
+    if (savedCur) return;
+    if (typeof fetch !== "function") return;
+    var ctrl = null;
+    try {
+      ctrl = new AbortController();
+      setTimeout(function () { try { ctrl.abort(); } catch (e) { /* ignore */ } }, 3000);
+    } catch (e) { ctrl = null; }
+    fetch("https://ipwho.is/", ctrl ? { signal: ctrl.signal } : undefined)
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d || !d.country_code) return;
+        var cc = String(d.country_code).toUpperCase();
+        if (cc === "IN") applyCurrency("INR");
+        else if (cc === "PK") applyCurrency("PKR");
+        else if (cc === "US") applyCurrency("USD");
+        /* any other country keeps the timezone/language guess (default USD) */
+      })
+      .catch(function () { /* offline / blocked — keep timezone guess */ });
+  }
   function fmtPrice(cur, amount) {
     if (cur === "USD") return "$" + amount;
     if (cur === "INR") return "\u20B9" + amount.toLocaleString("en-IN");
@@ -78,6 +105,7 @@
   var savedCur = null;
   try { savedCur = localStorage.getItem("msi-currency"); } catch (e) { /* ignore */ }
   applyCurrency(savedCur || detectCurrency());
+  detectCurrencyByIP();
   $all("[data-cur]").forEach(function (b) {
     b.addEventListener("click", function () { applyCurrency(b.getAttribute("data-cur")); });
   });
