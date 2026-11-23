@@ -58,14 +58,14 @@
     return "USD";
   }
   /* IP-based geo detection: the visitor's country comes from their IP
-     address, so an Indian visitor sees rupees, a US visitor sees dollars
-     and a Pakistani visitor sees rupees (Rs) — automatically. Runs after
-     first paint so the page never waits for it. A manual currency choice
-     saved in localStorage always wins and is never overridden. Free HTTPS
+     address, so an Indian visitor sees only rupees, a US visitor sees only
+     dollars and a Pakistani visitor sees only rupees (Rs). No currency
+     switcher is shown — each visitor sees exactly one price, their own.
+     Runs after first paint so the page never waits for it. Free HTTPS
      lookup (ipwho.is, no key). If the lookup fails or is blocked, the
-     timezone/language guess above stays in place. */
+     timezone/language guess above stays in place. Nothing is saved, so
+     every visit detects fresh from the visitor's current IP. */
   function detectCurrencyByIP() {
-    if (savedCur) return;
     if (typeof fetch !== "function") return;
     var ctrl = null;
     try {
@@ -90,25 +90,14 @@
     return "Rs " + amount.toLocaleString("en-US");
   }
   function applyCurrency(cur) {
-    try { localStorage.setItem("msi-currency", cur); } catch (e) { /* ignore */ }
     $all("[data-plan]").forEach(function (el) {
       var p = PRICES[el.getAttribute("data-plan")];
       if (p) el.textContent = fmtPrice(cur, p[cur]);
     });
-    $all("[data-cur]").forEach(function (b) {
-      var active = b.getAttribute("data-cur") === cur;
-      b.classList.toggle("active", active);
-      b.setAttribute("aria-pressed", active ? "true" : "false");
-    });
     $all("[data-cur-note]").forEach(function (el) { el.textContent = CUR_NOTES[cur]; });
   }
-  var savedCur = null;
-  try { savedCur = localStorage.getItem("msi-currency"); } catch (e) { /* ignore */ }
-  applyCurrency(savedCur || detectCurrency());
+  applyCurrency(detectCurrency());
   detectCurrencyByIP();
-  $all("[data-cur]").forEach(function (b) {
-    b.addEventListener("click", function () { applyCurrency(b.getAttribute("data-cur")); });
-  });
 
   /* ---------------- FAQ accordion ---------------- */
   $all(".faq-item").forEach(function (item) {
