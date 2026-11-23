@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Silk Invite — Digital Invitations for Every Celebration</title>
+<meta name="description" content="Create a beautiful digital invitation with a live interactive card, RSVP, countdown and QR code. Free to try — share it on WhatsApp in minutes.">
+<link rel="canonical" href="https://mysilkinvite.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="My Silk Invite">
+<meta property="og:title" content="My Silk Invite — Digital Invitations for Every Celebration">
+<meta property="og:description" content="Beautiful digital invitations for every celebration. Interactive cards, RSVP, countdown and QR — free to try.">
+<meta property="og:url" content="https://mysilkinvite.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="My Silk Invite — Digital Invitations for Every Celebration">
+<meta name="twitter:description" content="Beautiful digital invitations for every celebration. Interactive cards, RSVP, countdown and QR — free to try.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23b98a1d'/%3E%3Ctext x='32' y='44' font-size='36' text-anchor='middle' fill='%23fff' font-family='Georgia'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.min.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"My Silk Invite","url":"https://mysilkinvite.com/","description":"Beautiful digital invitations for every celebration — interactive cards with RSVP, countdown and QR code.","slogan":"Beautiful digital invitations for every celebration"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is a digital invitation?","acceptedAnswer":{"@type":"Answer","text":"A digital invitation is a beautiful web page for your event — with your names, date, venue, countdown and RSVP. Guests open it from a link or QR code on their phone. No app needed."}},
+{"@type":"Question","name":"Do my guests need an app to open it?","acceptedAnswer":{"@type":"Answer","text":"No. Your invitation opens in any browser on any phone. You share the link on WhatsApp or print the QR code on your paper card."}},
+{"@type":"Question","name":"Can I try it before I pay?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can build your invitation with your own names and preview it free. You only pay when you want to publish and share it."}},
+{"@type":"Question","name":"How do guests RSVP?","acceptedAnswer":{"@type":"Answer","text":"Every invitation has an RSVP form. Guests reply with their name and number of guests, and their replies are collected for you."}},
+{"@type":"Question","name":"Can I use it for events other than weddings?","acceptedAnswer":{"@type":"Answer","text":"Yes. My Silk Invite works for birthdays, parties, baby showers, bridal showers, engagements, anniversaries, graduations and housewarmings — with templates for each."}},
+{"@type":"Question","name":"What will I pay, and when?","acceptedAnswer":{"@type":"Answer","text":"Right now, nothing — the builder is free to try while we prepare for launch. At launch, publishing will be a one-time payment: $19–$29 in the US, ₹999–₹1,499 in India, and Rs 1,999–Rs 4,999 in Pakistan. No subscription."}}
+]}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="My Silk Invite — home">
+      <span class="mark" aria-hidden="true">S</span>
+      <span class="name">My Silk Invite<small>Digital Invitations</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#templates">Templates</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a class="nav-cta" href="builder.html">Create your invitation</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Beautiful digital invitations <em>for every celebration</em></h1>
+        <p class="hero-sub">An invitation your guests can touch — birds that fly away when tapped, lanterns that glow, butterflies that dance. Made in minutes, shared on WhatsApp.</p>
+        <ul class="hero-points">
+          <li>Live interactive card — no video, only code</li>
+          <li>RSVP, countdown, calendar and QR code built in</li>
+          <li>Free to try with your own names</li>
+        </ul>
+        <div class="hero-actions">
+          <a class="btn gold" href="builder.html">Create your invitation</a>
+          <a class="btn light-ghost" href="#templates">See templates</a>
+        </div>
+        <p class="hero-note">Free preview — no sign-up needed to try it.</p>
+      </div>
+      <div>
+        <div class="sky-wrap" id="heroSkyWrap">
+          <canvas class="sky" id="heroSky" aria-hidden="true"></canvas>
+          <div class="inv-card theme-birds" id="heroCard">
+            <div class="inv-eyebrow">Together with their families</div>
+            <div class="inv-names">Sara <span class="amp">&amp;</span> Omar</div>
+            <p class="inv-line">request the honour of your presence<br>at the celebration of their wedding</p>
+            <div class="inv-divider"><span aria-hidden="true">✦</span></div>
+            <div class="inv-date">Saturday, 14 August 2027</div>
+            <div class="inv-venue">7:00 PM · The Rosewood Hall, Chicago</div>
+            <div class="inv-divider"><span aria-hidden="true">♥</span></div>
+            <div class="inv-count" aria-label="Countdown to the wedding">
+              <div class="box"><div class="num cd-d">--</div><div class="lbl">Days</div></div>
+              <div class="box"><div class="num cd-h">--</div><div class="lbl">Hours</div></div>
+              <div class="box"><div class="num cd-m">--</div><div class="lbl">Mins</div></div>
+              <div class="box"><div class="num cd-s">--</div><div class="lbl">Secs</div></div>
+            </div>
+            <div class="inv-actions">
+              <button class="btn gold rsvp-toggle" type="button">RSVP Now</button>
+              <button class="btn ghost" id="heroCal" type="button">Add to Calendar</button>
+            </div>
+            <div class="inv-rsvp hidden">
+              <h3>Will you join us?</h3>
+              <label class="hidden" for="heroGuestName">Your name</label>
+              <input class="rsvp-name" id="heroGuestName" type="text" placeholder="Your name" maxlength="40">
+              <label class="hidden" for="heroGuestCount">Number of guests</label>
+              <select class="rsvp-count" id="heroGuestCount">
+                <option value="1">1 guest</option>
+                <option value="2" selected>2 guests</option>
+                <option value="3">3 guests</option>
+                <option value="4">4 guests</option>
+                <option value="5">5+ guests</option>
+              </select>
+              <div class="inv-choice">
+                <button class="btn gold rsvp-yes" type="button">Joyfully Accepts</button>
+                <button class="btn ghost rsvp-no" type="button">Regretfully Declines</button>
+              </div>
+              <div class="rsvp-msg" aria-live="polite"></div>
+            </div>
+            <div class="inv-foot">Sara ♥ Omar · 14 . 08 . 2027 · Sample invitation</div>
+          </div>
+        </div>
+        <p class="hint">Tap the birds — they fly away. This is a live sample.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="section" id="events">
+    <div class="wrap">
+      <span class="eyebrow">Every occasion</span>
+      <h2>Invitations for every celebration</h2>
+      <p class="lead">One builder, every event. Pick your occasion and start with a template made for it.</p>
+      <div class="cat-grid">
+        <a class="cat-card" href="digital-wedding-invitation.html"><span class="glyph" aria-hidden="true">♥</span><h3>Wedding</h3><p>Nikah, Walima and reception invitations</p></a>
+        <a class="cat-card" href="builder.html?event=Birthday"><span class="glyph" aria-hidden="true">✦</span><h3>Birthday</h3><p>Bright, playful cards for any age</p></a>
+        <a class="cat-card" href="builder.html?event=Party"><span class="glyph" aria-hidden="true">✦</span><h3>Party</h3><p>Dinner, dholki and get-together invites</p></a>
+        <a class="cat-card" href="builder.html?event=Baby%20Shower"><span class="glyph" aria-hidden="true">♥</span><h3>Baby Shower</h3><p>Soft and sweet welcomes</p></a>
+        <a class="cat-card" href="builder.html?event=Bridal%20Shower"><span class="glyph" aria-hidden="true">✦</span><h3>Bridal Shower</h3><p>Celebrate the bride-to-be</p></a>
+        <a class="cat-card" href="builder.html?event=Engagement"><span class="glyph" aria-hidden="true">♥</span><h3>Engagement</h3><p>Share the happy news in style</p></a>
+        <a class="cat-card" href="builder.html?event=Anniversary"><span class="glyph" aria-hidden="true">✦</span><h3>Anniversary</h3><p>Milestone years, golden words</p></a>
+        <a class="cat-card" href="builder.html?event=Graduation"><span class="glyph" aria-hidden="true">✦</span><h3>Graduation</h3><p>Caps off to the graduate</p></a>
+        <a class="cat-card" href="builder.html?event=Housewarming"><span class="glyph" aria-hidden="true">♥</span><h3>Housewarming</h3><p>Welcome friends to your new home</p></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how">
+    <div class="wrap">
+      <span class="eyebrow">Simple by design</span>
+      <h2>How it works</h2>
+      <p class="lead">From blank page to shared invitation in three steps — no design skills needed.</p>
+      <div class="steps">
+        <div class="step"><div class="num" aria-hidden="true">1</div><h3>Pick a template</h3><p>Choose a design you love — Golden Birds, Royal Night, and more on the way.</p></div>
+        <div class="step"><div class="num" aria-hidden="true">2</div><h3>Add your names &amp; details</h3><p>Names, date, time and venue. The preview updates live as you type.</p></div>
+        <div class="step"><div class="num" aria-hidden="true">3</div><h3>Share your link &amp; QR</h3><p>Send the link on WhatsApp or print the QR code on your paper card.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMPLATES -->
+  <section class="section" id="templates">
+    <div class="wrap">
+      <span class="eyebrow">Templates</span>
+      <h2>Templates that move</h2>
+      <p class="lead">Every template is interactive — tap the birds, the butterflies, the lanterns. No video, only code, so it loads fast on any phone.</p>
+      <div class="gallery">
+        <article class="tpl-card">
+          <div class="tpl-sw birds"><span class="tpl-tag">Wedding · Live</span></div>
+          <div class="tpl-body">
+            <h3>Golden Birds</h3>
+            <p>Warm ivory and gold. Birds drift across a sunset sky — tap one and it flies away with a chirp.</p>
+            <a class="btn gold" href="builder.html?template=birds">Use this template</a>
+          </div>
+        </article>
+        <article class="tpl-card">
+          <div class="tpl-sw royal"><span class="tpl-tag">Wedding · Live</span></div>
+          <div class="tpl-body">
+            <h3>Royal Night</h3>
+            <p>Deep emerald and gold under a moonlit sky. Butterflies, glowing lanterns and gold dust.</p>
+            <a class="btn gold" href="builder.html?template=royal">Use this template</a>
+          </div>
+        </article>
+        <article class="tpl-card">
+          <div class="tpl-sw coming"><span class="tpl-tag">Birthday</span></div>
+          <div class="tpl-body">
+            <h3>Blush Garden</h3>
+            <p>Soft blush blooms for birthdays and baby showers.</p>
+            <span class="badge-soon">Coming soon</span>
+          </div>
+        </article>
+        <article class="tpl-card">
+          <div class="tpl-sw coming"><span class="tpl-tag">Wedding</span></div>
+          <div class="tpl-body">
+            <h3>Emerald Palace</h3>
+            <p>Regal arches and gold for nikah and walima evenings.</p>
+            <span class="badge-soon">Coming soon</span>
+          </div>
+        </article>
+        <article class="tpl-card">
+          <div class="tpl-sw coming"><span class="tpl-tag">Mehndi</span></div>
+          <div class="tpl-body">
+            <h3>Sunset Mehndi</h3>
+            <p>Marigolds and warm light for mehndi and sangeet.</p>
+            <span class="badge-soon">Coming soon</span>
+          </div>
+        </article>
+        <article class="tpl-card">
+          <div class="tpl-sw coming"><span class="tpl-tag">Party</span></div>
+          <div class="tpl-body">
+            <h3>Golden Hour</h3>
+            <p>Confetti and warm glow for parties and graduations.</p>
+            <span class="badge-soon">Coming soon</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section pricing" id="pricing">
+    <div class="wrap">
+      <span class="eyebrow">Pricing · Coming soon</span>
+      <h2>Simple one-time pricing</h2>
+      <p class="lead">When we launch, you pay once for your invitation. No subscription, no per-guest fees. Until then, the builder is free to try.</p>
+      <div class="cur-switch" role="group" aria-label="Choose your currency">
+        <button type="button" data-cur="USD">US $</button>
+        <button type="button" data-cur="INR">India ₹</button>
+        <button type="button" data-cur="PKR">Pakistan Rs</button>
+      </div>
+      <div class="plans">
+        <div class="plan">
+          <h3>Free Preview</h3>
+          <div class="price">$0</div>
+          <div class="per">Try it with your own names</div>
+          <ul>
+            <li>Build with any template</li>
+            <li>Live preview with your details</li>
+            <li>Countdown and calendar</li>
+          </ul>
+        </div>
+        <div class="plan featured">
+          <span class="flag">Most popular</span>
+          <h3>Standard</h3>
+          <div class="price" data-plan="standard">$19</div>
+          <div class="per">One invitation, one event</div>
+          <ul>
+            <li>Everything in Free Preview</li>
+            <li>Publish and share your link</li>
+            <li>QR code for your printed card</li>
+            <li>RSVP form for your guests</li>
+          </ul>
+          <span class="badge-soon">Coming soon</span>
+        </div>
+        <div class="plan">
+          <h3>Premium</h3>
+          <div class="price" data-plan="premium">$29</div>
+          <div class="per">The full celebration</div>
+          <ul>
+            <li>Everything in Standard</li>
+            <li>All templates, including new ones</li>
+            <li>Multiple events — Nikah &amp; Walima</li>
+            <li>Per-guest links and RSVP inbox</li>
+          </ul>
+          <span class="badge-soon">Coming soon</span>
+        </div>
+      </div>
+      <p class="price-note" data-cur-note>Prices in US dollars — one-time payment, no subscription.</p>
+      <p class="price-note">Publishing and payments open at launch. For now, <a href="builder.html">try the builder free</a> — your design is saved in your browser.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="wrap">
+      <span class="eyebrow">Questions</span>
+      <h2>Frequently asked questions</h2>
+      <div class="faq">
+        <div class="faq-item">
+          <button class="faq-q" type="button">What is a digital invitation? <span class="mark" aria-hidden="true">+</span></button>
+          <div class="faq-a"><p>A digital invitation is a beautiful web page for your event — with your names, date, venue, countdown and RSVP. Guests open it from a link or QR code on their phone. No app needed.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">Do my guests need an app to open it? <span class="mark" aria-hidden="true">+</span></button>
+          <div class="faq-a"><p>No. Your invitation opens in any browser on any phone. You share the link on WhatsApp or print the QR code on your paper card.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">Can I try it before I pay? <span class="mark" aria-hidden="true">+</span></button>
+          <div class="faq-a"><p>Yes. You can build your invitation with your own names and preview it free. You only pay when you want to publish and share it.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">How do guests RSVP? <span class="mark" aria-hidden="true">+</span></button>
+          <div class="faq-a"><p>Every invitation has an RSVP form. Guests reply with their name and number of guests, and their replies are collected for you.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">Can I use it for events other than weddings? <span class="mark" aria-hidden="true">+</span></button>
+          <div class="faq-a"><p>Yes. My Silk Invite works for birthdays, parties, baby showers, bridal showers, engagements, anniversaries, graduations and housewarmings — with templates for each.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">What will I pay, and when? <span class="mark" aria-hidden="true">+</span></button>
+          <div class="faq-a"><p>Right now, nothing — the builder is free to try while we prepare for launch. At launch, publishing will be a one-time payment: $19–$29 in the US, ₹999–₹1,499 in India, and Rs 1,999–Rs 4,999 in Pakistan. No subscription.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-band">
+        <h2>Ready to send something beautiful?</h2>
+        <p>Your invitation is three steps away. Build it free, preview it with your names, share it when you love it.</p>
+        <a class="btn gold" href="builder.html">Create your invitation</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h3>My Silk Invite</h3>
+        <p>Beautiful digital invitations for every celebration. Interactive cards, RSVP, countdown and QR — made in minutes, shared on WhatsApp.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="digital-wedding-invitation.html">Digital wedding invitation</a></li>
+          <li><a href="builder.html">Create your invitation</a></li>
+          <li><a href="#templates">Templates</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Events</h4>
+        <ul>
+          <li><a href="digital-wedding-invitation.html">Wedding</a></li>
+          <li><a href="builder.html?event=Birthday">Birthday</a></li>
+          <li><a href="builder.html?event=Party">Party</a></li>
+          <li><a href="builder.html?event=Baby%20Shower">Baby Shower</a></li>
+          <li><a href="builder.html?event=Engagement">Engagement</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">© 2026 My Silk Invite · mysilkinvite.com · Made with care, in code — no video needed.</div>
+  </div>
+</footer>
+
+<div class="sticky-cta" role="complementary">
+  <a class="btn gold" href="builder.html">Create your invitation — free to try</a>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>

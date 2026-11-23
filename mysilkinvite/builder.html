@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Your Invitation — Free Preview | My Silk Invite</title>
+<meta name="description" content="Build your own digital invitation in minutes. Pick a template, add your names and details, preview it live, then share your link and QR code.">
+<link rel="canonical" href="https://mysilkinvite.com/builder.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="My Silk Invite">
+<meta property="og:title" content="Create Your Invitation — Free Preview | My Silk Invite">
+<meta property="og:description" content="Pick a template, add your names and details, preview it live, then share your link and QR code.">
+<meta property="og:url" content="https://mysilkinvite.com/builder.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Create Your Invitation — Free Preview | My Silk Invite">
+<meta name="twitter:description" content="Pick a template, add your names and details, preview it live, then share your link and QR code.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23b98a1d'/%3E%3Ctext x='32' y='44' font-size='36' text-anchor='middle' fill='%23fff' font-family='Georgia'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.min.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="My Silk Invite — home">
+      <span class="mark" aria-hidden="true">S</span>
+      <span class="name">My Silk Invite<small>Digital Invitations</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html#templates">Templates</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#faq">FAQ</a>
+      <a class="nav-cta" href="builder.html">Create your invitation</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="section" id="builder">
+    <div class="wrap">
+      <div id="builderTop"></div>
+      <span class="eyebrow">Free to try</span>
+      <h1 style="text-align:center;font-size:clamp(26px,5vw,36px);">Create your invitation</h1>
+      <p class="lead">Three steps. The preview on the right updates live as you type — what you see is what your guests will see.</p>
+
+      <div class="builder-steps" role="list" aria-label="Builder progress">
+        <span class="bstep active" role="listitem" data-step="1" aria-current="step">1 · Template</span>
+        <span class="bstep" role="listitem" data-step="2">2 · Your details</span>
+        <span class="bstep" role="listitem" data-step="3">3 · Preview &amp; share</span>
+      </div>
+
+      <div class="builder-grid">
+        <div>
+          <!-- STEP 1 -->
+          <div id="bstepPanel1">
+            <div class="form-card">
+              <h3>Choose a template</h3>
+              <p style="color:var(--muted);margin:6px 0 16px;">Tap one to select it — the preview updates straight away.</p>
+              <div class="pick-grid">
+                <button class="pick-card selected" type="button" data-template="birds" aria-pressed="true">
+                  <span class="tpl-sw birds"><span class="tpl-tag">Wedding · Live</span></span>
+                  <span class="tpl-body">
+                    <h3>Golden Birds</h3>
+                    <p>Warm ivory and gold. Tap a bird — it flies away with a chirp.</p>
+                  </span>
+                </button>
+                <button class="pick-card" type="button" data-template="royal" aria-pressed="false">
+                  <span class="tpl-sw royal"><span class="tpl-tag">Wedding · Live</span></span>
+                  <span class="tpl-body">
+                    <h3>Royal Night</h3>
+                    <p>Emerald and gold under the moon. Butterflies and glowing lanterns.</p>
+                  </span>
+                </button>
+              </div>
+              <div class="form-actions">
+                <button class="btn gold" id="toStep2" type="button">Continue to details →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div id="bstepPanel2" class="hidden">
+            <div class="form-card">
+              <h3>Your details</h3>
+              <p style="color:var(--muted);margin:6px 0 8px;">Type and watch the preview change.</p>
+              <label for="fName1">First name</label>
+              <input id="fName1" type="text" placeholder="e.g. Sara" maxlength="30" autocomplete="off">
+              <label for="fName2">Second name <span style="color:var(--muted);font-family:inherit;font-size:15px;">(optional — leave blank for birthdays)</span></label>
+              <input id="fName2" type="text" placeholder="e.g. Omar" maxlength="30" autocomplete="off">
+              <label for="fEvent">Event</label>
+              <select id="fEvent">
+                <option>Wedding</option>
+                <option>Nikah</option>
+                <option>Walima</option>
+                <option>Birthday</option>
+                <option>Party</option>
+                <option>Baby Shower</option>
+                <option>Bridal Shower</option>
+                <option>Engagement</option>
+                <option>Anniversary</option>
+                <option>Graduation</option>
+                <option>Housewarming</option>
+              </select>
+              <div class="row2">
+                <div>
+                  <label for="fDate">Date</label>
+                  <input id="fDate" type="date">
+                </div>
+                <div>
+                  <label for="fTime">Time</label>
+                  <input id="fTime" type="time" value="19:00">
+                </div>
+              </div>
+              <label for="fVenue">Venue</label>
+              <input id="fVenue" type="text" placeholder="e.g. The Rosewood Hall, Chicago" maxlength="60" autocomplete="off">
+              <label for="fHost">Host line</label>
+              <input id="fHost" type="text" value="Together with their families" maxlength="60" autocomplete="off">
+              <p class="hint">Your design is saved in this browser as you type.</p>
+              <div class="form-actions">
+                <button class="btn ghost" id="backToStep1" type="button">← Back</button>
+                <button class="btn gold" id="toStep3" type="button">See preview &amp; share →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div id="bstepPanel3" class="hidden">
+            <div class="share-box">
+              <h3>Share your invitation</h3>
+              <p>Your link is ready to copy. Publishing opens at launch — for now your design is saved in this browser.</p>
+              <label for="shareLink" style="font-family:Georgia,'Times New Roman',serif;font-size:17px;color:var(--emerald);display:block;margin-bottom:6px;">Your invitation link</label>
+              <div class="link-row">
+                <input id="shareLink" type="text" readonly value="https://mysilkinvite.com/invite/my-invitation" aria-label="Your invitation link">
+                <button class="btn gold" id="copyLink" type="button">Copy link</button>
+              </div>
+              <div class="qr-zone">
+                <canvas id="qrCanvas" width="168" height="168" role="img" aria-label="Preview QR code pattern — your real QR code is generated when you publish"></canvas>
+                <p class="qr-note">Preview pattern — your real QR code is generated when you publish, and guests can scan it from your printed card.</p>
+              </div>
+              <div class="form-actions">
+                <button class="btn ghost" id="backToStep2" type="button">← Edit details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LIVE PREVIEW -->
+        <div>
+          <div class="sky-wrap" id="pvSkyWrap">
+            <canvas class="sky" id="pvSky" aria-hidden="true"></canvas>
+            <div class="inv-card theme-birds" id="pvCard">
+              <div class="inv-eyebrow" id="pvHost">Together with their families</div>
+              <div class="inv-names" id="pvNames">Your Names</div>
+              <p class="inv-line" id="pvLine">request the honour of your presence at the celebration of their wedding</p>
+              <div class="inv-divider"><span aria-hidden="true">✦</span></div>
+              <div class="inv-date" id="pvDate">Pick a date to see it here</div>
+              <div class="inv-venue" id="pvVenue">Your venue</div>
+              <div class="inv-divider"><span aria-hidden="true">♥</span></div>
+              <div class="inv-count" aria-label="Countdown to your event">
+                <div class="box"><div class="num cd-d">--</div><div class="lbl">Days</div></div>
+                <div class="box"><div class="num cd-h">--</div><div class="lbl">Hours</div></div>
+                <div class="box"><div class="num cd-m">--</div><div class="lbl">Mins</div></div>
+                <div class="box"><div class="num cd-s">--</div><div class="lbl">Secs</div></div>
+              </div>
+              <div class="inv-actions">
+                <button class="btn gold rsvp-toggle" type="button">RSVP Now</button>
+                <button class="btn ghost" id="pvCal" type="button">Add to Calendar</button>
+              </div>
+              <div class="inv-rsvp hidden">
+                <h3>Will you join us?</h3>
+                <label class="hidden" for="pvGuestName">Your name</label>
+                <input class="rsvp-name" id="pvGuestName" type="text" placeholder="Your name" maxlength="40">
+                <label class="hidden" for="pvGuestCount">Number of guests</label>
+                <select class="rsvp-count" id="pvGuestCount">
+                  <option value="1">1 guest</option>
+                  <option value="2" selected>2 guests</option>
+                  <option value="3">3 guests</option>
+                  <option value="4">4 guests</option>
+                  <option value="5">5+ guests</option>
+                </select>
+                <div class="inv-choice">
+                  <button class="btn gold rsvp-yes" type="button">Joyfully Accepts</button>
+                  <button class="btn ghost rsvp-no" type="button">Regretfully Declines</button>
+                </div>
+                <div class="rsvp-msg" aria-live="polite"></div>
+              </div>
+              <div class="inv-foot">My Silk Invite · mysilkinvite.com</div>
+            </div>
+          </div>
+          <p class="hint" style="text-align:center;margin-top:12px;font-style:italic;color:var(--muted);">Live preview — tap the birds or butterflies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h3>My Silk Invite</h3>
+        <p>Beautiful digital invitations for every celebration. Interactive cards, RSVP, countdown and QR — made in minutes, shared on WhatsApp.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="digital-wedding-invitation.html">Digital wedding invitation</a></li>
+          <li><a href="builder.html">Create your invitation</a></li>
+          <li><a href="index.html#templates">Templates</a></li>
+          <li><a href="index.html#pricing">Pricing</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Events</h4>
+        <ul>
+          <li><a href="digital-wedding-invitation.html">Wedding</a></li>
+          <li><a href="builder.html?event=Birthday">Birthday</a></li>
+          <li><a href="builder.html?event=Party">Party</a></li>
+          <li><a href="builder.html?event=Baby%20Shower">Baby Shower</a></li>
+          <li><a href="builder.html?event=Engagement">Engagement</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">© 2026 My Silk Invite · mysilkinvite.com · Made with care, in code — no video needed.</div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
