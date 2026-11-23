@@ -107,8 +107,9 @@
      No AI API, no keys, no external requests. Answers come from the small
      built-in knowledge base below (keyword matching). Pricing answers
      quote ONLY the visitor's own detected currency (currentCurrency) —
-     other countries' prices are never listed. Runs only on pages that
-     have the chat markup (homepage). */
+     other countries' prices are never listed. Answers in English and in
+     Roman Urdu: if the visitor writes Roman Urdu, the reply is Roman
+     Urdu too. Runs only on pages that have the chat markup (homepage). */
   var chatFab = $("#chatFab"), chatPanel = $("#chatPanel"), chatLog = $("#chatLog"),
       chatForm = $("#chatForm"), chatInput = $("#chatInput"), chatClose = $("#chatClose");
   if (chatFab && chatPanel && chatLog) {
@@ -135,8 +136,37 @@
         " and Premium is " + fmtPrice(cur, PRICES.premium[cur]) +
         " — a one-time payment, no subscription. Right now the builder is free to try; pricing starts at launch.";
     }
+    function priceAnswerRU() {
+      var cur = currentCurrency;
+      return "Aap ke liye Standard " + fmtPrice(cur, PRICES.standard[cur]) +
+        " aur Premium " + fmtPrice(cur, PRICES.premium[cur]) +
+        " hai — ek dafa ki payment, koi subscription nahi. Abhi builder free try kar sakte hain; pricing launch par shuru hogi.";
+    }
     function assistantReply(q) {
       var s = (q || "").toLowerCase();
+      /* Roman Urdu: if the visitor writes Roman Urdu, answer in Roman Urdu. */
+      var ru = /\b(aoa|salam|assalam|salaam|keemat|qeemat|kitn\w+|paisa\w+|kaise|kaisay|banaye|banayen|banana|banao|banega|tareeq\w+|tarika|shadi|shaadi|mehman\w+|kab|chahiye|mujhe|mer\w+|aap|apn\w+|kya|hai|hain|bata\w+|kar\w+|wala|walay|wali|nahi|nahin|aur|bhi|mein)\b/.test(s);
+      if (ru) {
+        if (/\b(aoa|salam|assalam|salaam)\b/.test(s)) {
+          return { text: "Salam! Main Silk Assistant hoon. Main invitation banane, templates, pricing aur RSVP mein madad kar sakti hoon. Aap kya banana chahte hain?" };
+        }
+        if (/keemat|qeemat|kitn\w+|paisa\w+|\bprice\b|\bcost\b|rate|kharcha/.test(s)) {
+          return { text: priceAnswerRU() };
+        }
+        if (/kaise|kaisay|banaye|banayen|banana|banao|banega|tareeq\w+|tarika|shuru/.test(s)) {
+          return { text: "3 steps hain: 1) template chunein, 2) apne naam, tareekh, waqt aur venue likhein, 3) link aur QR code share karein. Sirf kuch minute lagte hain — try karne ke liye sign-up bhi nahi chahiye.", action: { label: "Open the builder", href: "builder.html" } };
+        }
+        if (/template|design|shadi|shaadi|nikah|walima|mehndi|bird|lantern|butterfl/.test(s)) {
+          return { text: "Hamare paas 2 live templates hain: Golden Birds — parinde par tap karein toh woh ur jata hai; aur Royal Night — roshan lanterns aur titliyan. 4 aur jald aa rahe hain: Blush Garden, Emerald Palace, Sunset Mehndi aur Golden Hour.", action: { label: "See templates", href: "#templates" } };
+        }
+        if (/rsvp|mehman\w+|countdown|calendar|qr|guest|includ|feature/.test(s)) {
+          return { text: "Har invitation mein RSVP (mehmanon ki ginti ke saath), live countdown, Add to Calendar, paper card ke liye QR code aur har mehman ke liye alag link shamil hai. Ek wedding invitation mein Nikah aur Walima dono ek page par ho sakte hain." };
+        }
+        if (/launch|kab|tayyar|jald|available/.test(s)) {
+          return { text: "Hum launch ki tayyari kar rahe hain. Abhi builder apne naamon ke saath free try kar sakte hain, aur pricing jald aa rahi hai — ek dafa ki payment, koi subscription nahi. Card payment baad mein aayegi." };
+        }
+        return { text: "Main invitations, pricing, templates aur RSVP mein madad kar sakti hoon — aap kya banana chahte hain?", action: { label: "Start in the builder", href: "builder.html" } };
+      }
       if (/\b(hi|hello|hey|salam|assalam)\b/.test(s)) {
         return { text: "Hi! I'm Silk Assistant. I can help with creating an invitation, templates, pricing and RSVP. What would you like to make?" };
       }
