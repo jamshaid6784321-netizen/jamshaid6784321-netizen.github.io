@@ -134,29 +134,61 @@
       var cur = currentCurrency;
       return "For you, Standard is " + fmtPrice(cur, PRICES.standard[cur]) +
         " and Premium is " + fmtPrice(cur, PRICES.premium[cur]) +
-        " — a one-time payment, no subscription. Right now the builder is free to try; pricing starts at launch.";
+        " — a one-time payment, no subscription. The builder is free to try right now; payments open at launch.";
     }
     function priceAnswerRU() {
       var cur = currentCurrency;
       return "Aap ke liye Standard " + fmtPrice(cur, PRICES.standard[cur]) +
         " aur Premium " + fmtPrice(cur, PRICES.premium[cur]) +
-        " hai — ek dafa ki payment, koi subscription nahi. Abhi builder free try kar sakte hain; pricing launch par shuru hogi.";
+        " hai — ek dafa ki payment, koi subscription nahi. Abhi builder free try kar sakte hain; payment launch par khulegi.";
+    }
+    /* Event detection: birthday, anniversary, engagement, baby shower,
+       graduation, housewarming, mehndi, nikah, walima, wedding, party. */
+    function eventName(s) {
+      if (/\bbirthday\b/.test(s)) return "Birthday";
+      if (/\banniversary\b/.test(s)) return "Anniversary";
+      if (/\bengagement\b/.test(s)) return "Engagement";
+      if (/baby\s*shower/.test(s)) return "Baby shower";
+      if (/\bgraduation\b/.test(s)) return "Graduation";
+      if (/housewarming/.test(s)) return "Housewarming";
+      if (/\bmehndi\b/.test(s)) return "Mehndi";
+      if (/\bnikah\b/.test(s)) return "Nikah";
+      if (/\bwalima\b/.test(s)) return "Walima";
+      if (/\bshaadi\b|\bshadi\b|\bwedding\b/.test(s)) return "Wedding";
+      if (/\bparty\b/.test(s)) return "Party";
+      return null;
     }
     function assistantReply(q) {
       var s = (q || "").toLowerCase();
       /* Roman Urdu: if the visitor writes Roman Urdu, answer in Roman Urdu. */
-      var ru = /\b(aoa|salam|assalam|salaam|keemat|qeemat|kitn\w+|paisa\w+|kaise|kaisay|banaye|banayen|banana|banao|banega|tareeq\w+|tarika|shadi|shaadi|mehman\w+|kab|chahiye|mujhe|mer\w+|aap|apn\w+|kya|hai|hain|bata\w+|kar\w+|wala|walay|wali|nahi|nahin|aur|bhi|mein)\b/.test(s);
+      var ru = /\b(aoa|salam|assalam|salaam|keemat|qeemat|kitn\w+|paisa\w+|kaise|kaisay|bna\w*|kr\w*|tareeq\w+|tarika|shadi|shaadi|mehman\w+|kab|chahiye|chahye|mujhe|mer\w+|aap|apn\w+|kya|hai|ha|hain|bata\w+|btao|wala|walay|wali|nahi|nahin|aur|bhi|mein|liye|lye|lya|din|\bmil\w+)\b/.test(s);
       if (ru) {
         if (/\b(aoa|salam|assalam|salaam)\b/.test(s)) {
           return { text: "Salam! Main Silk Assistant hoon. Main invitation banane, templates, pricing aur RSVP mein madad kar sakti hoon. Aap kya banana chahte hain?" };
         }
+        if (/deliver\w*|shipping|\bdin\b|\bmil\w+|pahunche|pohnche|kab (milega|aayega|aega)|der lag/.test(s)) {
+          return { text: "Koi physical delivery nahi hai — ye digital invitation hai. Card banate hi link aur QR code mil jata hai, foran mehmanon ko share kar sakte hain." };
+        }
+        if (/payment|\bpay\b|card se|jazzcash|easypaisa|bank|transfer/.test(s)) {
+          return { text: "Payment launch par khulegi — card se pay kar sakenge. Abhi builder free try kar sakte hain, invitation pehle bana lein, payment launch par hogi." };
+        }
+        if (/\bfree\b|muft|bina pais\w*/.test(s)) {
+          return { text: "Haan — builder abhi free try kar sakte hain, aur Free Preview $0 hai. Standard aur Premium paid plans hain jo launch par khulenge." };
+        }
+        if (/discount|offer|promo|coupon|\bsale\b|sasta/.test(s)) {
+          return { text: "Abhi koi discount nahi chal raha — price Standard " + fmtPrice(currentCurrency, PRICES.standard[currentCurrency]) + " aur Premium " + fmtPrice(currentCurrency, PRICES.premium[currentCurrency]) + " hai, ek dafa ki payment." };
+        }
+        var ev = eventName(s);
+        if (ev) {
+          return { text: "Bilkul! " + ev + " ke liye invitation yahan bana sakte hain — template chunein, naam, tareekh aur venue likhein, phir link aur QR code share karein. Sirf kuch minute lagte hain. Golden Birds aur Royal Night templates kisi bhi celebration ke liye hain.", action: { label: "Open the builder", href: "builder.html" } };
+        }
         if (/keemat|qeemat|kitn\w+|paisa\w+|\bprice\b|\bcost\b|rate|kharcha/.test(s)) {
           return { text: priceAnswerRU() };
         }
-        if (/kaise|kaisay|banaye|banayen|banana|banao|banega|tareeq\w+|tarika|shuru/.test(s)) {
+        if (/kaise|kaisay|bna\w*|tareeq\w+|tarika|shuru/.test(s)) {
           return { text: "3 steps hain: 1) template chunein, 2) apne naam, tareekh, waqt aur venue likhein, 3) link aur QR code share karein. Sirf kuch minute lagte hain — try karne ke liye sign-up bhi nahi chahiye.", action: { label: "Open the builder", href: "builder.html" } };
         }
-        if (/template|design|shadi|shaadi|nikah|walima|mehndi|bird|lantern|butterfl/.test(s)) {
+        if (/template|design|shadi|shaadi|nikah|walima|mehndi|bird|lantern|butterfl|\bcard\b/.test(s)) {
           return { text: "Hamare paas 2 live templates hain: Golden Birds — parinde par tap karein toh woh ur jata hai; aur Royal Night — roshan lanterns aur titliyan. 4 aur jald aa rahe hain: Blush Garden, Emerald Palace, Sunset Mehndi aur Golden Hour.", action: { label: "See templates", href: "#templates" } };
         }
         if (/rsvp|mehman\w+|countdown|calendar|qr|guest|includ|feature/.test(s)) {
@@ -165,10 +197,26 @@
         if (/launch|kab|tayyar|jald|available/.test(s)) {
           return { text: "Hum launch ki tayyari kar rahe hain. Abhi builder apne naamon ke saath free try kar sakte hain, aur pricing jald aa rahi hai — ek dafa ki payment, koi subscription nahi. Card payment baad mein aayegi." };
         }
-        return { text: "Main invitations, pricing, templates aur RSVP mein madad kar sakti hoon — aap kya banana chahte hain?", action: { label: "Start in the builder", href: "builder.html" } };
+        return { text: "Main invitations, pricing, templates, RSVP, delivery aur payment mein madad kar sakti hoon — aap kya banana chahte hain?", action: { label: "Start in the builder", href: "builder.html" } };
       }
       if (/\b(hi|hello|hey|salam|assalam)\b/.test(s)) {
         return { text: "Hi! I'm Silk Assistant. I can help with creating an invitation, templates, pricing and RSVP. What would you like to make?" };
+      }
+      if (/deliver\w*|shipping/.test(s)) {
+        return { text: "There's no physical delivery — it's a digital invitation. As soon as you create it, you get a link and a QR code to share instantly with your guests." };
+      }
+      if (/payment|\bpay\b|jazzcash|easypaisa/.test(s)) {
+        return { text: "Payments open at launch — you'll be able to pay by card. Right now the builder is free to try, so you can make your invitation first and pay when we launch." };
+      }
+      if (/\bfree\b|muft/.test(s)) {
+        return { text: "Yes — the builder is free to try right now, and Free Preview costs $0. Standard and Premium are paid plans that open at launch." };
+      }
+      if (/discount|offer|promo|coupon|\bsale\b/.test(s)) {
+        return { text: "No discount is running right now — Standard is " + fmtPrice(currentCurrency, PRICES.standard[currentCurrency]) + " and Premium is " + fmtPrice(currentCurrency, PRICES.premium[currentCurrency]) + ", a one-time payment." };
+      }
+      var evEn = eventName(s);
+      if (evEn) {
+        return { text: "Yes — you can make a " + evEn + " invitation here! Pick a template, add your names, date and venue, then share the link and QR code. It takes just a few minutes. Golden Birds and Royal Night are live now and work for any celebration.", action: { label: "Open the builder", href: "builder.html" } };
       }
       if (/price|cost|much|charge|\bfee\b|\bplan\b|pay|buy/.test(s)) {
         return { text: priceAnswer() };
@@ -176,7 +224,7 @@
       if (/\bhow\b|creat\w*|mak(e|ing)|made|start|build|begin|\bsteps?\b/.test(s)) {
         return { text: "It's 3 steps: 1) pick a template, 2) add your names, date, time and venue, 3) share your link and QR code. It takes just a few minutes — no sign-up needed to try.", action: { label: "Open the builder", href: "builder.html" } };
       }
-      if (/template|design|theme|bird|lantern|butterfl/.test(s)) {
+      if (/template|design|theme|bird|lantern|butterfl|\bcard\b/.test(s)) {
         return { text: "We have two live templates: Golden Birds — tap a bird and it flies away with a chirp; and Royal Night — glowing lanterns and butterflies. Four more are coming soon: Blush Garden, Emerald Palace, Sunset Mehndi and Golden Hour.", action: { label: "See templates", href: "#templates" } };
       }
       if (/rsvp|countdown|calendar|qr|guest|nikah|walima|includ|feature/.test(s)) {
@@ -185,7 +233,7 @@
       if (/launch|when|soon|available|\bready\b/.test(s)) {
         return { text: "We're preparing for launch. Right now the builder is free to try with your own names, and pricing is coming soon — a one-time payment, no subscription. Card payments will be added later." };
       }
-      return { text: "I can help with invitations, pricing, templates and RSVP — what would you like to make?", action: { label: "Start in the builder", href: "builder.html" } };
+      return { text: "I can help with invitations, pricing, templates, RSVP, delivery and payments — what would you like to make?", action: { label: "Start in the builder", href: "builder.html" } };
     }
     function ask(q) {
       var text = (q || "").trim();
