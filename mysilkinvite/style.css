@@ -17,7 +17,7 @@
   --shadow: 0 18px 44px rgba(60, 30, 0, 0.16);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 body {
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 18px;
@@ -52,19 +52,23 @@ img, canvas { max-width: 100%; }
   font-family: Georgia, 'Times New Roman', serif; font-size: 22px; font-weight: 600;
   box-shadow: 0 4px 12px rgba(160, 110, 10, 0.35);
 }
-.brand .name { font-family: Georgia, 'Times New Roman', serif; font-size: 21px; color: var(--emerald); line-height: 1.05; }
+.brand .name { font-family: Georgia, 'Times New Roman', serif; font-size: 21px; color: var(--emerald); line-height: 1.05; white-space: nowrap; }
 .brand .name small { display: block; font-family: Georgia, 'Times New Roman', serif; font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-2); }
-.site-nav { display: flex; align-items: center; gap: 4px; }
-.site-nav a { text-decoration: none; color: var(--emerald); font-size: 17px; padding: 8px 10px; border-radius: 8px; }
+.site-nav { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.site-nav a { text-decoration: none; color: var(--emerald); font-size: 17px; padding: 8px 10px; border-radius: 8px; white-space: nowrap; }
 .site-nav a:hover { background: rgba(217, 164, 65, 0.15); }
 .site-nav .nav-cta {
   background: linear-gradient(180deg, #e9b949, #c08a1e); color: #fff !important;
   border-radius: 999px; padding: 8px 16px; font-family: Georgia, 'Times New Roman', serif; font-size: 15px;
   box-shadow: 0 4px 12px rgba(160, 110, 10, 0.3);
 }
+.cta-short { display: none; }
 @media (max-width: 720px) {
   .site-nav a:not(.nav-cta) { display: none; }
-  .brand .name { font-size: 18px; }
+  .brand .name { font-size: 17px; }
+  .site-nav .nav-cta { font-size: 14px; padding: 8px 12px; }
+  .cta-full { display: none; }
+  .cta-short { display: inline; }
 }
 
 /* ---------- buttons ---------- */
@@ -143,6 +147,7 @@ img, canvas { max-width: 100%; }
 .inv-divider span { font-size: 18px; color: var(--gold); }
 .inv-count { display: flex; justify-content: center; gap: 10px; margin: 6px 0 2px; }
 .inv-count .box { border-radius: 12px; min-width: 62px; padding: 10px 6px; }
+@media (max-width: 400px) { .inv-count { gap: 6px; } .inv-count .box { min-width: 54px; } }
 .theme-birds .inv-count .box { background: #fff8ec; border: 1px solid var(--gold-soft); }
 .theme-royal .inv-count .box { background: rgba(255, 233, 168, 0.08); border: 1px solid var(--gold); }
 .inv-count .num { font-family: Georgia, 'Times New Roman', serif; font-size: 26px; }
@@ -353,15 +358,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* sticky mobile CTA - thumb-friendly, hidden on desktop */
 .sticky-cta {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
-  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  padding: 8px 14px calc(8px + env(safe-area-inset-bottom));
   background: rgba(253, 248, 239, 0.97);
   border-top: 1px solid var(--line);
   display: flex; justify-content: center;
   box-shadow: 0 -6px 20px rgba(60, 30, 0, 0.12);
 }
-.sticky-cta .btn { width: 100%; max-width: 480px; padding: 14px 22px; font-size: 17px; }
+.sticky-cta .btn { width: 100%; max-width: 480px; padding: 12px 22px; font-size: 17px; }
 @media (min-width: 761px) { .sticky-cta { display: none; } }
-@media (max-width: 760px) { body { padding-bottom: 76px; } }
+@media (max-width: 760px) { body { padding-bottom: 68px; } }
 
 /* names render in a script face where the system has one, serif italic otherwise */
 .inv-names, .hero h1 em { font-style: italic; }
