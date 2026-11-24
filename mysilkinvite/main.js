@@ -943,11 +943,13 @@
 
   /* Photo upload with automatic background removal (client-side, free).
      Uses @imgly/background-removal loaded on demand from jsDelivr — no key,
-     no server, the photo never leaves the visitor's device. First use
-     downloads the AI model (~30MB, cached after). If removal fails
-     (offline/CDN blocked), the original photo is shown in an arch frame.
-     The photo is stored separately from the text draft so a big image
-     can never block saving the names and details. */
+     no server, the photo never leaves the visitor's device. The AI model
+     (medium, ~84MB) and its runtime are hosted on this site under
+     bg-removal/ so they load even when the model CDN is blocked; the
+     browser caches them after the first use. If removal fails, the
+     original photo is shown in an arch frame. The photo is stored
+     separately from the text draft so a big image can never block
+     saving the names and details. */
   var bgRemovalLib = null;
   function setPhoto(src, framed) {
     var btn = field("removePhoto");
@@ -997,7 +999,8 @@
     var usedFallback = false;
     downscaleBlob(file, 900).then(function (b) {
       return loadBgRemoval().then(function (lib) {
-        return lib.removeBackground(b, { model: "medium", output: { format: "image/png" } });
+        var bgPath = location.href.split("?")[0].replace(/builder\.html$/, "") + "bg-removal/";
+        return lib.removeBackground(b, { model: "medium", publicPath: bgPath, output: { format: "image/png" } });
       }).catch(function () { usedFallback = true; return b; });
     }).then(function (outBlob) {
       return blobToDataURL(outBlob, 600).then(function (dataUrl) {
@@ -1074,7 +1077,7 @@
       var target = track.scrollLeft + dir * s;
       if (dir > 0 && target > max - 2) target = 0;
       if (dir < 0 && target < 2) target = max;
-      track.scrollTo({ left: target, behavior: "smooth" });
+      track.scrollLeft = target;
     }
     function start() {
       if (REDUCED) return;
