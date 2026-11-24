@@ -746,8 +746,13 @@
   if (tParam && validTemplates[tParam]) state.template = tParam;
   if (params.get("event") && EVENT_LINES[params.get("event")]) state.event = params.get("event");
 
-  var pvCard = $("#pvCard"), pvSky = lazySky($("#pvSky"), state.template);
-  var countTimer = null;
+  /* Long-template preview: the iframe shows the chosen template with the
+     visitor's details (via personalize.js). Templates are fetched once
+     per slug and cached; re-renders are debounced and skipped when
+     nothing changed, so typing does not reload the frame. */
+  var templateCache = {};
+  var previewTimer = null;
+  var lastPreviewKey = "";
 
   function field(id) { return document.getElementById(id); }
   /* Custom event: the visitor picks "Custom event" and types their own
@@ -795,50 +800,47 @@
       .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
     return s || "my-invitation";
   }
-  /* Data-driven preview palette: each pick-card carries its template's
-     colours as data attributes; the preview card reads them as CSS custom
-     properties, so all 31 templates re-theme without a theme class each.
-     The three original themes (birds / royal / rose) keep their classes. */
-  function applyPalette(slug, useCustom) {
-    if (!pvCard) return;
-    var card = $('.pick-card[data-template="' + slug + '"]');
-    ["bg", "inner", "ink", "names", "accent", "soft", "boxbg", "boxbd", "inputbg", "ghost"].forEach(function (p) {
-      var key = "--pv-" + p;
-      if (useCustom && card && card.getAttribute("data-" + p)) {
-        pvCard.style.setProperty(key, card.getAttribute("data-" + p));
-      } else {
-        pvCard.style.removeProperty(key);
-      }
-    });
+  /* The visitor's details as the personaliser wants them, including
+     the uploaded photo (stored in localStorage) when there is one. */
+  function previewUser() {
+    var savedPhoto = read("msi-photo", null);
+    return {
+      n1: state.name1 || "", n2: state.name2 || "",
+      dateISO: state.date || "", time: state.time || "19:00",
+      venue: state.venue || "",
+      host: state.host || "Together with their families",
+      event: eventDisplay(),
+      photo: savedPhoto && savedPhoto.src ? savedPhoto.src : ""
+    };
+  }
+  function renderPreview() {
+    var frame = $("#pvFrame");
+    if (!frame || !window.MSI || !window.MSI.personalize) return;
+    var slug = state.template;
+    var user = previewUser();
+    var key = slug + "|" + user.n1 + "|" + user.n2 + "|" + user.dateISO + "|" +
+      user.time + "|" + user.venue + "|" + user.host + "|" + (user.photo ? "photo" : "");
+    if (key === lastPreviewKey) return;
+    lastPreviewKey = key;
+    function apply(html) {
+      frame.srcdoc = window.MSI.personalize(html, slug, user);
+    }
+    if (templateCache[slug]) { apply(templateCache[slug]); return; }
+    fetch("templates/" + slug + ".html").then(function (r) { return r.text(); }).then(function (html) {
+      templateCache[slug] = html;
+      if (state.template === slug) apply(html);
+    }).catch(function () { /* leave the frame as-is */ });
   }
   function updatePreview() {
-    if (!pvCard) return;
-    var names = (state.name1 || "").trim();
-    if ((state.name2 || "").trim()) names += (names ? " & " : "") + state.name2.trim();
-    $("#pvNames").innerHTML = names
-      ? names.replace(/ & /g, ' <span class="amp">&amp;</span> ')
-      : "Your Names";
-    $("#pvHost").textContent = state.host || "Together with their families";
-    $("#pvLine").textContent = eventLine();
-    var dateTxt = fmtDateLong(state.date);
-    var timeTxt = fmtTime12(state.time);
-    $("#pvDate").textContent = dateTxt ? dateTxt : "Pick a date to see it here";
-    $("#pvVenue").textContent = (timeTxt ? timeTxt + " · " : "") + (state.venue || "Your venue");
-    var iso = state.date && state.time ? state.date + "T" + state.time + ":00" : "";
-    if (countTimer) { clearInterval(countTimer); countTimer = null; }
-    countTimer = bindCountdown(pvCard, iso);
-    var theme = state.template === "royal" ? "theme-royal" : state.template === "rose-gold-gates" ? "theme-rose" : state.template === "birds" ? "theme-birds" : "theme-custom";
-    pvCard.classList.remove("theme-birds", "theme-royal", "theme-rose", "theme-custom");
-    pvCard.classList.add(theme);
-    applyPalette(state.template, theme === "theme-custom");
-    if (pvSky) pvSky.setMode(state.template);
     updateShare();
+    if (previewTimer) clearTimeout(previewTimer);
+    previewTimer = setTimeout(renderPreview, 350);
   }
   function drawQR() {
     var cv = $("#qrCanvas");
     if (!cv) return;
     var ctx = cv.getContext("2d");
-    var N = 25, cell = cv.width / N, s = slugify();
+    var N = 25, cell = cv.width / N, s = inviteURL();
     var h = 0;
     for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
     function bit(x, y) {
@@ -860,9 +862,25 @@
     }
     finder(0, 0); finder(N - 7, 0); finder(0, N - 7);
   }
+  /* Shareable link: invite.html with the visitor's details as params.
+     Built from the current page URL so it works on the preview host
+     and on the live domain alike. */
+  function inviteURL() {
+    var base = location.href.split("?")[0].replace(/builder\.html$/, "");
+    var q = new URLSearchParams();
+    q.set("t", state.template);
+    if ((state.name1 || "").trim()) q.set("n1", state.name1.trim());
+    if ((state.name2 || "").trim()) q.set("n2", state.name2.trim());
+    if (state.date) q.set("d", state.date);
+    if (state.time) q.set("tm", state.time);
+    if ((state.venue || "").trim()) q.set("v", state.venue.trim());
+    if ((state.host || "").trim()) q.set("h", state.host.trim());
+    q.set("e", eventDisplay());
+    return base + "invite.html?" + q.toString();
+  }
   function updateShare() {
     var link = $("#shareLink");
-    if (link) link.value = "https://mysilkinvite.com/invite/" + slugify();
+    if (link) link.value = inviteURL();
     drawQR();
   }
   function saveDraft() { store("msi-draft", state); }
@@ -881,7 +899,6 @@
         ind.setAttribute("aria-current", i === n ? "step" : "false");
       }
     });
-    if (pvSky) pvSky.resize();
     if (n === 3) updateShare();
     var top = $("#builderTop");
     if (top) top.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -933,18 +950,10 @@
      can never block saving the names and details. */
   var bgRemovalLib = null;
   function setPhoto(src, framed) {
-    var w = field("pvPhotoWrap"), img = field("pvPhoto"), btn = field("removePhoto");
-    if (!w || !img) return;
-    if (!src) {
-      w.classList.add("hidden");
-      img.removeAttribute("src");
-      if (btn) btn.classList.add("hidden");
-      return;
-    }
-    img.src = src;
-    w.classList.toggle("framed", !!framed);
-    w.classList.remove("hidden");
-    if (btn) btn.classList.remove("hidden");
+    var btn = field("removePhoto");
+    if (btn) btn.classList.toggle("hidden", !src);
+    lastPreviewKey = "";
+    updatePreview();
   }
   function loadImageFromBlob(blob) {
     return new Promise(function (resolve, reject) {
@@ -1016,8 +1025,7 @@
   var savedPhoto = read("msi-photo", null);
   if (savedPhoto && savedPhoto.src) setPhoto(savedPhoto.src, !!savedPhoto.framed);
 
-  /* preview RSVP + calendar */
-  wireRsvp(pvCard, "msi-rsvp-" + slugify());
+  /* preview calendar */
   on($("#pvCal"), "click", function () {
     if (!state.date) { alert("Please add your event date first."); return; }
     var names = ((state.name1 || "Your") + (state.name2 ? " & " + state.name2 : ""));
