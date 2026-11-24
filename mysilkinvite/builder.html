@@ -343,8 +343,8 @@
                 <button class="btn gold" id="copyLink" type="button">Copy link</button>
               </div>
               <div class="qr-zone">
-                <canvas id="qrCanvas" width="168" height="168" role="img" aria-label="Preview QR code pattern — your real QR code is generated when you publish"></canvas>
-                <p class="qr-note">Preview pattern — your real QR code is generated when you publish, and guests can scan it from your printed card.</p>
+                <canvas id="qrCanvas" width="240" height="240" role="img" aria-label="QR code for your invitation link"></canvas>
+                <p class="qr-note">Scan this QR code to open your invitation. Print it on your paper card — guests just point their phone camera at it.</p>
               </div>
               <div class="form-actions">
                 <button class="btn ghost" id="backToStep2" type="button">← Edit details</button>
@@ -398,6 +398,7 @@
 </footer>
 
 <script src="personalize.js"></script>
+<script src="qrcode.min.js"></script>
 <script src="main.js"></script>
 <script src="auth.js"></script>
 </body>

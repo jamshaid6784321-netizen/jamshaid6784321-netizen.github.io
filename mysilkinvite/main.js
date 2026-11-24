@@ -869,31 +869,47 @@
     if (previewTimer) clearTimeout(previewTimer);
     previewTimer = setTimeout(renderPreview, 350);
   }
+  /* Real QR code for the invite link (qrcode-generator, self-hosted).
+     Error correction H (30%) so the light logo in the centre still scans. */
+  var qrLogoImg = null, qrLogoTried = false;
   function drawQR() {
     var cv = $("#qrCanvas");
     if (!cv) return;
+    if (typeof qrcode === "undefined") return;
+    var qr;
+    try {
+      qr = qrcode(0, "H");
+      qr.addData(inviteURL());
+      qr.make();
+    } catch (e) { return; }
+    var N = qr.getModuleCount(), quiet = 2, total = N + quiet * 2;
+    var cell = total <= 60 ? 4 : 3;
+    var size = cell * total;
+    if (cv.width !== size) { cv.width = size; cv.height = size; }
     var ctx = cv.getContext("2d");
-    var N = 25, cell = cv.width / N, s = inviteURL();
-    var h = 0;
-    for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
-    function bit(x, y) {
-      var v = (h ^ (x * 2654435761) ^ (y * 40503)) >>> 0;
-      return ((v >> ((x + y) % 24)) & 1) === 1;
-    }
-    ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, cv.width, cv.height);
+    ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, size, size);
     ctx.fillStyle = "#062a1a";
-    function finder(fx, fy) {
-      ctx.fillRect(fx * cell, fy * cell, 7 * cell, 7 * cell);
-      ctx.fillStyle = "#ffffff"; ctx.fillRect((fx + 1) * cell, (fy + 1) * cell, 5 * cell, 5 * cell);
-      ctx.fillStyle = "#062a1a"; ctx.fillRect((fx + 2) * cell, (fy + 2) * cell, 3 * cell, 3 * cell);
-    }
     for (var y = 0; y < N; y++) {
       for (var x = 0; x < N; x++) {
-        var inFinder = (x < 8 && y < 8) || (x >= N - 8 && y < 8) || (x < 8 && y >= N - 8);
-        if (!inFinder && bit(x, y)) ctx.fillRect(x * cell, y * cell, cell, cell);
+        if (qr.isDark(y, x)) ctx.fillRect((x + quiet) * cell, (y + quiet) * cell, cell, cell);
       }
     }
-    finder(0, 0); finder(N - 7, 0); finder(0, N - 7);
+    /* Light S logo in the centre — white backdrop + low opacity so the code stays scannable. */
+    if (!qrLogoTried) {
+      qrLogoTried = true;
+      var img = new Image();
+      img.onload = function () { qrLogoImg = img; drawQR(); };
+      img.src = "logo-icon.webp";
+    }
+    if (qrLogoImg) {
+      var ls = size * 0.22;
+      var lx = (size - ls) / 2, ly = (size - ls) / 2;
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(lx - 4, ly - 4, ls + 8, ls + 8);
+      ctx.globalAlpha = 0.45;
+      ctx.drawImage(qrLogoImg, lx, ly, ls, ls);
+      ctx.globalAlpha = 1;
+    }
   }
   /* Shareable link: invite.html with the visitor's details as params.
      Built from the current page URL so it works on the preview host
@@ -918,6 +934,51 @@
   }
   function saveDraft() { store("msi-draft", state); }
 
+  /* ---------- dashboard: save the finished invitation (preview) ----------
+     The dashboard reads these from localStorage key "msi-invites".
+     Saved ONLY when the visitor reaches the share step (step 3) — never
+     on every keystroke (updateShare/updatePreview run while typing).
+     Preview storage only: the SymbolHost backend will sync this list
+     at launch, when accounts and invitations move server-side. */
+  var INVITES_KEY = "msi-invites";
+  var MAX_INVITES = 50;
+  function saveInvitation() {
+    var entry = {
+      id: "",
+      template: state.template || "birds",
+      name1: (state.name1 || "").trim(),
+      name2: (state.name2 || "").trim(),
+      event: eventDisplay(),
+      date: state.date || "",
+      time: state.time || "19:00",
+      venue: (state.venue || "").trim(),
+      url: inviteURL(),
+      createdAt: new Date().toISOString()
+    };
+    var list = read(INVITES_KEY, []);
+    if (!Array.isArray(list)) list = [];
+    var i, found = -1;
+    for (i = 0; i < list.length; i++) {
+      var it = list[i];
+      if (!it || typeof it !== "object") continue;
+      if (it.template === entry.template &&
+          String(it.name1 || "").trim().toLowerCase() === entry.name1.toLowerCase() &&
+          String(it.name2 || "").trim().toLowerCase() === entry.name2.toLowerCase() &&
+          String(it.date || "") === entry.date) { found = i; break; }
+    }
+    if (found >= 0) {
+      /* Same template + names + date: update in place, keep id + created date. */
+      entry.id = list[found].id || ("inv-" + Date.now().toString(36));
+      entry.createdAt = list[found].createdAt || entry.createdAt;
+      list[found] = entry;
+    } else {
+      entry.id = "inv-" + Date.now().toString(36) + "-" + Math.floor(Math.random() * 1296).toString(36);
+      list.push(entry);
+    }
+    while (list.length > MAX_INVITES) list.shift();
+    store(INVITES_KEY, list);
+  }
+
   /* steps */
   var currentStep = 1;
   function showStep(n) {
@@ -932,7 +993,7 @@
         ind.setAttribute("aria-current", i === n ? "step" : "false");
       }
     });
-    if (n === 3) updateShare();
+    if (n === 3) { updateShare(); saveInvitation(); }
     var top = $("#builderTop");
     if (top) top.scrollIntoView({ behavior: "smooth", block: "start" });
   }
