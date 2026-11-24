@@ -38,8 +38,9 @@
 
   /* ---------------- currency / geo pricing ---------------- */
   var PRICES = {
-    standard: { USD: 19, INR: 999, PKR: 1999 },
-    premium: { USD: 29, INR: 1499, PKR: 4999 }
+    basic: { USD: 5, INR: 200, PKR: 500 },
+    standard: { USD: 10, INR: 400, PKR: 1000 },
+    premium: { USD: 15, INR: 600, PKR: 1500 }
   };
   var CUR_NOTES = {
     USD: "Prices in US dollars — one-time payment, no subscription.",
@@ -100,7 +101,7 @@
     });
     $all("[data-cur-note]").forEach(function (el) { el.textContent = CUR_NOTES[cur]; });
     $all("[data-faq-price]").forEach(function (el) {
-      el.textContent = fmtPrice(cur, PRICES.standard[cur]) + "\u2013" + fmtPrice(cur, PRICES.premium[cur]);
+      el.textContent = fmtPrice(cur, PRICES.basic[cur]) + "\u2013" + fmtPrice(cur, PRICES.premium[cur]);
     });
   }
   applyCurrency(detectCurrency());
@@ -135,13 +136,15 @@
     }
     function priceAnswer() {
       var cur = currentCurrency;
-      return "For you, Standard is " + fmtPrice(cur, PRICES.standard[cur]) +
+      return "For you, Basic is " + fmtPrice(cur, PRICES.basic[cur]) +
+        ", Standard is " + fmtPrice(cur, PRICES.standard[cur]) +
         " and Premium is " + fmtPrice(cur, PRICES.premium[cur]) +
         " — a one-time payment, no subscription. The builder is free to try right now; payments open at launch.";
     }
     function priceAnswerRU() {
       var cur = currentCurrency;
-      return "Aap ke liye Standard " + fmtPrice(cur, PRICES.standard[cur]) +
+      return "Aap ke liye Basic " + fmtPrice(cur, PRICES.basic[cur]) +
+        ", Standard " + fmtPrice(cur, PRICES.standard[cur]) +
         " aur Premium " + fmtPrice(cur, PRICES.premium[cur]) +
         " hai — ek dafa ki payment, koi subscription nahi. Abhi builder free try kar sakte hain; payment launch par khulegi.";
     }
@@ -176,10 +179,10 @@
           return { text: "Payment launch par khulegi — card se pay kar sakenge. Abhi builder free try kar sakte hain, invitation pehle bana lein, payment launch par hogi." };
         }
         if (/\bfree\b|muft|bina pais\w*/.test(s)) {
-          return { text: "Haan — builder abhi free try kar sakte hain, aur Free Preview $0 hai. Standard aur Premium paid plans hain jo launch par khulenge." };
+          return { text: "Haan — builder abhi free try kar sakte hain, aur Free Preview $0 hai. Basic, Standard aur Premium paid plans hain jo launch par khulenge." };
         }
         if (/discount|offer|promo|coupon|\bsale\b|sasta/.test(s)) {
-          return { text: "Abhi koi discount nahi chal raha — price Standard " + fmtPrice(currentCurrency, PRICES.standard[currentCurrency]) + " aur Premium " + fmtPrice(currentCurrency, PRICES.premium[currentCurrency]) + " hai, ek dafa ki payment." };
+          return { text: "Abhi koi discount nahi chal raha — price Basic " + fmtPrice(currentCurrency, PRICES.basic[currentCurrency]) + ", Standard " + fmtPrice(currentCurrency, PRICES.standard[currentCurrency]) + " aur Premium " + fmtPrice(currentCurrency, PRICES.premium[currentCurrency]) + " hai, ek dafa ki payment." };
         }
         var ev = eventName(s);
         if (ev) {
@@ -212,10 +215,10 @@
         return { text: "Payments open at launch — you'll be able to pay by card. Right now the builder is free to try, so you can make your invitation first and pay when we launch." };
       }
       if (/\bfree\b|muft/.test(s)) {
-        return { text: "Yes — the builder is free to try right now, and Free Preview costs $0. Standard and Premium are paid plans that open at launch." };
+        return { text: "Yes — the builder is free to try right now, and Free Preview costs $0. Basic, Standard and Premium are paid plans that open at launch." };
       }
       if (/discount|offer|promo|coupon|\bsale\b/.test(s)) {
-        return { text: "No discount is running right now — Standard is " + fmtPrice(currentCurrency, PRICES.standard[currentCurrency]) + " and Premium is " + fmtPrice(currentCurrency, PRICES.premium[currentCurrency]) + ", a one-time payment." };
+        return { text: "No discount is running right now — Basic is " + fmtPrice(currentCurrency, PRICES.basic[currentCurrency]) + ", Standard is " + fmtPrice(currentCurrency, PRICES.standard[currentCurrency]) + " and Premium is " + fmtPrice(currentCurrency, PRICES.premium[currentCurrency]) + ", a one-time payment." };
       }
       var evEn = eventName(s);
       if (evEn) {
@@ -687,7 +690,7 @@
 
   var params = new URLSearchParams(window.location.search || "");
   var state = read("msi-draft", null) || {
-    template: "birds", name1: "", name2: "", event: "Wedding",
+    template: "birds", name1: "", name2: "", event: "Wedding", customEvent: "",
     date: "", time: "19:00", venue: "", host: "Together with their families"
   };
   if (params.get("template") === "royal" || params.get("template") === "birds") state.template = params.get("template");
@@ -697,6 +700,32 @@
   var countTimer = null;
 
   function field(id) { return document.getElementById(id); }
+  /* Custom event: the visitor picks "Custom event" and types their own
+     event name. eventDisplay() is the name shown and shared; eventLine()
+     is the invitation sentence for it. */
+  function eventDisplay() {
+    if (state.event === "custom") {
+      var n = (state.customEvent || "").trim();
+      return n || "Custom event";
+    }
+    return state.event;
+  }
+  function eventLine() {
+    if (state.event === "custom") {
+      var n = (state.customEvent || "").trim();
+      if (!n) return "invite you to celebrate a special occasion";
+      var art = "aeiou".indexOf(n.charAt(0).toLowerCase()) >= 0 ? "an " : "a ";
+      return "invite you to celebrate " + art + n;
+    }
+    return EVENT_LINES[state.event] || EVENT_LINES["Wedding"];
+  }
+  function toggleCustomEvent() {
+    var sel = field("fEvent");
+    var on = !!sel && sel.value === "custom";
+    var w = field("fCustomEvent"), l = field("customEventLabel");
+    if (w) w.classList.toggle("hidden", !on);
+    if (l) l.classList.toggle("hidden", !on);
+  }
   function fmtDateLong(isoDate) {
     if (!isoDate) return "";
     var d = new Date(isoDate + "T12:00:00");
@@ -724,7 +753,7 @@
       ? names.replace(/ & /g, ' <span class="amp">&amp;</span> ')
       : "Your Names";
     $("#pvHost").textContent = state.host || "Together with their families";
-    $("#pvLine").textContent = EVENT_LINES[state.event] || EVENT_LINES["Wedding"];
+    $("#pvLine").textContent = eventLine();
     var dateTxt = fmtDateLong(state.date);
     var timeTxt = fmtTime12(state.time);
     $("#pvDate").textContent = dateTxt ? dateTxt : "Pick a date to see it here";
@@ -820,10 +849,105 @@
   bindField("fName1", "name1");
   bindField("fName2", "name2");
   bindField("fEvent", "event");
+  bindField("fCustomEvent", "customEvent");
+  on(field("fEvent"), "change", toggleCustomEvent);
+  toggleCustomEvent();
   bindField("fDate", "date");
   bindField("fTime", "time");
   bindField("fVenue", "venue");
   bindField("fHost", "host");
+
+  /* Photo upload with automatic background removal (client-side, free).
+     Uses @imgly/background-removal loaded on demand from jsDelivr — no key,
+     no server, the photo never leaves the visitor's device. First use
+     downloads the AI model (~30MB, cached after). If removal fails
+     (offline/CDN blocked), the original photo is shown in an arch frame.
+     The photo is stored separately from the text draft so a big image
+     can never block saving the names and details. */
+  var bgRemovalLib = null;
+  function setPhoto(src, framed) {
+    var w = field("pvPhotoWrap"), img = field("pvPhoto"), btn = field("removePhoto");
+    if (!w || !img) return;
+    if (!src) {
+      w.classList.add("hidden");
+      img.removeAttribute("src");
+      if (btn) btn.classList.add("hidden");
+      return;
+    }
+    img.src = src;
+    w.classList.toggle("framed", !!framed);
+    w.classList.remove("hidden");
+    if (btn) btn.classList.remove("hidden");
+  }
+  function loadImageFromBlob(blob) {
+    return new Promise(function (resolve, reject) {
+      var img = new Image();
+      var url = URL.createObjectURL(blob);
+      img.onload = function () { URL.revokeObjectURL(url); resolve(img); };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error("image load failed")); };
+      img.src = url;
+    });
+  }
+  function drawScaled(img, maxSide) {
+    var s = Math.min(1, maxSide / Math.max(img.naturalWidth, img.naturalHeight));
+    var cv = document.createElement("canvas");
+    cv.width = Math.max(1, Math.round(img.naturalWidth * s));
+    cv.height = Math.max(1, Math.round(img.naturalHeight * s));
+    cv.getContext("2d").drawImage(img, 0, 0, cv.width, cv.height);
+    return cv;
+  }
+  function downscaleBlob(blob, maxSide) {
+    return loadImageFromBlob(blob).then(function (img) {
+      var cv = drawScaled(img, maxSide);
+      return new Promise(function (resolve, reject) {
+        cv.toBlob(function (b) { b ? resolve(b) : reject(new Error("encode failed")); }, "image/png");
+      });
+    });
+  }
+  function blobToDataURL(blob, maxSide) {
+    return loadImageFromBlob(blob).then(function (img) {
+      return drawScaled(img, maxSide).toDataURL("image/png");
+    });
+  }
+  function loadBgRemoval() {
+    if (bgRemovalLib) return Promise.resolve(bgRemovalLib);
+    return import("https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.5/+esm")
+      .then(function (m) { bgRemovalLib = m; return m; });
+  }
+  function handlePhoto(file) {
+    if (!file || !file.type || file.type.indexOf("image/") !== 0) return;
+    var status = field("photoStatus");
+    if (status) status.textContent = "Removing background… first time takes a moment while the AI model loads.";
+    var usedFallback = false;
+    downscaleBlob(file, 900).then(function (b) {
+      return loadBgRemoval().then(function (lib) {
+        return lib.removeBackground(b, { model: "medium", output: { format: "image/png" } });
+      }).catch(function () { usedFallback = true; return b; });
+    }).then(function (outBlob) {
+      return blobToDataURL(outBlob, 600).then(function (dataUrl) {
+        store("msi-photo", { src: dataUrl, framed: usedFallback });
+        setPhoto(dataUrl, usedFallback);
+        if (status) status.textContent = usedFallback
+          ? "Background could not be removed (offline) — your photo is shown in a frame."
+          : "Background removed — your photo is on the invitation.";
+      });
+    }).catch(function () {
+      if (status) status.textContent = "That photo could not be used — please try another image.";
+    });
+  }
+  on(field("fPhoto"), "change", function () {
+    var inp = field("fPhoto");
+    if (inp && inp.files && inp.files[0]) handlePhoto(inp.files[0]);
+    if (inp) inp.value = "";
+  });
+  on(field("removePhoto"), "click", function () {
+    store("msi-photo", null);
+    setPhoto("", false);
+    var status = field("photoStatus");
+    if (status) status.textContent = "Upload a photo — its background is removed automatically and it is placed on your invitation.";
+  });
+  var savedPhoto = read("msi-photo", null);
+  if (savedPhoto && savedPhoto.src) setPhoto(savedPhoto.src, !!savedPhoto.framed);
 
   /* preview RSVP + calendar */
   wireRsvp(pvCard, "msi-rsvp-" + slugify());
@@ -833,9 +957,9 @@
     downloadICS({
       startISO: state.date + "T" + (state.time || "19:00") + ":00",
       uid: slugify() + "@mysilkinvite.com",
-      title: names + " — " + state.event,
+      title: names + " — " + eventDisplay(),
       location: state.venue || "",
-      description: state.event + " invitation by My Silk Invite.",
+      description: eventDisplay() + " invitation by My Silk Invite.",
       filename: slugify() + ".ics"
     });
   });

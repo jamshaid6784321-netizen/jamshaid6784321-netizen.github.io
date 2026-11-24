@@ -98,7 +98,10 @@
                 <option>Anniversary</option>
                 <option>Graduation</option>
                 <option>Housewarming</option>
+                <option value="custom">Custom event</option>
               </select>
+              <label for="fCustomEvent" id="customEventLabel" class="hidden">Your event name</label>
+              <input id="fCustomEvent" type="text" placeholder="e.g. Aqiqah" maxlength="30" autocomplete="off" class="hidden">
               <div class="row2">
                 <div>
                   <label for="fDate">Date</label>
@@ -113,6 +116,10 @@
               <input id="fVenue" type="text" placeholder="e.g. The Rosewood Hall, Chicago" maxlength="60" autocomplete="off">
               <label for="fHost">Host line</label>
               <input id="fHost" type="text" value="Together with their families" maxlength="60" autocomplete="off">
+              <label for="fPhoto">Your photo (optional)</label>
+              <input id="fPhoto" type="file" accept="image/*">
+              <p class="hint" id="photoStatus">Upload a photo — its background is removed automatically and it is placed on your invitation.</p>
+              <button id="removePhoto" type="button" class="btn ghost hidden">Remove photo</button>
               <p class="hint">Your design is saved in this browser as you type.</p>
               <div class="form-actions">
                 <button class="btn ghost" id="backToStep1" type="button">← Back</button>
@@ -147,6 +154,7 @@
           <div class="sky-wrap" id="pvSkyWrap">
             <canvas class="sky" id="pvSky" aria-hidden="true"></canvas>
             <div class="inv-card theme-birds" id="pvCard">
+              <div class="inv-photo hidden" id="pvPhotoWrap"><img id="pvPhoto" alt="Your photo"></div>
               <div class="inv-eyebrow" id="pvHost">Together with their families</div>
               <div class="inv-names" id="pvNames">Your Names</div>
               <p class="inv-line" id="pvLine">request the honour of your presence at the celebration of their wedding</p>
