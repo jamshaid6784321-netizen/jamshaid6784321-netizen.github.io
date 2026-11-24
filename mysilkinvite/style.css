@@ -449,7 +449,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .plan::before { width: 44px; height: 44px; top: -7px; right: -7px; }
 .plan::after { width: 44px; height: 44px; bottom: -7px; left: -7px; }
 .plan .btn { position: relative; z-index: 1; }
-.tpl-card::before { width: 38px; height: 38px; top: 0; right: 0; }
+.tpl-card::before { width: 38px; height: 38px; top: 0; right: 0; z-index: 1; }
 .tpl-card::after { width: 38px; height: 38px; bottom: 0; left: 0; }
 .tpl-body { padding-bottom: 30px; }
 .tpl-body .btn, .tpl-body .badge-soon { position: relative; z-index: 1; }
