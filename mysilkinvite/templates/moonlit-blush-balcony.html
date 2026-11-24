@@ -180,6 +180,43 @@
   .foot { text-align:center; font-size:14px; color:#ffe9a8; margin-top:20px; letter-spacing:.06em; text-shadow:0 1px 8px rgba(0,0,0,.5); }
   .use-row { margin-top:18px; text-align:center; }
   .use-row .btn { margin:4px; }
+  /* ---- long-format sections ---- */
+  .topbar { justify-content:space-between; }
+  .mono-mini { pointer-events:auto; font-family:'Great Vibes', cursive; font-size:24px; color:#ffe9a8; text-shadow:0 1px 8px rgba(0,0,0,.5); }
+  .sec { margin:0 auto 18px; }
+  .sec h2 { font-family:'Playfair Display', serif; font-size:24px; color:#ffe9a8; margin-bottom:8px; }
+  .sec p { font-size:17px; line-height:1.55; }
+  .parents { font-size:17px; font-style:italic; line-height:1.6; color:#f3d9d9; margin-top:12px; }
+  .banner { margin:16px auto 6px; max-width:420px; height:150px; border-radius:14px; overflow:hidden; position:relative; border:1px solid #e6c87a; }
+  .banner svg { display:block; width:100%; height:100%; }
+  .cue { display:flex; justify-content:center; margin:10px 0 2px; animation:cueBob 1.8s ease-in-out infinite; }
+  @keyframes cueBob { 0%,100% { transform:translateY(0); opacity:.65; } 50% { transform:translateY(6px); opacity:1; } }
+  .scratch-wrap { position:relative; max-width:420px; height:190px; margin:14px auto 0; border-radius:14px; overflow:hidden; border:1px solid #e6c87a; }
+  .scratch-msg { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px; text-align:center; background:radial-gradient(circle at 50% 30%, #5c3244, #241324); }
+  .scratch-msg .sn { font-family:'Great Vibes', cursive; font-size:34px; line-height:1.1; color:#ffe9a8; }
+  .scratch-msg p { font-size:17px; font-style:italic; color:#f3d9d9; }
+  #scratchCv { position:absolute; inset:0; width:100%; height:100%; touch-action:none; }
+  .gal { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
+  .gal-p { height:132px; border-radius:12px; position:relative; overflow:hidden; display:flex; align-items:flex-end; justify-content:center; border:1px solid rgba(230,200,122,.6); }
+  .gal-p span { font-size:14px; padding:4px 10px; border-radius:999px; margin-bottom:8px; background:rgba(20,8,16,.55); color:#ffe9a8; }
+  .gal-p.g1 { background:radial-gradient(circle at 65% 32%, #fffdf4 0 24px, #ffefc4 32px, transparent 34px), linear-gradient(180deg,#241324,#3a2230); }
+  .gal-p.g2 { background:radial-gradient(circle at 50% 55%, #f6b8c8 0 28px, #b76e79 44px, transparent 46px), linear-gradient(180deg,#5c3244,#3a2230); }
+  .gal-p.g3 { background:repeating-linear-gradient(90deg, transparent 0 22px, #2a1626 22px 27px), linear-gradient(180deg,#8e5a68,#5c3244); }
+  .gal-p.g4 { background:radial-gradient(circle at 30% 40%, #ffe9a8 0 3px, transparent 5px), radial-gradient(circle at 65% 60%, #ffe9a8 0 3px, transparent 5px), radial-gradient(circle at 45% 25%, #fff 0 2px, transparent 4px), linear-gradient(180deg,#241324,#5c3244); }
+  .map { margin-top:14px; border-radius:14px; border:1px solid #e6c87a; min-height:170px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:16px 12px; background:linear-gradient(180deg, rgba(36,19,36,.9), rgba(92,50,68,.9)), repeating-linear-gradient(0deg, transparent 0 22px, rgba(230,200,122,.25) 22px 23px), repeating-linear-gradient(90deg, transparent 0 30px, rgba(230,200,122,.25) 30px 31px); }
+  .map .pin { width:26px; height:26px; border-radius:50% 50% 50% 0; background:#e6c87a; transform:rotate(-45deg); box-shadow:0 0 14px rgba(230,200,122,.6); }
+  .map .vn { font-family:'Playfair Display', serif; font-size:19px; color:#ffe9a8; }
+  .map .va { font-size:15px; font-style:italic; color:#e8b4b8; }
+  .swatches { display:flex; justify-content:center; gap:10px; margin:14px 0; }
+  .swatches i { width:34px; height:34px; border-radius:50%; border:2px solid rgba(255,255,255,.6); }
+  .travel { text-align:left; max-width:440px; margin:0 auto; }
+  .travel h3 { font-family:'Playfair Display', serif; font-size:19px; color:#ffe9a8; margin:12px 0 4px; }
+  #rsvp textarea { font-family:inherit; font-size:16px; padding:10px 12px; border:1px solid #c08a7e; border-radius:10px; background:#fff; color:#3a2230; width:100%; max-width:320px; margin-bottom:10px; min-height:64px; resize:vertical; }
+  #rsvp label { display:block; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:#e8b4b8; margin:6px 0 4px; }
+  .foot-band { text-align:center; margin:6px auto 0; max-width:560px; padding:22px 14px 30px; }
+  .foot-band .mono-seal2 { width:74px; height:74px; border-radius:50%; border:2px solid #e6c87a; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display', serif; font-size:24px; margin:0 auto 12px; color:#ffe9a8; background:rgba(58,34,48,.9); }
+  .foot-band p { font-size:15px; letter-spacing:.06em; color:#ffe9a8; margin-bottom:12px; text-shadow:0 1px 8px rgba(0,0,0,.5); }
+  .float-use { position:fixed; right:14px; bottom:14px; z-index:8; font-family:'Playfair Display', serif; font-size:15px; padding:11px 18px; border-radius:999px; text-decoration:none; background:linear-gradient(180deg,#e6c87a,#b98a1d); color:#3a2230; box-shadow:0 8px 22px rgba(0,0,0,.45); border:1px solid #e6c87a; }
   .hidden { display:none !important; }
 </style>
 </head>
@@ -204,6 +241,7 @@
   <canvas id="flies"></canvas>
 
   <div class="topbar">
+    <span class="mono-mini">N &amp; F</span>
     <button id="musicBtn" type="button" aria-label="Toggle music">&#9834; Music: Off</button>
   </div>
 
@@ -220,17 +258,54 @@
   </div>
 
   <main id="main" class="hidden">
-    <div class="card">
+    <section class="card">
       <div class="bismillah">بسم اللہ الرحمن الرحیم</div>
       <div class="eyebrow">Together with their families</div>
       <div class="names">Nadia <span class="amp">&amp;</span> Faisal</div>
       <p class="invite-line">request the honour of your presence<br>at the celebration of their Nikah</p>
+      <p class="parents">Nadia, daughter of Mr &amp; Mrs Tariq Ahmed<br>Faisal, son of Mr &amp; Mrs Imran Khan</p>
+      <div class="banner" aria-hidden="true"><svg viewBox="0 0 420 150" preserveAspectRatio="xMidYMid slice"><rect width="420" height="150" fill="#241324"/><circle cx="330" cy="42" r="30" fill="#ffefc4"/><circle cx="330" cy="42" r="46" fill="none" stroke="#ffe9a8" stroke-opacity=".4"/><g fill="#e8b4b8"><circle cx="90" cy="105" r="14"/><circle cx="120" cy="112" r="11"/><circle cx="62" cy="114" r="9"/></g><g fill="#ffe9a8"><circle cx="90" cy="105" r="4"/><circle cx="120" cy="112" r="3"/></g><rect y="128" width="420" height="6" fill="#2a1626"/><g fill="#ffe9a8"><circle cx="60" cy="40" r="2"/><circle cx="150" cy="26" r="2"/><circle cx="220" cy="52" r="2"/><circle cx="270" cy="24" r="2"/></g></svg></div>
+      <div class="cue" aria-hidden="true"><svg width="28" height="16" viewBox="0 0 28 16"><path d="M2 2 L14 14 L26 2" fill="none" stroke="#e6c87a" stroke-width="3" stroke-linecap="round"/></svg></div>
 
       <div class="divider"><span>&#10022;</span></div>
 
       <div class="date-big">Sunday, 30 May 2027</div>
       <div class="venue">7:00 PM onwards &middot; Moonlight Terrace, Islamabad</div>
-      <div class="dress">Dress Code &middot; Shades of Blush &amp; Rose Gold</div>
+      <div class="rose-row" id="roseRow" aria-label="Roses">
+        <span class="rose-btn" aria-hidden="true"><span class="bloom"></span><span class="stem"></span><span class="leaf"></span></span>
+        <span class="rose-btn" aria-hidden="true"><span class="bloom"></span><span class="stem"></span><span class="leaf"></span></span>
+        <span class="rose-btn" aria-hidden="true"><span class="bloom"></span><span class="stem"></span><span class="leaf"></span></span>
+        <span class="rose-btn" aria-hidden="true"><span class="bloom"></span><span class="stem"></span><span class="leaf"></span></span>
+        <span class="rose-btn" aria-hidden="true"><span class="bloom"></span><span class="stem"></span><span class="leaf"></span></span>
+      </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Welcome</h2>
+      <p>Under a full moon, on a balcony dressed in blush roses, two families become one. Thank you for being part of our beginning — your presence is the brightest light of the evening, and your duas are the greatest gift you could bring.</p>
+    </section>
+
+    <section class="card sec">
+      <h2>A Hidden Wish</h2>
+      <div class="scratch-wrap" id="scratchWrap">
+        <div class="scratch-msg"><div class="sn">Nadia &amp; Faisal</div><p>Under the same moon, always.</p></div>
+        <canvas id="scratchCv"></canvas>
+      </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Our Memories</h2>
+      <div class="gal">
+        <div class="gal-p g1"><span>The Full Moon</span></div>
+        <div class="gal-p g2"><span>Blush Roses</span></div>
+        <div class="gal-p g3"><span>The Balcony</span></div>
+        <div class="gal-p g4"><span>Fireflies at Dusk</span></div>
+      </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Save the Date</h2>
+      <p>Sunday, 30 May 2027 &middot; Moonlight Terrace, Islamabad</p>
 
       <div class="divider"><span>&hearts;</span></div>
 
@@ -241,16 +316,79 @@
         <div class="box"><div class="num" id="cd-s">--</div><div class="lbl">Secs</div></div>
       </div>
 
+    </section>
+
+    <section class="card sec">
+      <h2>Order of the Day</h2>
       <div class="events">
         <div class="event">
           <div class="day"><b>Sun 30 May</b><span>7:00 PM</span></div>
-          <p>Nikah Ceremony<small>Arrival of the groom, followed by dinner</small></p>
+          <p>Nikah Ceremony<small>The groom arrives under the moonlight, and the Nikah is solemnised</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Sun 30 May</b><span>8:30 PM</span></div>
+          <p>Dinner<small>A moonlit dinner on the terrace with family and friends</small></p>
         </div>
         <div class="event">
           <div class="day"><b>Mon 31 May</b><span>1:00 PM</span></div>
           <p>Walima Reception<small>Lunch &amp; blessings with family and friends</small></p>
         </div>
       </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Our Venue</h2>
+      <p>The Nikah and Walima both take place at Moonlight Terrace, a garden terrace above the city, glowing with roses and lantern light.</p>
+      <div class="map">
+        <span class="pin" aria-hidden="true"></span>
+        <span class="vn">Moonlight Terrace</span>
+        <span class="va">Islamabad</span>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Moonlight%20Terrace%2C%20Islamabad" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Dress Code</h2>
+      <div class="swatches" aria-hidden="true"><i style="background:#f6b8c8"></i><i style="background:#e8a0b0"></i><i style="background:#e6c87a"></i><i style="background:#5c3244"></i></div>
+      <p>Shades of blush &amp; rose gold, with a little gold shimmer for the evening. Formal dress, comfortable shoes for the garden terrace.</p>
+    </section>
+
+    <section class="card sec">
+      <h2>Pre-Wedding Events</h2>
+      <div class="events">
+        <div class="event">
+          <div class="day"><b>Fri 28 May</b><span>7:00 PM</span></div>
+          <p>Mehndi<small>Henna, roses and songs under the fairy lights</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Sat 29 May</b><span>7:00 PM</span></div>
+          <p>Sangeet<small>An evening of music, dance and family performances</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Sun 30 May</b><span>10:00 AM</span></div>
+          <p>Haldi<small>A bright morning of turmeric, marigolds and blessings</small></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Travel &amp; Stay</h2>
+      <div class="travel">
+        <h3>Getting There</h3>
+        <p>Fly into Islamabad International Airport (ISB). Moonlight Terrace is about a 30-minute drive from the airport; rideshares and taxis are easy to find at the terminal.</p>
+        <h3>Where to Stay</h3>
+        <p>We suggest the Islamabad Serena Hotel, a short drive from the terrace, with comfortable rooms and gardens for a slow morning after the Walima.</p>
+      </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Gifts</h2>
+      <p>Your presence and your duas are the greatest gift. If you would like to honour us further, a contribution towards our honeymoon would be cherished — given with love, never expected.</p>
+    </section>
+
+    <section class="card sec">
+      <h2>RSVP</h2>
+      <p>Kindly respond by 15 May 2027 so we can keep a seat — and a plate — ready for you.</p>
 
       <div class="actions">
         <button class="btn gold" id="rsvpBtn" type="button">RSVP Now</button>
@@ -260,13 +398,28 @@
       <div id="rsvp" class="hidden">
         <h3>Will you join us?</h3>
         <input id="guestName" type="text" placeholder="Your name" maxlength="40" aria-label="Your name">
+        <input id="guestEmail" type="email" placeholder="Your email" maxlength="60" aria-label="Your email">
+        <label for="attendSel">Attending?</label>
+        <select id="attendSel" aria-label="Attending">
+          <option value="yes" selected>Joyfully attending</option>
+          <option value="no">Regretfully declining</option>
+        </select>
+        <label for="guestCount">Guests (including you)</label>
         <select id="guestCount" aria-label="Number of guests">
           <option value="1">1 guest</option>
           <option value="2" selected>2 guests</option>
           <option value="3">3 guests</option>
           <option value="4">4 guests</option>
-          <option value="5">5+ guests</option>
         </select>
+        <label for="guestDiet">Dietary needs</label>
+        <select id="guestDiet" aria-label="Dietary needs">
+          <option value="none" selected>No special needs</option>
+          <option value="veg">Vegetarian</option>
+          <option value="vegan">Vegan</option>
+          <option value="halal">Halal</option>
+          <option value="other">Other (see message)</option>
+        </select>
+        <textarea id="guestMsg" placeholder="A message for the couple (optional)" maxlength="200" aria-label="Message for the couple"></textarea>
         <div class="choice">
           <button class="btn gold" id="attendYes" type="button">Joyfully Accepts</button>
           <button class="btn ghost" id="attendNo" type="button">Regretfully Declines</button>
@@ -274,20 +427,16 @@
         <div id="rsvpMsg"></div>
       </div>
 
-      <div class="rose-row" id="roseRow" aria-label="Roses">
-        <span class="rose-btn" aria-hidden="true"><span class="bloom"></span><span class="stem"></span><span class="leaf"></span></span>
-        <span class="rose-btn" aria-hidden="true"><span class="bloom"></span><span class="stem"></span><span class="leaf"></span></span>
-        <span class="rose-btn" aria-hidden="true"><span class="bloom"></span><span class="stem"></span><span class="leaf"></span></span>
-        <span class="rose-btn" aria-hidden="true"><span class="bloom"></span><span class="stem"></span><span class="leaf"></span></span>
-        <span class="rose-btn" aria-hidden="true"><span class="bloom"></span><span class="stem"></span><span class="leaf"></span></span>
-      </div>
-    </div>
-    <div class="use-row">
+    </section>
+
+    <footer class="foot-band">
+      <div class="mono-seal2">N &amp; F</div>
+      <p>Nadia &hearts; Faisal &middot; 30 . 05 . 2027</p>
       <a class="btn gold" href="../builder.html?template=moonlit-blush-balcony">Use this template</a>
-      <a class="btn ghost" href="../index.html#templates">All templates</a>
-    </div>
-    <div class="foot">Nadia &hearts; Faisal &middot; 30 . 05 . 2027 &middot; Demo invitation — no video, only code</div>
+      <p style="margin-top:14px; font-size:13px;">Demo invitation — no video, only code</p>
+    </footer>
   </main>
+  <a class="float-use" href="../builder.html?template=moonlit-blush-balcony">Use this template</a>
 <script>
 (function () {
   "use strict";
@@ -439,11 +588,16 @@
   });
   function rsvp(attending) {
     var name = document.getElementById("guestName").value.trim();
+    var email = document.getElementById("guestEmail").value.trim();
     var count = document.getElementById("guestCount").value;
+    var diet = document.getElementById("guestDiet").value;
+    var message = document.getElementById("guestMsg").value.trim();
     var msg = document.getElementById("rsvpMsg");
+    var sel = document.getElementById("attendSel");
+    if (sel) sel.value = attending ? "yes" : "no";
     try {
       var saved = JSON.parse(localStorage.getItem("demo-rsvp-moonlit-blush-balcony") || "[]");
-      saved.push({ name: name, count: count, attending: attending, at: Date.now() });
+      saved.push({ name: name, email: email, count: count, attending: attending, diet: diet, message: message, at: Date.now() });
       localStorage.setItem("demo-rsvp-moonlit-blush-balcony", JSON.stringify(saved));
     } catch (err) { /* private mode: ignore */ }
     if (attending) {
@@ -480,6 +634,38 @@
     a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
   });
+/* ---------- scratch panel (sized only when visible) ---------- */
+  var sw = document.getElementById("scratchWrap"), sc = document.getElementById("scratchCv");
+  if (sw && sc) {
+    var sctx = sc.getContext("2d"), sDone = false;
+    function paintScratch() {
+      var r = sw.getBoundingClientRect();
+      if (r.width < 10) return;
+      var d = Math.min(window.devicePixelRatio || 1, 2);
+      sc.width = r.width * d; sc.height = r.height * d;
+      sc.style.width = r.width + "px"; sc.style.height = r.height + "px";
+      sctx.setTransform(d, 0, 0, d, 0, 0);
+      var g = sctx.createLinearGradient(0, 0, r.width, r.height);
+      g.addColorStop(0, "#e6c87a"); g.addColorStop(0.5, "#b76e79"); g.addColorStop(1, "#5c3244");
+      sctx.fillStyle = g; sctx.fillRect(0, 0, r.width, r.height);
+      sctx.fillStyle = "rgba(255,255,255,.28)";
+      for (var i = 0; i < 24; i++) { sctx.beginPath(); sctx.arc((i * 53) % r.width, (i * 37) % r.height, 3, 0, Math.PI * 2); sctx.fill(); }
+      sctx.fillStyle = "#fff8ec"; sctx.font = "26px Georgia, serif"; sctx.textAlign = "center";
+      sctx.fillText("✦", r.width / 2, r.height / 2 + 9);
+    }
+    function scratchAt(e) {
+      if (sDone) return;
+      var r = sc.getBoundingClientRect();
+      sctx.globalCompositeOperation = "destination-out";
+      sctx.beginPath(); sctx.arc(e.clientX - r.left, e.clientY - r.top, 26, 0, Math.PI * 2); sctx.fill();
+      sctx.globalCompositeOperation = "source-over";
+    }
+    sc.addEventListener("pointerdown", scratchAt);
+    sc.addEventListener("pointermove", function (e) { if (e.buttons) scratchAt(e); });
+    if ("ResizeObserver" in window) new ResizeObserver(function () { if (!sDone) paintScratch(); }).observe(sw);
+    window.addEventListener("resize", function () { if (!sDone) paintScratch(); });
+    setTimeout(paintScratch, 600);
+  }
 })();
 </script>
 </body>

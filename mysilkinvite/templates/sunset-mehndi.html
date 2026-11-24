@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Mehwish &amp; Adnan — Sunset Mehndi Invitation (Demo)</title>
+<title>Anika &amp; Aman — Sunset Mehndi Invitation (Demo)</title>
 <meta name="description" content="Demo: Sunset Mehndi invitation. Marigold garlands and warm sunset light for mehndi and sangeet. HTML/CSS/JS only, no video.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,7 +77,7 @@
   }
   /* marigold garland frame along the top of the card */
   .card .garland { justify-content:center; margin:-8px 0 10px; }
-  .bismillah { font-family:'Noto Nastaliq Urdu', serif; font-size:26px; color:#8a5a20; line-height:2; }
+  .blessing { font-family:'Playfair Display', serif; font-size:26px; color:#8a5a20; line-height:2; }
   .eyebrow { letter-spacing:.32em; text-transform:uppercase; font-size:12px; color:#9a6b1f; margin:10px 0 4px; }
   .names { font-family:'Great Vibes', cursive; font-size:clamp(46px,12vw,72px); color:#7a3f06; line-height:1.15; margin:6px 0 2px; }
   .names .amp { color:#c08a1e; font-size:.7em; }
@@ -151,25 +151,25 @@
   <div id="cover">
     <div class="sun" aria-hidden="true"></div>
     <div class="garland" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="mono">Mehwish &amp; Adnan</div>
+    <div class="mono">Anika &amp; Aman</div>
     <div class="sub">Mehndi &amp; Sangeet</div>
     <div class="when">Sunday, 27 June 2027</div>
-    <div class="where">Sunset Lawn, Lahore</div>
+    <div class="where">Sunset Lawn, Goa</div>
     <button id="beginBtn" type="button">Begin the Celebration</button>
   </div>
 
   <main id="main" class="hidden">
     <div class="card">
       <div class="garland" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="bismillah">بسم اللہ الرحمن الرحیم</div>
+      <div class="blessing">With the blessings of our families</div>
       <div class="eyebrow">Together with their families</div>
-      <div class="names">Mehwish <span class="amp">&amp;</span> Adnan</div>
+      <div class="names">Anika <span class="amp">&amp;</span> Aman</div>
       <p class="invite-line">request the honour of your presence<br>at the celebration of their Mehndi &amp; Sangeet</p>
 
       <div class="divider"><span>&#10022;</span></div>
 
       <div class="date-big">Sunday, 27 June 2027</div>
-      <div class="venue">7:00 PM onwards &middot; Sunset Lawn, Lahore</div>
+      <div class="venue">7:00 PM onwards &middot; Sunset Lawn, Goa</div>
       <div class="dress">Dress Code &middot; Marigold, Gold &amp; Green</div>
 
       <div class="divider"><span>&hearts;</span></div>
@@ -226,7 +226,7 @@
       <a class="btn gold" href="../builder.html?template=sunset-mehndi">Use this template</a>
       <a class="btn ghost" href="../index.html#templates" style="color:#ffe9d6;border-color:#e8c87e;">All templates</a>
     </div>
-    <div class="foot">Mehwish &hearts; Adnan &middot; 27 . 06 . 2027 &middot; Demo invitation — no video, only code</div>
+    <div class="foot">Anika &hearts; Aman &middot; 27 . 06 . 2027 &middot; Demo invitation — no video, only code</div>
   </main>
 <script>
 (function () {
@@ -431,18 +431,18 @@
   document.getElementById("calBtn").addEventListener("click", function () {
     var ics = [
       "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Demo Invitation//EN",
-      "BEGIN:VEVENT", "UID:mehwish-adnan-sangeet@demo",
+      "BEGIN:VEVENT", "UID:anika-aman-sangeet@demo",
       "DTSTAMP:20261124T000000Z",
       "DTSTART:20270627T140000Z", "DTEND:20270627T180000Z",
-      "SUMMARY:Mehwish & Adnan — Sangeet",
-      "LOCATION:Sunset Lawn\\, Lahore",
-      "DESCRIPTION:Sangeet night of Mehwish & Adnan.",
+      "SUMMARY:Anika & Aman — Sangeet",
+      "LOCATION:Sunset Lawn\\, Goa",
+      "DESCRIPTION:Sangeet night of Anika & Aman.",
       "END:VEVENT", "END:VCALENDAR"
     ].join("\r\n");
     var blob = new Blob([ics], { type: "text/calendar" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "Mehwish-Adnan-Sangeet.ics";
+    a.download = "Anika-Aman-Sangeet.ics";
     document.body.appendChild(a);
     a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Farah &amp; Imran — Royal Blush Drapes Invitation (Demo)</title>
+<title>Sneha &amp; Karan — Royal Blush Drapes Invitation (Demo)</title>
 <meta name="description" content="Demo: Royal Blush Drapes wedding invitation. Velvet blush drapes part like theatre curtains to reveal the couple. HTML/CSS/JS only, no video.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -104,7 +104,6 @@
   }
   .card::before { background-image:url(../flower-tr.webp); top:-8px; right:-8px; }
   .card::after { background-image:url(../flower-bl.webp); bottom:-8px; left:-8px; }
-  .bismillah { font-family:'Noto Nastaliq Urdu', serif; font-size:26px; color:#a05a66; line-height:2; }
   .eyebrow { letter-spacing:.32em; text-transform:uppercase; font-size:12px; color:#b76e79; margin:10px 0 4px; }
   .names { font-family:'Great Vibes', cursive; font-size:clamp(46px,12vw,72px); color:#8e4a54; line-height:1.15; margin:6px 0 2px; }
   .names .amp { color:#b76e79; font-size:.7em; }
@@ -152,6 +151,44 @@
   .foot { text-align:center; font-size:14px; color:#fff3f5; margin-top:20px; letter-spacing:.06em; text-shadow:0 1px 8px rgba(90,40,50,.5); }
   .use-row { margin-top:18px; text-align:center; }
   .use-row .btn { margin:4px; }
+  /* ---- long-format sections ---- */
+  .topbar { justify-content:space-between; }
+  .mono-mini { pointer-events:auto; font-family:'Great Vibes', cursive; font-size:24px; color:#8e4a54; }
+  .blessing { font-size:17px; font-style:italic; color:#a06a72; margin:8px 0 2px; }
+  .sec { margin:0 auto 18px; }
+  .sec h2 { font-family:'Playfair Display', serif; font-size:24px; color:#8e4a54; margin-bottom:8px; }
+  .sec p { font-size:17px; line-height:1.55; }
+  .parents { font-size:17px; font-style:italic; line-height:1.6; color:#7a4a52; margin-top:12px; }
+  .banner { margin:16px auto 6px; max-width:420px; height:150px; border-radius:14px; overflow:hidden; position:relative; border:1px solid #b76e79; }
+  .banner svg { display:block; width:100%; height:100%; }
+  .cue { display:flex; justify-content:center; margin:10px 0 2px; animation:cueBob 1.8s ease-in-out infinite; }
+  @keyframes cueBob { 0%,100% { transform:translateY(0); opacity:.65; } 50% { transform:translateY(6px); opacity:1; } }
+  .scratch-wrap { position:relative; max-width:420px; height:190px; margin:14px auto 0; border-radius:14px; overflow:hidden; border:1px solid #b76e79; }
+  .scratch-msg { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px; text-align:center; background:linear-gradient(180deg,#fff3e6,#f3d9c2); }
+  .scratch-msg .sn { font-family:'Great Vibes', cursive; font-size:34px; line-height:1.1; color:#8e4a54; }
+  .scratch-msg p { font-size:17px; font-style:italic; color:#7a4a52; }
+  #scratchCv { position:absolute; inset:0; width:100%; height:100%; touch-action:none; }
+  .gal { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
+  .gal-p { height:132px; border-radius:12px; position:relative; overflow:hidden; display:flex; align-items:flex-end; justify-content:center; border:1px solid rgba(183,110,121,.5); }
+  .gal-p span { font-size:14px; padding:4px 10px; border-radius:999px; margin-bottom:8px; background:rgba(255,255,255,.65); color:#6b3240; }
+  .gal-p.g1 { background:repeating-linear-gradient(90deg, rgba(0,0,0,.14) 0 12px, transparent 12px 26px), linear-gradient(180deg,#f0c3cd,#b76e79); }
+  .gal-p.g2 { background:radial-gradient(ellipse at 50% 0%, rgba(255,244,200,.9), transparent 65%), linear-gradient(180deg,#fff3e6,#d9a48f); }
+  .gal-p.g3 { background:repeating-linear-gradient(90deg, #d4af37 0 3px, #b98a1d 3px 6px), linear-gradient(180deg,#e9b7c0,#cf8a99); }
+  .gal-p.g4 { background:radial-gradient(circle at 50% 35%, #ffe9a8 0 22px, transparent 30px), linear-gradient(180deg,#dfa3b1,#b76e79); }
+  .map { margin-top:14px; border-radius:14px; border:1px solid #b76e79; min-height:170px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:16px 12px; background:repeating-linear-gradient(0deg, transparent 0 22px, rgba(183,110,121,.25) 22px 23px), repeating-linear-gradient(90deg, transparent 0 30px, rgba(183,110,121,.25) 30px 31px), linear-gradient(180deg,#fff9f5,#fbeef0); }
+  .map .pin { width:26px; height:26px; border-radius:50% 50% 50% 0; background:#b76e79; transform:rotate(-45deg); box-shadow:0 0 14px rgba(183,110,121,.5); }
+  .map .vn { font-family:'Playfair Display', serif; font-size:19px; color:#8e4a54; }
+  .map .va { font-size:15px; font-style:italic; color:#a06a72; }
+  .swatches { display:flex; justify-content:center; gap:10px; margin:14px 0; }
+  .swatches i { width:34px; height:34px; border-radius:50%; border:2px solid rgba(255,255,255,.7); box-shadow:0 0 0 1px #d9a0aa; }
+  .travel { text-align:left; max-width:440px; margin:0 auto; }
+  .travel h3 { font-family:'Playfair Display', serif; font-size:19px; color:#8e4a54; margin:12px 0 4px; }
+  #rsvp textarea { font-family:inherit; font-size:16px; padding:10px 12px; border:1px solid #d9a0aa; border-radius:10px; background:#fff; color:#5c2e35; width:100%; max-width:320px; margin-bottom:10px; min-height:64px; resize:vertical; }
+  #rsvp label { display:block; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:#b76e79; margin:6px 0 4px; }
+  .foot-band { text-align:center; margin:6px auto 0; max-width:560px; padding:22px 14px 30px; }
+  .foot-band .mono-seal2 { width:74px; height:74px; border-radius:50%; border:2px solid #b76e79; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display', serif; font-size:24px; margin:0 auto 12px; color:#8e4a54; background:rgba(255,248,240,.97); }
+  .foot-band p { font-size:15px; letter-spacing:.06em; color:#fff3f5; margin-bottom:12px; text-shadow:0 1px 8px rgba(90,40,50,.5); }
+  .float-use { position:fixed; right:14px; bottom:14px; z-index:8; font-family:'Playfair Display', serif; font-size:15px; padding:11px 18px; border-radius:999px; text-decoration:none; background:linear-gradient(180deg,#d98a9b,#b76e79); color:#fff; box-shadow:0 8px 22px rgba(90,40,50,.4); border:1px solid #b76e79; }
   .hidden { display:none !important; }
 </style>
 </head>
@@ -159,6 +196,7 @@
   <canvas id="sky"></canvas>
 
   <div class="topbar">
+    <span class="mono-mini">S &amp; K</span>
     <button id="musicBtn" type="button" aria-label="Toggle music">&#9834; Music: Off</button>
   </div>
 
@@ -166,10 +204,10 @@
   <div id="cover">
     <div class="spotlight"></div>
     <div class="stage">
-      <div class="mono">Farah &amp; Imran</div>
+      <div class="mono">Sneha &amp; Karan</div>
       <div class="sub">Are Getting Married</div>
       <div class="when">Sunday, 13 June 2027</div>
-      <div class="where">Grand Theatre Hall, Lahore</div>
+      <div class="where">Grand Theatre Hall, Mumbai</div>
     </div>
     <div class="drape left" aria-hidden="true"></div>
     <div class="drape right" aria-hidden="true"></div>
@@ -179,19 +217,49 @@
   </div>
 
   <main id="main" class="hidden">
-    <div class="card">
-      <div class="bismillah">بسم اللہ الرحمن الرحیم</div>
+    <section class="card">
       <div class="eyebrow">Together with their families</div>
-      <div class="names">Farah <span class="amp">&amp;</span> Imran</div>
-      <p class="invite-line">request the honour of your presence<br>at the celebration of their Nikah</p>
+      <div class="names">Sneha <span class="amp">&amp;</span> Karan</div>
+      <p class="invite-line">request the honour of your presence<br>at the celebration of their Wedding</p>
+      <div class="blessing">With the blessings of our families and the joy of our friends</div>
+      <p class="parents">Sneha, daughter of Mr &amp; Mrs Anil Deshpande<br>Karan, son of Mr &amp; Mrs Rohit Kapoor</p>
+      <div class="banner" aria-hidden="true"><svg viewBox="0 0 420 150" preserveAspectRatio="xMidYMid slice"><rect width="420" height="150" fill="#fff3e6"/><ellipse cx="210" cy="10" rx="180" ry="70" fill="#ffe9a8" opacity=".7"/><path d="M0 0 H150 C120 60 130 100 100 150 H0 Z" fill="#e9b7c0" stroke="#d4af37" stroke-width="2"/><path d="M420 0 H270 C300 60 290 100 320 150 H420 Z" fill="#e9b7c0" stroke="#d4af37" stroke-width="2"/><circle cx="150" cy="118" r="10" fill="#d4af37"/><circle cx="270" cy="118" r="10" fill="#d4af37"/><circle cx="210" cy="75" r="26" fill="#ffe9a8" stroke="#d4af37" stroke-width="2"/></svg></div>
+      <div class="cue" aria-hidden="true"><svg width="28" height="16" viewBox="0 0 28 16"><path d="M2 2 L14 14 L26 2" fill="none" stroke="#b76e79" stroke-width="3" stroke-linecap="round"/></svg></div>
 
       <div class="tassels" aria-hidden="true">
         <span class="t"><i></i><b></b></span><span class="t"><i></i><b></b></span><span class="t"><i></i><b></b></span><span class="t"><i></i><b></b></span><span class="t"><i></i><b></b></span>
       </div>
 
       <div class="date-big">Sunday, 13 June 2027</div>
-      <div class="venue">7:00 PM onwards &middot; Grand Theatre Hall, Lahore</div>
-      <div class="dress">Dress Code &middot; Blush Velvet &amp; Gold</div>
+      <div class="venue">7:00 PM onwards &middot; Grand Theatre Hall, Mumbai</div>
+    </section>
+
+    <section class="card sec">
+      <h2>Welcome</h2>
+      <p>The curtains are parting, the stage is set, and our favourite people are taking their seats. Welcome to our celebration — an evening of vows, music and dancing, with the people who have cheered us on from the very first act.</p>
+    </section>
+
+    <section class="card sec">
+      <h2>A Hidden Wish</h2>
+      <div class="scratch-wrap" id="scratchWrap">
+        <div class="scratch-msg"><div class="sn">Sneha &amp; Karan</div><p>The stage is set for forever.</p></div>
+        <canvas id="scratchCv"></canvas>
+      </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Our Memories</h2>
+      <div class="gal">
+        <div class="gal-p g1"><span>The Drapes</span></div>
+        <div class="gal-p g2"><span>The Stage</span></div>
+        <div class="gal-p g3"><span>Golden Tassels</span></div>
+        <div class="gal-p g4"><span>The Spotlight</span></div>
+      </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Save the Date</h2>
+      <p>Sunday, 13 June 2027 &middot; Grand Theatre Hall, Mumbai</p>
 
       <div class="divider"><span>&hearts;</span></div>
 
@@ -202,16 +270,87 @@
         <div class="box"><div class="num" id="cd-s">--</div><div class="lbl">Secs</div></div>
       </div>
 
+    </section>
+
+    <section class="card sec">
+      <h2>Order of the Day</h2>
       <div class="events">
         <div class="event">
-          <div class="day"><b>Sun 13 Jun</b><span>7:00 PM</span></div>
-          <p>Nikah Ceremony<small>Arrival of the groom, followed by dinner</small></p>
+          <div class="day"><b>Sun 13 Jun</b><span>5:00 PM</span></div>
+          <p>Baraat<small>The groom arrives with dancing, drums and family</small></p>
         </div>
         <div class="event">
-          <div class="day"><b>Mon 14 Jun</b><span>1:00 PM</span></div>
-          <p>Walima Reception<small>Lunch &amp; blessings with family and friends</small></p>
+          <div class="day"><b>Sun 13 Jun</b><span>6:00 PM</span></div>
+          <p>Varmala<small>The couple exchange garlands beneath the velvet drapes</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Sun 13 Jun</b><span>6:30 PM</span></div>
+          <p>Pheras<small>Seven vows around the sacred fire</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Sun 13 Jun</b><span>8:00 PM</span></div>
+          <p>Vidaai<small>A tender farewell as the couple begin their new life</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Sun 13 Jun</b><span>8:30 PM</span></div>
+          <p>Reception<small>Dinner, toasts and dancing into the night</small></p>
         </div>
       </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Our Venue</h2>
+      <p>The Wedding and Reception both take place at Grand Theatre Hall, a grand stage dressed in blush velvet drapes and gold tassels.</p>
+      <div class="map">
+        <span class="pin" aria-hidden="true"></span>
+        <span class="vn">Grand Theatre Hall</span>
+        <span class="va">Mumbai</span>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Grand%20Theatre%20Hall%2C%20Mumbai" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Dress Code</h2>
+      <div class="swatches" aria-hidden="true"><i style="background:#e9b7c0"></i><i style="background:#d4af37"></i><i style="background:#b76e79"></i><i style="background:#fff3e6"></i></div>
+      <p>Blush velvet &amp; gold, with a touch of stage sparkle. Festive Indian wear is warmly welcome; comfortable shoes for an evening of dancing.</p>
+    </section>
+
+    <section class="card sec">
+      <h2>Pre-Wedding Events</h2>
+      <div class="events">
+        <div class="event">
+          <div class="day"><b>Fri 11 Jun</b><span>7:00 PM</span></div>
+          <p>Mehndi<small>Henna, marigolds and songs with family</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Sat 12 Jun</b><span>7:00 PM</span></div>
+          <p>Sangeet<small>An evening of music, dance and family performances</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Sun 13 Jun</b><span>10:00 AM</span></div>
+          <p>Haldi<small>A bright morning of turmeric, marigolds and blessings</small></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Travel &amp; Stay</h2>
+      <div class="travel">
+        <h3>Getting There</h3>
+        <p>Fly into Chhatrapati Shivaji Maharaj International Airport (BOM). Grand Theatre Hall is about a 40-minute drive from the airport; taxis and rideshares are easy to find outside arrivals.</p>
+        <h3>Where to Stay</h3>
+        <p>We suggest The Taj Mahal Palace in Colaba, a short drive from the hall, with sea views and old-world charm for a slow morning after the celebration.</p>
+      </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Gifts</h2>
+      <p>Your presence is the greatest gift. If you would like to honour us further, a contribution towards our honeymoon would be cherished — given with love, never expected.</p>
+    </section>
+
+    <section class="card sec">
+      <h2>RSVP</h2>
+      <p>Kindly respond by 30 May 2027 so we can keep a seat — and a plate — ready for you.</p>
 
       <div class="tassels" aria-hidden="true">
         <span class="t"><i></i><b></b></span><span class="t"><i></i><b></b></span><span class="t"><i></i><b></b></span>
@@ -225,26 +364,44 @@
       <div id="rsvp" class="hidden">
         <h3>Will you join us?</h3>
         <input id="guestName" type="text" placeholder="Your name" maxlength="40" aria-label="Your name">
+        <input id="guestEmail" type="email" placeholder="Your email" maxlength="60" aria-label="Your email">
+        <label for="attendSel">Attending?</label>
+        <select id="attendSel" aria-label="Attending">
+          <option value="yes" selected>Joyfully attending</option>
+          <option value="no">Regretfully declining</option>
+        </select>
+        <label for="guestCount">Guests (including you)</label>
         <select id="guestCount" aria-label="Number of guests">
           <option value="1">1 guest</option>
           <option value="2" selected>2 guests</option>
           <option value="3">3 guests</option>
           <option value="4">4 guests</option>
-          <option value="5">5+ guests</option>
         </select>
+        <label for="guestDiet">Dietary needs</label>
+        <select id="guestDiet" aria-label="Dietary needs">
+          <option value="none" selected>No special needs</option>
+          <option value="veg">Vegetarian</option>
+          <option value="vegan">Vegan</option>
+          <option value="jain">Jain</option>
+          <option value="other">Other (see message)</option>
+        </select>
+        <textarea id="guestMsg" placeholder="A message for the couple (optional)" maxlength="200" aria-label="Message for the couple"></textarea>
         <div class="choice">
           <button class="btn gold" id="attendYes" type="button">Joyfully Accepts</button>
           <button class="btn ghost" id="attendNo" type="button">Regretfully Declines</button>
         </div>
         <div id="rsvpMsg"></div>
       </div>
-    </div>
-    <div class="use-row">
+    </section>
+
+    <footer class="foot-band">
+      <div class="mono-seal2">S &amp; K</div>
+      <p>Sneha &hearts; Karan &middot; 13 . 06 . 2027</p>
       <a class="btn gold" href="../builder.html?template=royal-blush-drapes">Use this template</a>
-      <a class="btn ghost" href="../index.html#templates" style="color:#fff3f5;border-color:#e8a0b0;">All templates</a>
-    </div>
-    <div class="foot">Farah &hearts; Imran &middot; 13 . 06 . 2027 &middot; Demo invitation — no video, only code</div>
+      <p style="margin-top:14px; font-size:13px;">Demo invitation — no video, only code</p>
+    </footer>
   </main>
+  <a class="float-use" href="../builder.html?template=royal-blush-drapes">Use this template</a>
 <script>
 (function () {
   "use strict";
@@ -415,23 +572,28 @@
   });
   function rsvp(attending) {
     var name = document.getElementById("guestName").value.trim();
+    var email = document.getElementById("guestEmail").value.trim();
     var count = document.getElementById("guestCount").value;
+    var diet = document.getElementById("guestDiet").value;
+    var message = document.getElementById("guestMsg").value.trim();
     var msg = document.getElementById("rsvpMsg");
+    var sel = document.getElementById("attendSel");
+    if (sel) sel.value = attending ? "yes" : "no";
     try {
       var saved = JSON.parse(localStorage.getItem("demo-rsvp-royal-blush-drapes") || "[]");
-      saved.push({ name: name, count: count, attending: attending, at: Date.now() });
+      saved.push({ name: name, email: email, count: count, attending: attending, diet: diet, message: message, at: Date.now() });
       localStorage.setItem("demo-rsvp-royal-blush-drapes", JSON.stringify(saved));
     } catch (err) { /* private mode: ignore */ }
     if (attending) {
       msg.textContent = name
-        ? "Shukriya, " + name + "! " + count + " guest(s) noted — hum intezaar karenge."
-        : "Shukriya! " + count + " guest(s) noted — hum intezaar karenge.";
+        ? "Thank you, " + name + "! " + count + " guest(s) noted — we can't wait to celebrate with you."
+        : "Thank you! " + count + " guest(s) noted — we can't wait to celebrate with you.";
       burst(window.innerWidth / 2, window.innerHeight * 0.5);
       chime();
     } else {
       msg.textContent = name
-        ? "Shukriya, " + name + " — aapki duaen hamare saath hain."
-        : "Shukriya — aapki duaen hamare saath hain.";
+        ? "Thank you, " + name + " — you will be missed, and your blessings mean the world."
+        : "Thank you — you will be missed, and your blessings mean the world.";
     }
   }
   document.getElementById("attendYes").addEventListener("click", function () { rsvp(true); });
@@ -441,22 +603,54 @@
   document.getElementById("calBtn").addEventListener("click", function () {
     var ics = [
       "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Demo Invitation//EN",
-      "BEGIN:VEVENT", "UID:farah-imran-nikah@demo",
+      "BEGIN:VEVENT", "UID:sneha-karan-wedding@demo",
       "DTSTAMP:20261124T000000Z",
       "DTSTART:20270613T140000Z", "DTEND:20270613T180000Z",
-      "SUMMARY:Farah & Imran — Nikah",
-      "LOCATION:Grand Theatre Hall\\, Lahore",
-      "DESCRIPTION:Nikah ceremony of Farah & Imran.",
+      "SUMMARY:Sneha & Karan — Wedding",
+      "LOCATION:Grand Theatre Hall\\, Mumbai",
+      "DESCRIPTION:Wedding ceremony of Sneha & Karan.",
       "END:VEVENT", "END:VCALENDAR"
     ].join("\r\n");
     var blob = new Blob([ics], { type: "text/calendar" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "Farah-Imran-Nikah.ics";
+    a.download = "Sneha-Karan-Wedding.ics";
     document.body.appendChild(a);
     a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
   });
+  /* ---------- scratch panel (sized only when visible) ---------- */
+  var sw = document.getElementById("scratchWrap"), sc = document.getElementById("scratchCv");
+  if (sw && sc) {
+    var sctx = sc.getContext("2d"), sDone = false;
+    function paintScratch() {
+      var r = sw.getBoundingClientRect();
+      if (r.width < 10) return;
+      var d = Math.min(window.devicePixelRatio || 1, 2);
+      sc.width = r.width * d; sc.height = r.height * d;
+      sc.style.width = r.width + "px"; sc.style.height = r.height + "px";
+      sctx.setTransform(d, 0, 0, d, 0, 0);
+      var g = sctx.createLinearGradient(0, 0, r.width, r.height);
+      g.addColorStop(0, "#e9b949"); g.addColorStop(0.5, "#d98a9b"); g.addColorStop(1, "#b76e79");
+      sctx.fillStyle = g; sctx.fillRect(0, 0, r.width, r.height);
+      sctx.fillStyle = "rgba(255,255,255,.28)";
+      for (var i = 0; i < 24; i++) { sctx.beginPath(); sctx.arc((i * 53) % r.width, (i * 37) % r.height, 3, 0, Math.PI * 2); sctx.fill(); }
+      sctx.fillStyle = "#fff8ec"; sctx.font = "26px Georgia, serif"; sctx.textAlign = "center";
+      sctx.fillText("✦", r.width / 2, r.height / 2 + 9);
+    }
+    function scratchAt(e) {
+      if (sDone) return;
+      var r = sc.getBoundingClientRect();
+      sctx.globalCompositeOperation = "destination-out";
+      sctx.beginPath(); sctx.arc(e.clientX - r.left, e.clientY - r.top, 26, 0, Math.PI * 2); sctx.fill();
+      sctx.globalCompositeOperation = "source-over";
+    }
+    sc.addEventListener("pointerdown", scratchAt);
+    sc.addEventListener("pointermove", function (e) { if (e.buttons) scratchAt(e); });
+    if ("ResizeObserver" in window) new ResizeObserver(function () { if (!sDone) paintScratch(); }).observe(sw);
+    window.addEventListener("resize", function () { if (!sDone) paintScratch(); });
+    setTimeout(paintScratch, 600);
+  }
 })();
 </script>
 </body>

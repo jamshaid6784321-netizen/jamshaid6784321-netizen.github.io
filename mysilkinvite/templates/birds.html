@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Ahmed &amp; Ayesha — Golden Birds Invitation (Demo)</title>
+<title>Simran &amp; Varun — Golden Birds Invitation (Demo)</title>
 <meta name="description" content="Demo: Golden Birds wedding invitation. Ivory and gold, birds drift across a sunset sky. HTML/CSS/JS only, no video.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,7 +84,7 @@
     box-shadow:0 24px 60px rgba(90,40,0,.28), inset 0 0 0 6px #fffdf8, inset 0 0 0 7px #e8c87e;
     padding:34px 22px 26px; text-align:center; position:relative;
   }
-  .bismillah { font-family:'Noto Nastaliq Urdu', serif; font-size:26px; color:#8a5a20; line-height:2; }
+  .blessing { font-family:'Playfair Display', serif; font-size:26px; color:#8a5a20; line-height:2; }
   .eyebrow { letter-spacing:.32em; text-transform:uppercase; font-size:12px; color:#9a6b1f; margin:10px 0 4px; }
   .names { font-family:'Great Vibes', cursive; font-size:clamp(46px,12vw,72px); color:#7a3f06; line-height:1.15; margin:6px 0 2px; }
   .names .amp { color:#c08a1e; font-size:.7em; }
@@ -152,7 +152,7 @@
 
   <!-- COVER -->
   <div id="cover">
-    <div class="mono">Ahmed &amp; Ayesha</div>
+    <div class="mono">Simran &amp; Varun</div>
     <div class="sub">Are Getting Married</div>
     <button id="sealBtn" type="button" aria-label="Open invitation">
       <span class="aa">A &hearts; A</span>
@@ -162,15 +162,15 @@
 
   <main id="main" class="hidden">
     <div class="card">
-      <div class="bismillah">بسم اللہ الرحمن الرحیم</div>
+      <div class="blessing">With the blessings of our families</div>
       <div class="eyebrow">Together with their families</div>
-      <div class="names">Ahmed <span class="amp">&amp;</span> Ayesha</div>
-      <p class="invite-line">request the honour of your presence<br>at the celebration of their Nikah</p>
+      <div class="names">Simran <span class="amp">&amp;</span> Varun</div>
+      <p class="invite-line">request the honour of your presence<br>at the celebration of their Wedding</p>
 
       <div class="divider"><span>&#10022;</span></div>
 
       <div class="date-big">Saturday, 20 February 2027</div>
-      <div class="venue">7:00 PM onwards &middot; The Royal Palm Marquee, Lahore</div>
+      <div class="venue">7:00 PM onwards &middot; The Palm Grove, Goa</div>
       <div class="dress">Dress Code &middot; Shades of Gold &amp; Ivory</div>
 
       <div class="divider"><span>&hearts;</span></div>
@@ -185,11 +185,11 @@
       <div class="events">
         <div class="event">
           <div class="day"><b>Sat 20 Feb</b><span>7:00 PM</span></div>
-          <p>Nikah Ceremony<small>Arrival of the groom, followed by dinner</small></p>
+          <p>Wedding Ceremony<small>Arrival of the groom, followed by dinner</small></p>
         </div>
         <div class="event">
           <div class="day"><b>Sun 21 Feb</b><span>1:00 PM</span></div>
-          <p>Walima Reception<small>Lunch &amp; blessings with family and friends</small></p>
+          <p>Reception<small>Lunch &amp; blessings with family and friends</small></p>
         </div>
       </div>
 
@@ -220,7 +220,7 @@
       <a class="btn gold" href="../builder.html?template=birds" style="text-decoration:none;">Use this template</a>
       <a class="btn ghost" href="../index.html#templates" style="text-decoration:none;">All templates</a>
     </div>
-    <div class="foot">Ahmed &hearts; Ayesha &middot; 20 . 02 . 2027 &middot; Demo invitation — no video, only code</div>
+    <div class="foot">Simran &hearts; Varun &middot; 20 . 02 . 2027 &middot; Demo invitation — no video, only code</div>
   </main>
 
 <script>
@@ -537,18 +537,18 @@
   document.getElementById("calBtn").addEventListener("click", function () {
     var ics = [
       "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Demo Invitation//EN",
-      "BEGIN:VEVENT", "UID:ahmed-ayesha-nikah@demo",
+      "BEGIN:VEVENT", "UID:simran-varun-wedding@demo",
       "DTSTAMP:20261124T000000Z",
       "DTSTART:20270220T140000Z", "DTEND:20270220T180000Z",
-      "SUMMARY:Ahmed & Ayesha — Nikah",
-      "LOCATION:The Royal Palm Marquee\\, Lahore",
-      "DESCRIPTION:Nikah ceremony of Ahmed & Ayesha.",
+      "SUMMARY:Simran & Varun — Wedding",
+      "LOCATION:The Palm Grove\\, Goa",
+      "DESCRIPTION:Wedding ceremony of Simran & Varun.",
       "END:VEVENT", "END:VCALENDAR"
     ].join("\r\n");
     var blob = new Blob([ics], { type: "text/calendar" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "Ahmed-Ayesha-Nikah.ics";
+    a.download = "Simran-Varun-Wedding.ics";
     document.body.appendChild(a);
     a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Saba &amp; Kamran — Rose Gold Ribbon Invitation (Demo)</title>
+<title>Pooja &amp; Nakul — Rose Gold Ribbon Invitation (Demo)</title>
 <meta name="description" content="Demo: Rose Gold Ribbon wedding invitation. A gift scroll tied with a rose-gold ribbon unrolls to reveal the invitation. HTML/CSS/JS only, no video.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -106,7 +106,6 @@
   }
   .card::before { background-image:url(../flower-tr.webp); top:-8px; right:-8px; }
   .card::after { background-image:url(../flower-bl.webp); bottom:-8px; left:-8px; }
-  .bismillah { font-family:'Noto Nastaliq Urdu', serif; font-size:26px; color:#a05a66; line-height:2; }
   .eyebrow { letter-spacing:.32em; text-transform:uppercase; font-size:12px; color:#b76e79; margin:10px 0 4px; }
   .names { font-family:'Great Vibes', cursive; font-size:clamp(46px,12vw,72px); color:#8e4a54; line-height:1.15; margin:6px 0 2px; }
   .names .amp { color:#b76e79; font-size:.7em; }
@@ -149,6 +148,44 @@
   .foot { text-align:center; font-size:14px; color:#8e4a54; margin-top:20px; letter-spacing:.06em; }
   .use-row { margin-top:18px; text-align:center; }
   .use-row .btn { margin:4px; }
+  /* ---- long-format sections ---- */
+  .topbar { justify-content:space-between; }
+  .mono-mini { pointer-events:auto; font-family:'Great Vibes', cursive; font-size:24px; color:#8e4a54; }
+  .blessing { font-size:17px; font-style:italic; color:#a06a72; margin:8px 0 2px; }
+  .sec { margin:0 auto 18px; }
+  .sec h2 { font-family:'Playfair Display', serif; font-size:24px; color:#8e4a54; margin-bottom:8px; }
+  .sec p { font-size:17px; line-height:1.55; }
+  .parents { font-size:17px; font-style:italic; line-height:1.6; color:#7a4a52; margin-top:12px; }
+  .banner { margin:16px auto 6px; max-width:420px; height:150px; border-radius:14px; overflow:hidden; position:relative; border:1px solid #b76e79; }
+  .banner svg { display:block; width:100%; height:100%; }
+  .cue { display:flex; justify-content:center; margin:10px 0 2px; animation:cueBob 1.8s ease-in-out infinite; }
+  @keyframes cueBob { 0%,100% { transform:translateY(0); opacity:.65; } 50% { transform:translateY(6px); opacity:1; } }
+  .scratch-wrap { position:relative; max-width:420px; height:190px; margin:14px auto 0; border-radius:14px; overflow:hidden; border:1px solid #b76e79; }
+  .scratch-msg { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px; text-align:center; background:linear-gradient(180deg,#fffdf8,#fbeef0); }
+  .scratch-msg .sn { font-family:'Great Vibes', cursive; font-size:34px; line-height:1.1; color:#8e4a54; }
+  .scratch-msg p { font-size:17px; font-style:italic; color:#7a4a52; }
+  #scratchCv { position:absolute; inset:0; width:100%; height:100%; touch-action:none; }
+  .gal { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
+  .gal-p { height:132px; border-radius:12px; position:relative; overflow:hidden; display:flex; align-items:flex-end; justify-content:center; border:1px solid rgba(183,110,121,.5); }
+  .gal-p span { font-size:14px; padding:4px 10px; border-radius:999px; margin-bottom:8px; background:rgba(255,255,255,.65); color:#6b3240; }
+  .gal-p.g1 { background:linear-gradient(90deg, transparent 42%, #e88aa5 42% 58%, transparent 58%), linear-gradient(180deg,#f9dde2,#eec3cd); }
+  .gal-p.g2 { background:repeating-linear-gradient(0deg, #fffdf8 0 14px, #fbeef0 14px 28px); }
+  .gal-p.g3 { background:radial-gradient(circle at 50% 50%, #e8a0b0 0 32px, #d4af37 34px, transparent 36px), linear-gradient(180deg,#f3c9d2,#e8b7c2); }
+  .gal-p.g4 { background:radial-gradient(circle at 50% 55%, #e0393e 0 24px, #8f1115 32px, transparent 34px), linear-gradient(180deg,#fff9f5,#f3c9d2); }
+  .map { margin-top:14px; border-radius:14px; border:1px solid #b76e79; min-height:170px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:16px 12px; background:repeating-linear-gradient(0deg, transparent 0 22px, rgba(183,110,121,.25) 22px 23px), repeating-linear-gradient(90deg, transparent 0 30px, rgba(183,110,121,.25) 30px 31px), linear-gradient(180deg,#fff9f5,#fbeef0); }
+  .map .pin { width:26px; height:26px; border-radius:50% 50% 50% 0; background:#b76e79; transform:rotate(-45deg); box-shadow:0 0 14px rgba(183,110,121,.5); }
+  .map .vn { font-family:'Playfair Display', serif; font-size:19px; color:#8e4a54; }
+  .map .va { font-size:15px; font-style:italic; color:#a06a72; }
+  .swatches { display:flex; justify-content:center; gap:10px; margin:14px 0; }
+  .swatches i { width:34px; height:34px; border-radius:50%; border:2px solid rgba(255,255,255,.7); box-shadow:0 0 0 1px #d9a0aa; }
+  .travel { text-align:left; max-width:440px; margin:0 auto; }
+  .travel h3 { font-family:'Playfair Display', serif; font-size:19px; color:#8e4a54; margin:12px 0 4px; }
+  #rsvp textarea { font-family:inherit; font-size:16px; padding:10px 12px; border:1px solid #d9a0aa; border-radius:10px; background:#fff; color:#5c2e35; width:100%; max-width:320px; margin-bottom:10px; min-height:64px; resize:vertical; }
+  #rsvp label { display:block; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:#b76e79; margin:6px 0 4px; }
+  .foot-band { text-align:center; margin:6px auto 0; max-width:560px; padding:22px 14px 30px; }
+  .foot-band .mono-seal2 { width:74px; height:74px; border-radius:50%; border:2px solid #b76e79; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display', serif; font-size:24px; margin:0 auto 12px; color:#8e4a54; background:rgba(255,249,245,.96); }
+  .foot-band p { font-size:15px; letter-spacing:.06em; color:#8e4a54; margin-bottom:12px; }
+  .float-use { position:fixed; right:14px; bottom:14px; z-index:8; font-family:'Playfair Display', serif; font-size:15px; padding:11px 18px; border-radius:999px; text-decoration:none; background:linear-gradient(180deg,#d98a9b,#b76e79); color:#fff; box-shadow:0 8px 22px rgba(90,40,50,.4); border:1px solid #b76e79; }
   .hidden { display:none !important; }
 </style>
 </head>
@@ -156,6 +193,7 @@
   <canvas id="sky"></canvas>
 
   <div class="topbar">
+    <span class="mono-mini">P &amp; N</span>
     <button id="musicBtn" type="button" aria-label="Toggle music">&#9834; Music: Off</button>
   </div>
 
@@ -167,11 +205,11 @@
       <div class="roll"></div>
       <div class="paper">
         <div class="inner">
-          <div class="mono">Saba &amp; Kamran</div>
+          <div class="mono">Pooja &amp; Nakul</div>
           <div class="sub">Are Getting Married</div>
           <div class="when">Sunday, 6 June 2027</div>
-          <div class="where">The Ribbon Hall, Karachi</div>
-          <div class="seal">S &hearts; K</div>
+          <div class="where">The Ribbon Hall, Pune</div>
+          <div class="seal">P &hearts; N</div>
         </div>
       </div>
       <div class="roll"></div>
@@ -180,17 +218,47 @@
   </div>
 
   <main id="main" class="hidden">
-    <div class="card">
-      <div class="bismillah">بسم اللہ الرحمن الرحیم</div>
+    <section class="card">
       <div class="eyebrow">Together with their families</div>
-      <div class="names">Saba <span class="amp">&amp;</span> Kamran</div>
-      <p class="invite-line">request the honour of your presence<br>at the celebration of their Nikah</p>
+      <div class="names">Pooja <span class="amp">&amp;</span> Nakul</div>
+      <div class="blessing">Blessed by our families, united in love</div>
+      <p class="invite-line">request the honour of your presence<br>at the celebration of their Wedding</p>
+      <p class="parents">Pooja, daughter of Mr &amp; Mrs Rajesh Sharma<br>Nakul, son of Mr &amp; Mrs Vikram Mehta</p>
+      <div class="banner" aria-hidden="true"><svg viewBox="0 0 420 150" preserveAspectRatio="xMidYMid slice"><rect width="420" height="150" fill="#f9dde2"/><rect x="40" y="28" width="340" height="94" rx="10" fill="#fffdf8" stroke="#e8c87e"/><rect x="196" y="18" width="28" height="114" fill="#e88aa5" stroke="#d4af37"/><circle cx="210" cy="75" r="16" fill="#ffe9a8" stroke="#b98a1d" stroke-width="2"/><g fill="#e88aa5"><circle cx="90" cy="60" r="12"/><circle cx="330" cy="100" r="12"/><circle cx="340" cy="52" r="9"/></g><g fill="#f6b8c8"><circle cx="90" cy="60" r="5"/><circle cx="330" cy="100" r="5"/></g></svg></div>
+      <div class="cue" aria-hidden="true"><svg width="28" height="16" viewBox="0 0 28 16"><path d="M2 2 L14 14 L26 2" fill="none" stroke="#b76e79" stroke-width="3" stroke-linecap="round"/></svg></div>
 
       <div class="divider"><span>&#10022;</span></div>
 
       <div class="date-big">Sunday, 6 June 2027</div>
-      <div class="venue">7:00 PM onwards &middot; The Ribbon Hall, Karachi</div>
-      <div class="dress">Dress Code &middot; Blush &amp; Rose Gold</div>
+      <div class="venue">7:00 PM onwards &middot; The Ribbon Hall, Pune</div>
+    </section>
+
+    <section class="card sec">
+      <h2>Welcome</h2>
+      <p>Tied with a ribbon and sealed with love, this invitation carries our happiest news. Two families, one celebration, and a day we have dreamed of — we cannot wait to share it with the people who mean the most to us.</p>
+    </section>
+
+    <section class="card sec">
+      <h2>A Hidden Wish</h2>
+      <div class="scratch-wrap" id="scratchWrap">
+        <div class="scratch-msg"><div class="sn">Pooja &amp; Nakul</div><p>Tied together, forever.</p></div>
+        <canvas id="scratchCv"></canvas>
+      </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Our Memories</h2>
+      <div class="gal">
+        <div class="gal-p g1"><span>The Ribbon</span></div>
+        <div class="gal-p g2"><span>The Scroll</span></div>
+        <div class="gal-p g3"><span>Rose Gold</span></div>
+        <div class="gal-p g4"><span>The Seal</span></div>
+      </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Save the Date</h2>
+      <p>Sunday, 6 June 2027 &middot; The Ribbon Hall, Pune</p>
 
       <div class="divider"><span>&hearts;</span></div>
 
@@ -201,16 +269,87 @@
         <div class="box"><div class="num" id="cd-s">--</div><div class="lbl">Secs</div></div>
       </div>
 
+    </section>
+
+    <section class="card sec">
+      <h2>Order of the Day</h2>
       <div class="events">
         <div class="event">
-          <div class="day"><b>Sun 6 Jun</b><span>7:00 PM</span></div>
-          <p>Nikah Ceremony<small>Arrival of the groom, followed by dinner</small></p>
+          <div class="day"><b>Sun 6 Jun</b><span>5:00 PM</span></div>
+          <p>Baraat<small>The groom arrives with dancing, drums and family</small></p>
         </div>
         <div class="event">
-          <div class="day"><b>Mon 7 Jun</b><span>1:00 PM</span></div>
-          <p>Walima Reception<small>Lunch &amp; blessings with family and friends</small></p>
+          <div class="day"><b>Sun 6 Jun</b><span>6:00 PM</span></div>
+          <p>Varmala<small>The couple exchange garlands beneath the ribbon arch</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Sun 6 Jun</b><span>6:30 PM</span></div>
+          <p>Pheras<small>Seven vows around the sacred fire</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Sun 6 Jun</b><span>8:00 PM</span></div>
+          <p>Vidaai<small>A tender farewell as the couple begin their new life</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Sun 6 Jun</b><span>8:30 PM</span></div>
+          <p>Reception<small>Dinner, toasts and dancing into the night</small></p>
         </div>
       </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Our Venue</h2>
+      <p>The Wedding and Reception both take place at The Ribbon Hall, a bright hall dressed in blush roses and rose-gold ribbon.</p>
+      <div class="map">
+        <span class="pin" aria-hidden="true"></span>
+        <span class="vn">The Ribbon Hall</span>
+        <span class="va">Pune</span>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=The%20Ribbon%20Hall%2C%20Pune" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Dress Code</h2>
+      <div class="swatches" aria-hidden="true"><i style="background:#f9dde2"></i><i style="background:#e88aa5"></i><i style="background:#d4af37"></i><i style="background:#b76e79"></i></div>
+      <p>Blush &amp; rose gold, with a touch of gold shimmer. Festive Indian wear is warmly welcome; comfortable shoes for an evening of dancing.</p>
+    </section>
+
+    <section class="card sec">
+      <h2>Pre-Wedding Events</h2>
+      <div class="events">
+        <div class="event">
+          <div class="day"><b>Fri 4 Jun</b><span>7:00 PM</span></div>
+          <p>Mehndi<small>Henna, marigolds and songs with family</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Sat 5 Jun</b><span>7:00 PM</span></div>
+          <p>Sangeet<small>An evening of music, dance and family performances</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Sun 6 Jun</b><span>10:00 AM</span></div>
+          <p>Haldi<small>A bright morning of turmeric, marigolds and blessings</small></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Travel &amp; Stay</h2>
+      <div class="travel">
+        <h3>Getting There</h3>
+        <p>Fly into Pune Airport (PNQ). The Ribbon Hall is about a 25-minute drive from the airport; taxis and rideshares are easy to find outside arrivals.</p>
+        <h3>Where to Stay</h3>
+        <p>We suggest the JW Marriott Hotel Pune on Senapati Bapat Road, a short drive from the hall, with comfortable rooms for a slow morning after the celebration.</p>
+      </div>
+    </section>
+
+    <section class="card sec">
+      <h2>Gifts</h2>
+      <p>Your presence is the greatest gift. If you would like to honour us further, a contribution towards our honeymoon would be cherished — given with love, never expected.</p>
+    </section>
+
+    <section class="card sec">
+      <h2>RSVP</h2>
+      <p>Kindly respond by 23 May 2027 so we can keep a seat — and a plate — ready for you.</p>
 
       <div class="actions">
         <button class="btn gold" id="rsvpBtn" type="button">RSVP Now</button>
@@ -220,26 +359,44 @@
       <div id="rsvp" class="hidden">
         <h3>Will you join us?</h3>
         <input id="guestName" type="text" placeholder="Your name" maxlength="40" aria-label="Your name">
+        <input id="guestEmail" type="email" placeholder="Your email" maxlength="60" aria-label="Your email">
+        <label for="attendSel">Attending?</label>
+        <select id="attendSel" aria-label="Attending">
+          <option value="yes" selected>Joyfully attending</option>
+          <option value="no">Regretfully declining</option>
+        </select>
+        <label for="guestCount">Guests (including you)</label>
         <select id="guestCount" aria-label="Number of guests">
           <option value="1">1 guest</option>
           <option value="2" selected>2 guests</option>
           <option value="3">3 guests</option>
           <option value="4">4 guests</option>
-          <option value="5">5+ guests</option>
         </select>
+        <label for="guestDiet">Dietary needs</label>
+        <select id="guestDiet" aria-label="Dietary needs">
+          <option value="none" selected>No special needs</option>
+          <option value="veg">Vegetarian</option>
+          <option value="vegan">Vegan</option>
+          <option value="jain">Jain</option>
+          <option value="other">Other (see message)</option>
+        </select>
+        <textarea id="guestMsg" placeholder="A message for the couple (optional)" maxlength="200" aria-label="Message for the couple"></textarea>
         <div class="choice">
           <button class="btn gold" id="attendYes" type="button">Joyfully Accepts</button>
           <button class="btn ghost" id="attendNo" type="button">Regretfully Declines</button>
         </div>
         <div id="rsvpMsg"></div>
       </div>
-    </div>
-    <div class="use-row">
+    </section>
+
+    <footer class="foot-band">
+      <div class="mono-seal2">P &amp; N</div>
+      <p>Pooja &hearts; Nakul &middot; 06 . 06 . 2027</p>
       <a class="btn gold" href="../builder.html?template=rose-gold-ribbon">Use this template</a>
-      <a class="btn ghost" href="../index.html#templates">All templates</a>
-    </div>
-    <div class="foot">Saba &hearts; Kamran &middot; 06 . 06 . 2027 &middot; Demo invitation — no video, only code</div>
+      <p style="margin-top:14px; font-size:13px;">Demo invitation — no video, only code</p>
+    </footer>
   </main>
+  <a class="float-use" href="../builder.html?template=rose-gold-ribbon">Use this template</a>
 <script>
 (function () {
   "use strict";
@@ -417,23 +574,28 @@
   });
   function rsvp(attending) {
     var name = document.getElementById("guestName").value.trim();
+    var email = document.getElementById("guestEmail").value.trim();
     var count = document.getElementById("guestCount").value;
+    var diet = document.getElementById("guestDiet").value;
+    var message = document.getElementById("guestMsg").value.trim();
     var msg = document.getElementById("rsvpMsg");
+    var sel = document.getElementById("attendSel");
+    if (sel) sel.value = attending ? "yes" : "no";
     try {
       var saved = JSON.parse(localStorage.getItem("demo-rsvp-rose-gold-ribbon") || "[]");
-      saved.push({ name: name, count: count, attending: attending, at: Date.now() });
+      saved.push({ name: name, email: email, count: count, attending: attending, diet: diet, message: message, at: Date.now() });
       localStorage.setItem("demo-rsvp-rose-gold-ribbon", JSON.stringify(saved));
     } catch (err) { /* private mode: ignore */ }
     if (attending) {
       msg.textContent = name
-        ? "Shukriya, " + name + "! " + count + " guest(s) noted — hum intezaar karenge."
-        : "Shukriya! " + count + " guest(s) noted — hum intezaar karenge.";
+        ? "Thank you, " + name + "! " + count + " guest(s) noted — we can't wait to celebrate with you."
+        : "Thank you! " + count + " guest(s) noted — we can't wait to celebrate with you.";
       burst(window.innerWidth / 2, window.innerHeight * 0.5, "curl");
       chime();
     } else {
       msg.textContent = name
-        ? "Shukriya, " + name + " — aapki duaen hamare saath hain."
-        : "Shukriya — aapki duaen hamare saath hain.";
+        ? "Thank you, " + name + " — you will be missed, and your blessings mean the world."
+        : "Thank you — you will be missed, and your blessings mean the world.";
     }
   }
   document.getElementById("attendYes").addEventListener("click", function () { rsvp(true); });
@@ -443,22 +605,54 @@
   document.getElementById("calBtn").addEventListener("click", function () {
     var ics = [
       "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Demo Invitation//EN",
-      "BEGIN:VEVENT", "UID:saba-kamran-nikah@demo",
+      "BEGIN:VEVENT", "UID:pooja-nakul-wedding@demo",
       "DTSTAMP:20261124T000000Z",
       "DTSTART:20270606T140000Z", "DTEND:20270606T180000Z",
-      "SUMMARY:Saba & Kamran — Nikah",
-      "LOCATION:The Ribbon Hall\\, Karachi",
-      "DESCRIPTION:Nikah ceremony of Saba & Kamran.",
+      "SUMMARY:Pooja & Nakul — Wedding",
+      "LOCATION:The Ribbon Hall\\, Pune",
+      "DESCRIPTION:Wedding ceremony of Pooja & Nakul.",
       "END:VEVENT", "END:VCALENDAR"
     ].join("\r\n");
     var blob = new Blob([ics], { type: "text/calendar" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "Saba-Kamran-Nikah.ics";
+    a.download = "Pooja-Nakul-Wedding.ics";
     document.body.appendChild(a);
     a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
   });
+  /* ---------- scratch panel (sized only when visible) ---------- */
+  var sw = document.getElementById("scratchWrap"), sc = document.getElementById("scratchCv");
+  if (sw && sc) {
+    var sctx = sc.getContext("2d"), sDone = false;
+    function paintScratch() {
+      var r = sw.getBoundingClientRect();
+      if (r.width < 10) return;
+      var d = Math.min(window.devicePixelRatio || 1, 2);
+      sc.width = r.width * d; sc.height = r.height * d;
+      sc.style.width = r.width + "px"; sc.style.height = r.height + "px";
+      sctx.setTransform(d, 0, 0, d, 0, 0);
+      var g = sctx.createLinearGradient(0, 0, r.width, r.height);
+      g.addColorStop(0, "#e9b949"); g.addColorStop(0.5, "#e88aa5"); g.addColorStop(1, "#b76e79");
+      sctx.fillStyle = g; sctx.fillRect(0, 0, r.width, r.height);
+      sctx.fillStyle = "rgba(255,255,255,.28)";
+      for (var i = 0; i < 24; i++) { sctx.beginPath(); sctx.arc((i * 53) % r.width, (i * 37) % r.height, 3, 0, Math.PI * 2); sctx.fill(); }
+      sctx.fillStyle = "#fff8ec"; sctx.font = "26px Georgia, serif"; sctx.textAlign = "center";
+      sctx.fillText("✦", r.width / 2, r.height / 2 + 9);
+    }
+    function scratchAt(e) {
+      if (sDone) return;
+      var r = sc.getBoundingClientRect();
+      sctx.globalCompositeOperation = "destination-out";
+      sctx.beginPath(); sctx.arc(e.clientX - r.left, e.clientY - r.top, 26, 0, Math.PI * 2); sctx.fill();
+      sctx.globalCompositeOperation = "source-over";
+    }
+    sc.addEventListener("pointerdown", scratchAt);
+    sc.addEventListener("pointermove", function (e) { if (e.buttons) scratchAt(e); });
+    if ("ResizeObserver" in window) new ResizeObserver(function () { if (!sDone) paintScratch(); }).observe(sw);
+    window.addEventListener("resize", function () { if (!sDone) paintScratch(); });
+    setTimeout(paintScratch, 600);
+  }
 })();
 </script>
 </body>

@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Sadia & Noman &mdash; Sunset Terracotta Invitation (Demo)</title>
-<meta name="description" content="Demo: Sunset Terracotta wedding invitation for Sadia & Noman, Sunday, 1 August 2027, Terracotta Courtyard, Karachi. HTML/CSS/JS only, no video.">
+<title>Sanjana & Ishaan &mdash; Sunset Terracotta Invitation (Demo)</title>
+<meta name="description" content="Demo: Sunset Terracotta wedding invitation for Sanjana & Ishaan, Sunday, 1 August 2027, Terracotta Courtyard, Chennai. HTML/CSS/JS only, no video.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@500;600&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
   #openBtn { margin-top:26px; padding:13px 30px; border-radius:999px; cursor:pointer; font-family:'Playfair Display', serif; font-size:17px; letter-spacing:.06em; box-shadow:0 8px 22px rgba(0,0,0,.3); animation:pulse 2.2s ease-in-out infinite; }
   @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.05); } }
   .card { width:100%; max-width:560px; border-radius:18px; padding:34px 22px 26px; text-align:center; position:relative; }
-  .bismillah { font-family:'Noto Nastaliq Urdu', serif; font-size:26px; line-height:2; }
+  .blessing { font-family:'Playfair Display', serif; font-size:26px; line-height:2; }
   .eyebrow { letter-spacing:.32em; text-transform:uppercase; font-size:12px; margin:10px 0 4px; }
   .names { font-size:clamp(46px,12vw,72px); line-height:1.15; margin:6px 0 2px; }
   .names .amp { font-size:.7em; }
@@ -69,7 +69,7 @@
   #openBtn { border:1px solid #8A4A2E; background:linear-gradient(180deg,#C96F4A,#8A4A2E); color:#fff; position:relative; z-index:2; }
   .hero-sun { position:fixed; top:9vh; right:12vw; width:96px; height:96px; border-radius:50%; z-index:0; pointer-events:none; background:radial-gradient(circle at 50% 42%, #FFF6DC 0%, #FFD98A 45%, #E8A84C 80%, #C96F4A 100%); box-shadow:0 0 40px 14px rgba(255,200,110,.55); }
   .card { background:rgba(255,243,224,.97); border:1px solid #C96F4A; box-shadow:0 24px 60px rgba(92,58,33,.4), inset 0 0 0 6px #FFF3E0, inset 0 0 0 7px #E8A84C; }
-  .bismillah { color:#C96F4A; } .eyebrow { color:#C96F4A; } .names { font-family:'Playfair Display', serif; font-weight:600; color:#5C3A21; } .names .amp { color:#C96F4A; }
+  .blessing { color:#C96F4A; } .eyebrow { color:#C96F4A; } .names { font-family:'Playfair Display', serif; font-weight:600; color:#5C3A21; } .names .amp { color:#C96F4A; }
   .invite-line { color:#7A5238; } .date-big { color:#5C3A21; } .venue { color:#7A5238; } .dress { color:#C96F4A; }
   .divider { color:#C96F4A; } .divider::before,.divider::after { background:linear-gradient(90deg,transparent,#C96F4A,transparent); }
   .count .box { background:#FFF3E0; border:1px solid #E8A84C; } .count .num { color:#5C3A21; } .count .lbl { color:#C96F4A; }
@@ -86,20 +86,20 @@
 <body>
 <div class="hero-sun" id="heroSun"></div>
 <div class="topbar"><span class="brand">My Silk Invite</span><button id="musicBtn" type="button" aria-label="Music">&#9834; Music: Off</button></div>
-<div id="cover"><div class="mono">Sadia &amp; Noman</div>
+<div id="cover"><div class="mono">Sanjana &amp; Ishaan</div>
 <div class="sub">Are Getting Married</div>
 <div class="desert-sun"></div>
 <div class="dunes" aria-hidden="true"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0 70 Q 200 20 420 60 T 820 55 T 1200 70 V120 H0 Z" fill="#8A4A2E"/><path d="M0 90 Q 260 55 520 85 T 1200 88 V120 H0 Z" fill="#5C3A21"/></svg></div>
 <button id="openBtn" type="button" aria-label="Open the invitation">Open the Invitation</button></div>
 <main id="main" class="hidden">
 <div class="card">
-<div class="bismillah">بسم اللہ الرحمن الرحیم</div>
+<div class="blessing">With the blessings of our families</div>
 <div class="eyebrow">Together with their families</div>
-<div class="names">Sadia <span class="amp">&amp;</span> Noman</div>
-<p class="invite-line">request the honour of your presence<br>at the celebration of their Nikah</p>
+<div class="names">Sanjana <span class="amp">&amp;</span> Ishaan</div>
+<p class="invite-line">request the honour of your presence<br>at the celebration of their Wedding</p>
 <div class="divider"><span>&#10022;</span></div>
 <div class="date-big">Sunday, 1 August 2027</div>
-<div class="venue">7:00 PM onwards &middot; Terracotta Courtyard, Karachi</div>
+<div class="venue">7:00 PM onwards &middot; Terracotta Courtyard, Chennai</div>
 <div class="dress">Dress Code &middot; Terracotta, Amber &amp; Cream</div>
 <div class="divider"><span>&hearts;</span></div>
 <div class="count" id="countdown" aria-label="Countdown">
@@ -109,8 +109,8 @@
 <div class="box"><div class="num" id="cd-s">--</div><div class="lbl">Secs</div></div>
 </div>
 <div class="events">
-<div class="event"><div class="day"><b>Sun 1 Aug</b><span>7:00 PM</span></div><p>Nikah Ceremony<small>Nikah at sunset, followed by dinner</small></p></div>
-<div class="event"><div class="day"><b>Mon 2 Aug</b><span>1:00 PM</span></div><p>Walima Reception<small>Walima lunch with family and friends</small></p></div>
+<div class="event"><div class="day"><b>Sun 1 Aug</b><span>7:00 PM</span></div><p>Wedding Ceremony<small>Wedding at sunset, followed by dinner</small></p></div>
+<div class="event"><div class="day"><b>Mon 2 Aug</b><span>1:00 PM</span></div><p>Reception<small>Reception lunch with family and friends</small></p></div>
 </div>
 <div class="actions">
 <button class="btn gold" id="rsvpBtn" type="button">RSVP Now</button>
@@ -138,7 +138,7 @@
 <a class="btn gold" href="../builder.html?template=sunset-terracotta">Use this template</a>
 <a class="btn ghost" href="../index.html#templates">All templates</a>
 </div>
-<div class="foot">Sadia & Noman &hearts; 01 . 08 . 2027 &middot; Demo invitation &mdash; no video, only code</div>
+<div class="foot">Sanjana & Ishaan &hearts; 01 . 08 . 2027 &middot; Demo invitation &mdash; no video, only code</div>
 </main>
 <script>
 (function () {
@@ -166,7 +166,7 @@
   document.getElementById("attendYes").addEventListener("click",function(){ rsvp(true); });
   document.getElementById("attendNo").addEventListener("click",function(){ rsvp(false); });
   /* ---------- add to calendar (.ics) ---------- */
-  document.getElementById("calBtn").addEventListener("click",function(){ var ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Demo Invitation//EN","BEGIN:VEVENT","UID:"+"sadia-noman-nikah@demo","DTSTAMP:20261124T000000Z","DTSTART:"+"20270801T140000Z","DTEND:"+"20270801T180000Z","SUMMARY:"+"Sadia & Noman — Nikah","LOCATION:"+"Terracotta Courtyard\, Karachi","DESCRIPTION:"+"Nikah ceremony of Sadia & Noman.","END:VEVENT","END:VCALENDAR"].join("\r\n"); var blob=new Blob([ics],{type:"text/calendar"}); var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="Sadia-Noman-Nikah.ics"; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },500); });
+  document.getElementById("calBtn").addEventListener("click",function(){ var ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Demo Invitation//EN","BEGIN:VEVENT","UID:"+"sanjana-ishaan-wedding@demo","DTSTAMP:20261124T000000Z","DTSTART:"+"20270801T140000Z","DTEND:"+"20270801T180000Z","SUMMARY:"+"Sanjana & Ishaan — Wedding","LOCATION:"+"Terracotta Courtyard\, Chennai","DESCRIPTION:"+"Wedding ceremony of Sanjana & Ishaan.","END:VEVENT","END:VCALENDAR"].join("\r\n"); var blob=new Blob([ics],{type:"text/calendar"}); var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="Sanjana-Ishaan-Wedding.ics"; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },500); });
 
   var heroSun=document.getElementById("heroSun");
   function dipSun(){ var y=window.scrollY||window.pageYOffset; heroSun.style.transform="translateY("+Math.min(160,y*0.35)+"px)"; heroSun.style.opacity=Math.max(0.25,1-y/1400); }

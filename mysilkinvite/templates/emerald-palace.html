@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Anaya &amp; Kabir — Emerald Palace Invitation (Demo)</title>
+<title>Shreya &amp; Nikhil — Emerald Palace Invitation (Demo)</title>
 <meta name="description" content="Demo: Emerald Palace wedding invitation. Regal arches light up in gold across a deep emerald palace. HTML/CSS/JS only, no video.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,7 +84,7 @@
     box-shadow:0 24px 60px rgba(0,0,0,.5), inset 0 0 0 6px rgba(10,50,30,.9), inset 0 0 0 7px #d9a441;
     padding:34px 22px 26px; text-align:center; position:relative;
   }
-  .bismillah { font-family:'Noto Nastaliq Urdu', serif; font-size:26px; color:#ffe9a8; line-height:2; }
+  .blessing { font-family:'Playfair Display', serif; font-size:26px; color:#ffe9a8; line-height:2; }
   .eyebrow { letter-spacing:.32em; text-transform:uppercase; font-size:12px; color:#e8c87e; margin:10px 0 4px; }
   .names { font-family:'Great Vibes', cursive; font-size:clamp(46px,12vw,72px); color:#ffe9a8; line-height:1.15; margin:6px 0 2px; text-shadow:0 0 22px rgba(255,210,110,.4); }
   .names .amp { color:#d9a441; font-size:.7em; }
@@ -152,7 +152,7 @@
 
   <!-- PALACE COVER -->
   <div id="cover">
-    <div class="mono">Anaya &amp; Kabir</div>
+    <div class="mono">Shreya &amp; Nikhil</div>
     <div class="sub">Are Getting Married</div>
     <div class="facade" id="facade">
       <div class="win" aria-hidden="true"></div>
@@ -164,15 +164,15 @@
 
   <main id="main" class="hidden">
     <div class="card">
-      <div class="bismillah">بسم اللہ الرحمن الرحیم</div>
+      <div class="blessing">With the blessings of our families</div>
       <div class="eyebrow">Together with their families</div>
-      <div class="names">Anaya <span class="amp">&amp;</span> Kabir</div>
-      <p class="invite-line">request the honour of your presence<br>at the celebration of their Nikah</p>
+      <div class="names">Shreya <span class="amp">&amp;</span> Nikhil</div>
+      <p class="invite-line">request the honour of your presence<br>at the celebration of their Wedding</p>
 
       <div class="divider"><span>&#10022;</span></div>
 
       <div class="date-big">Sunday, 20 June 2027</div>
-      <div class="venue">7:00 PM onwards &middot; Emerald Court, Karachi</div>
+      <div class="venue">7:00 PM onwards &middot; Emerald Court, Jaipur</div>
       <div class="dress">Dress Code &middot; Emerald &amp; Gold</div>
 
       <div class="divider"><span>&hearts;</span></div>
@@ -185,14 +185,14 @@
       </div>
 
       <div class="events">
-        <button class="arch" type="button" aria-label="Nikah arch">
+        <button class="arch" type="button" aria-label="Wedding arch">
           <div class="day">Sun 20 Jun<span>7:00 PM</span></div>
-          <div class="ttl">Nikah Ceremony</div>
+          <div class="ttl">Wedding Ceremony</div>
           <div class="det">Arrival of the groom, followed by dinner under the palace lights</div>
         </button>
-        <button class="arch" type="button" aria-label="Walima arch">
+        <button class="arch" type="button" aria-label="Reception arch">
           <div class="day">Mon 21 Jun<span>1:00 PM</span></div>
-          <div class="ttl">Walima Reception</div>
+          <div class="ttl">Reception</div>
           <div class="det">Lunch &amp; blessings with family and friends</div>
         </button>
       </div>
@@ -223,7 +223,7 @@
       <a class="btn gold" href="../builder.html?template=emerald-palace">Use this template</a>
       <a class="btn ghost" href="../index.html#templates">All templates</a>
     </div>
-    <div class="foot">Anaya &hearts; Kabir &middot; 20 . 06 . 2027 &middot; Demo invitation — no video, only code</div>
+    <div class="foot">Shreya &hearts; Nikhil &middot; 20 . 06 . 2027 &middot; Demo invitation — no video, only code</div>
   </main>
 <script>
 (function () {
@@ -435,18 +435,18 @@
   document.getElementById("calBtn").addEventListener("click", function () {
     var ics = [
       "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Demo Invitation//EN",
-      "BEGIN:VEVENT", "UID:anaya-kabir-nikah@demo",
+      "BEGIN:VEVENT", "UID:shreya-nikhil-wedding@demo",
       "DTSTAMP:20261124T000000Z",
       "DTSTART:20270620T140000Z", "DTEND:20270620T180000Z",
-      "SUMMARY:Anaya & Kabir — Nikah",
-      "LOCATION:Emerald Court\\, Karachi",
-      "DESCRIPTION:Nikah ceremony of Anaya & Kabir.",
+      "SUMMARY:Shreya & Nikhil — Wedding",
+      "LOCATION:Emerald Court\\, Jaipur",
+      "DESCRIPTION:Wedding ceremony of Shreya & Nikhil.",
       "END:VEVENT", "END:VCALENDAR"
     ].join("\r\n");
     var blob = new Blob([ics], { type: "text/calendar" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "Anaya-Kabir-Nikah.ics";
+    a.download = "Shreya-Nikhil-Wedding.ics";
     document.body.appendChild(a);
     a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);

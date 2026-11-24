@@ -97,10 +97,10 @@ main{position:relative;z-index:2;display:flex;flex-direction:column;align-items:
   <div class="card">
     <div class="eyebrow">Together with their families</div>
     <div class="names">Kiran <span class="amp">&amp;</span> Rohan</div>
-    <p class="invite-line">request the honour of your presence<br>at the celebration of their Nikah</p>
+    <p class="invite-line">request the honour of your presence<br>at the celebration of their Wedding</p>
     <div class="divider"><span>&#10022;</span></div>
     <div class="date-big">Sunday, 12 September 2027</div>
-    <div class="venue">7:00 PM onwards &middot; Ocean Pearl Resort, Karachi</div>
+    <div class="venue">7:00 PM onwards &middot; Ocean Pearl Resort, Goa</div>
     <div class="dress">Dress Code &middot; Seafoam &amp; Sand</div>
     <div class="divider"><span>&hearts;</span></div>
     <div class="count" id="countdown" aria-label="Countdown">
@@ -111,8 +111,8 @@ main{position:relative;z-index:2;display:flex;flex-direction:column;align-items:
     </div>
     <div class="events">
       <div class="event"><div class="day"><b>Sat 11 Sep</b><span>6:00 PM</span></div><p>Mehndi Evening<small>Henna, music and family blessings</small></p></div>
-      <div class="event"><div class="day"><b>Sun 12 Sep</b><span>7:00 PM</span></div><p>Nikah Ceremony<small>Arrival of the groom, followed by dinner</small></p></div>
-      <div class="event"><div class="day"><b>Mon 13 Sep</b><span>1:00 PM</span></div><p>Walima Reception<small>Lunch &amp; blessings with family and friends</small></p></div>
+      <div class="event"><div class="day"><b>Sun 12 Sep</b><span>7:00 PM</span></div><p>Wedding Ceremony<small>Arrival of the groom, followed by dinner</small></p></div>
+      <div class="event"><div class="day"><b>Mon 13 Sep</b><span>1:00 PM</span></div><p>Reception<small>Lunch &amp; blessings with family and friends</small></p></div>
     </div>
     <div class="actions">
       <button class="btn gold" id="rsvpBtn" type="button">RSVP Now</button>
@@ -164,7 +164,7 @@ document.getElementById("rsvpBtn").addEventListener("click",function(){var r=doc
 function rsvp(attending){var name=document.getElementById("guestName").value.trim();var count=document.getElementById("guestCount").value;var msg=document.getElementById("rsvpMsg");try{var saved=JSON.parse(localStorage.getItem("demo-rsvp-ocean-pearl")||"[]");saved.push({name:name,count:count,attending:attending,at:Date.now()});localStorage.setItem("demo-rsvp-ocean-pearl",JSON.stringify(saved))}catch(err){}if(attending){msg.textContent=name?"Shukriya, "+name+"! "+count+" guest(s) noted — hum intezaar karenge.":"Shukriya! "+count+" guest(s) noted — hum intezaar karenge.";chime()}else{msg.textContent=name?"Shukriya, "+name+" — aapki duaen hamare saath hain.":"Shukriya — aapki duaen hamare saath hain."}}
 document.getElementById("attendYes").addEventListener("click",function(){rsvp(true)});
 document.getElementById("attendNo").addEventListener("click",function(){rsvp(false)});
-document.getElementById("calBtn").addEventListener("click",function(){var ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Demo Invitation//EN","BEGIN:VEVENT","UID:kiran-rohan-nikah@demo","DTSTAMP:20261124T000000Z","DTSTART:20270912T140000Z","DTEND:20270912T180000Z","SUMMARY:Kiran & Rohan — Nikah","LOCATION:Ocean Pearl Resort\\, Karachi","DESCRIPTION:Nikah ceremony of Kiran & Rohan.","END:VEVENT","END:VCALENDAR"].join("\r\n");var blob=new Blob([ics],{type:"text/calendar"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="Kiran-Rohan-Nikah.ics";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)});
+document.getElementById("calBtn").addEventListener("click",function(){var ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Demo Invitation//EN","BEGIN:VEVENT","UID:kiran-rohan-wedding@demo","DTSTAMP:20261124T000000Z","DTSTART:20270912T140000Z","DTEND:20270912T180000Z","SUMMARY:Kiran & Rohan — Wedding","LOCATION:Ocean Pearl Resort\\, Goa","DESCRIPTION:Wedding ceremony of Kiran & Rohan.","END:VEVENT","END:VCALENDAR"].join("\r\n");var blob=new Blob([ics],{type:"text/calendar"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="Kiran-Rohan-Wedding.ics";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)});
 })();
 </script>
 </body>

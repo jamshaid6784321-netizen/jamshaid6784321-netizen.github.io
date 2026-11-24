@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
-<title>Iqra &amp; Saad — Blush &amp; Ivory Lace Invitation (Demo)</title>
-<meta name="description" content="Demo: Blush &amp; Ivory Lace wedding invitation. A lace frame draws itself around engraved serif names. HTML/CSS/JS only, no video.">
+<meta name="robots" content="noindex,nofollow">
+<title>Riya &amp; Aryan — Blush &amp; Ivory Lace Invitation (Demo)</title>
+<meta name="description" content="Demo: Riya & Aryan — Blush &amp; Ivory Lace wedding invitation. A lace frame draws itself around engraved serif names. HTML/CSS/JS only, no video.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   html,body { height:100%; }
@@ -75,7 +75,6 @@
     box-shadow:0 20px 50px rgba(122,74,58,.22), inset 0 0 0 5px #fffdf8, inset 0 0 0 6px #e8c9b8;
     padding:36px 24px 28px; text-align:center; position:relative;
   }
-  .bismillah { font-family:'Noto Nastaliq Urdu', serif; font-size:26px; color:#a06a5a; line-height:2; }
   .eyebrow { letter-spacing:.32em; text-transform:uppercase; font-size:12px; color:#c08a7e; margin:10px 0 4px; }
   .names {
     font-family:'Playfair Display', serif; font-weight:600;
@@ -139,6 +138,52 @@
   .use-row { margin-top:18px; text-align:center; }
   .use-row .btn { margin:4px; }
   .hidden { display:none !important; }
+
+  /* --- long-format additions --- */
+  .topbar{justify-content:space-between}
+  .mono-top{pointer-events:auto;background:rgba(255,255,255,.92);border:1px solid #7a4a3a;color:#7a4a3a;border-radius:999px;padding:6px 12px;font-family:'Playfair Display',serif;font-size:14px;letter-spacing:.1em}
+  .sec{margin-top:16px}
+  .sec h2{font-family:'Playfair Display',serif;font-size:24px;color:#7a4a3a;margin-bottom:8px}
+  .sec p{font-size:17px;line-height:1.55}
+  .parents{font-size:16px;font-style:italic;margin:8px 0 2px}
+  .photobanner{margin:16px auto 4px;max-width:420px;border:1px solid #c08a7e;border-radius:12px;padding:18px 14px;background:linear-gradient(180deg,#fffaf2,#fff)}
+  .photobanner .pb-mono{font-family:'Great Vibes',cursive;font-size:44px;color:#7a4a3a;line-height:1}
+  .photobanner .pb-sub{letter-spacing:.3em;text-transform:uppercase;font-size:11px;color:#c08a7e;margin-top:6px}
+  .scrollcue{margin:14px auto 0;color:#7a4a3a;animation:cue 1.8s ease-in-out infinite}
+  .scrollcue svg{display:block;margin:0 auto}
+  @keyframes cue{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(6px);opacity:1}}
+  .mem-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+  .mem-panel{border:1px solid #c08a7e;border-radius:12px;padding:14px 8px;background:#fffaf2}
+  .mem-panel svg{width:44px;height:44px}
+  .mem-panel p{font-size:15px;font-style:italic;margin-top:6px}
+  .scratch-wrap{position:relative;max-width:420px;margin:14px auto 0;border:1px solid #c08a7e;border-radius:12px;overflow:hidden}
+  .scratch-under{padding:26px 18px;background:#fffaf2}
+  .scratch-under p{font-size:18px;font-style:italic}
+  .scratch-under .su-mono{font-family:'Great Vibes',cursive;font-size:34px;color:#7a4a3a}
+  #scratchCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .prog{text-align:left;max-width:420px;margin:12px auto 0}
+  .prog .p-row{display:flex;gap:12px;padding:11px 4px;border-top:1px solid #c08a7e}
+  .prog .p-row:last-child{border-bottom:1px solid #c08a7e}
+  .prog .p-time{font-family:'Playfair Display',serif;color:#7a4a3a;min-width:82px}
+  .prog .p-row b{display:block;font-size:17px}
+  .prog .p-row span{font-size:14px;font-style:italic}
+  .swatches{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+  .sw{font-size:13px}
+  .sw i{display:block;width:44px;height:44px;border-radius:50%;border:1px solid rgba(0,0,0,.12);margin:0 auto 5px}
+  .pre-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px;text-align:left}
+  .pre-card{border:1px solid #c08a7e;border-radius:12px;padding:12px 14px;background:#fffaf2}
+  .pre-card b{font-family:'Playfair Display',serif;font-size:18px;color:#7a4a3a}
+  .pre-card span{float:right;font-size:14px}
+  .pre-card p{font-size:16px;margin-top:2px}
+  .map-panel{margin-top:12px;border:1px solid #c08a7e;border-radius:12px;padding:20px 14px;background:#fffaf2}
+  .map-panel b{font-family:'Playfair Display',serif;font-size:19px;color:#7a4a3a;display:block;margin:6px 0 2px}
+  .fab{position:fixed;right:14px;bottom:14px;z-index:8;background:#7a4a3a;color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none;font-family:'Playfair Display',serif;font-size:15px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+  .foot-band{width:100%;max-width:560px;margin-top:16px;padding:22px 18px;text-align:center;border-radius:12px;background:#7a4a3a;color:#fff}
+  .foot-band .fb-mono{font-family:'Great Vibes',cursive;font-size:40px;line-height:1}
+  .foot-band p{margin-top:6px}
+  .foot-band a{color:#fff}
+  #rsvp-sec{scroll-margin-top:70px}
+  #rsvp textarea{font-family:inherit;font-size:16px;padding:10px 12px;border:1px solid #c08a7e;border-radius:10px;background:#fff;width:100%;max-width:320px;margin-bottom:10px;min-height:70px}
 </style>
 </head>
 <body>
@@ -154,6 +199,7 @@
   </div>
 
   <div class="topbar">
+    <span class="mono-top">R &amp; A</span>
     <button id="musicBtn" type="button" aria-label="Toggle music">&#9834; Music: Off</button>
   </div>
 
@@ -163,73 +209,151 @@
       <path d="M5 13 Q 15 3, 25 13 Q 35 23, 45 13 Q 55 3, 65 13 Q 75 23, 85 13 Q 95 3, 105 13 Q 115 23, 125 13 Q 135 3, 145 13" fill="none" stroke="#c08a7e" stroke-width="1.6"/>
       <circle cx="25" cy="13" r="2" fill="#d9c08a"/><circle cx="65" cy="13" r="2" fill="#d9c08a"/><circle cx="105" cy="13" r="2" fill="#d9c08a"/>
     </svg>
-    <div class="mono">Iqra <em>&amp;</em> Saad</div>
+    <div class="mono">Riya <em>&amp;</em> Aryan</div>
     <div class="sub">Are Getting Married</div>
     <button id="openBtn" type="button">Open the Invitation</button>
   </div>
 
   <main id="main" class="hidden">
     <div class="card">
-      <div class="bismillah">بسم اللہ الرحمن الرحیم</div>
       <div class="eyebrow">Together with their families</div>
-      <div class="names">Iqra <em>&amp;</em> Saad</div>
-      <p class="invite-line">request the honour of your presence<br>at the celebration of their Nikah</p>
+      <div class="names">Riya <em>&amp;</em> Aryan</div>
+      <p class="parents">Son of Mr &amp; Mrs Vikram Malhotra &middot; Daughter of Mr &amp; Mrs Sanjay Kapoor</p>
+      <p class="invite-line">request the honour of your presence<br>at the celebration of their Wedding</p>
 
       <div class="divider"><span>&#10022;</span></div>
 
       <div class="date-big">Sunday, 16 May 2027</div>
-      <div class="venue">7:00 PM onwards &middot; The Ivory House, Karachi</div>
-      <div class="dress">Dress Code &middot; Shades of Blush &amp; Ivory</div>
+      <div class="venue">7:00 PM onwards &middot; The Ivory House, Delhi</div>
+      <div class="photobanner"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M4 20 Q 11 10, 18 20 Q 25 30, 32 20 Q 37 13, 40 20" stroke="#c08a7e" stroke-width="1.6" fill="none"/><circle cx="11" cy="20" r="2" fill="#d9c08a"/><circle cx="22" cy="20" r="2" fill="#d9c08a"/><circle cx="33" cy="20" r="2" fill="#d9c08a"/><circle cx="22" cy="33" r="5" fill="#f3d1d1" stroke="#c08a7e" stroke-width="1"/></svg><div class="pb-mono">R &amp; A</div><div class="pb-sub">16 . 05 . 2027</div></div>
+      <div class="scrollcue" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 9l7 7 7-7"/></svg></div>
 
       <div class="divider"><span>&hearts;</span></div>
 
+
+
+
+
+
+
+
+    </div>
+    <section class="card sec">
+      <h2>Welcome</h2>
+      <p>Delicate as lace, steady as ivory — Riya &amp; Aryan are weaving two lives into one, and they would love you to be there for every stitch.</p>
+    </section>
+    <section class="card sec">
+      <h2>Scratch to Reveal</h2>
+      <div class="scratch-wrap" id="scratchWrap">
+        <div class="scratch-under"><div class="su-mono">R &amp; A</div><p>Every thread of this day is woven with love — and with you in it.</p></div>
+        <canvas id="scratchCanvas"></canvas>
+      </div>
+    </section>
+    <section class="card sec">
+      <h2>Our Memories</h2>
+      <div class="mem-grid">
+        <div class="mem-panel"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M4 20 Q 11 10, 18 20 Q 25 30, 32 20 Q 37 13, 40 20" stroke="#c08a7e" stroke-width="1.6" fill="none"/><circle cx="11" cy="20" r="2" fill="#d9c08a"/><circle cx="22" cy="20" r="2" fill="#d9c08a"/><circle cx="33" cy="20" r="2" fill="#d9c08a"/><circle cx="22" cy="33" r="5" fill="#f3d1d1" stroke="#c08a7e" stroke-width="1"/></svg><p>First Meeting</p></div>
+        <div class="mem-panel"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M4 20 Q 11 10, 18 20 Q 25 30, 32 20 Q 37 13, 40 20" stroke="#c08a7e" stroke-width="1.6" fill="none"/><circle cx="11" cy="20" r="2" fill="#d9c08a"/><circle cx="22" cy="20" r="2" fill="#d9c08a"/><circle cx="33" cy="20" r="2" fill="#d9c08a"/><circle cx="22" cy="33" r="5" fill="#f3d1d1" stroke="#c08a7e" stroke-width="1"/></svg><p>The Proposal</p></div>
+        <div class="mem-panel"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M4 20 Q 11 10, 18 20 Q 25 30, 32 20 Q 37 13, 40 20" stroke="#c08a7e" stroke-width="1.6" fill="none"/><circle cx="11" cy="20" r="2" fill="#d9c08a"/><circle cx="22" cy="20" r="2" fill="#d9c08a"/><circle cx="33" cy="20" r="2" fill="#d9c08a"/><circle cx="22" cy="33" r="5" fill="#f3d1d1" stroke="#c08a7e" stroke-width="1"/></svg><p>Family Blessings</p></div>
+        <div class="mem-panel"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M4 20 Q 11 10, 18 20 Q 25 30, 32 20 Q 37 13, 40 20" stroke="#c08a7e" stroke-width="1.6" fill="none"/><circle cx="11" cy="20" r="2" fill="#d9c08a"/><circle cx="22" cy="20" r="2" fill="#d9c08a"/><circle cx="33" cy="20" r="2" fill="#d9c08a"/><circle cx="22" cy="33" r="5" fill="#f3d1d1" stroke="#c08a7e" stroke-width="1"/></svg><p>Forever Begins</p></div>
+      </div>
+    </section>
+    <section class="card sec">
+      <h2>Save the Date</h2>
+      <p>Sunday, 16 May 2027 &middot; The Ivory House, Delhi</p>
       <div class="count" id="countdown" aria-label="Countdown">
         <div class="box"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
         <div class="box"><div class="num" id="cd-h">--</div><div class="lbl">Hours</div></div>
         <div class="box"><div class="num" id="cd-m">--</div><div class="lbl">Mins</div></div>
         <div class="box"><div class="num" id="cd-s">--</div><div class="lbl">Secs</div></div>
       </div>
-
-      <div class="events">
-        <h3>Order of the Day</h3>
-        <div class="event-card">
-          <div class="day">Sunday, 16 May <span>7:00 PM</span></div>
-          <p>Nikah Ceremony<small>Arrival of the groom, followed by dinner</small></p>
-        </div>
-        <div class="event-card">
-          <div class="day">Monday, 17 May <span>1:00 PM</span></div>
-          <p>Walima Reception<small>Lunch &amp; blessings with family and friends</small></p>
-        </div>
+      <div class="actions"><button class="btn ghost" id="calBtn" type="button">Add to Calendar</button></div>
+    </section>
+    <section class="card sec">
+      <h2>Programme</h2>
+      <div class="prog">
+        <div class="p-row"><div class="p-time">4:30 PM</div><div><b>Baraat</b><span>The groom arrives, drums leading the way.</span></div></div>
+        <div class="p-row"><div class="p-time">5:15 PM</div><div><b>Varmala</b><span>Exchange of garlands, cheered by both families.</span></div></div>
+        <div class="p-row"><div class="p-time">6:00 PM</div><div><b>Pheras</b><span>Seven vows around the sacred fire.</span></div></div>
+        <div class="p-row"><div class="p-time">7:00 PM</div><div><b>Vidaai</b><span>A tender farewell, with blessings all around.</span></div></div>
+        <div class="p-row"><div class="p-time">7:30 PM</div><div><b>Reception</b><span>Dinner, toasts and dancing under the lights.</span></div></div>
       </div>
-
-      <div class="actions">
-        <button class="btn gold" id="rsvpBtn" type="button">RSVP Now</button>
-        <button class="btn ghost" id="calBtn" type="button">Add to Calendar</button>
+    </section>
+    <section class="card sec">
+      <h2>Our Venue</h2>
+      <div class="map-panel">
+        <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z" fill="#7a4a3a"/><circle cx="12" cy="9" r="2.5" fill="#fff"/></svg>
+        <b>The Ivory House</b>
+        <p>New Delhi</p>
+        <p><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=The%20Ivory%20House%2C%20Delhi" target="_blank" rel="noopener">Open in Google Maps</a></p>
       </div>
-
-      <div id="rsvp" class="hidden">
+    </section>
+    <section class="card sec">
+      <h2>Dress Code</h2>
+      <p>Blush and ivory, soft and timeless — lace and light fabrics welcome.</p>
+      <div class="swatches">
+        <div class="sw"><i style="background:#f3d1d1"></i>Blush</div>
+        <div class="sw"><i style="background:#fffdf8"></i>Ivory</div>
+        <div class="sw"><i style="background:#f0dcb8"></i>Champagne</div>
+        <div class="sw"><i style="background:#d9c08a"></i>Soft Gold</div>
+      </div>
+    </section>
+    <section class="card sec">
+      <h2>Pre-Wedding Events</h2>
+      <div class="pre-grid">
+        <div class="pre-card"><b>Mehndi</b><span>Friday, 14 May &middot; 4:00 PM</span><p>Henna, marigolds and music at the bride's home.</p></div>
+        <div class="pre-card"><b>Sangeet</b><span>Saturday, 15 May &middot; 7:00 PM</span><p>An evening of songs, dances and friendly rivalry.</p></div>
+        <div class="pre-card"><b>Haldi</b><span>Sunday, 16 May &middot; 9:00 AM</span><p>Turmeric, blessings and laughter to begin the wedding day.</p></div>
+      </div>
+    </section>
+    <section class="card sec">
+      <h2>Travel &amp; Stay</h2>
+      <p><b>Transport.</b> Fly into Indira Gandhi International Airport (DEL), about 40 minutes from the venue. Taxis wait outside arrivals.</p>
+      <p><b>Accommodation.</b> We suggest The Imperial, New Delhi — rooms fill quickly in May, so do book early.</p>
+    </section>
+    <section class="card sec">
+      <h2>Gifts</h2>
+      <p>Your presence is the greatest gift of all. If you would like to give a little more, a contribution towards our honeymoon would mean the world — given with love, never expected.</p>
+    </section>
+    <section class="card sec" id="rsvp-sec">
+      <h2>RSVP</h2>
+      <p>Kindly respond by 29 April 2027.</p>
+      <div id="rsvp">
         <h3>Will you join us?</h3>
         <input id="guestName" type="text" placeholder="Your name" maxlength="40" aria-label="Your name">
+        <input id="guestEmail" type="email" placeholder="Your email" maxlength="60" aria-label="Your email">
         <select id="guestCount" aria-label="Number of guests">
           <option value="1">1 guest</option>
           <option value="2" selected>2 guests</option>
           <option value="3">3 guests</option>
           <option value="4">4 guests</option>
-          <option value="5">5+ guests</option>
         </select>
+        <select id="guestDiet" aria-label="Dietary preference">
+          <option value="" selected>No dietary preference</option>
+          <option value="Vegetarian">Vegetarian</option>
+          <option value="Vegan">Vegan</option>
+          <option value="Jain">Jain</option>
+          <option value="Other">Other — tell us below</option>
+        </select>
+        <textarea id="guestMsg" placeholder="A message for the couple (optional)" maxlength="300" aria-label="Message for the couple"></textarea>
         <div class="choice">
           <button class="btn gold" id="attendYes" type="button">Joyfully Accepts</button>
           <button class="btn ghost" id="attendNo" type="button">Regretfully Declines</button>
         </div>
         <div id="rsvpMsg"></div>
       </div>
-    </div>
+    </section>
     <div class="use-row">
       <a class="btn gold" href="../builder.html?template=blush-ivory-lace">Use this template</a>
       <a class="btn ghost" href="../index.html#templates">All templates</a>
     </div>
-    <div class="foot">Iqra &hearts; Saad &middot; 16 . 05 . 2027 &middot; Demo invitation — no video, only code</div>
+    <div class="foot-band">
+      <div class="fb-mono">R &amp; A</div>
+      <p>Riya &amp; Aryan &middot; Sunday, 16 May 2027 &middot; The Ivory House, Delhi</p>
+      <p><a href="../builder.html?template=blush-ivory-lace">Use this template</a></p>
+    </div>
   </main>
+  <a class="fab" href="../builder.html?template=blush-ivory-lace">Use this template</a>
 <script>
 (function () {
   "use strict";
@@ -325,18 +449,16 @@
   setInterval(tick, 1000);
 
   /* ---------- RSVP ---------- */
-  document.getElementById("rsvpBtn").addEventListener("click", function () {
-    var r = document.getElementById("rsvp");
-    r.classList.toggle("hidden");
-    if (!r.classList.contains("hidden")) document.getElementById("guestName").focus();
-  });
   function rsvp(attending) {
     var name = document.getElementById("guestName").value.trim();
+    var email = document.getElementById("guestEmail").value.trim();
     var count = document.getElementById("guestCount").value;
+    var diet = document.getElementById("guestDiet").value;
+    var note = document.getElementById("guestMsg").value.trim();
     var msg = document.getElementById("rsvpMsg");
     try {
       var saved = JSON.parse(localStorage.getItem("demo-rsvp-blush-ivory-lace") || "[]");
-      saved.push({ name: name, count: count, attending: attending, at: Date.now() });
+      saved.push({ name: name, email: email, count: count, diet: diet, message: note, attending: attending, at: Date.now() });
       localStorage.setItem("demo-rsvp-blush-ivory-lace", JSON.stringify(saved));
     } catch (err) { /* private mode: ignore */ }
     if (attending) {
@@ -357,22 +479,55 @@
   document.getElementById("calBtn").addEventListener("click", function () {
     var ics = [
       "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Demo Invitation//EN",
-      "BEGIN:VEVENT", "UID:iqra-saad-nikah@demo",
+      "BEGIN:VEVENT", "UID:riya-aryan-wedding@demo",
       "DTSTAMP:20261124T000000Z",
       "DTSTART:20270516T140000Z", "DTEND:20270516T180000Z",
-      "SUMMARY:Iqra & Saad — Nikah",
-      "LOCATION:The Ivory House\\, Karachi",
-      "DESCRIPTION:Nikah ceremony of Iqra & Saad.",
+      "SUMMARY:Riya & Aryan — Wedding",
+      "LOCATION:The Ivory House\\, Delhi",
+      "DESCRIPTION:Wedding ceremony of Riya & Aryan.",
       "END:VEVENT", "END:VCALENDAR"
     ].join("\r\n");
     var blob = new Blob([ics], { type: "text/calendar" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "Iqra-Saad-Nikah.ics";
+    a.download = "Riya-Aryan-Wedding.ics";
     document.body.appendChild(a);
     a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
   });
+  /* ---------- scratch to reveal (sized only when visible) ---------- */
+  var scWrap = document.getElementById("scratchWrap");
+  var sc = document.getElementById("scratchCanvas");
+  if (scWrap && sc) {
+    var sctx = sc.getContext("2d");
+    var scratching = false, scDone = false;
+    function sizeScratch() {
+      var r = scWrap.getBoundingClientRect();
+      if (r.width < 10 || r.height < 10) return;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      sc.width = r.width * dpr; sc.height = r.height * dpr;
+      sctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var g = sctx.createLinearGradient(0, 0, r.width, r.height);
+      g.addColorStop(0, "#d9a08a"); g.addColorStop(1, "#b0705e");
+      sctx.globalCompositeOperation = "source-over";
+      sctx.fillStyle = g; sctx.fillRect(0, 0, r.width, r.height);
+      sctx.fillStyle = "rgba(255,255,255,.9)";
+      sctx.font = "40px cursive"; sctx.textAlign = "center";
+      sctx.fillText("R & A", r.width / 2, r.height / 2 + 14);
+    }
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(function () { if (!scDone) sizeScratch(); }).observe(scWrap);
+    }
+    sizeScratch();
+    function scratchAt(e) {
+      var r = sc.getBoundingClientRect();
+      sctx.globalCompositeOperation = "destination-out";
+      sctx.beginPath(); sctx.arc(e.clientX - r.left, e.clientY - r.top, 26, 0, Math.PI * 2); sctx.fill();
+    }
+    sc.addEventListener("pointerdown", function (e) { scDone = true; scratching = true; scratchAt(e); });
+    window.addEventListener("pointermove", function (e) { if (scratching) scratchAt(e); });
+    window.addEventListener("pointerup", function () { scratching = false; });
+  }
 })();
 </script>
 </body>

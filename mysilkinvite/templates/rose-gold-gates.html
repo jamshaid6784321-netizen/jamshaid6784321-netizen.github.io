@@ -248,6 +248,38 @@
   .use-row { margin-top:18px; text-align:center; }
   .use-row .btn { margin:4px; }
   .hidden { display:none !important; }
+
+.sec{margin-top:16px}
+.sec h2{font-family:'Playfair Display',serif;font-size:24px;color:#8e4a54;margin-bottom:6px}
+.sec p{font-size:17px;line-height:1.55;color:#6b4a44}
+.sec .sub2{font-size:15px;font-style:italic;color:#b76e79}
+.mono-mini{pointer-events:auto;background:rgba(255,249,245,.85);border:1px solid #b76e79;color:#8e4a54;font-family:'Playfair Display',serif;font-weight:600;font-size:15px;padding:6px 12px;border-radius:999px}
+.parents{font-size:16px;font-style:italic;color:#b76e79;margin:8px 0 2px;line-height:1.5}
+.banner{margin:14px auto 4px;max-width:420px;padding:16px 12px 14px;border:1px solid #b76e79;border-radius:14px;background:linear-gradient(180deg,#fff5f7,#f7d6de)}
+.banner .bi{font-family:'Great Vibes',cursive;font-size:38px;color:#8e4a54;line-height:1.1}
+.banner .bo{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:#b76e79;margin-top:4px}
+.cue{margin:12px auto 0;color:#b76e79;animation:bob 1.8s ease-in-out infinite;line-height:0}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+.blessing{font-size:17px;font-style:italic;color:#b76e79;margin:6px 0 2px}
+.mem-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.mem{border-radius:12px;padding:16px 8px 12px;border:1px solid #b76e79;background:linear-gradient(180deg,#fff5f7,#f7d6de)}
+.mem .g{font-size:30px;line-height:1;color:#8e4a54}
+.mem .c{font-size:14px;font-style:italic;margin-top:6px;color:#7a4a52}
+.map-panel{margin:12px auto 0;max-width:420px;border-radius:12px;padding:18px 12px;background:linear-gradient(180deg,#f7d6de,#e8a0b0);border:1px solid #b76e79}
+.map-panel b{font-family:'Playfair Display',serif;font-size:19px;color:#8e4a54}
+.map-panel p{font-size:16px;color:#6b4a44}
+.map-panel .btn{margin-top:12px}
+.swatches{display:flex;gap:10px;justify-content:center;margin:12px 0 8px}
+.sw{width:34px;height:34px;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.scratch2{position:relative;max-width:420px;margin:12px auto 0;padding:14px 10px;border:1px solid #b76e79;border-radius:14px;background:linear-gradient(180deg,#fff5f7,#f7d6de)}
+.scratch2 .hid{font-family:'Great Vibes',cursive;font-size:30px;color:#8e4a54;line-height:1.2}
+.scratch2 canvas{position:absolute;inset:0;width:100%;height:100%;border-radius:14px;cursor:pointer;touch-action:none;transition:opacity .8s}
+.scratch2 canvas.gone{opacity:0;pointer-events:none}
+#rsvp textarea{font-family:inherit;font-size:16px;padding:10px 12px;border:1px solid #d9a0aa;border-radius:10px;background:#fff;color:#5c2e35;width:100%;max-width:320px;margin-bottom:10px;min-height:64px;resize:vertical}
+.foot-band{padding:24px 16px}
+.foot-band .mono2{font-family:'Great Vibes',cursive;font-size:46px;color:#8e4a54;line-height:1.1}
+.float-use{position:fixed;right:14px;bottom:14px;z-index:8;background:linear-gradient(180deg,#d98a9b,#b76e79);color:#fff;padding:11px 18px;border-radius:999px;font-family:'Playfair Display',serif;font-size:15px;text-decoration:none;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+
 </style>
 </head>
 <body>
@@ -305,7 +337,7 @@
   <div class="water"></div>
   <canvas id="sky"></canvas>
 
-  <div class="topbar">
+  <div class="topbar"><span class="mono-mini">A &hearts; B</span>
     <button id="musicBtn" type="button" aria-label="Toggle music">&#9834; Music: Off</button>
   </div>
 
@@ -328,25 +360,19 @@
       <div class="bismillah">بسم اللہ الرحمن الرحیم</div>
       <div class="eyebrow">Together with their families</div>
       <div class="names">Ayesha <span class="amp">&amp;</span> Bilal</div>
+    <div class="parents">Son of Mr &amp; Mrs Imran Ahmed / Daughter of Mr &amp; Mrs Tariq Khan</div>
       <p class="invite-line">request the honour of your presence<br>at the celebration of their Nikah</p>
+    <div class="banner"><div class="bi">A &amp; B</div><div class="bo">Under a Rose-Gold Moon</div></div>
+    <div class="cue" aria-hidden="true"><svg width="26" height="16" viewBox="0 0 26 16"><path d="M2 2l11 11L24 2" fill="none" stroke="#b76e79" stroke-width="2.5" stroke-linecap="round"/></svg></div>
 
       <div class="divider"><span>&#10022;</span></div>
 
-      <div class="scratch-wrap" id="scratchWrap">
-        <div class="date-big">Saturday, 27 February 2027</div>
-        <canvas id="scratch"></canvas>
-      </div>
+      <div class="date-big">Saturday, 27 February 2027</div>
       <div class="venue">7:00 PM onwards &middot; The Rosewood Palace, Lahore</div>
-      <div class="dress">Dress Code &middot; Shades of Blush &amp; Rose Gold</div>
 
       <div class="divider"><span>&hearts;</span></div>
 
-      <div class="count" id="countdown" aria-label="Countdown">
-        <div class="box"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
-        <div class="box"><div class="num" id="cd-h">--</div><div class="lbl">Hours</div></div>
-        <div class="box"><div class="num" id="cd-m">--</div><div class="lbl">Mins</div></div>
-        <div class="box"><div class="num" id="cd-s">--</div><div class="lbl">Secs</div></div>
-      </div>
+      
 
       <div class="events">
         <div class="event">
@@ -364,24 +390,9 @@
         <button class="btn ghost" id="calBtn" type="button">Add to Calendar</button>
       </div>
 
-      <div id="rsvp" class="hidden">
-        <h3>Will you join us?</h3>
-        <input id="guestName" type="text" placeholder="Your name" maxlength="40" aria-label="Your name">
-        <select id="guestCount" aria-label="Number of guests">
-          <option value="1">1 guest</option>
-          <option value="2" selected>2 guests</option>
-          <option value="3">3 guests</option>
-          <option value="4">4 guests</option>
-          <option value="5">5+ guests</option>
-        </select>
-        <div class="choice">
-          <button class="btn gold" id="attendYes" type="button">Joyfully Accepts</button>
-          <button class="btn ghost" id="attendNo" type="button">Regretfully Declines</button>
-        </div>
-        <div id="rsvpMsg"></div>
-      </div>
+      
 
-      <div class="garden" id="garden" aria-label="Tap a flower">
+      <div class="garden" id="garden" aria-label="Garden flowers">
         <button class="flower" type="button" aria-label="Flower 1"><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="core"></span><span class="stem"></span></button>
         <button class="flower" type="button" aria-label="Flower 2"><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="core"></span><span class="stem"></span></button>
         <button class="flower" type="button" aria-label="Flower 3"><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="core"></span><span class="stem"></span></button>
@@ -389,12 +400,38 @@
         <button class="flower" type="button" aria-label="Flower 5"><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="core"></span><span class="stem"></span></button>
       </div>
     </div>
-    <div class="use-row">
-      <a class="btn gold" href="../builder.html?template=rose-gold-gates">Use this template</a>
-      <a class="btn ghost" href="../index.html#templates" style="color:#ffe3ea;border-color:#e8a0b0;">All templates</a>
-    </div>
-    <div class="foot">Ayesha &hearts; Bilal &middot; 27 . 02 . 2027 &middot; Demo invitation — no video, only code</div>
-  </main>
+    <div class="card sec"><h2>Welcome</h2><p>Under a rose-gold moon, two families become one. Thank you for being part of the evening we have dreamed of — your presence, and your prayers, are the blessing we treasure most.</p></div>
+    <div class="card sec"><h2>A Little Secret</h2><div class="scratch-wrap" id="scratchWrap">
+        <div class="date-big">Saturday, 27 February 2027</div>
+        <canvas id="scratch"></canvas>
+      </div></div>
+    <div class="card sec"><h2>Our Memories</h2><div class="mem-grid"><div class="mem"><div class="g">☾</div><div class="c">Moonlit evenings</div></div><div class="mem"><div class="g">♥</div><div class="c">The proposal</div></div><div class="mem"><div class="g">❀</div><div class="c">Family blessings</div></div><div class="mem"><div class="g">✦</div><div class="c">Forever begins</div></div></div></div>
+    <div class="card sec"><h2>Save the Date</h2><p class="sub2">Saturday, 27 February 2027 &middot; The Rosewood Palace, Lahore</p><div class="count" id="countdown" aria-label="Countdown">
+        <div class="box"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
+        <div class="box"><div class="num" id="cd-h">--</div><div class="lbl">Hours</div></div>
+        <div class="box"><div class="num" id="cd-m">--</div><div class="lbl">Mins</div></div>
+        <div class="box"><div class="num" id="cd-s">--</div><div class="lbl">Secs</div></div>
+      </div></div>
+    <div class="card sec"><h2>Programme</h2><p class="sub2">Saturday, 27 February 2027</p><div class="events"><div class="event"><div class="day"><b>6:30 PM</b><span>Sat 27 Feb</span></div><p>Guest arrival &amp; welcome<small>Doors open with rose refreshments</small></p></div><div class="event"><div class="day"><b>7:00 PM</b><span>Sat 27 Feb</span></div><p>Nikah ceremony<small>The sacred vows, witnessed by family</small></p></div><div class="event"><div class="day"><b>8:00 PM</b><span>Sat 27 Feb</span></div><p>Dinner<small>A celebratory feast under the moon</small></p></div><div class="event"><div class="day"><b>9:00 PM</b><span>Sat 27 Feb</span></div><p>Dua &amp; blessings<small>Prayers &amp; good wishes for the couple</small></p></div><div class="event"><div class="day"><b>1:00 PM</b><span>Sun 28 Feb</span></div><p>Walima reception<small>Lunch &amp; blessings with family and friends</small></p></div></div></div>
+    <div class="card sec"><h2>Our Venue</h2><div class="map-panel"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z" fill="#b76e79"/><circle cx="12" cy="9" r="2.6" fill="#fff"/></svg><p><b>The Rosewood Palace</b><br>MM Alam Road, Gulberg III, Lahore</p><a class="btn gold" href="https://www.google.com/maps/search/?api=1&query=The%20Rosewood%20Palace%2C%20Lahore">Open in Google Maps</a></div></div>
+    <div class="card sec"><h2>Dress Code</h2><div class="swatches"><span class="sw" style="background:#f6b8c8"></span><span class="sw" style="background:#d4af37"></span><span class="sw" style="background:#8e4a54"></span></div><p>Shades of blush &amp; rose gold, with a touch of gold.</p></div>
+    <div class="card sec"><h2>Pre-Wedding Events</h2><div class="events"><div class="event"><div class="day"><b>Thu 25 Feb</b><span>5:00 PM</span></div><p>Mehndi<small>Henna, music &amp; colour</small></p></div><div class="event"><div class="day"><b>Fri 26 Feb</b><span>7:00 PM</span></div><p>Sangeet<small>An evening of songs &amp; dance</small></p></div><div class="event"><div class="day"><b>Sat 27 Feb</b><span>10:00 AM</span></div><p>Haldi<small>A golden morning blessing</small></p></div></div></div>
+    <div class="card sec"><h2>Travel &amp; Stay</h2><div class="events"><div class="event"><div class="day"><b>Travel</b><span></span></div><p>Fly into <b>Allama Iqbal International Airport (LHE)</b><small>About 35 minutes from the venue.</small></p></div><div class="event"><div class="day"><b>Stay</b><span></span></div><p><b>Pearl-Continental Hotel, Lahore</b><small>Our suggested stay, close to the venue.</small></p></div></div></div>
+    <div class="card sec"><h2>Gifts</h2><p>Your presence — and your prayers — are the greatest gifts. If you wish to bless us further, a contribution towards our honeymoon would be received with gratitude.</p></div>
+    <div class="card sec" id="rsvpCard"><h2>RSVP</h2><p class="sub2">Kindly respond by Saturday, 13 February 2027</p><div id="rsvp">
+        <h3>Will you join us?</h3>
+        <input id="guestName" type="text" placeholder="Your name" maxlength="40" aria-label="Your name">
+        <input id="guestEmail" type="email" placeholder="Your email" maxlength="60" aria-label="Your email">
+        <select id="rsvpChoice" aria-label="Accept or decline"><option value="accept" selected>Joyfully Accepts</option><option value="decline">Regretfully Declines</option></select>
+        <select id="guestCount" aria-label="Number of guests"><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4 guests</option></select>
+        <select id="guestDiet" aria-label="Dietary preference"><option value="No preference" selected>No dietary preference</option><option value="Vegetarian">Vegetarian</option><option value="Vegan">Vegan</option><option value="Jain">Jain</option></select>
+        <textarea id="guestMsg" placeholder="A message for the couple (optional)" maxlength="200" aria-label="Message"></textarea>
+        <div class="choice"><button class="btn gold" id="rsvpSend" type="button">Send RSVP</button></div>
+        <div id="rsvpMsg"></div>
+      </div></div>
+    <div class="card sec foot-band"><div class="mono2">A &hearts; B</div><p>Ayesha &amp; Bilal &middot; Saturday, 27 February 2027</p><div class="actions"><a class="btn gold" href="../builder.html?template=rose-gold-gates">Use this template</a><a class="btn ghost" href="../index.html#templates">All templates</a></div><p class="sub2">Demo invitation — no video, only code</p></div>
+  <a class="float-use" href="../builder.html?template=rose-gold-gates">Use this template</a>
+</main>
 <script>
 (function () {
   "use strict";
@@ -590,7 +627,7 @@
     else if (musicTimer) { clearInterval(musicTimer); musicTimer = null; }
   });
 
-  /* ---------- tap handling: petals respond ---------- */
+  /* ---------- petal interaction ---------- */
   window.addEventListener("pointerdown", function (e) {
     if (e.target.closest("button, input, select, a, .flower, #openBtn, canvas#scratch")) return;
     var x = e.clientX, y = e.clientY;
@@ -746,37 +783,11 @@
   setInterval(tick, 1000);
 
   /* ---------- RSVP ---------- */
-  document.getElementById("rsvpBtn").addEventListener("click", function () {
-    var r = document.getElementById("rsvp");
-    r.classList.toggle("hidden");
-    if (!r.classList.contains("hidden")) document.getElementById("guestName").focus();
-  });
-  function rsvp(attending) {
-    var name = document.getElementById("guestName").value.trim();
-    var count = document.getElementById("guestCount").value;
-    var msg = document.getElementById("rsvpMsg");
-    try {
-      var saved = JSON.parse(localStorage.getItem("demo-rsvp-rose") || "[]");
-      saved.push({ name: name, count: count, attending: attending, at: Date.now() });
-      localStorage.setItem("demo-rsvp-rose", JSON.stringify(saved));
-    } catch (err) { /* private mode: ignore */ }
-    if (attending) {
-      msg.textContent = name
-        ? "Shukriya, " + name + "! " + count + " guest(s) noted — hum intezaar karenge."
-        : "Shukriya! " + count + " guest(s) noted — hum intezaar karenge.";
-      burst(window.innerWidth / 2, window.innerHeight * 0.5, "heart");
-      chime();
-    } else {
-      msg.textContent = name
-        ? "Shukriya, " + name + " — aapki duaen hamare saath hain."
-        : "Shukriya — aapki duaen hamare saath hain.";
-    }
-  }
-  document.getElementById("attendYes").addEventListener("click", function () { rsvp(true); });
-  document.getElementById("attendNo").addEventListener("click", function () { rsvp(false); });
-
-  /* ---------- add to calendar (.ics) ---------- */
-  document.getElementById("calBtn").addEventListener("click", function () {
+  document.getElementById("rsvpBtn").addEventListener("click",function(){var r=document.getElementById("rsvp");r.classList.remove("hidden");var cd=document.getElementById("rsvpCard");if(cd)cd.scrollIntoView({behavior:"smooth"});document.getElementById("guestName").focus();});
+  function rsvp(){var name=document.getElementById("guestName").value.trim();var email=document.getElementById("guestEmail").value.trim();var attending=document.getElementById("rsvpChoice").value==="accept";var count=document.getElementById("guestCount").value;var diet=document.getElementById("guestDiet").value;var note=document.getElementById("guestMsg").value.trim();var msg=document.getElementById("rsvpMsg");try{var saved=JSON.parse(localStorage.getItem("demo-rsvp-rose-gold-gates")||"[]");saved.push({name:name,email:email,attending:attending,count:count,diet:diet,note:note,at:Date.now()});localStorage.setItem("demo-rsvp-rose-gold-gates",JSON.stringify(saved));}catch(err){}if(attending){msg.textContent=name?"Shukriya, "+name+"! "+count+" guest(s) noted — hum intezaar karenge.":"Shukriya! "+count+" guest(s) noted — hum intezaar karenge.";burst(window.innerWidth/2,window.innerHeight*0.5,"heart");chime();}else{msg.textContent=name?"Shukriya, "+name+" — aapki duaen hamare saath hain.":"Shukriya — aapki duaen hamare saath hain.";}}
+document.getElementById("rsvpSend").addEventListener("click",function(){rsvp();});
+/* ---------- add to calendar (.ics) ---------- */
+document.getElementById("calBtn").addEventListener("click", function () {
     var ics = [
       "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Demo Invitation//EN",
       "BEGIN:VEVENT", "UID:ayesha-bilal-nikah@demo",
