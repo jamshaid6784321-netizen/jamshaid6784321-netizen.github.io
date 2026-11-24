@@ -1100,5 +1100,9 @@
     c.setAttribute("aria-pressed", sel ? "true" : "false");
   });
   updatePreview();
-  showStep(1);
+  /* "Use this template" (?template=) opens straight on the edit screen
+     (step 2) for that template; without a chosen template the builder
+     starts on the template picker (step 1). The picker stays reachable
+     via the Back button on step 2, so the template can still be changed. */
+  showStep(tParam && validTemplates[tParam] ? 2 : 1);
 })();
