@@ -54,7 +54,7 @@ img, canvas { max-width: 100%; }
 }
 .brand .mark svg { width: 28px; height: 28px; display: block; }
 .brand-logo { height: 84px; width: auto; display: block; }
-.brand .name { font-family: Georgia, 'Times New Roman', serif; font-size: 21px; color: var(--emerald); line-height: 1.05; white-space: nowrap; }
+.brand .name { font-family: 'Snell Roundhand', 'Brush Script MT', 'Segoe Script', cursive; font-size: 30px; color: var(--gold-2); line-height: 1.05; white-space: nowrap; }
 .brand .name small { display: block; font-family: Georgia, 'Times New Roman', serif; font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-2); }
 .site-nav { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
 .site-nav a { text-decoration: none; color: var(--emerald); font-size: 17px; padding: 8px 10px; border-radius: 8px; white-space: nowrap; }
@@ -67,7 +67,7 @@ img, canvas { max-width: 100%; }
 .cta-short { display: none; }
 @media (max-width: 720px) {
   .site-nav a:not(.nav-cta) { display: none; }
-  .brand .name { font-size: 17px; }
+  .brand .name { font-size: 24px; }
   .brand-logo { height: 60px; }
   .site-nav .nav-cta { font-size: 14px; padding: 8px 12px; }
   .cta-full { display: none; }
