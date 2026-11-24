@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Log In | My Silk Invite</title>
+<meta name="description" content="Log in to your My Silk Invite dashboard with your username or Gmail and password.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="stylesheet" href="auth.css">
+</head>
+<body data-page="login">
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="My Silk Invite — home">
+      <img class="brand-logo" src="logo-v3-com.webp" alt="My Silk Invite — digital invitations" width="960" height="339">
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="builder.html">Create invitation</a>
+      <a href="signup.html">Sign up</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <span class="eyebrow">Welcome back</span>
+      <h1>Log in</h1>
+      <p class="auth-sub">Log in to your dashboard to see and manage your invitations.</p>
+
+      <form id="loginForm" novalidate>
+        <p id="loginMsg" class="form-msg" hidden></p>
+        <div class="field">
+          <label for="liIdentifier">Username or Gmail</label>
+          <input id="liIdentifier" name="identifier" type="text" autocomplete="username" placeholder="Your username or example@gmail.com">
+        </div>
+        <div class="field">
+          <label for="liPassword">Password</label>
+          <input id="liPassword" name="password" type="password" autocomplete="current-password" placeholder="Your password">
+        </div>
+        <button class="btn gold block" type="submit">Login</button>
+      </form>
+
+      <p class="auth-alt"><a href="#" id="forgotPassword">Forgot password?</a></p>
+      <p class="auth-alt">New to My Silk Invite? <a href="signup.html">Create an account</a></p>
+      <p class="auth-home"><a href="index.html">← Back to home</a></p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">My Silk Invite — beautiful digital invitations for every celebration.</div>
+</footer>
+<script src="auth.js"></script>
+</body>
+</html>

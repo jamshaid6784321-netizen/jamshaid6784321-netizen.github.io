@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Create Your Account — Sign Up | My Silk Invite</title>
+<meta name="description" content="Create your My Silk Invite account with your username and Gmail. We verify your Gmail with a 6-digit code, then your dashboard is ready.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="stylesheet" href="auth.css">
+</head>
+<body data-page="signup">
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="My Silk Invite — home">
+      <img class="brand-logo" src="logo-v3-com.webp" alt="My Silk Invite — digital invitations" width="960" height="339">
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="builder.html">Create invitation</a>
+      <a href="login.html">Log in</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <span class="eyebrow">Create your account</span>
+      <h1>Sign up</h1>
+      <p class="auth-sub">Choose a username, add your Gmail, and verify it with a 6-digit code.</p>
+
+      <!-- Step 1: details -->
+      <div id="step1">
+        <form id="signupForm" novalidate>
+          <p id="formMsg" class="form-msg" hidden></p>
+          <div class="field">
+            <label for="suUsername">Username</label>
+            <input id="suUsername" name="username" type="text" autocomplete="username" maxlength="20" placeholder="e.g. aisha_weds">
+            <p class="hint">3–20 characters, start with a letter. Letters, numbers, _ and - only.</p>
+            <p id="errUsername" class="field-error" hidden></p>
+          </div>
+          <div class="field">
+            <label for="suEmail">Gmail address</label>
+            <input id="suEmail" name="email" type="email" autocomplete="email" placeholder="example@gmail.com">
+            <p class="hint">We send your verification code to this Gmail.</p>
+            <p id="errEmail" class="field-error" hidden></p>
+          </div>
+          <div class="field">
+            <label for="suPassword">Password</label>
+            <input id="suPassword" name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters">
+            <p id="errPassword" class="field-error" hidden></p>
+          </div>
+          <div class="field">
+            <label for="suConfirm">Confirm password</label>
+            <input id="suConfirm" name="confirm" type="password" autocomplete="new-password" placeholder="Type your password again">
+            <p id="errConfirm" class="field-error" hidden></p>
+          </div>
+          <button id="sendOtpBtn" class="btn gold block" type="submit">Send OTP</button>
+        </form>
+      </div>
+
+      <!-- Step 2: OTP verification -->
+      <div id="step2" class="hidden">
+        <p class="auth-sub">We sent a 6-digit code to <strong id="otpEmailDisplay"></strong>. Enter it below — it expires in 10 minutes.</p>
+        <div id="otpNotice" class="notice" hidden>
+          OTP email sending connects to the server at launch — no real email is sent in this preview.
+        </div>
+        <div id="demoOtpBox" class="demo-otp" hidden>
+          <div class="demo-label">Demo OTP — for preview only</div>
+          <div id="demoOtpCode" class="demo-code">------</div>
+          <div class="demo-note">This code is shown here only so the signup can be tested. In the live version it arrives by email.</div>
+        </div>
+        <form id="verifyOtpForm" novalidate>
+          <p id="otpMsg" class="form-msg" hidden></p>
+          <div class="field">
+            <label for="suOtp">6-digit code</label>
+            <input id="suOtp" name="otp" type="text" class="otp-input" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••">
+          </div>
+          <button class="btn gold block" type="submit">Verify &amp; Create Account</button>
+          <div class="otp-actions">
+            <button id="resendOtp" class="link-btn" type="button">Resend OTP</button>
+            <span aria-hidden="true">·</span>
+            <button id="changeEmail" class="link-btn" type="button">Change email</button>
+          </div>
+        </form>
+      </div>
+
+      <p class="auth-alt">Already have an account? <a href="login.html">Log in</a></p>
+      <p class="auth-home"><a href="index.html">← Back to home</a></p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">My Silk Invite — beautiful digital invitations for every celebration.</div>
+</footer>
+<script src="auth.js"></script>
+</body>
+</html>

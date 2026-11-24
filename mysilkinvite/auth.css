@@ -1,0 +1,145 @@
+/* My Silk Invite — auth pages (signup / login / dashboard).
+   Cream/ivory + gold, serif display type — matches the main site.
+   Standalone stylesheet: these pages do not load style.min.css. */
+
+:root {
+  --ivory: #fdf8ef;
+  --silk: #fffdf8;
+  --emerald: #062a1a;
+  --gold: #d4af37;
+  --gold-2: #b98a1d;
+  --gold-soft: #e8c87e;
+  --ink: #2b2118;
+  --muted: #6b5a44;
+  --cream: #f3e6c8;
+  --line: #e5d5ae;
+  --radius: 18px;
+  --shadow: 0 18px 44px rgba(60, 30, 0, 0.16);
+  --error: #a83226;
+  --ok: #2e6b34;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--ivory);
+  overflow-x: hidden;
+}
+h1, h2, h3 { font-family: Georgia, 'Times New Roman', serif; font-weight: 600; line-height: 1.2; color: var(--emerald); }
+a { color: var(--gold-2); }
+a:hover { color: var(--gold); }
+.wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+/* ---------- header ---------- */
+.site-header { background: var(--silk); border-bottom: 1px solid var(--line); }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 10px; padding-bottom: 10px; }
+.brand { display: inline-flex; align-items: center; text-decoration: none; }
+.brand-logo { height: 56px; width: auto; display: block; border-radius: 8px; }
+.site-nav { display: flex; align-items: center; gap: 4px; }
+.site-nav a { text-decoration: none; color: var(--emerald); font-size: 17px; padding: 8px 10px; border-radius: 8px; white-space: nowrap; }
+.site-nav a:hover { background: var(--cream); }
+
+/* ---------- buttons (same pill style as the site) ---------- */
+.btn {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 16px; letter-spacing: .03em;
+  padding: 12px 22px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--gold-2); text-decoration: none;
+  display: inline-block; text-align: center;
+  background: transparent; color: var(--gold-2);
+}
+.btn.gold { background: linear-gradient(180deg, #e9c25a, #c39a2b); color: #fff; box-shadow: 0 6px 16px rgba(160, 110, 10, 0.35); border-color: #b98a1d; }
+.btn.ghost { background: transparent; color: var(--emerald); }
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.55; cursor: default; }
+.btn.block { display: block; width: 100%; }
+.btn.small { padding: 8px 16px; font-size: 15px; }
+
+/* ---------- auth layout ---------- */
+.auth-wrap { max-width: 520px; margin: 0 auto; padding: 48px 16px 64px; }
+.auth-card {
+  background: var(--silk);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 34px 30px 28px;
+}
+.eyebrow { letter-spacing: .3em; text-transform: uppercase; font-size: 12px; color: var(--gold-2); text-align: center; display: block; margin-bottom: 8px; }
+.auth-card h1 { text-align: center; font-size: 32px; margin-bottom: 6px; }
+.auth-sub { text-align: center; color: var(--muted); font-size: 16px; margin-bottom: 24px; }
+.auth-alt { text-align: center; margin-top: 20px; font-size: 16px; color: var(--muted); }
+.auth-home { text-align: center; margin-top: 12px; font-size: 15px; }
+.hidden { display: none !important; }
+
+/* ---------- forms ---------- */
+.field { margin-bottom: 16px; }
+.field label { display: block; font-size: 15px; color: var(--emerald); margin-bottom: 6px; font-weight: 600; }
+.field input {
+  width: 100%;
+  font-family: inherit; font-size: 16px; padding: 11px 12px;
+  border-radius: 10px; border: 1px solid var(--line);
+  background: #fff; color: var(--ink);
+}
+.field input:focus { outline: 2px solid var(--gold); border-color: var(--gold); }
+.field input.invalid { border-color: var(--error); outline-color: var(--error); }
+.field .hint { font-size: 14px; color: var(--muted); margin-top: 5px; }
+.field-error { color: var(--error); font-size: 14px; margin-top: 5px; }
+.form-msg { border-radius: 10px; padding: 10px 14px; font-size: 15px; margin-bottom: 16px; }
+.form-msg.error { background: #fbe9e5; color: var(--error); border: 1px solid #e5b3ab; }
+.form-msg.ok { background: #e7f2e4; color: var(--ok); border: 1px solid #b3d3ae; }
+.otp-input { text-align: center; font-size: 26px !important; letter-spacing: .45em; padding: 12px 12px 12px 20px !important; }
+.otp-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 16px; }
+.link-btn { background: none; border: none; cursor: pointer; font-family: inherit; font-size: 15px; color: var(--gold-2); text-decoration: underline; padding: 4px 2px; }
+.link-btn:disabled { opacity: 0.55; cursor: default; text-decoration: none; }
+
+/* ---------- preview notices (shown only while no backend is connected) ---------- */
+.notice {
+  background: var(--cream);
+  border: 1px solid var(--gold-soft);
+  border-left: 4px solid var(--gold);
+  border-radius: 10px; padding: 10px 14px;
+  font-size: 15px; color: var(--ink); margin-bottom: 16px;
+}
+.demo-otp {
+  border: 2px dashed var(--gold);
+  background: #fff8e1;
+  border-radius: 12px; padding: 14px 16px;
+  text-align: center; margin-bottom: 16px;
+}
+.demo-otp .demo-label { font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-2); font-weight: 600; }
+.demo-otp .demo-code { font-size: 34px; letter-spacing: .4em; font-weight: 600; color: var(--emerald); margin: 6px 0 2px; }
+.demo-otp .demo-note { font-size: 14px; color: var(--muted); }
+
+/* ---------- dashboard ---------- */
+.dash-wrap { max-width: 860px; margin: 0 auto; padding: 40px 16px 64px; }
+.dash-wrap h1 { font-size: 34px; margin-bottom: 6px; }
+.dash-sub { color: var(--muted); margin-bottom: 28px; }
+.dash-card {
+  background: var(--silk);
+  border: 1px solid var(--line);
+  border-radius: 16px; padding: 26px 24px; margin-bottom: 22px;
+}
+.dash-card h2 { font-size: 24px; margin-bottom: 4px; }
+.dash-card p { color: var(--muted); font-size: 16px; margin-bottom: 14px; }
+.dash-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; justify-content: space-between; }
+.invite-list { list-style: none; }
+.invite-item {
+  display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: #fff; padding: 14px 16px; margin-bottom: 10px;
+}
+.invite-item .inv-title { font-weight: 600; color: var(--emerald); font-size: 18px; }
+.invite-item .inv-meta { color: var(--muted); font-size: 15px; }
+.empty-state { text-align: center; padding: 18px 8px 6px; }
+.empty-state p { margin-bottom: 16px; }
+.account-row { display: flex; flex-wrap: wrap; gap: 6px 32px; font-size: 17px; margin-bottom: 8px; }
+.account-row .k { color: var(--muted); }
+.account-row .v { color: var(--ink); font-weight: 600; word-break: break-all; }
+.dash-foot { text-align: center; color: var(--muted); font-size: 14px; margin-top: 8px; }
+
+/* ---------- footer ---------- */
+.site-footer { border-top: 1px solid var(--line); padding: 22px 0 30px; text-align: center; color: var(--muted); font-size: 15px; background: var(--silk); }

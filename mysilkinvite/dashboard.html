@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<title>My Dashboard | My Silk Invite</title>
+<meta name="description" content="Your My Silk Invite dashboard — see your invitations, create a new one, and manage your account.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="stylesheet" href="auth.css">
+</head>
+<body data-page="dashboard">
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="My Silk Invite — home">
+      <img class="brand-logo" src="logo-v3-com.webp" alt="My Silk Invite — digital invitations" width="960" height="339">
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="builder.html">Create invitation</a>
+      <button id="logoutBtn" class="btn ghost small" type="button">Logout</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="dash-wrap">
+    <h1 id="dashGreeting">Welcome back!</h1>
+    <p class="dash-sub">This is your dashboard, <span id="dashName"></span> — your invitations live here.</p>
+
+    <section class="dash-card" aria-labelledby="invTitle">
+      <div class="dash-head">
+        <div>
+          <h2 id="invTitle">My Invitations</h2>
+          <p>Every invitation you create appears here.</p>
+        </div>
+        <a class="btn gold" href="builder.html">Create New Invitation</a>
+      </div>
+      <ul id="inviteList" class="invite-list" hidden></ul>
+      <div id="inviteEmpty" class="empty-state">
+        <p>You haven&rsquo;t created any invitations yet.</p>
+        <a class="btn gold" href="builder.html">Create your first invitation</a>
+      </div>
+    </section>
+
+    <section class="dash-card" aria-labelledby="accTitle">
+      <h2 id="accTitle">Account</h2>
+      <p>Your account details.</p>
+      <div class="account-row"><span class="k">Username</span><span class="v" id="accUsername"></span></div>
+      <div class="account-row"><span class="k">Gmail</span><span class="v" id="accEmail"></span></div>
+      <p id="accNote" class="form-msg" hidden></p>
+      <a href="#" id="changePassword">Change password</a>
+    </section>
+
+    <p class="dash-foot">Preview dashboard — accounts and invitations are stored in this browser until launch.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">My Silk Invite — beautiful digital invitations for every celebration.</div>
+</footer>
+<script src="auth.js"></script>
+</body>
+</html>
