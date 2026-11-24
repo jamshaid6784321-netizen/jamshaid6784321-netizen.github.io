@@ -550,32 +550,3 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width: 759px) {
   .tpl-track .tpl-card { flex-basis: calc((100% - 16px) / 2); }
 }
-
-/* ---------- touch devices: force the mobile layout even when the browser
-   reports a wide (desktop) viewport, e.g. Chrome "Desktop site" mode on a
-   phone (980px viewport). A phone is a touch device, so (pointer: coarse)
-   is true there; a real desktop has a fine pointer and is unaffected. ---------- */
-@media (pointer: coarse) and (max-width: 1024px) {
-  .site-nav a:not(.nav-cta) { display: none; }
-  .brand .name { font-size: 17px; }
-  .brand-logo { height: 60px; }
-  .site-nav .nav-cta { font-size: 14px; padding: 8px 12px; }
-  .cta-full { display: none; }
-  .cta-short { display: inline; }
-  .hero .wrap { grid-template-columns: 1fr; }
-  .cat-grid { grid-template-columns: repeat(2, 1fr); }
-  .cat-card { padding: 14px 10px; }
-  .cat-card .glyph { font-size: 22px; margin-bottom: 4px; }
-  .cat-card h3 { font-size: 17px; }
-  .cat-card p { font-size: 14px; }
-  .steps { grid-template-columns: 1fr; }
-  .plans { grid-template-columns: 1fr; }
-  .site-footer .cols { grid-template-columns: 1fr; }
-  .tpl-track .tpl-card { flex-basis: calc((100% - 16px) / 2); }
-  .builder-grid { grid-template-columns: 1fr; }
-  .pick-grid { grid-template-columns: 1fr; }
-  .sticky-cta { display: flex; }
-  body { padding-bottom: 68px; }
-  .chat-fab { right: 16px; bottom: 92px; }
-  .chat-panel { left: 12px; right: 12px; bottom: 92px; width: auto; }
-}
