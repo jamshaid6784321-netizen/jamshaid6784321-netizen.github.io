@@ -53,6 +53,7 @@ img, canvas { max-width: 100%; }
   box-shadow: 0 4px 12px rgba(160, 110, 10, 0.35);
 }
 .brand .mark svg { width: 28px; height: 28px; display: block; }
+.brand-logo { height: 58px; width: auto; display: block; border-radius: 10px; background: #fff; border: 1px solid var(--line); }
 .brand .name { font-family: Georgia, 'Times New Roman', serif; font-size: 21px; color: var(--emerald); line-height: 1.05; white-space: nowrap; }
 .brand .name small { display: block; font-family: Georgia, 'Times New Roman', serif; font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-2); }
 .site-nav { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
@@ -67,6 +68,7 @@ img, canvas { max-width: 100%; }
 @media (max-width: 720px) {
   .site-nav a:not(.nav-cta) { display: none; }
   .brand .name { font-size: 17px; }
+  .brand-logo { height: 48px; }
   .site-nav .nav-cta { font-size: 14px; padding: 8px 12px; }
   .cta-full { display: none; }
   .cta-short { display: inline; }
