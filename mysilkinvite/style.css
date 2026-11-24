@@ -511,3 +511,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .cat-card::before { top: -6px; right: -6px; }
   .cat-card::after { bottom: -6px; left: -6px; }
 }
+
+/* ---------- paper vs digital ---------- */
+.eyebrow-script { display: block; text-align: center; font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 19px; color: var(--gold-2); margin-bottom: 6px; }
+.gold-rule { width: 64px; height: 3px; background: var(--gold); margin: 12px auto 28px; border-radius: 2px; }
+.compare-wrap { max-width: 760px; margin: 0 auto; overflow-x: auto; border: 1px solid var(--gold-soft); border-radius: 14px; background: var(--silk); }
+.compare { width: 100%; min-width: 540px; border-collapse: collapse; font-size: 16px; }
+.compare th, .compare td { padding: 13px 16px; text-align: left; border-bottom: 1px solid var(--line); }
+.compare tr:last-child th, .compare tr:last-child td { border-bottom: 0; }
+.compare thead th { background: #fbf3df; font-size: 17px; }
+.compare th:nth-child(2), .compare td:nth-child(2) { text-align: center; color: var(--muted); }
+.compare th:nth-child(3), .compare td:nth-child(3) { text-align: center; background: rgba(217, 164, 65, 0.07); }
+.compare .gold { color: var(--gold-2); font-weight: 700; }
+.compare .yes { color: #2e7d32; font-weight: 700; font-size: 19px; }
+.compare .no { color: #c0392b; font-weight: 700; font-size: 19px; }
+@media (max-width: 559px) {
+  .compare { font-size: 15px; }
+  .compare th, .compare td { padding: 11px 12px; }
+}
