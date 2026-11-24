@@ -257,8 +257,7 @@ img, canvas { max-width: 100%; }
 .step p { color: var(--muted); }
 
 /* ---------- gallery ---------- */
-.gallery { display: grid; gap: 16px; }
-@media (min-width: 760px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
+.gallery { display: block; }
 .tpl-card {
   background: var(--silk); border: 1px solid var(--line); border-radius: 14px;
   display: flex; flex-direction: column;
@@ -531,11 +530,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 /* ---------- template categories + carousel ---------- */
-.tpl-cat { margin-bottom: 34px; }
+.tpl-cat { margin-bottom: 34px; min-width: 0; }
 .tpl-cat:last-child { margin-bottom: 0; }
 .tpl-cat-title { text-align: left; font-size: 22px; margin: 0 0 6px; }
 .tpl-cat-title::after { content: ""; display: block; width: 44px; height: 3px; background: var(--gold); border-radius: 2px; margin-top: 8px; }
-.tpl-carousel { position: relative; }
+.tpl-carousel { position: relative; min-width: 0; }
 .tpl-track { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 12px 10px; -webkit-overflow-scrolling: touch; }
 .tpl-track::-webkit-scrollbar { display: none; }
 .tpl-track .tpl-card { flex: 0 0 calc((100% - 64px) / 5); scroll-snap-align: start; }
