@@ -650,14 +650,22 @@
     var cv = document.getElementById("scratch");
     var sctx = cv.getContext("2d");
     var scratching = false, revealed = false;
+    var cw = 0, ch = 0; // canvas size in CSS pixels
     function sizeCanvas() {
       var r = wrap.getBoundingClientRect();
-      cv.width = Math.max(50, r.width);
-      cv.height = Math.max(50, r.height);
+      var w = Math.max(50, r.width);
+      var h = Math.max(50, r.height);
+      if (Math.abs(w - cw) < 1 && Math.abs(h - ch) < 1) return; // already this size
+      cw = w; ch = h;
+      var dpr = window.devicePixelRatio || 1;
+      cv.width = Math.round(w * dpr);
+      cv.height = Math.round(h * dpr);
       paint();
     }
     function paint() {
-      var w = cv.width, h = cv.height;
+      var w = cw, h = ch;
+      var dpr = window.devicePixelRatio || 1;
+      sctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       var g = sctx.createLinearGradient(0, 0, w, h);
       g.addColorStop(0, "#e8a0b0");
       g.addColorStop(0.55, "#b76e79");
@@ -678,8 +686,11 @@
       sctx.fill();
       sctx.restore();
       sctx.fillStyle = "rgba(255, 245, 247, 0.95)";
-      sctx.font = "600 13px Georgia, serif";
       sctx.textAlign = "center";
+      var fs = 13;
+      sctx.font = "600 " + fs + "px Georgia, serif";
+      var tw = sctx.measureText("Scratch the heart").width;
+      if (tw > w - 20) { fs = Math.max(9, Math.floor(fs * (w - 20) / tw)); sctx.font = "600 " + fs + "px Georgia, serif"; }
       sctx.fillText("Scratch the heart", w / 2, h - 10);
     }
     function pos(e) {
@@ -713,6 +724,12 @@
     window.addEventListener("pointermove", erase);
     window.addEventListener("pointerup", function () { scratching = false; });
     window.addEventListener("resize", function () { if (!revealed) sizeCanvas(); });
+    // Re-size when the card becomes visible (the gate opens) and on any layout
+    // change. The page loads with the invitation hidden, so the first measure
+    // is 0x0 and the canvas must be re-measured once it is shown.
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(function () { if (!revealed) sizeCanvas(); }).observe(wrap);
+    }
     sizeCanvas();
   })();
 
