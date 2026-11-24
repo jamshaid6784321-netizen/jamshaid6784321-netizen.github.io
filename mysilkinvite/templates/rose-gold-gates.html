@@ -245,7 +245,6 @@
   .flower .petal:nth-child(6){ transform:rotate(300deg) translateY(-4px); }
   .flower .core { position:absolute; left:50%; top:24px; width:16px; height:16px; margin-left:-8px; border-radius:50%; background:radial-gradient(circle at 40% 35%, #ffe9a8, #d4af37); box-shadow:0 0 0 2px rgba(255,255,255,.6); }
   .flower .stem { position:absolute; left:50%; top:38px; width:3px; height:24px; margin-left:-1.5px; background:#7a9a5e; border-radius:2px; }
-  .garden-note { font-size:15px; font-style:italic; color:#a06a72; margin-top:8px; }
 
   .foot { text-align:center; font-size:14px; color:#ffd9e2; margin-top:20px; letter-spacing:.06em; text-shadow:0 1px 8px rgba(0,0,0,.4); }
   .use-row { margin-top:18px; text-align:center; }
@@ -394,7 +393,6 @@
         <button class="flower" type="button" aria-label="Flower 4"><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="core"></span><span class="stem"></span></button>
         <button class="flower" type="button" aria-label="Flower 5"><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="core"></span><span class="stem"></span></button>
       </div>
-      <div class="garden-note">Phoolon ko bhi chhoo kar dekho — woh khil jate hain</div>
     </div>
     <div class="use-row">
       <a class="btn gold" href="../builder.html?template=rose-gold-gates">Use this template</a>
@@ -742,7 +740,7 @@
     if (!r.classList.contains("hidden")) document.getElementById("guestName").focus();
   });
   function rsvp(attending) {
-    var name = document.getElementById("guestName").value.trim() || "Mehmaan";
+    var name = document.getElementById("guestName").value.trim();
     var count = document.getElementById("guestCount").value;
     var msg = document.getElementById("rsvpMsg");
     try {
@@ -751,11 +749,15 @@
       localStorage.setItem("demo-rsvp-rose", JSON.stringify(saved));
     } catch (err) { /* private mode: ignore */ }
     if (attending) {
-      msg.textContent = "Shukriya, " + name + "! " + count + " guest(s) noted — hum intezaar karenge.";
+      msg.textContent = name
+        ? "Shukriya, " + name + "! " + count + " guest(s) noted — hum intezaar karenge."
+        : "Shukriya! " + count + " guest(s) noted — hum intezaar karenge.";
       burst(window.innerWidth / 2, window.innerHeight * 0.5, "heart");
       chime();
     } else {
-      msg.textContent = "Shukriya, " + name + " — aapki duaen hamare saath hain.";
+      msg.textContent = name
+        ? "Shukriya, " + name + " — aapki duaen hamare saath hain."
+        : "Shukriya — aapki duaen hamare saath hain.";
     }
   }
   document.getElementById("attendYes").addEventListener("click", function () { rsvp(true); });
