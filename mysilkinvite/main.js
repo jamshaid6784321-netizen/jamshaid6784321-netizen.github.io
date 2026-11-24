@@ -195,7 +195,7 @@
           return { text: "3 steps hain: 1) template chunein, 2) apne naam, tareekh, waqt aur venue likhein, 3) link aur QR code share karein. Sirf kuch minute lagte hain — try karne ke liye sign-up bhi nahi chahiye.", action: { label: "Open the builder", href: "builder.html" } };
         }
         if (/template|design|shadi|shaadi|nikah|walima|mehndi|bird|lantern|butterfl|rose|gate|petal|\bcard\b/.test(s)) {
-          return { text: "Hamare paas 3 live templates hain: Golden Birds — parinde par tap karein toh woh ur jata hai; Royal Night — roshan lanterns aur titliyan; aur Rose Gold Gates — gates khulte hain aur chaandni raat mein mahal dikhta hai. 4 aur jald aa rahe hain: Blush Garden, Emerald Palace, Sunset Mehndi aur Golden Hour.", action: { label: "See templates", href: "#templates" } };
+          return { text: "Hamare paas 30 wedding templates live hain — Golden Birds, Royal Night, Rose Gold Gates, Blush Garden, Emerald Palace, Sunset Mehndi aur 24 aur, har ek ka apna design aur rang. Builder mein koi ek chunein aur apne naamon ke saath preview dekhein.", action: { label: "See templates", href: "#templates" } };
         }
         if (/rsvp|mehman\w+|countdown|calendar|qr|guest|includ|feature/.test(s)) {
           return { text: "Har invitation mein RSVP (mehmanon ki ginti ke saath), live countdown, Add to Calendar, paper card ke liye QR code aur har mehman ke liye alag link shamil hai. Ek wedding invitation mein Nikah aur Walima dono ek page par ho sakte hain." };
@@ -231,7 +231,7 @@
         return { text: "It's 3 steps: 1) pick a template, 2) add your names, date, time and venue, 3) share your link and QR code. It takes just a few minutes — no sign-up needed to try.", action: { label: "Open the builder", href: "builder.html" } };
       }
       if (/template|design|theme|bird|lantern|butterfl|rose|gate|petal|\bcard\b/.test(s)) {
-        return { text: "We have three live templates: Golden Birds — tap a bird and it flies away with a chirp; Royal Night — glowing lanterns and butterflies; and Rose Gold Gates — gates open onto a moonlit balcony and castle. Four more are coming soon: Blush Garden, Emerald Palace, Sunset Mehndi and Golden Hour.", action: { label: "See templates", href: "#templates" } };
+        return { text: "We have 30 wedding templates live — Golden Birds, Royal Night, Rose Gold Gates, Blush Garden, Emerald Palace, Sunset Mehndi and 24 more, each with its own design and colours. Pick one in the builder and preview it with your own names.", action: { label: "See templates", href: "#templates" } };
       }
       if (/rsvp|countdown|calendar|qr|guest|nikah|walima|includ|feature/.test(s)) {
         return { text: "Every invitation includes RSVP with guest count, a live countdown, Add to Calendar, a QR code for your paper card, and per-guest links. A wedding invitation can carry Nikah and Walima on one page." };
@@ -739,7 +739,11 @@
     date: "", time: "19:00", venue: "", host: "Together with their families"
   };
   var tParam = params.get("template");
-  if (tParam === "royal" || tParam === "birds" || tParam === "rose-gold-gates") state.template = tParam;
+  /* Any of the 30 gallery templates is a valid ?template= value — the list
+     comes from the pick-cards on the page, so it stays in sync with them. */
+  var validTemplates = {};
+  $all(".pick-card").forEach(function (c) { validTemplates[c.getAttribute("data-template")] = true; });
+  if (tParam && validTemplates[tParam]) state.template = tParam;
   if (params.get("event") && EVENT_LINES[params.get("event")]) state.event = params.get("event");
 
   var pvCard = $("#pvCard"), pvSky = lazySky($("#pvSky"), state.template);
@@ -791,6 +795,22 @@
       .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
     return s || "my-invitation";
   }
+  /* Data-driven preview palette: each pick-card carries its template's
+     colours as data attributes; the preview card reads them as CSS custom
+     properties, so all 30 templates re-theme without a theme class each.
+     The three original themes (birds / royal / rose) keep their classes. */
+  function applyPalette(slug, useCustom) {
+    if (!pvCard) return;
+    var card = $('.pick-card[data-template="' + slug + '"]');
+    ["bg", "inner", "ink", "names", "accent", "soft", "boxbg", "boxbd", "inputbg", "ghost"].forEach(function (p) {
+      var key = "--pv-" + p;
+      if (useCustom && card && card.getAttribute("data-" + p)) {
+        pvCard.style.setProperty(key, card.getAttribute("data-" + p));
+      } else {
+        pvCard.style.removeProperty(key);
+      }
+    });
+  }
   function updatePreview() {
     if (!pvCard) return;
     var names = (state.name1 || "").trim();
@@ -807,9 +827,10 @@
     var iso = state.date && state.time ? state.date + "T" + state.time + ":00" : "";
     if (countTimer) { clearInterval(countTimer); countTimer = null; }
     countTimer = bindCountdown(pvCard, iso);
-    var theme = state.template === "royal" ? "theme-royal" : state.template === "rose-gold-gates" ? "theme-rose" : "theme-birds";
-    pvCard.classList.remove("theme-birds", "theme-royal", "theme-rose");
+    var theme = state.template === "royal" ? "theme-royal" : state.template === "rose-gold-gates" ? "theme-rose" : state.template === "birds" ? "theme-birds" : "theme-custom";
+    pvCard.classList.remove("theme-birds", "theme-royal", "theme-rose", "theme-custom");
     pvCard.classList.add(theme);
+    applyPalette(state.template, theme === "theme-custom");
     if (pvSky) pvSky.setMode(state.template);
     updateShare();
   }
