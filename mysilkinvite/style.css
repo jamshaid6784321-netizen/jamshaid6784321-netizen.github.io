@@ -444,20 +444,26 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 .inv-card::before, .plan::before, .tpl-card::before, .cat-card::before { background: url(flower-tr.webp) no-repeat center / contain; }
 .inv-card::after, .plan::after, .tpl-card::after, .cat-card::after { background: url(flower-bl.webp) no-repeat center / contain; }
-.inv-card::before { width: 52px; height: 52px; top: -8px; right: -8px; }
-.inv-card::after { width: 52px; height: 52px; bottom: -8px; left: -8px; }
-.plan::before { width: 44px; height: 44px; top: -7px; right: -7px; }
-.plan::after { width: 44px; height: 44px; bottom: -7px; left: -7px; }
+.inv-card::before { width: 76px; height: 76px; top: -12px; right: -12px; }
+.inv-card::after { width: 76px; height: 76px; bottom: -12px; left: -12px; }
+.plan::before { width: 56px; height: 56px; top: -9px; right: -9px; }
+.plan::after { width: 56px; height: 56px; bottom: -9px; left: -9px; }
 .plan .btn { position: relative; z-index: 1; }
-.tpl-card::before { width: 38px; height: 38px; top: 0; right: 0; z-index: 1; }
-.tpl-card::after { width: 38px; height: 38px; bottom: 0; left: 0; }
+.tpl-card::before { width: 52px; height: 52px; top: 0; right: 0; z-index: 1; }
+.tpl-card::after { width: 52px; height: 52px; bottom: 0; left: 0; }
 .tpl-body { padding-bottom: 30px; }
 .tpl-body .btn, .tpl-body .badge-soon { position: relative; z-index: 1; }
-.cat-card::before { width: 30px; height: 30px; top: -5px; right: -5px; }
-.cat-card::after { width: 30px; height: 30px; bottom: -5px; left: -5px; }
+.cat-card::before { width: 44px; height: 44px; top: -7px; right: -7px; }
+.cat-card::after { width: 44px; height: 44px; bottom: -7px; left: -7px; }
 @media (max-width: 559px) {
-  .inv-card::before, .inv-card::after { width: 44px; height: 44px; }
-  .plan::before, .plan::after { width: 36px; height: 36px; }
-  .tpl-card::before, .tpl-card::after { width: 32px; height: 32px; }
-  .cat-card::before, .cat-card::after { width: 24px; height: 24px; }
+  .inv-card::before, .inv-card::after { width: 64px; height: 64px; }
+  .inv-card::before { top: -10px; right: -10px; }
+  .inv-card::after { bottom: -10px; left: -10px; }
+  .plan::before, .plan::after { width: 48px; height: 48px; }
+  .plan::before { top: -8px; right: -8px; }
+  .plan::after { bottom: -8px; left: -8px; }
+  .tpl-card::before, .tpl-card::after { width: 44px; height: 44px; }
+  .cat-card::before, .cat-card::after { width: 36px; height: 36px; }
+  .cat-card::before { top: -6px; right: -6px; }
+  .cat-card::after { bottom: -6px; left: -6px; }
 }
