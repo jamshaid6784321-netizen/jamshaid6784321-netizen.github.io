@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Mehwish &amp; Adnan — Sunset Mehndi Invitation (Demo)</title>
+<meta name="description" content="Demo: Sunset Mehndi invitation. Marigold garlands and warm sunset light for mehndi and sangeet. HTML/CSS/JS only, no video.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@500;600&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { height:100%; }
+  body {
+    font-family:'Cormorant Garamond', Georgia, serif;
+    color:#4a3226;
+    background:linear-gradient(180deg,#ffdf9e 0%,#ffb347 30%,#f28c38 58%,#c96f4a 82%,#5c3a21 100%);
+    background-attachment:fixed;
+    overflow-x:hidden;
+    min-height:100vh;
+  }
+  #sky { position:fixed; inset:0; z-index:6; pointer-events:none; }
+  .topbar {
+    position:fixed; top:0; left:0; right:0; z-index:7;
+    display:flex; justify-content:flex-end; align-items:center;
+    padding:10px 14px; pointer-events:none;
+  }
+  .topbar button {
+    pointer-events:auto; background:rgba(255,251,244,.85); border:1px solid #c96f4a;
+    color:#7a4a16; font-size:14px; padding:6px 12px; border-radius:999px; cursor:pointer;
+    font-family:inherit;
+  }
+  main { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; padding:74px 14px 40px; }
+
+  /* ---------- SUNSET COVER ---------- */
+  #cover {
+    position:fixed; inset:0; z-index:10; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:20px 14px;
+    background:linear-gradient(180deg, rgba(255,223,158,.9) 0%, rgba(255,179,71,.92) 45%, rgba(201,111,74,.95) 100%);
+    transition:transform 1.2s ease-in-out, opacity 1.2s ease-in-out;
+  }
+  #cover.opened { transform:translateY(-102%); opacity:0; pointer-events:none; }
+  .sun {
+    width:120px; height:120px; border-radius:50%; margin-bottom:18px;
+    background:radial-gradient(circle,#fff8e1 0%,#ffe9a8 45%,rgba(255,214,120,0) 72%);
+    box-shadow:0 0 60px 24px rgba(255,220,140,.5);
+    animation:sunpulse 3s ease-in-out infinite;
+  }
+  @keyframes sunpulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.06); } }
+  #cover .mono { font-family:'Great Vibes', cursive; font-size:clamp(46px,11vw,84px); color:#5c2e10; line-height:1.05; text-shadow:0 2px 14px rgba(255,255,255,.7); }
+  #cover .sub { letter-spacing:.35em; text-transform:uppercase; font-size:13px; color:#8a5a20; margin:12px 0 6px; }
+  #cover .when { font-family:'Playfair Display', serif; font-size:19px; color:#5c3a10; margin-top:8px; }
+  #cover .where { font-size:16px; font-style:italic; color:#6b4a2a; margin-top:4px; }
+  /* marigold garland arch over the cover names */
+  .garland { display:flex; gap:6px; margin-bottom:14px; }
+  .garland i {
+    width:20px; height:20px; border-radius:50%;
+    background:radial-gradient(circle at 40% 35%, #ffe9a8, #f28c38 60%, #c96f1e);
+    box-shadow:0 0 0 2px rgba(255,255,255,.45);
+  }
+  .garland i:nth-child(even) { background:radial-gradient(circle at 40% 35%, #fff8d6, #ffb347 60%, #d98a1e); transform:translateY(6px); }
+  #beginBtn {
+    margin-top:26px; padding:13px 30px; border-radius:999px; cursor:pointer;
+    border:1px solid #8a5a10; font-family:'Playfair Display', serif; font-size:17px; letter-spacing:.06em;
+    background:linear-gradient(180deg,#e9b949,#c08a1e); color:#fff;
+    box-shadow:0 8px 22px rgba(90,40,0,.4); animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.05); } }
+
+  /* ---------- CARD ---------- */
+  .card {
+    width:100%; max-width:560px; background:rgba(255,251,244,.96);
+    border:1px solid #c96f4a; border-radius:18px;
+    box-shadow:0 24px 60px rgba(90,40,0,.35), inset 0 0 0 6px #fffdf8, inset 0 0 0 7px #ffb347;
+    padding:34px 22px 26px; text-align:center; position:relative;
+  }
+  /* marigold garland frame along the top of the card */
+  .card .garland { justify-content:center; margin:-8px 0 10px; }
+  .bismillah { font-family:'Noto Nastaliq Urdu', serif; font-size:26px; color:#8a5a20; line-height:2; }
+  .eyebrow { letter-spacing:.32em; text-transform:uppercase; font-size:12px; color:#9a6b1f; margin:10px 0 4px; }
+  .names { font-family:'Great Vibes', cursive; font-size:clamp(46px,12vw,72px); color:#7a3f06; line-height:1.15; margin:6px 0 2px; }
+  .names .amp { color:#c08a1e; font-size:.7em; }
+  .invite-line { font-size:19px; font-style:italic; color:#6b4a2a; margin:10px 0 4px; }
+  .date-big { font-family:'Playfair Display', serif; font-size:22px; letter-spacing:.08em; color:#5c3a10; margin-top:14px; }
+  .venue { font-size:18px; color:#6b4a2a; margin-top:4px; }
+  .dress { font-size:15px; letter-spacing:.14em; text-transform:uppercase; color:#9a6b1f; margin-top:8px; }
+  .divider { display:flex; align-items:center; gap:10px; margin:18px auto; max-width:340px; color:#c08a1e; }
+  .divider::before,.divider::after { content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,#c08a1e,transparent); }
+  .divider span { font-size:18px; }
+  .count { display:flex; justify-content:center; gap:10px; margin:6px 0 2px; }
+  .count .box { background:#fff8ec; border:1px solid #e8c87e; border-radius:12px; min-width:64px; padding:10px 6px; }
+  .count .num { font-family:'Playfair Display', serif; font-size:26px; color:#7a3f06; }
+  .count .lbl { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#9a6b1f; }
+  .events { text-align:left; margin:10px auto 0; max-width:420px; }
+  .event { display:flex; gap:12px; padding:12px 6px; border-top:1px dashed #d9b96a; }
+  .event:last-child { border-bottom:1px dashed #d9b96a; }
+  .event .day { font-family:'Playfair Display', serif; color:#7a3f06; min-width:86px; }
+  .event .day b { display:block; font-size:20px; }
+  .event .day span { font-size:13px; color:#9a6b1f; }
+  .event p { font-size:17px; line-height:1.45; }
+  .event p small { display:block; font-size:14px; color:#8a6a3a; font-style:italic; }
+  .actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px; }
+  .btn {
+    font-family:'Playfair Display', serif; font-size:16px; letter-spacing:.04em;
+    padding:11px 20px; border-radius:999px; cursor:pointer; border:1px solid #b98a1d;
+    text-decoration:none; display:inline-block;
+  }
+  .btn.gold { background:linear-gradient(180deg,#e9b949,#c08a1e); color:#fff; box-shadow:0 6px 16px rgba(160,110,10,.35); }
+  .btn.ghost { background:transparent; color:#7a5a17; }
+  .btn:active { transform:scale(.97); }
+  #rsvp { margin-top:18px; border-top:1px dashed #d9b96a; padding-top:16px; }
+  #rsvp h3 { font-family:'Playfair Display', serif; color:#7a3f06; font-size:22px; margin-bottom:10px; }
+  #rsvp input, #rsvp select {
+    font-family:inherit; font-size:16px; padding:10px 12px; border:1px solid #d9b96a;
+    border-radius:10px; background:#fff; color:#4a3226; width:100%; max-width:320px; margin-bottom:10px;
+  }
+  .choice { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  #rsvpMsg { font-size:18px; font-style:italic; color:#5c7a2e; margin-top:6px; min-height:24px; }
+  /* marigolds: tap one and it sways + glows */
+  .marigolds { display:flex; justify-content:center; gap:18px; margin-top:22px; }
+  .marigold { background:none; border:none; cursor:pointer; width:56px; height:64px; position:relative; transition:transform .3s; }
+  .marigold .petal { position:absolute; left:50%; top:6px; width:18px; height:26px; margin-left:-9px; border-radius:50% 50% 50% 50%/60% 60% 40% 40%; transform-origin:50% 100%; background:radial-gradient(circle at 50% 30%, #fff8d6, #ffb347 60%, #f28c38); }
+  .marigold .petal:nth-child(1){ transform:rotate(0deg) translateY(-4px); }
+  .marigold .petal:nth-child(2){ transform:rotate(45deg) translateY(-4px); }
+  .marigold .petal:nth-child(3){ transform:rotate(90deg) translateY(-4px); }
+  .marigold .petal:nth-child(4){ transform:rotate(135deg) translateY(-4px); }
+  .marigold .petal:nth-child(5){ transform:rotate(180deg) translateY(-4px); }
+  .marigold .petal:nth-child(6){ transform:rotate(225deg) translateY(-4px); }
+  .marigold .petal:nth-child(7){ transform:rotate(270deg) translateY(-4px); }
+  .marigold .petal:nth-child(8){ transform:rotate(315deg) translateY(-4px); }
+  .marigold .core { position:absolute; left:50%; top:24px; width:16px; height:16px; margin-left:-8px; border-radius:50%; background:radial-gradient(circle at 40% 35%, #ffe9a8, #c96f1e); box-shadow:0 0 0 2px rgba(255,255,255,.6); }
+  .marigold .stem { position:absolute; left:50%; top:38px; width:3px; height:24px; margin-left:-1.5px; background:#2e7d5b; border-radius:2px; }
+  .marigold.glow { transform:rotate(-8deg) scale(1.25); }
+  .marigold.glow .core { box-shadow:0 0 22px 8px rgba(255,190,80,.85), 0 0 0 2px rgba(255,255,255,.6); }
+  .marigold.glow .petal { background:radial-gradient(circle at 50% 30%, #fffbe8, #ffcf5e 60%, #ff9a2e); }
+  .foot { text-align:center; font-size:14px; color:#ffe9d6; margin-top:20px; letter-spacing:.06em; text-shadow:0 1px 8px rgba(90,40,0,.5); }
+  .use-row { margin-top:18px; text-align:center; }
+  .use-row .btn { margin:4px; }
+  .hidden { display:none !important; }
+</style>
+</head>
+<body>
+  <canvas id="sky"></canvas>
+
+  <div class="topbar">
+    <button id="musicBtn" type="button" aria-label="Toggle music">&#9834; Music: Off</button>
+  </div>
+
+  <!-- SUNSET COVER -->
+  <div id="cover">
+    <div class="sun" aria-hidden="true"></div>
+    <div class="garland" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="mono">Mehwish &amp; Adnan</div>
+    <div class="sub">Mehndi &amp; Sangeet</div>
+    <div class="when">Sunday, 27 June 2027</div>
+    <div class="where">Sunset Lawn, Lahore</div>
+    <button id="beginBtn" type="button">Begin the Celebration</button>
+  </div>
+
+  <main id="main" class="hidden">
+    <div class="card">
+      <div class="garland" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="bismillah">بسم اللہ الرحمن الرحیم</div>
+      <div class="eyebrow">Together with their families</div>
+      <div class="names">Mehwish <span class="amp">&amp;</span> Adnan</div>
+      <p class="invite-line">request the honour of your presence<br>at the celebration of their Mehndi &amp; Sangeet</p>
+
+      <div class="divider"><span>&#10022;</span></div>
+
+      <div class="date-big">Sunday, 27 June 2027</div>
+      <div class="venue">7:00 PM onwards &middot; Sunset Lawn, Lahore</div>
+      <div class="dress">Dress Code &middot; Marigold, Gold &amp; Green</div>
+
+      <div class="divider"><span>&hearts;</span></div>
+
+      <div class="count" id="countdown" aria-label="Countdown">
+        <div class="box"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
+        <div class="box"><div class="num" id="cd-h">--</div><div class="lbl">Hours</div></div>
+        <div class="box"><div class="num" id="cd-m">--</div><div class="lbl">Mins</div></div>
+        <div class="box"><div class="num" id="cd-s">--</div><div class="lbl">Secs</div></div>
+      </div>
+
+      <div class="events">
+        <div class="event">
+          <div class="day"><b>Sat 26 Jun</b><span>6:00 PM</span></div>
+          <p>Mehndi Evening<small>Henna, music &amp; marigolds at sunset</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Sun 27 Jun</b><span>7:00 PM</span></div>
+          <p>Sangeet Night<small>An evening of songs, dance &amp; dinner</small></p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn gold" id="rsvpBtn" type="button">RSVP Now</button>
+        <button class="btn ghost" id="calBtn" type="button">Add to Calendar</button>
+      </div>
+
+      <div id="rsvp" class="hidden">
+        <h3>Will you join us?</h3>
+        <input id="guestName" type="text" placeholder="Your name" maxlength="40" aria-label="Your name">
+        <select id="guestCount" aria-label="Number of guests">
+          <option value="1">1 guest</option>
+          <option value="2" selected>2 guests</option>
+          <option value="3">3 guests</option>
+          <option value="4">4 guests</option>
+          <option value="5">5+ guests</option>
+        </select>
+        <div class="choice">
+          <button class="btn gold" id="attendYes" type="button">Joyfully Accepts</button>
+          <button class="btn ghost" id="attendNo" type="button">Regretfully Declines</button>
+        </div>
+        <div id="rsvpMsg"></div>
+      </div>
+
+      <div class="marigolds" id="marigolds">
+        <button class="marigold" type="button" aria-label="Marigold 1"><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="core"></span><span class="stem"></span></button>
+        <button class="marigold" type="button" aria-label="Marigold 2"><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="core"></span><span class="stem"></span></button>
+        <button class="marigold" type="button" aria-label="Marigold 3"><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="core"></span><span class="stem"></span></button>
+        <button class="marigold" type="button" aria-label="Marigold 4"><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="core"></span><span class="stem"></span></button>
+        <button class="marigold" type="button" aria-label="Marigold 5"><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="core"></span><span class="stem"></span></button>
+      </div>
+    </div>
+    <div class="use-row">
+      <a class="btn gold" href="../builder.html?template=sunset-mehndi">Use this template</a>
+      <a class="btn ghost" href="../index.html#templates" style="color:#ffe9d6;border-color:#e8c87e;">All templates</a>
+    </div>
+    <div class="foot">Mehwish &hearts; Adnan &middot; 27 . 06 . 2027 &middot; Demo invitation — no video, only code</div>
+  </main>
+<script>
+(function () {
+  "use strict";
+  var canvas = document.getElementById("sky");
+  var ctx = canvas.getContext("2d");
+  var W = 0, H = 0, DPR = 1;
+  var embers = [], parts = [];
+  var audioCtx = null, musicOn = false, musicTimer = null;
+  var NOTE_SEQ = [523.25, 587.33, 659.25, 783.99, 880.0, 783.99, 659.25, 587.33];
+  var noteIdx = 0;
+
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    canvas.style.width = W + "px"; canvas.style.height = H + "px";
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  /* ---------- warm rising embers ---------- */
+  function seedEmbers() {
+    embers = [];
+    for (var i = 0; i < 16; i++) {
+      embers.push({ x: rand(0, W), y: rand(0, H), s: rand(1.4, 3), vy: rand(-0.5, -0.2), sway: rand(0, 6.28), tw: rand(0, 6.28), color: pick(["#ffe9a8", "#ffb347", "#fff8d6", "#ffd700"]) });
+    }
+  }
+  seedEmbers();
+
+  function burst(x, y) {
+    for (var i = 0; i < 12; i++) {
+      parts.push({
+        x: x, y: y,
+        vx: rand(-1.8, 1.8), vy: rand(-2.6, -0.4),
+        life: 1, decay: rand(0.012, 0.025),
+        size: rand(2.5, 6),
+        color: pick(["#ffe9a8", "#ffb347", "#f28c38", "#ffd700", "#fff8d6"])
+      });
+    }
+  }
+  function updateParts() {
+    for (var i = parts.length - 1; i >= 0; i--) {
+      var p = parts[i];
+      p.life -= p.decay;
+      if (p.life <= 0) { parts.splice(i, 1); continue; }
+      p.x += p.vx; p.y += p.vy;
+      p.vy += 0.02;
+      p.vx *= 0.985;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, p.life);
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+      ctx.globalAlpha = 1;
+    }
+    for (var j = 0; j < embers.length; j++) {
+      var e = embers[j];
+      e.y += e.vy;
+      e.sway += 0.012;
+      e.tw += 0.05;
+      e.x += Math.sin(e.sway) * 0.4;
+      if (e.y < -8) { e.y = H + 8; e.x = rand(0, W); }
+      ctx.save();
+      ctx.globalAlpha = 0.35 + Math.abs(Math.sin(e.tw)) * 0.55;
+      ctx.fillStyle = e.color;
+      ctx.beginPath();
+      ctx.arc(e.x, e.y, e.s, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+      ctx.globalAlpha = 1;
+    }
+  }
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    updateParts();
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+
+  /* ---------- audio (created only after a tap) ---------- */
+  function ensureAudio() {
+    if (!audioCtx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) audioCtx = new AC();
+    }
+    if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+    return audioCtx;
+  }
+  function tone(freq, dur, type, vol, when) {
+    if (!ensureAudio()) return;
+    var t = audioCtx.currentTime + (when || 0);
+    var o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    o.type = type || "sine";
+    o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.12, t + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(t); o.stop(t + dur + 0.05);
+  }
+  function chime() {
+    tone(659.25, 0.5, "triangle", 0.12, 0);
+    tone(783.99, 0.5, "triangle", 0.12, 0.14);
+    tone(1046.5, 0.8, "triangle", 0.10, 0.28);
+  }
+  function musicStep() {
+    if (!musicOn) return;
+    var f = NOTE_SEQ[noteIdx % NOTE_SEQ.length];
+    noteIdx++;
+    tone(f, 0.7, "triangle", 0.05, 0);
+    if (noteIdx % 4 === 0) tone(f / 2, 0.9, "sine", 0.04, 0);
+  }
+  var musicBtn = document.getElementById("musicBtn");
+  musicBtn.addEventListener("click", function () {
+    ensureAudio();
+    musicOn = !musicOn;
+    musicBtn.innerHTML = musicOn ? "&#9834; Music: On" : "&#9834; Music: Off";
+    if (musicOn) { musicStep(); musicTimer = setInterval(musicStep, 480); }
+    else if (musicTimer) { clearInterval(musicTimer); musicTimer = null; }
+  });
+
+  /* ---------- cover open ---------- */
+  var cover = document.getElementById("cover");
+  var main = document.getElementById("main");
+  document.getElementById("beginBtn").addEventListener("click", function () {
+    chime();
+    cover.classList.add("opened");
+    main.classList.remove("hidden");
+    burst(W / 2, H * 0.35);
+    setTimeout(function () { cover.style.display = "none"; }, 1300);
+  });
+
+  /* ---------- signature: a marigold sways + releases a warm glow ---------- */
+  var marigolds = document.querySelectorAll(".marigold");
+  marigolds.forEach(function (m) {
+    m.addEventListener("click", function (e) {
+      var r = m.getBoundingClientRect();
+      var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      m.classList.add("glow");
+      setTimeout(function () { m.classList.remove("glow"); }, 1200);
+      burst(cx, cy);
+      tone(880, 0.25, "sine", 0.06, 0);
+      tone(1174.66, 0.3, "sine", 0.05, 0.08);
+      e.stopPropagation();
+    });
+  });
+
+  /* ---------- countdown ---------- */
+  var target = new Date("2027-06-27T19:00:00+05:00").getTime();
+  function tick() {
+    var diff = Math.max(0, target - Date.now());
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor(diff / 3600000) % 24;
+    var m = Math.floor(diff / 60000) % 60;
+    var s = Math.floor(diff / 1000) % 60;
+    document.getElementById("cd-d").textContent = d;
+    document.getElementById("cd-h").textContent = (h < 10 ? "0" : "") + h;
+    document.getElementById("cd-m").textContent = (m < 10 ? "0" : "") + m;
+    document.getElementById("cd-s").textContent = (s < 10 ? "0" : "") + s;
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ---------- RSVP ---------- */
+  document.getElementById("rsvpBtn").addEventListener("click", function () {
+    var r = document.getElementById("rsvp");
+    r.classList.toggle("hidden");
+    if (!r.classList.contains("hidden")) document.getElementById("guestName").focus();
+  });
+  function rsvp(attending) {
+    var name = document.getElementById("guestName").value.trim();
+    var count = document.getElementById("guestCount").value;
+    var msg = document.getElementById("rsvpMsg");
+    try {
+      var saved = JSON.parse(localStorage.getItem("demo-rsvp-sunset-mehndi") || "[]");
+      saved.push({ name: name, count: count, attending: attending, at: Date.now() });
+      localStorage.setItem("demo-rsvp-sunset-mehndi", JSON.stringify(saved));
+    } catch (err) { /* private mode: ignore */ }
+    if (attending) {
+      msg.textContent = name
+        ? "Shukriya, " + name + "! " + count + " guest(s) noted — hum intezaar karenge."
+        : "Shukriya! " + count + " guest(s) noted — hum intezaar karenge.";
+      burst(window.innerWidth / 2, window.innerHeight * 0.5);
+      chime();
+    } else {
+      msg.textContent = name
+        ? "Shukriya, " + name + " — aapki duaen hamare saath hain."
+        : "Shukriya — aapki duaen hamare saath hain.";
+    }
+  }
+  document.getElementById("attendYes").addEventListener("click", function () { rsvp(true); });
+  document.getElementById("attendNo").addEventListener("click", function () { rsvp(false); });
+
+  /* ---------- add to calendar (.ics) ---------- */
+  document.getElementById("calBtn").addEventListener("click", function () {
+    var ics = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Demo Invitation//EN",
+      "BEGIN:VEVENT", "UID:mehwish-adnan-sangeet@demo",
+      "DTSTAMP:20261124T000000Z",
+      "DTSTART:20270627T140000Z", "DTEND:20270627T180000Z",
+      "SUMMARY:Mehwish & Adnan — Sangeet",
+      "LOCATION:Sunset Lawn\\, Lahore",
+      "DESCRIPTION:Sangeet night of Mehwish & Adnan.",
+      "END:VEVENT", "END:VCALENDAR"
+    ].join("\r\n");
+    var blob = new Blob([ics], { type: "text/calendar" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Mehwish-Adnan-Sangeet.ics";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  });
+})();
+</script>
+</body>
+</html>

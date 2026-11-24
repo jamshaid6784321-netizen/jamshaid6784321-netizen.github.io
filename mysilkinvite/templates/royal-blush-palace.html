@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Fatima &amp; Ali — Royal Blush Palace Invitation (Demo)</title>
+<meta name="description" content="Demo: Royal Blush Palace wedding invitation. A palace corridor of arched doorways, each one opening onto an event. HTML/CSS/JS only, no video.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@500;600&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { height:100%; }
+  body {
+    font-family:'Cormorant Garamond', Georgia, serif;
+    color:#6b3240;
+    background:linear-gradient(180deg,#fff6ec 0%,#fbe9dd 30%,#f5c6c6 62%,#e8a0a8 85%,#d98a96 100%);
+    background-attachment:fixed;
+    overflow-x:hidden; min-height:100vh;
+  }
+  /* chandelier glow overhead */
+  .glow {
+    position:fixed; top:-140px; left:50%; width:640px; height:420px; margin-left:-320px;
+    background:radial-gradient(ellipse at 50% 0%, rgba(255,236,180,.85) 0%, rgba(201,162,39,.35) 40%, rgba(201,162,39,0) 70%);
+    z-index:0; pointer-events:none;
+  }
+  .chandelier { position:fixed; top:0; left:50%; transform:translateX(-50%); z-index:0; pointer-events:none; line-height:0; }
+  .chandelier svg { width:220px; height:120px; display:block; }
+  .topbar {
+    position:fixed; top:0; left:0; right:0; z-index:7;
+    display:flex; justify-content:flex-end; align-items:center;
+    padding:10px 14px; pointer-events:none;
+  }
+  .topbar button {
+    pointer-events:auto; background:rgba(255,246,236,.92); border:1px solid #b76e79;
+    color:#8e4a54; font-size:14px; padding:6px 12px; border-radius:999px; cursor:pointer;
+    font-family:inherit;
+  }
+  main { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; padding:130px 14px 60px; }
+
+  /* ---------- COVER: corridor perspective ---------- */
+  #cover {
+    position:fixed; inset:0; z-index:10; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:20px 14px;
+    background:linear-gradient(180deg,#fbe9dd 0%,#f5c6c6 55%,#e8a0a8 100%);
+    transition:transform 1.2s ease-in-out, opacity 1.2s ease-in-out;
+  }
+  #cover.opened { transform:translateY(-102%); opacity:0; pointer-events:none; }
+  #cover .mono { font-family:'Great Vibes', cursive; font-size:clamp(44px,11vw,84px); color:#8e4a54; line-height:1.05; text-shadow:0 2px 18px rgba(255,255,255,.7); }
+  #cover .sub { letter-spacing:.35em; text-transform:uppercase; font-size:13px; color:#a05a66; margin:12px 0 22px; }
+  .corridor {
+    width:min(420px, 90vw); height:250px; position:relative; margin:0 auto;
+    perspective:520px; overflow:hidden; border-radius:8px;
+    background:linear-gradient(180deg,#fff6ec 0%,#fbe9dd 55%,#f0c9c0 100%);
+    border:2px solid #c9a227; box-shadow:0 18px 44px rgba(90,20,40,.35);
+  }
+  .corridor .floor {
+    position:absolute; left:0; right:0; bottom:0; height:70px;
+    background:linear-gradient(180deg,#e9c9a8,#c9a227);
+    clip-path:polygon(18% 0, 82% 0, 100% 100%, 0 100%);
+    opacity:.55;
+  }
+  .corridor .arch {
+    position:absolute; bottom:34px; width:74px; height:150px;
+    border:3px solid #c9a227; border-bottom:none; border-radius:74px 74px 0 0;
+    background:linear-gradient(180deg, rgba(255,246,236,.95), rgba(245,198,198,.9));
+    box-shadow:inset 0 0 0 4px rgba(255,255,255,.7), 0 0 22px rgba(201,162,39,.35);
+  }
+  .corridor .arch.a1 { left:6%; transform:scale(.72); transform-origin:bottom left; }
+  .corridor .arch.a2 { left:24%; transform:scale(.85); transform-origin:bottom left; }
+  .corridor .arch.a3 { left:50%; margin-left:-37px; z-index:2; }
+  .corridor .arch.a4 { right:24%; transform:scale(.85); transform-origin:bottom right; }
+  .corridor .arch.a5 { right:6%; transform:scale(.72); transform-origin:bottom right; }
+  .corridor .arch::after {
+    content:"\2665"; position:absolute; left:50%; top:34%; transform:translate(-50%,-50%);
+    font-size:22px; color:#b76e79;
+  }
+  .corridor .lamp {
+    position:absolute; top:8px; left:50%; width:10px; height:10px; margin-left:-5px;
+    border-radius:50%; background:#ffe9a8; box-shadow:0 0 24px 10px rgba(255,233,168,.8);
+  }
+  #openBtn {
+    margin-top:26px; padding:13px 30px; border-radius:999px; cursor:pointer;
+    border:1px solid #c9a227; font-family:'Playfair Display', serif; font-size:17px; letter-spacing:.06em;
+    background:linear-gradient(180deg,#d98a9b,#b76e79); color:#fff;
+    box-shadow:0 8px 22px rgba(90,20,40,.3); animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.05); } }
+
+  /* ---------- CARD ---------- */
+  .card {
+    width:100%; max-width:560px; background:rgba(255,246,236,.97);
+    border:1px solid #b76e79; border-radius:18px;
+    box-shadow:0 24px 60px rgba(90,20,40,.3), inset 0 0 0 6px #fffdf8, inset 0 0 0 7px #e8a0b0;
+    padding:34px 22px 26px; text-align:center; position:relative;
+  }
+  .bismillah { font-family:'Noto Nastaliq Urdu', serif; font-size:26px; color:#a05a66; line-height:2; }
+  .eyebrow { letter-spacing:.32em; text-transform:uppercase; font-size:12px; color:#b76e79; margin:10px 0 4px; }
+  .names { font-family:'Great Vibes', cursive; font-size:clamp(46px,12vw,72px); color:#8e4a54; line-height:1.15; margin:6px 0 2px; }
+  .names .amp { color:#b76e79; font-size:.7em; }
+  .invite-line { font-size:19px; font-style:italic; color:#7a4a52; margin:10px 0 4px; }
+  .date-big { font-family:'Playfair Display', serif; font-size:22px; letter-spacing:.08em; color:#6b3240; margin-top:14px; }
+  .venue { font-size:18px; color:#7a4a52; margin-top:4px; }
+  .dress { font-size:15px; letter-spacing:.14em; text-transform:uppercase; color:#b76e79; margin-top:8px; }
+  .divider { display:flex; align-items:center; gap:10px; margin:18px auto; max-width:340px; color:#b76e79; }
+  .divider::before,.divider::after { content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,#b76e79,transparent); }
+  .divider span { font-size:18px; }
+
+  /* countdown */
+  .count { display:flex; justify-content:center; gap:10px; margin:6px 0 2px; }
+  .count .box { background:#fff5f7; border:1px solid #e8a0b0; border-radius:12px; min-width:64px; padding:10px 6px; }
+  .count .num { font-family:'Playfair Display', serif; font-size:26px; color:#8e4a54; }
+  .count .lbl { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#b76e79; }
+
+  /* timeline: arched doorways */
+  .events { margin:14px auto 0; max-width:440px; }
+  .events h3 { font-family:'Playfair Display', serif; color:#8e4a54; font-size:21px; margin-bottom:12px; }
+  .arch-row { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+  .arch-door {
+    width:118px; min-height:150px; border:3px solid #c9a227; border-bottom-width:2px;
+    border-radius:60px 60px 10px 10px; cursor:pointer; position:relative;
+    background:linear-gradient(180deg,#fffdf8,#fbeef0);
+    box-shadow:inset 0 0 0 4px rgba(255,255,255,.8), 0 8px 20px rgba(90,20,40,.2);
+    transition:transform .3s ease, box-shadow .3s ease;
+    font-family:inherit; color:#6b3240; padding:18px 8px 10px; text-align:center;
+  }
+  .arch-door:hover { transform:translateY(-4px); }
+  .arch-door .knob {
+    position:absolute; left:50%; top:52%; width:12px; height:12px; margin-left:-6px;
+    border-radius:50%; background:radial-gradient(circle at 40% 35%, #ffe9a8, #c9a227);
+    box-shadow:0 0 8px rgba(201,162,39,.6);
+  }
+  .arch-door .ev-day { font-family:'Playfair Display', serif; font-size:16px; color:#8e4a54; }
+  .arch-door .ev-time { font-size:13px; color:#b76e79; letter-spacing:.08em; }
+  .arch-door .ev-name { font-family:'Playfair Display', serif; font-size:17px; color:#6b3240; margin-top:26px; }
+  .arch-door .ev-detail {
+    display:none; font-size:14px; font-style:italic; color:#7a4a52; margin-top:6px; line-height:1.4;
+  }
+  .arch-door.open { background:linear-gradient(180deg,#fff6ec,#f5c6c6); box-shadow:inset 0 0 0 4px rgba(255,255,255,.8), 0 0 26px rgba(201,162,39,.55); }
+  .arch-door.open .ev-detail { display:block; }
+  .arch-door.open .knob { opacity:0; }
+  /* buttons */
+  .actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px; }
+  .btn {
+    font-family:'Playfair Display', serif; font-size:16px; letter-spacing:.04em;
+    padding:11px 20px; border-radius:999px; cursor:pointer; border:1px solid #b76e79;
+    text-decoration:none; display:inline-block;
+  }
+  .btn.gold { background:linear-gradient(180deg,#d98a9b,#b76e79); color:#fff; box-shadow:0 6px 16px rgba(140,60,80,.35); }
+  .btn.ghost { background:transparent; color:#8e4a54; }
+  .btn:active { transform:scale(.97); }
+
+  /* RSVP */
+  #rsvp { margin-top:18px; border-top:1px dashed #d9a0aa; padding-top:16px; }
+  #rsvp h3 { font-family:'Playfair Display', serif; color:#8e4a54; font-size:22px; margin-bottom:10px; }
+  #rsvp input, #rsvp select {
+    font-family:inherit; font-size:16px; padding:10px 12px; border:1px solid #d9a0aa;
+    border-radius:10px; background:#fff; color:#5c2e35; width:100%; max-width:320px; margin-bottom:10px;
+  }
+  .choice { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  #rsvpMsg { font-size:18px; font-style:italic; color:#8e4a54; margin-top:6px; min-height:24px; }
+
+  .foot { text-align:center; font-size:14px; color:#8e4a54; margin-top:20px; letter-spacing:.06em; }
+  .use-row { margin-top:18px; text-align:center; }
+  .use-row .btn { margin:4px; }
+  .use-row .btn.ghost { color:#8e4a54; }
+  .hidden { display:none !important; }
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="chandelier" aria-hidden="true">
+    <svg viewBox="0 0 220 120">
+      <line x1="110" y1="0" x2="110" y2="22" stroke="#c9a227" stroke-width="3"/>
+      <path d="M40 30 Q110 10 180 30 L170 78 Q110 96 50 78 Z" fill="none" stroke="#c9a227" stroke-width="3"/>
+      <circle cx="40" cy="30" r="6" fill="#ffe9a8"/>
+      <circle cx="75" cy="22" r="6" fill="#ffe9a8"/>
+      <circle cx="110" cy="18" r="6" fill="#ffe9a8"/>
+      <circle cx="145" cy="22" r="6" fill="#ffe9a8"/>
+      <circle cx="180" cy="30" r="6" fill="#ffe9a8"/>
+      <circle cx="60" cy="80" r="5" fill="#ffe9a8"/>
+      <circle cx="110" cy="88" r="5" fill="#ffe9a8"/>
+      <circle cx="160" cy="80" r="5" fill="#ffe9a8"/>
+      <path d="M110 96 L110 112" stroke="#c9a227" stroke-width="3"/>
+      <circle cx="110" cy="116" r="4" fill="#d4af37"/>
+    </svg>
+  </div>
+
+  <div class="topbar">
+    <button id="musicBtn" type="button" aria-label="Toggle music">&#9834; Music: Off</button>
+  </div>
+
+  <!-- COVER: palace corridor -->
+  <div id="cover">
+    <div class="mono">Fatima &amp; Ali</div>
+    <div class="sub">Are Getting Married</div>
+    <div class="corridor" aria-hidden="true">
+      <span class="lamp"></span>
+      <div class="arch a1"></div>
+      <div class="arch a2"></div>
+      <div class="arch a3"></div>
+      <div class="arch a4"></div>
+      <div class="arch a5"></div>
+      <div class="floor"></div>
+    </div>
+    <button id="openBtn" type="button">Walk the Corridor</button>
+  </div>
+
+  <main id="main" class="hidden">
+    <div class="card">
+      <div class="bismillah">بسم اللہ الرحمن الرحیم</div>
+      <div class="eyebrow">Together with their families</div>
+      <div class="names">Fatima <span class="amp">&amp;</span> Ali</div>
+      <p class="invite-line">request the honour of your presence<br>at the celebration of their Nikah</p>
+
+      <div class="divider"><span>&#10022;</span></div>
+
+      <div class="date-big">Sunday, 25 April 2027</div>
+      <div class="venue">7:00 PM onwards &middot; Royal Palm Marquee, Karachi</div>
+      <div class="dress">Dress Code &middot; Shades of Blush &amp; Rose Gold</div>
+
+      <div class="divider"><span>&hearts;</span></div>
+
+      <div class="count" id="countdown" aria-label="Countdown">
+        <div class="box"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
+        <div class="box"><div class="num" id="cd-h">--</div><div class="lbl">Hours</div></div>
+        <div class="box"><div class="num" id="cd-m">--</div><div class="lbl">Mins</div></div>
+        <div class="box"><div class="num" id="cd-s">--</div><div class="lbl">Secs</div></div>
+      </div>
+
+      <div class="events">
+        <h3>The Palace Corridor</h3>
+        <div class="arch-row">
+          <button class="arch-door" type="button" aria-label="Nikah">
+            <span class="knob"></span>
+            <div class="ev-day">Sun 25 Apr</div>
+            <div class="ev-time">7:00 PM</div>
+            <div class="ev-name">Nikah</div>
+            <div class="ev-detail">Arrival of the groom, Nikah ceremony, followed by dinner.</div>
+          </button>
+          <button class="arch-door" type="button" aria-label="Walima">
+            <span class="knob"></span>
+            <div class="ev-day">Mon 26 Apr</div>
+            <div class="ev-time">1:00 PM</div>
+            <div class="ev-name">Walima</div>
+            <div class="ev-detail">Lunch reception with family and friends, and blessings for the couple.</div>
+          </button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn gold" id="rsvpBtn" type="button">RSVP Now</button>
+        <button class="btn ghost" id="calBtn" type="button">Add to Calendar</button>
+      </div>
+
+      <div id="rsvp" class="hidden">
+        <h3>Will you join us?</h3>
+        <input id="guestName" type="text" placeholder="Your name" maxlength="40" aria-label="Your name">
+        <select id="guestCount" aria-label="Number of guests">
+          <option value="1">1 guest</option>
+          <option value="2" selected>2 guests</option>
+          <option value="3">3 guests</option>
+          <option value="4">4 guests</option>
+          <option value="5">5+ guests</option>
+        </select>
+        <div class="choice">
+          <button class="btn gold" id="attendYes" type="button">Joyfully Accepts</button>
+          <button class="btn ghost" id="attendNo" type="button">Regretfully Declines</button>
+        </div>
+        <div id="rsvpMsg"></div>
+      </div>
+    </div>
+    <div class="use-row">
+      <a class="btn gold" href="../builder.html?template=royal-blush-palace">Use this template</a>
+      <a class="btn ghost" href="../index.html#templates">All templates</a>
+    </div>
+    <div class="foot">Fatima &hearts; Ali &middot; 25 . 04 . 2027 &middot; Demo invitation — no video, only code</div>
+  </main>
+<script>
+(function () {
+  "use strict";
+  var audioCtx = null, musicOn = false, musicTimer = null;
+  var NOTE_SEQ = [523.25, 587.33, 659.25, 783.99, 880.0, 783.99, 659.25, 587.33];
+  var noteIdx = 0;
+
+  function ensureAudio() {
+    if (!audioCtx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) audioCtx = new AC();
+    }
+    if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+    return audioCtx;
+  }
+  function tone(freq, dur, type, vol, when) {
+    if (!ensureAudio()) return;
+    var t = audioCtx.currentTime + (when || 0);
+    var o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    o.type = type || "sine";
+    o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.12, t + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(t); o.stop(t + dur + 0.05);
+  }
+  function chime() {
+    tone(659.25, 0.5, "triangle", 0.12, 0);
+    tone(783.99, 0.5, "triangle", 0.12, 0.14);
+    tone(1046.5, 0.8, "triangle", 0.10, 0.28);
+  }
+  function musicStep() {
+    if (!musicOn) return;
+    var f = NOTE_SEQ[noteIdx % NOTE_SEQ.length];
+    noteIdx++;
+    tone(f, 0.7, "triangle", 0.05, 0);
+    if (noteIdx % 4 === 0) tone(f / 2, 0.9, "sine", 0.04, 0);
+  }
+  var musicBtn = document.getElementById("musicBtn");
+  musicBtn.addEventListener("click", function () {
+    ensureAudio();
+    musicOn = !musicOn;
+    musicBtn.innerHTML = musicOn ? "&#9834; Music: On" : "&#9834; Music: Off";
+    if (musicOn) { musicStep(); musicTimer = setInterval(musicStep, 480); }
+    else if (musicTimer) { clearInterval(musicTimer); musicTimer = null; }
+  });
+
+  /* ---------- cover ---------- */
+  var cover = document.getElementById("cover");
+  var main = document.getElementById("main");
+  document.getElementById("openBtn").addEventListener("click", function () {
+    chime();
+    setTimeout(function () {
+      cover.classList.add("opened");
+      main.classList.remove("hidden");
+    }, 200);
+    setTimeout(function () { cover.style.display = "none"; }, 1500);
+  });
+
+  /* ---------- arch doorways ---------- */
+  var doors = document.querySelectorAll(".arch-door");
+  doors.forEach(function (d) {
+    d.addEventListener("click", function () {
+      var wasOpen = d.classList.contains("open");
+      doors.forEach(function (o) { o.classList.remove("open"); });
+      if (!wasOpen) {
+        d.classList.add("open");
+        tone(880, 0.25, "sine", 0.06, 0);
+        tone(1174.66, 0.3, "sine", 0.05, 0.08);
+      }
+    });
+  });
+
+  /* ---------- countdown ---------- */
+  var target = new Date("2027-04-25T19:00:00+05:00").getTime();
+  function tick() {
+    var diff = Math.max(0, target - Date.now());
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor(diff / 3600000) % 24;
+    var m = Math.floor(diff / 60000) % 60;
+    var s = Math.floor(diff / 1000) % 60;
+    document.getElementById("cd-d").textContent = d;
+    document.getElementById("cd-h").textContent = (h < 10 ? "0" : "") + h;
+    document.getElementById("cd-m").textContent = (m < 10 ? "0" : "") + m;
+    document.getElementById("cd-s").textContent = (s < 10 ? "0" : "") + s;
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ---------- RSVP ---------- */
+  document.getElementById("rsvpBtn").addEventListener("click", function () {
+    var r = document.getElementById("rsvp");
+    r.classList.toggle("hidden");
+    if (!r.classList.contains("hidden")) document.getElementById("guestName").focus();
+  });
+  function rsvp(attending) {
+    var name = document.getElementById("guestName").value.trim();
+    var count = document.getElementById("guestCount").value;
+    var msg = document.getElementById("rsvpMsg");
+    try {
+      var saved = JSON.parse(localStorage.getItem("demo-rsvp-royal-blush-palace") || "[]");
+      saved.push({ name: name, count: count, attending: attending, at: Date.now() });
+      localStorage.setItem("demo-rsvp-royal-blush-palace", JSON.stringify(saved));
+    } catch (err) { /* private mode: ignore */ }
+    if (attending) {
+      msg.textContent = name
+        ? "Shukriya, " + name + "! " + count + " guest(s) noted — hum intezaar karenge."
+        : "Shukriya! " + count + " guest(s) noted — hum intezaar karenge.";
+      chime();
+    } else {
+      msg.textContent = name
+        ? "Shukriya, " + name + " — aapki duaen hamare saath hain."
+        : "Shukriya — aapki duaen hamare saath hain.";
+    }
+  }
+  document.getElementById("attendYes").addEventListener("click", function () { rsvp(true); });
+  document.getElementById("attendNo").addEventListener("click", function () { rsvp(false); });
+
+  /* ---------- add to calendar (.ics) ---------- */
+  document.getElementById("calBtn").addEventListener("click", function () {
+    var ics = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Demo Invitation//EN",
+      "BEGIN:VEVENT", "UID:fatima-ali-nikah@demo",
+      "DTSTAMP:20261124T000000Z",
+      "DTSTART:20270425T140000Z", "DTEND:20270425T180000Z",
+      "SUMMARY:Fatima & Ali — Nikah",
+      "LOCATION:Royal Palm Marquee\\, Karachi",
+      "DESCRIPTION:Nikah ceremony of Fatima & Ali.",
+      "END:VEVENT", "END:VCALENDAR"
+    ].join("\r\n");
+    var blob = new Blob([ics], { type: "text/calendar" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Fatima-Ali-Nikah.ics";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Nadia &amp; Faisal — Moonlit Blush Balcony Invitation (Demo)</title>
+<meta name="description" content="Demo: Moonlit Blush Balcony wedding invitation. Blush roses glow under a full moon while fireflies drift over the garden balcony. HTML/CSS/JS only, no video.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@500;600&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { height:100%; }
+  body {
+    font-family:'Cormorant Garamond', Georgia, serif;
+    color:#f3d9d9;
+    background:linear-gradient(180deg,#241324 0%,#3a2230 30%,#5c3244 58%,#8e5a68 82%,#c08a7e 100%);
+    background-attachment:fixed;
+    overflow-x:hidden; min-height:100vh;
+  }
+  /* full moon */
+  .moon {
+    position:fixed; top:5vh; right:9vw; width:104px; height:104px; border-radius:50%;
+    background:radial-gradient(circle at 38% 35%, #fffdf4 0%, #ffefc4 45%, #f2cf8a 70%, rgba(242,207,138,0) 78%);
+    box-shadow:0 0 60px 24px rgba(255,240,200,.4), 0 0 120px 60px rgba(255,220,160,.16);
+    z-index:0; pointer-events:none;
+  }
+  .moon::after {
+    content:""; position:absolute; inset:0; border-radius:50%;
+    background:
+      radial-gradient(circle at 62% 30%, rgba(200,170,110,.35) 0 10px, transparent 11px),
+      radial-gradient(circle at 34% 62%, rgba(200,170,110,.3) 0 13px, transparent 14px),
+      radial-gradient(circle at 68% 66%, rgba(200,170,110,.28) 0 8px, transparent 9px);
+  }
+  .stars { position:fixed; inset:0; z-index:0; pointer-events:none; }
+  .stars i {
+    position:absolute; width:2px; height:2px; border-radius:50%; background:#fff;
+    animation:twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle { 0%,100% { opacity:.25; } 50% { opacity:1; } }
+  /* rose garden at the base */
+  .garden-base {
+    position:fixed; left:0; right:0; bottom:0; z-index:0; pointer-events:none; line-height:0;
+  }
+  .garden-base svg { width:100%; height:150px; display:block; }
+  #flies { position:fixed; inset:0; z-index:1; pointer-events:none; }
+  .topbar {
+    position:fixed; top:0; left:0; right:0; z-index:7;
+    display:flex; justify-content:flex-end; align-items:center;
+    padding:10px 14px; pointer-events:none;
+  }
+  .topbar button {
+    pointer-events:auto; background:rgba(58,34,48,.85); border:1px solid #e6c87a;
+    color:#ffe9a8; font-size:14px; padding:6px 12px; border-radius:999px; cursor:pointer;
+    font-family:inherit;
+  }
+  main { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; padding:64px 14px 170px; }
+
+  /* ---------- COVER: night balcony ---------- */
+  #cover {
+    position:fixed; inset:0; z-index:10; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:20px 14px;
+    background:linear-gradient(180deg, rgba(36,19,36,.72) 0%, rgba(58,34,48,.6) 55%, rgba(92,50,68,.65) 100%);
+    transition:transform 1.2s ease-in-out, opacity 1.2s ease-in-out;
+  }
+  #cover.opened { transform:translateY(-102%); opacity:0; pointer-events:none; }
+  #cover .mono { font-family:'Great Vibes', cursive; font-size:clamp(46px,12vw,86px); color:#ffe9a8; line-height:1.05; text-shadow:0 0 26px rgba(230,200,122,.65), 0 2px 14px rgba(0,0,0,.5); }
+  #cover .sub { letter-spacing:.35em; text-transform:uppercase; font-size:13px; color:#f3d9d9; margin:12px 0 22px; }
+  .balcony { width:min(400px, 88vw); height:170px; position:relative; margin:0 auto; }
+  .balcony .rail {
+    position:absolute; left:0; right:0; bottom:0; height:64px;
+    border-top:4px solid #2a1626;
+    background:repeating-linear-gradient(90deg, transparent 0 26px, #2a1626 26px 32px);
+    border-bottom:4px solid #2a1626;
+  }
+  .balcony .rose-bush { position:absolute; bottom:56px; display:flex; gap:6px; }
+  .balcony .rose-bush.b1 { left:4%; }
+  .balcony .rose-bush.b2 { right:4%; }
+  .balcony .rose-bush i {
+    display:block; width:26px; height:26px; border-radius:50%;
+    background:radial-gradient(circle at 40% 35%, #f6b8c8, #e8b4b8 55%, #b76e79);
+    box-shadow:0 0 12px rgba(232,180,184,.5);
+  }
+  #openBtn {
+    margin-top:26px; padding:13px 30px; border-radius:999px; cursor:pointer;
+    border:1px solid #e6c87a; font-family:'Playfair Display', serif; font-size:17px; letter-spacing:.06em;
+    background:linear-gradient(180deg,#e6c87a,#b98a1d); color:#3a2230;
+    box-shadow:0 8px 22px rgba(0,0,0,.4); animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.05); } }
+
+  /* ---------- CARD ---------- */
+  .card {
+    width:100%; max-width:560px; background:rgba(58,34,48,.92);
+    border:1px solid #e6c87a; border-radius:18px;
+    box-shadow:0 24px 60px rgba(10,4,10,.55), inset 0 0 0 6px rgba(58,34,48,.6), inset 0 0 0 7px rgba(230,200,122,.5);
+    padding:34px 22px 26px; text-align:center; position:relative;
+  }
+  .bismillah { font-family:'Noto Nastaliq Urdu', serif; font-size:26px; color:#e8b4b8; line-height:2; }
+  .eyebrow { letter-spacing:.32em; text-transform:uppercase; font-size:12px; color:#e6c87a; margin:10px 0 4px; }
+  .names { font-family:'Great Vibes', cursive; font-size:clamp(46px,12vw,72px); color:#ffe9a8; line-height:1.15; margin:6px 0 2px; text-shadow:0 0 22px rgba(230,200,122,.4); }
+  .names .amp { color:#e8b4b8; font-size:.7em; }
+  .invite-line { font-size:19px; font-style:italic; color:#f3d9d9; margin:10px 0 4px; }
+  .date-big { font-family:'Playfair Display', serif; font-size:22px; letter-spacing:.08em; color:#ffe9a8; margin-top:14px; }
+  .venue { font-size:18px; color:#f3d9d9; margin-top:4px; }
+  .dress { font-size:15px; letter-spacing:.14em; text-transform:uppercase; color:#e6c87a; margin-top:8px; }
+  .divider { display:flex; align-items:center; gap:10px; margin:18px auto; max-width:340px; color:#e6c87a; }
+  .divider::before,.divider::after { content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,#e6c87a,transparent); }
+  .divider span { font-size:18px; }
+
+  /* golden-glow countdown */
+  .count { display:flex; justify-content:center; gap:10px; margin:6px 0 2px; }
+  .count .box {
+    background:rgba(36,19,36,.85); border:1px solid #e6c87a; border-radius:12px; min-width:64px; padding:10px 6px;
+    box-shadow:0 0 18px rgba(230,200,122,.35), inset 0 0 12px rgba(230,200,122,.2);
+  }
+  .count .num { font-family:'Playfair Display', serif; font-size:26px; color:#ffe9a8; }
+  .count .lbl { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#e8b4b8; }
+
+  /* timeline */
+  .events { text-align:left; margin:10px auto 0; max-width:420px; }
+  .event { display:flex; gap:12px; padding:12px 6px; border-top:1px dashed rgba(232,180,184,.5); }
+  .event:last-child { border-bottom:1px dashed rgba(232,180,184,.5); }
+  .event .day { font-family:'Playfair Display', serif; color:#ffe9a8; min-width:86px; }
+  .event .day b { display:block; font-size:20px; }
+  .event .day span { font-size:13px; color:#e8b4b8; }
+  .event p { font-size:17px; line-height:1.45; }
+  .event p small { display:block; font-size:14px; color:#e8b4b8; font-style:italic; }
+
+  /* glowing roses */
+  .rose-row { display:flex; justify-content:center; gap:16px; margin-top:22px; }
+  .rose-btn {
+    width:58px; height:70px; position:relative;
+    transition:transform .3s ease; padding:0;
+  }
+  .rose-btn .bloom {
+    position:absolute; left:50%; top:4px; width:44px; height:44px; margin-left:-22px;
+    border-radius:50%;
+    background:radial-gradient(circle at 40% 35%, #f6b8c8, #e8b4b8 55%, #b76e79);
+    box-shadow:0 0 0 3px rgba(255,255,255,.25);
+    animation:roseGlow 3.2s ease-in-out infinite;
+  }
+  .rose-btn .bloom::after {
+    content:""; position:absolute; left:50%; top:50%; width:12px; height:12px; margin:-6px 0 0 -6px;
+    border-radius:50%; background:radial-gradient(circle at 40% 35%, #ffe9a8, #e6c87a);
+  }
+  .rose-btn .stem { position:absolute; left:50%; top:46px; width:3px; height:22px; margin-left:-1.5px; background:#7a9b76; border-radius:2px; }
+  .rose-btn .leaf { position:absolute; left:50%; top:56px; width:16px; height:8px; margin-left:-14px; background:#7a9b76; border-radius:50% 50% 50% 0; transform:rotate(-30deg); }
+  @keyframes roseGlow {
+    0%,100% { box-shadow:0 0 0 3px rgba(255,255,255,.25); }
+    50% { box-shadow:0 0 14px 5px rgba(255,233,168,.5), 0 0 30px 12px rgba(230,200,122,.25); }
+  }
+  .rose-btn:nth-child(2) .bloom { animation-delay:.6s; }
+  .rose-btn:nth-child(3) .bloom { animation-delay:1.2s; }
+  .rose-btn:nth-child(4) .bloom { animation-delay:1.8s; }
+  .rose-btn:nth-child(5) .bloom { animation-delay:2.4s; }
+
+  /* buttons */
+  .actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px; }
+  .btn {
+    font-family:'Playfair Display', serif; font-size:16px; letter-spacing:.04em;
+    padding:11px 20px; border-radius:999px; cursor:pointer; border:1px solid #e6c87a;
+    text-decoration:none; display:inline-block;
+  }
+  .btn.gold { background:linear-gradient(180deg,#e6c87a,#b98a1d); color:#3a2230; box-shadow:0 6px 16px rgba(0,0,0,.4); }
+  .btn.ghost { background:transparent; color:#ffe9a8; }
+  .btn:active { transform:scale(.97); }
+
+  /* RSVP */
+  #rsvp { margin-top:18px; border-top:1px dashed rgba(232,180,184,.5); padding-top:16px; }
+  #rsvp h3 { font-family:'Playfair Display', serif; color:#ffe9a8; font-size:22px; margin-bottom:10px; }
+  #rsvp input, #rsvp select {
+    font-family:inherit; font-size:16px; padding:10px 12px; border:1px solid #c08a7e;
+    border-radius:10px; background:#fff; color:#3a2230; width:100%; max-width:320px; margin-bottom:10px;
+  }
+  .choice { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  #rsvpMsg { font-size:18px; font-style:italic; color:#ffe9a8; margin-top:6px; min-height:24px; }
+
+  .foot { text-align:center; font-size:14px; color:#ffe9a8; margin-top:20px; letter-spacing:.06em; text-shadow:0 1px 8px rgba(0,0,0,.5); }
+  .use-row { margin-top:18px; text-align:center; }
+  .use-row .btn { margin:4px; }
+  .hidden { display:none !important; }
+</style>
+</head>
+<body>
+  <div class="moon"></div>
+  <div class="stars" id="stars"></div>
+  <div class="garden-base" aria-hidden="true">
+    <svg viewBox="0 0 1200 150" preserveAspectRatio="xMidYMax slice">
+      <path d="M0 150 L0 110 Q 150 70 300 105 Q 450 140 600 100 Q 750 65 900 105 Q 1050 140 1200 100 L1200 150 Z" fill="#2a1626"/>
+      <g fill="#e8b4b8">
+        <circle cx="120" cy="98" r="9"/><circle cx="150" cy="108" r="7"/><circle cx="95" cy="110" r="6"/>
+        <circle cx="420" cy="92" r="9"/><circle cx="452" cy="104" r="7"/><circle cx="392" cy="106" r="6"/>
+        <circle cx="760" cy="96" r="9"/><circle cx="792" cy="106" r="7"/><circle cx="730" cy="108" r="6"/>
+        <circle cx="1060" cy="94" r="9"/><circle cx="1092" cy="106" r="7"/><circle cx="1032" cy="108" r="6"/>
+      </g>
+      <g fill="#ffe9a8">
+        <circle cx="120" cy="98" r="3"/><circle cx="420" cy="92" r="3"/>
+        <circle cx="760" cy="96" r="3"/><circle cx="1060" cy="94" r="3"/>
+      </g>
+    </svg>
+  </div>
+  <canvas id="flies"></canvas>
+
+  <div class="topbar">
+    <button id="musicBtn" type="button" aria-label="Toggle music">&#9834; Music: Off</button>
+  </div>
+
+  <!-- COVER: moonlit balcony -->
+  <div id="cover">
+    <div class="mono">Nadia &amp; Faisal</div>
+    <div class="sub">Are Getting Married</div>
+    <div class="balcony" aria-hidden="true">
+      <div class="rose-bush b1"><i></i><i></i><i></i></div>
+      <div class="rose-bush b2"><i></i><i></i><i></i></div>
+      <div class="rail"></div>
+    </div>
+    <button id="openBtn" type="button">Step onto the Balcony</button>
+  </div>
+
+  <main id="main" class="hidden">
+    <div class="card">
+      <div class="bismillah">بسم اللہ الرحمن الرحیم</div>
+      <div class="eyebrow">Together with their families</div>
+      <div class="names">Nadia <span class="amp">&amp;</span> Faisal</div>
+      <p class="invite-line">request the honour of your presence<br>at the celebration of their Nikah</p>
+
+      <div class="divider"><span>&#10022;</span></div>
+
+      <div class="date-big">Sunday, 30 May 2027</div>
+      <div class="venue">7:00 PM onwards &middot; Moonlight Terrace, Islamabad</div>
+      <div class="dress">Dress Code &middot; Shades of Blush &amp; Rose Gold</div>
+
+      <div class="divider"><span>&hearts;</span></div>
+
+      <div class="count" id="countdown" aria-label="Countdown">
+        <div class="box"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
+        <div class="box"><div class="num" id="cd-h">--</div><div class="lbl">Hours</div></div>
+        <div class="box"><div class="num" id="cd-m">--</div><div class="lbl">Mins</div></div>
+        <div class="box"><div class="num" id="cd-s">--</div><div class="lbl">Secs</div></div>
+      </div>
+
+      <div class="events">
+        <div class="event">
+          <div class="day"><b>Sun 30 May</b><span>7:00 PM</span></div>
+          <p>Nikah Ceremony<small>Arrival of the groom, followed by dinner</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Mon 31 May</b><span>1:00 PM</span></div>
+          <p>Walima Reception<small>Lunch &amp; blessings with family and friends</small></p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn gold" id="rsvpBtn" type="button">RSVP Now</button>
+        <button class="btn ghost" id="calBtn" type="button">Add to Calendar</button>
+      </div>
+
+      <div id="rsvp" class="hidden">
+        <h3>Will you join us?</h3>
+        <input id="guestName" type="text" placeholder="Your name" maxlength="40" aria-label="Your name">
+        <select id="guestCount" aria-label="Number of guests">
+          <option value="1">1 guest</option>
+          <option value="2" selected>2 guests</option>
+          <option value="3">3 guests</option>
+          <option value="4">4 guests</option>
+          <option value="5">5+ guests</option>
+        </select>
+        <div class="choice">
+          <button class="btn gold" id="attendYes" type="button">Joyfully Accepts</button>
+          <button class="btn ghost" id="attendNo" type="button">Regretfully Declines</button>
+        </div>
+        <div id="rsvpMsg"></div>
+      </div>
+
+      <div class="rose-row" id="roseRow" aria-label="Roses">
+        <span class="rose-btn" aria-hidden="true"><span class="bloom"></span><span class="stem"></span><span class="leaf"></span></span>
+        <span class="rose-btn" aria-hidden="true"><span class="bloom"></span><span class="stem"></span><span class="leaf"></span></span>
+        <span class="rose-btn" aria-hidden="true"><span class="bloom"></span><span class="stem"></span><span class="leaf"></span></span>
+        <span class="rose-btn" aria-hidden="true"><span class="bloom"></span><span class="stem"></span><span class="leaf"></span></span>
+        <span class="rose-btn" aria-hidden="true"><span class="bloom"></span><span class="stem"></span><span class="leaf"></span></span>
+      </div>
+    </div>
+    <div class="use-row">
+      <a class="btn gold" href="../builder.html?template=moonlit-blush-balcony">Use this template</a>
+      <a class="btn ghost" href="../index.html#templates">All templates</a>
+    </div>
+    <div class="foot">Nadia &hearts; Faisal &middot; 30 . 05 . 2027 &middot; Demo invitation — no video, only code</div>
+  </main>
+<script>
+(function () {
+  "use strict";
+  var canvas = document.getElementById("flies");
+  var ctx = canvas.getContext("2d");
+  var W = 0, H = 0, DPR = 1;
+  var flies = [];
+  var audioCtx = null, musicOn = false, musicTimer = null;
+  var NOTE_SEQ = [523.25, 587.33, 659.25, 783.99, 880.0, 783.99, 659.25, 587.33];
+  var noteIdx = 0;
+
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    canvas.style.width = W + "px"; canvas.style.height = H + "px";
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+
+  /* ---------- stars ---------- */
+  (function seedStars() {
+    var box = document.getElementById("stars");
+    for (var i = 0; i < 40; i++) {
+      var s = document.createElement("i");
+      s.style.left = rand(0, 100) + "%";
+      s.style.top = rand(0, 42) + "%";
+      s.style.animationDelay = rand(0, 3) + "s";
+      if (Math.random() < 0.3) { s.style.width = "3px"; s.style.height = "3px"; }
+      box.appendChild(s);
+    }
+  })();
+
+  /* ---------- drifting fireflies ---------- */
+  function makeFly() {
+    return {
+      x: rand(0, W), y: rand(0, H),
+      r: rand(1.5, 3), vx: rand(-0.25, 0.25), vy: rand(-0.2, 0.2),
+      phase: rand(0, 6.28), speed: rand(0.015, 0.04)
+    };
+  }
+  for (var i = 0; i < (W < 600 ? 14 : 22); i++) flies.push(makeFly());
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < flies.length; i++) {
+      var f = flies[i];
+      f.phase += f.speed;
+      f.x += f.vx + Math.sin(f.phase * 2) * 0.25;
+      f.y += f.vy + Math.cos(f.phase * 1.6) * 0.2;
+      if (f.x < -10) f.x = W + 10;
+      if (f.x > W + 10) f.x = -10;
+      if (f.y < -10) f.y = H + 10;
+      if (f.y > H + 10) f.y = -10;
+      var glow = 0.35 + 0.55 * Math.abs(Math.sin(f.phase));
+      var g = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 5);
+      g.addColorStop(0, "rgba(255,233,168," + glow.toFixed(2) + ")");
+      g.addColorStop(1, "rgba(255,233,168,0)");
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.r * 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "rgba(255,240,200," + glow.toFixed(2) + ")";
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+
+  /* ---------- audio (created only after a tap) ---------- */
+  function ensureAudio() {
+    if (!audioCtx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) audioCtx = new AC();
+    }
+    if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+    return audioCtx;
+  }
+  function tone(freq, dur, type, vol, when) {
+    if (!ensureAudio()) return;
+    var t = audioCtx.currentTime + (when || 0);
+    var o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    o.type = type || "sine";
+    o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.12, t + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(t); o.stop(t + dur + 0.05);
+  }
+  function chime() {
+    tone(659.25, 0.5, "triangle", 0.12, 0);
+    tone(783.99, 0.5, "triangle", 0.12, 0.14);
+    tone(1046.5, 0.8, "triangle", 0.10, 0.28);
+  }
+  function musicStep() {
+    if (!musicOn) return;
+    var f = NOTE_SEQ[noteIdx % NOTE_SEQ.length];
+    noteIdx++;
+    tone(f, 0.7, "triangle", 0.05, 0);
+    if (noteIdx % 4 === 0) tone(f / 2, 0.9, "sine", 0.04, 0);
+  }
+  var musicBtn = document.getElementById("musicBtn");
+  musicBtn.addEventListener("click", function () {
+    ensureAudio();
+    musicOn = !musicOn;
+    musicBtn.innerHTML = musicOn ? "&#9834; Music: On" : "&#9834; Music: Off";
+    if (musicOn) { musicStep(); musicTimer = setInterval(musicStep, 480); }
+    else if (musicTimer) { clearInterval(musicTimer); musicTimer = null; }
+  });
+
+  /* ---------- cover ---------- */
+  var cover = document.getElementById("cover");
+  var main = document.getElementById("main");
+  document.getElementById("openBtn").addEventListener("click", function () {
+    chime();
+    setTimeout(function () {
+      cover.classList.add("opened");
+      main.classList.remove("hidden");
+    }, 200);
+    setTimeout(function () { cover.style.display = "none"; }, 1500);
+  });
+
+  /* ---------- countdown ---------- */
+  var target = new Date("2027-05-30T19:00:00+05:00").getTime();
+  function tick() {
+    var diff = Math.max(0, target - Date.now());
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor(diff / 3600000) % 24;
+    var m = Math.floor(diff / 60000) % 60;
+    var s = Math.floor(diff / 1000) % 60;
+    document.getElementById("cd-d").textContent = d;
+    document.getElementById("cd-h").textContent = (h < 10 ? "0" : "") + h;
+    document.getElementById("cd-m").textContent = (m < 10 ? "0" : "") + m;
+    document.getElementById("cd-s").textContent = (s < 10 ? "0" : "") + s;
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ---------- RSVP ---------- */
+  document.getElementById("rsvpBtn").addEventListener("click", function () {
+    var r = document.getElementById("rsvp");
+    r.classList.toggle("hidden");
+    if (!r.classList.contains("hidden")) document.getElementById("guestName").focus();
+  });
+  function rsvp(attending) {
+    var name = document.getElementById("guestName").value.trim();
+    var count = document.getElementById("guestCount").value;
+    var msg = document.getElementById("rsvpMsg");
+    try {
+      var saved = JSON.parse(localStorage.getItem("demo-rsvp-moonlit-blush-balcony") || "[]");
+      saved.push({ name: name, count: count, attending: attending, at: Date.now() });
+      localStorage.setItem("demo-rsvp-moonlit-blush-balcony", JSON.stringify(saved));
+    } catch (err) { /* private mode: ignore */ }
+    if (attending) {
+      msg.textContent = name
+        ? "Shukriya, " + name + "! " + count + " guest(s) noted — hum intezaar karenge."
+        : "Shukriya! " + count + " guest(s) noted — hum intezaar karenge.";
+      chime();
+    } else {
+      msg.textContent = name
+        ? "Shukriya, " + name + " — aapki duaen hamare saath hain."
+        : "Shukriya — aapki duaen hamare saath hain.";
+    }
+  }
+  document.getElementById("attendYes").addEventListener("click", function () { rsvp(true); });
+  document.getElementById("attendNo").addEventListener("click", function () { rsvp(false); });
+
+  /* ---------- add to calendar (.ics) ---------- */
+  document.getElementById("calBtn").addEventListener("click", function () {
+    var ics = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Demo Invitation//EN",
+      "BEGIN:VEVENT", "UID:nadia-faisal-nikah@demo",
+      "DTSTAMP:20261124T000000Z",
+      "DTSTART:20270530T140000Z", "DTEND:20270530T180000Z",
+      "SUMMARY:Nadia & Faisal — Nikah",
+      "LOCATION:Moonlight Terrace\\, Islamabad",
+      "DESCRIPTION:Nikah ceremony of Nadia & Faisal.",
+      "END:VEVENT", "END:VCALENDAR"
+    ].join("\r\n");
+    var blob = new Blob([ics], { type: "text/calendar" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Nadia-Faisal-Nikah.ics";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  });
+})();
+</script>
+</body>
+</html>

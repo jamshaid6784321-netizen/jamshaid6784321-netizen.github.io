@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Anaya &amp; Kabir — Emerald Palace Invitation (Demo)</title>
+<meta name="description" content="Demo: Emerald Palace wedding invitation. Regal arches light up in gold across a deep emerald palace. HTML/CSS/JS only, no video.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@500;600&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { height:100%; }
+  body {
+    font-family:'Cormorant Garamond', Georgia, serif;
+    color:#f3e6c8;
+    background:linear-gradient(180deg,#04140d 0%,#062a1a 34%,#0a3d26 62%,#0d4a2e 100%);
+    background-attachment:fixed;
+    overflow-x:hidden;
+    min-height:100vh;
+  }
+  #sky { position:fixed; inset:0; z-index:6; pointer-events:none; }
+  .topbar {
+    position:fixed; top:0; left:0; right:0; z-index:7;
+    display:flex; justify-content:flex-end; align-items:center;
+    padding:10px 14px; pointer-events:none;
+  }
+  .topbar button {
+    pointer-events:auto; background:rgba(4,20,13,.6); border:1px solid #d9a441;
+    color:#ffe9a8; font-size:14px; padding:6px 12px; border-radius:999px; cursor:pointer;
+    font-family:inherit;
+  }
+  main { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; padding:74px 14px 40px; }
+
+  /* ---------- PALACE COVER ---------- */
+  #cover {
+    position:fixed; inset:0; z-index:10; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:20px 14px;
+    background:linear-gradient(180deg, rgba(4,20,13,.96) 0%, rgba(6,42,26,.94) 55%, rgba(13,74,46,.96) 100%);
+    transition:transform 1.2s ease-in-out, opacity 1.2s ease-in-out;
+  }
+  #cover.opened { transform:translateY(-102%); opacity:0; pointer-events:none; }
+  #cover .mono { font-family:'Great Vibes', cursive; font-size:clamp(46px,11vw,84px); color:#ffe9a8; line-height:1.05; text-shadow:0 0 24px rgba(255,210,110,.5), 0 2px 14px rgba(0,0,0,.6); }
+  #cover .sub { letter-spacing:.35em; text-transform:uppercase; font-size:13px; color:#e8c87e; margin:12px 0 24px; }
+  /* palace facade: three arched windows */
+  .facade { display:flex; align-items:flex-end; gap:14px; margin-bottom:28px; }
+  .facade .win {
+    width:74px; height:120px; border-radius:37px 37px 0 0; position:relative;
+    background:linear-gradient(180deg,#0d4a2e,#062a1a);
+    border:2px solid #d9a441;
+    box-shadow:inset 0 0 18px rgba(0,0,0,.6);
+    transition:box-shadow .6s, background .6s;
+  }
+  .facade .win.tall { width:92px; height:150px; border-radius:46px 46px 0 0; }
+  .facade .win::after {
+    content:""; position:absolute; left:50%; top:34%; width:10px; height:10px; margin-left:-5px;
+    border-radius:50%; background:rgba(255,233,168,.25);
+    box-shadow:0 -26px 0 rgba(255,233,168,.2), 0 26px 0 rgba(255,233,168,.2);
+    transition:background .6s, box-shadow .6s;
+  }
+  .facade .win.lit {
+    background:linear-gradient(180deg,#ffe9a8,#d9a441 70%,#8a5a10);
+    box-shadow:0 0 34px 10px rgba(255,210,110,.55), inset 0 0 12px rgba(255,255,255,.5);
+  }
+  .facade .win.lit::after { background:#fff8d6; box-shadow:0 -26px 0 #ffe9a8, 0 26px 0 #ffe9a8; }
+  .facade .dome {
+    position:absolute; left:50%; top:-34px; width:70px; height:36px; margin-left:-35px;
+    border-radius:35px 35px 0 0; background:linear-gradient(180deg,#e9b949,#b98a1d);
+    box-shadow:0 0 22px rgba(255,210,110,.5);
+  }
+  #enterBtn {
+    padding:13px 30px; border-radius:999px; cursor:pointer;
+    border:1px solid #d9a441; font-family:'Playfair Display', serif; font-size:17px; letter-spacing:.06em;
+    background:linear-gradient(180deg,#e9b949,#b98a1d); color:#1c1206;
+    box-shadow:0 8px 22px rgba(0,0,0,.45); animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.05); } }
+
+  /* ---------- CARD ---------- */
+  .card {
+    width:100%; max-width:560px; background:rgba(6,32,20,.94);
+    border:1px solid #d9a441; border-radius:18px;
+    box-shadow:0 24px 60px rgba(0,0,0,.5), inset 0 0 0 6px rgba(10,50,30,.9), inset 0 0 0 7px #d9a441;
+    padding:34px 22px 26px; text-align:center; position:relative;
+  }
+  .bismillah { font-family:'Noto Nastaliq Urdu', serif; font-size:26px; color:#ffe9a8; line-height:2; }
+  .eyebrow { letter-spacing:.32em; text-transform:uppercase; font-size:12px; color:#e8c87e; margin:10px 0 4px; }
+  .names { font-family:'Great Vibes', cursive; font-size:clamp(46px,12vw,72px); color:#ffe9a8; line-height:1.15; margin:6px 0 2px; text-shadow:0 0 22px rgba(255,210,110,.4); }
+  .names .amp { color:#d9a441; font-size:.7em; }
+  .invite-line { font-size:19px; font-style:italic; color:#e8d9b0; margin:10px 0 4px; }
+  .date-big { font-family:'Playfair Display', serif; font-size:22px; letter-spacing:.08em; color:#ffe9a8; margin-top:14px; }
+  .venue { font-size:18px; color:#e8d9b0; margin-top:4px; }
+  .dress { font-size:15px; letter-spacing:.14em; text-transform:uppercase; color:#d9a441; margin-top:8px; }
+  .divider { display:flex; align-items:center; gap:10px; margin:18px auto; max-width:340px; color:#d9a441; }
+  .divider::before,.divider::after { content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,#d9a441,transparent); }
+  .divider span { font-size:18px; }
+  .count { display:flex; justify-content:center; gap:10px; margin:6px 0 2px; }
+  .count .box { background:rgba(255,233,168,.08); border:1px solid #d9a441; border-radius:12px; min-width:64px; padding:10px 6px; }
+  .count .num { font-family:'Playfair Display', serif; font-size:26px; color:#ffe9a8; }
+  .count .lbl { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#e8c87e; }
+  /* arched timeline: each event is a palace window */
+  .events { margin:12px auto 0; max-width:440px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .arch {
+    width:196px; min-height:190px; padding:18px 12px 14px; cursor:pointer;
+    border-radius:98px 98px 12px 12px; border:2px solid #d9a441; background:linear-gradient(180deg,#0d4a2e,#062a1a);
+    color:#f3e6c8; font-family:inherit; text-align:center;
+    transition:box-shadow .5s, background .5s, transform .25s;
+  }
+  .arch:active { transform:scale(.97); }
+  .arch .day { font-family:'Playfair Display', serif; color:#ffe9a8; font-size:19px; }
+  .arch .day span { display:block; font-size:13px; color:#e8c87e; margin-top:2px; }
+  .arch .ttl { font-size:19px; margin-top:10px; }
+  .arch .det { font-size:15px; font-style:italic; color:#cbb877; margin-top:6px; line-height:1.4; opacity:0; max-height:0; overflow:hidden; transition:opacity .6s, max-height .6s; }
+  .arch.lit {
+    background:linear-gradient(180deg,#ffe9a8,#e8c87e 60%,#c08a1e);
+    color:#1c1206;
+    box-shadow:0 0 36px 10px rgba(255,210,110,.5);
+  }
+  .arch.lit .day, .arch.lit .day span { color:#5c3a10; }
+  .arch.lit .det { opacity:1; max-height:120px; color:#5c3a10; }
+  .actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px; }
+  .btn {
+    font-family:'Playfair Display', serif; font-size:16px; letter-spacing:.04em;
+    padding:11px 20px; border-radius:999px; cursor:pointer; border:1px solid #d9a441;
+    text-decoration:none; display:inline-block;
+  }
+  .btn.gold { background:linear-gradient(180deg,#e9b949,#b98a1d); color:#1c1206; box-shadow:0 6px 16px rgba(0,0,0,.4); }
+  .btn.ghost { background:transparent; color:#ffe9a8; }
+  .btn:active { transform:scale(.97); }
+  #rsvp { margin-top:18px; border-top:1px dashed #a8842c; padding-top:16px; }
+  #rsvp h3 { font-family:'Playfair Display', serif; color:#ffe9a8; font-size:22px; margin-bottom:10px; }
+  #rsvp input, #rsvp select {
+    font-family:inherit; font-size:16px; padding:10px 12px; border:1px solid #d9a441;
+    border-radius:10px; background:#0a2a1a; color:#f3e6c8; width:100%; max-width:320px; margin-bottom:10px;
+  }
+  #rsvp input::placeholder { color:#9ab89a; }
+  .choice { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  #rsvpMsg { font-size:18px; font-style:italic; color:#b8e6a0; margin-top:6px; min-height:24px; }
+  .foot { text-align:center; font-size:14px; color:#cbb877; margin-top:20px; letter-spacing:.06em; }
+  .use-row { margin-top:18px; text-align:center; }
+  .use-row .btn { margin:4px; }
+  .hidden { display:none !important; }
+</style>
+</head>
+<body>
+  <canvas id="sky"></canvas>
+
+  <div class="topbar">
+    <button id="musicBtn" type="button" aria-label="Toggle music">&#9834; Music: Off</button>
+  </div>
+
+  <!-- PALACE COVER -->
+  <div id="cover">
+    <div class="mono">Anaya &amp; Kabir</div>
+    <div class="sub">Are Getting Married</div>
+    <div class="facade" id="facade">
+      <div class="win" aria-hidden="true"></div>
+      <div class="win tall" aria-hidden="true"><span class="dome"></span></div>
+      <div class="win" aria-hidden="true"></div>
+    </div>
+    <button id="enterBtn" type="button">Enter the Palace</button>
+  </div>
+
+  <main id="main" class="hidden">
+    <div class="card">
+      <div class="bismillah">بسم اللہ الرحمن الرحیم</div>
+      <div class="eyebrow">Together with their families</div>
+      <div class="names">Anaya <span class="amp">&amp;</span> Kabir</div>
+      <p class="invite-line">request the honour of your presence<br>at the celebration of their Nikah</p>
+
+      <div class="divider"><span>&#10022;</span></div>
+
+      <div class="date-big">Sunday, 20 June 2027</div>
+      <div class="venue">7:00 PM onwards &middot; Emerald Court, Karachi</div>
+      <div class="dress">Dress Code &middot; Emerald &amp; Gold</div>
+
+      <div class="divider"><span>&hearts;</span></div>
+
+      <div class="count" id="countdown" aria-label="Countdown">
+        <div class="box"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
+        <div class="box"><div class="num" id="cd-h">--</div><div class="lbl">Hours</div></div>
+        <div class="box"><div class="num" id="cd-m">--</div><div class="lbl">Mins</div></div>
+        <div class="box"><div class="num" id="cd-s">--</div><div class="lbl">Secs</div></div>
+      </div>
+
+      <div class="events">
+        <button class="arch" type="button" aria-label="Nikah arch">
+          <div class="day">Sun 20 Jun<span>7:00 PM</span></div>
+          <div class="ttl">Nikah Ceremony</div>
+          <div class="det">Arrival of the groom, followed by dinner under the palace lights</div>
+        </button>
+        <button class="arch" type="button" aria-label="Walima arch">
+          <div class="day">Mon 21 Jun<span>1:00 PM</span></div>
+          <div class="ttl">Walima Reception</div>
+          <div class="det">Lunch &amp; blessings with family and friends</div>
+        </button>
+      </div>
+
+      <div class="actions">
+        <button class="btn gold" id="rsvpBtn" type="button">RSVP Now</button>
+        <button class="btn ghost" id="calBtn" type="button">Add to Calendar</button>
+      </div>
+
+      <div id="rsvp" class="hidden">
+        <h3>Will you join us?</h3>
+        <input id="guestName" type="text" placeholder="Your name" maxlength="40" aria-label="Your name">
+        <select id="guestCount" aria-label="Number of guests">
+          <option value="1">1 guest</option>
+          <option value="2" selected>2 guests</option>
+          <option value="3">3 guests</option>
+          <option value="4">4 guests</option>
+          <option value="5">5+ guests</option>
+        </select>
+        <div class="choice">
+          <button class="btn gold" id="attendYes" type="button">Joyfully Accepts</button>
+          <button class="btn ghost" id="attendNo" type="button">Regretfully Declines</button>
+        </div>
+        <div id="rsvpMsg"></div>
+      </div>
+    </div>
+    <div class="use-row">
+      <a class="btn gold" href="../builder.html?template=emerald-palace">Use this template</a>
+      <a class="btn ghost" href="../index.html#templates">All templates</a>
+    </div>
+    <div class="foot">Anaya &hearts; Kabir &middot; 20 . 06 . 2027 &middot; Demo invitation — no video, only code</div>
+  </main>
+<script>
+(function () {
+  "use strict";
+  var canvas = document.getElementById("sky");
+  var ctx = canvas.getContext("2d");
+  var W = 0, H = 0, DPR = 1;
+  var flecks = [], parts = [];
+  var audioCtx = null, musicOn = false, musicTimer = null;
+  var NOTE_SEQ = [392.0, 440.0, 523.25, 587.33, 659.25, 587.33, 523.25, 440.0];
+  var noteIdx = 0;
+
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    canvas.style.width = W + "px"; canvas.style.height = H + "px";
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  /* ---------- drifting gold flecks ---------- */
+  function seedFlecks() {
+    flecks = [];
+    for (var i = 0; i < 14; i++) {
+      flecks.push({ x: rand(0, W), y: rand(0, H), s: rand(2, 4.5), vy: rand(0.15, 0.45), sway: rand(0, 6.28), tw: rand(0, 6.28), rot: rand(0, 6.28), color: pick(["#ffe9a8", "#ffd700", "#d9a441"]) });
+    }
+  }
+  seedFlecks();
+
+  function burst(x, y) {
+    for (var i = 0; i < 12; i++) {
+      parts.push({
+        x: x, y: y,
+        vx: rand(-1.8, 1.8), vy: rand(-2.6, -0.4),
+        life: 1, decay: rand(0.012, 0.025),
+        size: rand(2.5, 6),
+        color: pick(["#ffe9a8", "#ffd700", "#fff8d6", "#ffb347"])
+      });
+    }
+  }
+  function updateParts() {
+    for (var i = parts.length - 1; i >= 0; i--) {
+      var p = parts[i];
+      p.life -= p.decay;
+      if (p.life <= 0) { parts.splice(i, 1); continue; }
+      p.x += p.vx; p.y += p.vy;
+      p.vy += 0.02;
+      p.vx *= 0.985;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, p.life);
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+      ctx.globalAlpha = 1;
+    }
+    for (var j = 0; j < flecks.length; j++) {
+      var f = flecks[j];
+      f.y += f.vy;
+      f.sway += 0.012;
+      f.tw += 0.04;
+      f.rot += 0.01;
+      f.x += Math.sin(f.sway) * 0.4;
+      if (f.y > H + 8) { f.y = -8; f.x = rand(0, W); }
+      ctx.save();
+      ctx.translate(f.x, f.y);
+      ctx.rotate(f.rot);
+      ctx.globalAlpha = 0.35 + Math.abs(Math.sin(f.tw)) * 0.55;
+      ctx.fillStyle = f.color;
+      ctx.fillRect(-f.s / 2, -f.s / 4, f.s, f.s / 2);
+      ctx.restore();
+      ctx.globalAlpha = 1;
+    }
+  }
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    updateParts();
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+
+  /* ---------- audio (created only after a tap) ---------- */
+  function ensureAudio() {
+    if (!audioCtx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) audioCtx = new AC();
+    }
+    if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+    return audioCtx;
+  }
+  function tone(freq, dur, type, vol, when) {
+    if (!ensureAudio()) return;
+    var t = audioCtx.currentTime + (when || 0);
+    var o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    o.type = type || "sine";
+    o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.12, t + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(t); o.stop(t + dur + 0.05);
+  }
+  function chime() {
+    tone(392.0, 0.5, "triangle", 0.12, 0);
+    tone(523.25, 0.5, "triangle", 0.12, 0.14);
+    tone(659.25, 0.8, "triangle", 0.10, 0.28);
+  }
+  function musicStep() {
+    if (!musicOn) return;
+    var f = NOTE_SEQ[noteIdx % NOTE_SEQ.length];
+    noteIdx++;
+    tone(f, 0.7, "triangle", 0.05, 0);
+    if (noteIdx % 4 === 0) tone(f / 2, 0.9, "sine", 0.04, 0);
+  }
+  var musicBtn = document.getElementById("musicBtn");
+  musicBtn.addEventListener("click", function () {
+    ensureAudio();
+    musicOn = !musicOn;
+    musicBtn.innerHTML = musicOn ? "&#9834; Music: On" : "&#9834; Music: Off";
+    if (musicOn) { musicStep(); musicTimer = setInterval(musicStep, 480); }
+    else if (musicTimer) { clearInterval(musicTimer); musicTimer = null; }
+  });
+
+  /* ---------- cover: palace windows light up, then cover lifts ---------- */
+  var cover = document.getElementById("cover");
+  var main = document.getElementById("main");
+  var wins = document.querySelectorAll("#facade .win");
+  document.getElementById("enterBtn").addEventListener("click", function () {
+    chime();
+    wins.forEach(function (w, i) {
+      setTimeout(function () { w.classList.add("lit"); }, i * 220);
+    });
+    burst(W / 2, H * 0.4);
+    setTimeout(function () {
+      cover.classList.add("opened");
+      main.classList.remove("hidden");
+    }, 1100);
+    setTimeout(function () { cover.style.display = "none"; }, 2400);
+  });
+
+  /* ---------- signature: tap an arch to light it in gold ---------- */
+  var arches = document.querySelectorAll(".arch");
+  arches.forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var r = a.getBoundingClientRect();
+      var lit = a.classList.toggle("lit");
+      if (lit) {
+        burst(r.left + r.width / 2, r.top + r.height / 2);
+        tone(1046.5, 0.3, "sine", 0.07, 0);
+        tone(1318.5, 0.35, "sine", 0.06, 0.08);
+      }
+      e.stopPropagation();
+    });
+  });
+
+  /* ---------- countdown ---------- */
+  var target = new Date("2027-06-20T19:00:00+05:00").getTime();
+  function tick() {
+    var diff = Math.max(0, target - Date.now());
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor(diff / 3600000) % 24;
+    var m = Math.floor(diff / 60000) % 60;
+    var s = Math.floor(diff / 1000) % 60;
+    document.getElementById("cd-d").textContent = d;
+    document.getElementById("cd-h").textContent = (h < 10 ? "0" : "") + h;
+    document.getElementById("cd-m").textContent = (m < 10 ? "0" : "") + m;
+    document.getElementById("cd-s").textContent = (s < 10 ? "0" : "") + s;
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ---------- RSVP ---------- */
+  document.getElementById("rsvpBtn").addEventListener("click", function () {
+    var r = document.getElementById("rsvp");
+    r.classList.toggle("hidden");
+    if (!r.classList.contains("hidden")) document.getElementById("guestName").focus();
+  });
+  function rsvp(attending) {
+    var name = document.getElementById("guestName").value.trim();
+    var count = document.getElementById("guestCount").value;
+    var msg = document.getElementById("rsvpMsg");
+    try {
+      var saved = JSON.parse(localStorage.getItem("demo-rsvp-emerald-palace") || "[]");
+      saved.push({ name: name, count: count, attending: attending, at: Date.now() });
+      localStorage.setItem("demo-rsvp-emerald-palace", JSON.stringify(saved));
+    } catch (err) { /* private mode: ignore */ }
+    if (attending) {
+      msg.textContent = name
+        ? "Shukriya, " + name + "! " + count + " guest(s) noted — hum intezaar karenge."
+        : "Shukriya! " + count + " guest(s) noted — hum intezaar karenge.";
+      burst(window.innerWidth / 2, window.innerHeight * 0.5);
+      chime();
+    } else {
+      msg.textContent = name
+        ? "Shukriya, " + name + " — aapki duaen hamare saath hain."
+        : "Shukriya — aapki duaen hamare saath hain.";
+    }
+  }
+  document.getElementById("attendYes").addEventListener("click", function () { rsvp(true); });
+  document.getElementById("attendNo").addEventListener("click", function () { rsvp(false); });
+
+  /* ---------- add to calendar (.ics) ---------- */
+  document.getElementById("calBtn").addEventListener("click", function () {
+    var ics = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Demo Invitation//EN",
+      "BEGIN:VEVENT", "UID:anaya-kabir-nikah@demo",
+      "DTSTAMP:20261124T000000Z",
+      "DTSTART:20270620T140000Z", "DTEND:20270620T180000Z",
+      "SUMMARY:Anaya & Kabir — Nikah",
+      "LOCATION:Emerald Court\\, Karachi",
+      "DESCRIPTION:Nikah ceremony of Anaya & Kabir.",
+      "END:VEVENT", "END:VCALENDAR"
+    ].join("\r\n");
+    var blob = new Blob([ics], { type: "text/calendar" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Anaya-Kabir-Nikah.ics";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  });
+})();
+</script>
+</body>
+</html>

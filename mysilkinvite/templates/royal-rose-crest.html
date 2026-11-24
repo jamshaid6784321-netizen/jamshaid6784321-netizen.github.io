@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Amina &amp; Tariq — Royal Rose Crest Invitation (Demo)</title>
+<meta name="description" content="Demo: Royal Rose Crest wedding invitation. A wax seal breaks open to reveal the couple's shimmering monogram crest. HTML/CSS/JS only, no video.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@500;600&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { height:100%; }
+  body {
+    font-family:'Cormorant Garamond', Georgia, serif;
+    color:#5c2e35;
+    background:linear-gradient(180deg,#f6d3d8 0%,#f9e4e6 45%,#fff6ec 100%);
+    background-attachment:fixed;
+    overflow-x:hidden; min-height:100vh;
+  }
+  .topbar {
+    position:fixed; top:0; left:0; right:0; z-index:7;
+    display:flex; justify-content:flex-end; align-items:center;
+    padding:10px 14px; pointer-events:none;
+  }
+  .topbar button {
+    pointer-events:auto; background:rgba(255,246,236,.92); border:1px solid #b76e79;
+    color:#8e4a54; font-size:14px; padding:6px 12px; border-radius:999px; cursor:pointer;
+    font-family:inherit;
+  }
+  main { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; padding:64px 14px 60px; }
+
+  /* ---------- COVER: wax seal ---------- */
+  #cover {
+    position:fixed; inset:0; z-index:10; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:20px 14px;
+    background:linear-gradient(180deg,#f6d3d8 0%,#eeb9c2 55%,#d98a96 100%);
+    transition:transform 1.2s ease-in-out, opacity 1.2s ease-in-out;
+  }
+  #cover.opened { transform:translateY(-102%); opacity:0; pointer-events:none; }
+  #cover .mono { font-family:'Great Vibes', cursive; font-size:clamp(44px,11vw,84px); color:#6e2f3c; line-height:1.05; text-shadow:0 2px 16px rgba(255,255,255,.6); }
+  #cover .sub { letter-spacing:.35em; text-transform:uppercase; font-size:13px; color:#8e4a54; margin:12px 0 26px; }
+  .seal-wrap { position:relative; width:190px; height:190px; margin:0 auto; }
+  .seal {
+    position:absolute; inset:0; border:none; cursor:pointer; padding:0;
+    border-radius:48% 52% 50% 50%/52% 48% 52% 48%;
+    background:radial-gradient(circle at 38% 32%, #9a4a5a, #6e2f3c 55%, #4a1e26);
+    box-shadow:0 10px 30px rgba(60,10,25,.5), inset 0 2px 6px rgba(255,255,255,.25), inset 0 -4px 10px rgba(0,0,0,.35);
+    transition:transform .5s ease, opacity .5s ease;
+  }
+  .seal::before {
+    content:""; position:absolute; inset:16px;
+    border:2px solid rgba(201,162,39,.85); border-radius:50%;
+  }
+  .seal span {
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display', serif; font-size:44px; letter-spacing:.04em; color:#e6c87a;
+    text-shadow:0 1px 4px rgba(0,0,0,.4);
+  }
+  .seal .crack {
+    position:absolute; inset:0; pointer-events:none; opacity:0;
+  }
+  .seal .crack path { stroke:#3a141c; stroke-width:2.5; fill:none; stroke-linecap:round; }
+  .seal-wrap.broken .seal { transform:scale(1.12) rotate(-4deg); opacity:0; }
+  .seal-wrap.broken .seal .crack { opacity:1; }
+  .seal-wrap.broken .seal-half.left { transform:translate(-46px, 10px) rotate(-24deg); opacity:0; }
+  .seal-wrap.broken .seal-half.right { transform:translate(46px, -8px) rotate(22deg); opacity:0; }
+  .seal-half {
+    position:absolute; top:0; bottom:0; width:50%; overflow:hidden; pointer-events:none;
+    transition:transform .7s ease, opacity .7s ease;
+  }
+  .seal-half.left { left:0; }
+  .seal-half.right { right:0; }
+  .seal-half i {
+    position:absolute; top:0; width:190px; height:190px;
+    border-radius:48% 52% 50% 50%/52% 48% 52% 48%;
+    background:radial-gradient(circle at 38% 32%, #9a4a5a, #6e2f3c 55%, #4a1e26);
+  }
+  .seal-half.left i { left:0; }
+  .seal-half.right i { right:-95px; }
+  /* the crest revealed beneath the seal */
+  .crest {
+    position:absolute; inset:8px; border-radius:50%; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; opacity:0; transform:scale(.7);
+    background:radial-gradient(circle at 50% 35%, #fffdf8, #f6d3d8 70%, #e8a0b0);
+    border:3px solid #c9a227;
+    box-shadow:0 0 0 6px rgba(255,253,248,.8), 0 0 34px rgba(201,162,39,.7);
+    transition:opacity .7s ease .15s, transform .7s ease .15s;
+    overflow:hidden;
+  }
+  .crest::after {
+    content:""; position:absolute; inset:-40%;
+    background:linear-gradient(115deg, transparent 42%, rgba(255,255,255,.85) 50%, transparent 58%);
+    animation:shimmer 2.4s ease-in-out infinite;
+  }
+  @keyframes shimmer { 0% { transform:translateX(-60%); } 60%,100% { transform:translateX(60%); } }
+  .crest .mono2 { font-family:'Great Vibes', cursive; font-size:52px; color:#6e2f3c; line-height:1; position:relative; z-index:1; }
+  .crest .rose { font-size:20px; color:#b76e79; position:relative; z-index:1; }
+  .seal-wrap.broken .crest { opacity:1; transform:scale(1); }
+
+  /* ---------- CARD ---------- */
+  .card {
+    width:100%; max-width:560px; background:rgba(255,246,236,.97);
+    border:1px solid #b76e79; border-radius:18px;
+    box-shadow:0 24px 60px rgba(90,20,40,.3), inset 0 0 0 6px #fffdf8, inset 0 0 0 7px #e8a0b0;
+    padding:34px 22px 26px; text-align:center; position:relative; overflow:hidden;
+  }
+  /* crest watermark behind sections */
+  .card::after {
+    content:"A\00a0\2022\00a0T"; position:absolute; right:-30px; bottom:-46px;
+    font-family:'Playfair Display', serif; font-size:150px; color:rgba(183,110,121,.08);
+    pointer-events:none; line-height:1;
+  }
+  .bismillah { font-family:'Noto Nastaliq Urdu', serif; font-size:26px; color:#a05a66; line-height:2; position:relative; }
+  .eyebrow { letter-spacing:.32em; text-transform:uppercase; font-size:12px; color:#b76e79; margin:10px 0 4px; position:relative; }
+  .names { font-family:'Great Vibes', cursive; font-size:clamp(46px,12vw,72px); color:#6e2f3c; line-height:1.15; margin:6px 0 2px; position:relative; }
+  .names .amp { color:#b76e79; font-size:.7em; }
+  .invite-line { font-size:19px; font-style:italic; color:#7a4a52; margin:10px 0 4px; position:relative; }
+  .date-big { font-family:'Playfair Display', serif; font-size:22px; letter-spacing:.08em; color:#6b3240; margin-top:14px; position:relative; }
+  .venue { font-size:18px; color:#7a4a52; margin-top:4px; position:relative; }
+  .dress { font-size:15px; letter-spacing:.14em; text-transform:uppercase; color:#b76e79; margin-top:8px; position:relative; }
+  .divider { display:flex; align-items:center; gap:10px; margin:18px auto; max-width:340px; color:#b76e79; position:relative; }
+  .divider::before,.divider::after { content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,#b76e79,transparent); }
+  .divider span { font-size:18px; }
+  .crest-mini {
+    width:74px; height:74px; margin:0 auto 4px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:radial-gradient(circle at 50% 35%, #fffdf8, #f6d3d8 70%, #e8a0b0);
+    border:2px solid #c9a227; box-shadow:0 0 0 4px rgba(255,253,248,.8), 0 4px 14px rgba(110,47,60,.25);
+    font-family:'Great Vibes', cursive; font-size:30px; color:#6e2f3c; position:relative; overflow:hidden;
+  }
+  .crest-mini::after {
+    content:""; position:absolute; inset:-40%;
+    background:linear-gradient(115deg, transparent 42%, rgba(255,255,255,.8) 50%, transparent 58%);
+    animation:shimmer 3s ease-in-out infinite;
+  }
+
+  /* countdown */
+  .count { display:flex; justify-content:center; gap:10px; margin:6px 0 2px; position:relative; }
+  .count .box { background:#fff5f7; border:1px solid #e8a0b0; border-radius:12px; min-width:64px; padding:10px 6px; }
+  .count .num { font-family:'Playfair Display', serif; font-size:26px; color:#6e2f3c; }
+  .count .lbl { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#b76e79; }
+
+  /* timeline */
+  .events { text-align:left; margin:10px auto 0; max-width:420px; position:relative; }
+  .event { display:flex; gap:12px; padding:12px 6px; border-top:1px dashed #d9a0aa; }
+  .event:last-child { border-bottom:1px dashed #d9a0aa; }
+  .event .day { font-family:'Playfair Display', serif; color:#6e2f3c; min-width:86px; }
+  .event .day b { display:block; font-size:20px; }
+  .event .day span { font-size:13px; color:#b76e79; }
+  .event p { font-size:17px; line-height:1.45; }
+  .event p small { display:block; font-size:14px; color:#a06a72; font-style:italic; }
+
+  /* buttons */
+  .actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px; position:relative; }
+  .btn {
+    font-family:'Playfair Display', serif; font-size:16px; letter-spacing:.04em;
+    padding:11px 20px; border-radius:999px; cursor:pointer; border:1px solid #b76e79;
+    text-decoration:none; display:inline-block;
+  }
+  .btn.gold { background:linear-gradient(180deg,#d98a9b,#b76e79); color:#fff; box-shadow:0 6px 16px rgba(140,60,80,.35); }
+  .btn.ghost { background:transparent; color:#6e2f3c; }
+  .btn:active { transform:scale(.97); }
+
+  /* RSVP */
+  #rsvp { margin-top:18px; border-top:1px dashed #d9a0aa; padding-top:16px; position:relative; }
+  #rsvp h3 { font-family:'Playfair Display', serif; color:#6e2f3c; font-size:22px; margin-bottom:10px; }
+  #rsvp input, #rsvp select {
+    font-family:inherit; font-size:16px; padding:10px 12px; border:1px solid #d9a0aa;
+    border-radius:10px; background:#fff; color:#5c2e35; width:100%; max-width:320px; margin-bottom:10px;
+  }
+  .choice { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  #rsvpMsg { font-size:18px; font-style:italic; color:#6e2f3c; margin-top:6px; min-height:24px; }
+
+  .foot {
+    text-align:center; font-size:14px; color:#f6d3d8; margin-top:20px; letter-spacing:.06em;
+    background:#6e2f3c; padding:14px 18px; border-radius:12px; max-width:560px; width:100%;
+  }
+  .use-row { margin-top:18px; text-align:center; }
+  .use-row .btn { margin:4px; }
+  .hidden { display:none !important; }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <button id="musicBtn" type="button" aria-label="Toggle music">&#9834; Music: Off</button>
+  </div>
+
+  <!-- COVER: wax seal -->
+  <div id="cover">
+    <div class="mono">Amina &amp; Tariq</div>
+    <div class="sub">Are Getting Married</div>
+    <div class="seal-wrap" id="sealWrap">
+      <div class="crest" aria-hidden="true">
+        <div class="mono2">A &amp; T</div>
+        <div class="rose">&#10086;</div>
+      </div>
+      <div class="seal-half left"><i></i></div>
+      <div class="seal-half right"><i></i></div>
+      <button class="seal" id="sealBtn" type="button" aria-label="Wax seal">
+        <span>A &amp; T</span>
+        <svg class="crack" viewBox="0 0 190 190" aria-hidden="true">
+          <path d="M95 8 L 88 60 L 102 96 L 86 140 L 96 182"/>
+          <path d="M102 96 L 128 118 L 150 112"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <main id="main" class="hidden">
+    <div class="card">
+      <div class="crest-mini">A &amp; T</div>
+      <div class="bismillah">بسم اللہ الرحمن الرحیم</div>
+      <div class="eyebrow">Together with their families</div>
+      <div class="names">Amina <span class="amp">&amp;</span> Tariq</div>
+      <p class="invite-line">request the honour of your presence<br>at the celebration of their Nikah</p>
+
+      <div class="divider"><span>&#10022;</span></div>
+
+      <div class="date-big">Sunday, 23 May 2027</div>
+      <div class="venue">7:00 PM onwards &middot; Crestwood Palace, Lahore</div>
+      <div class="dress">Dress Code &middot; Shades of Blush &amp; Rose Gold</div>
+
+      <div class="divider"><span>&hearts;</span></div>
+
+      <div class="count" id="countdown" aria-label="Countdown">
+        <div class="box"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
+        <div class="box"><div class="num" id="cd-h">--</div><div class="lbl">Hours</div></div>
+        <div class="box"><div class="num" id="cd-m">--</div><div class="lbl">Mins</div></div>
+        <div class="box"><div class="num" id="cd-s">--</div><div class="lbl">Secs</div></div>
+      </div>
+
+      <div class="events">
+        <div class="event">
+          <div class="day"><b>Sun 23 May</b><span>7:00 PM</span></div>
+          <p>Nikah Ceremony<small>Arrival of the groom, followed by dinner</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Mon 24 May</b><span>1:00 PM</span></div>
+          <p>Walima Reception<small>Lunch &amp; blessings with family and friends</small></p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn gold" id="rsvpBtn" type="button">RSVP Now</button>
+        <button class="btn ghost" id="calBtn" type="button">Add to Calendar</button>
+      </div>
+
+      <div id="rsvp" class="hidden">
+        <h3>Will you join us?</h3>
+        <input id="guestName" type="text" placeholder="Your name" maxlength="40" aria-label="Your name">
+        <select id="guestCount" aria-label="Number of guests">
+          <option value="1">1 guest</option>
+          <option value="2" selected>2 guests</option>
+          <option value="3">3 guests</option>
+          <option value="4">4 guests</option>
+          <option value="5">5+ guests</option>
+        </select>
+        <div class="choice">
+          <button class="btn gold" id="attendYes" type="button">Joyfully Accepts</button>
+          <button class="btn ghost" id="attendNo" type="button">Regretfully Declines</button>
+        </div>
+        <div id="rsvpMsg"></div>
+      </div>
+    </div>
+    <div class="use-row">
+      <a class="btn gold" href="../builder.html?template=royal-rose-crest">Use this template</a>
+      <a class="btn ghost" href="../index.html#templates">All templates</a>
+    </div>
+    <div class="foot">Amina &hearts; Tariq &middot; 23 . 05 . 2027 &middot; Demo invitation — no video, only code</div>
+  </main>
+<script>
+(function () {
+  "use strict";
+  var audioCtx = null, musicOn = false, musicTimer = null;
+  var NOTE_SEQ = [523.25, 587.33, 659.25, 783.99, 880.0, 783.99, 659.25, 587.33];
+  var noteIdx = 0;
+
+  /* ---------- audio (created only after a tap) ---------- */
+  function ensureAudio() {
+    if (!audioCtx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) audioCtx = new AC();
+    }
+    if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+    return audioCtx;
+  }
+  function tone(freq, dur, type, vol, when) {
+    if (!ensureAudio()) return;
+    var t = audioCtx.currentTime + (when || 0);
+    var o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    o.type = type || "sine";
+    o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.12, t + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(t); o.stop(t + dur + 0.05);
+  }
+  function chime() {
+    tone(659.25, 0.5, "triangle", 0.12, 0);
+    tone(783.99, 0.5, "triangle", 0.12, 0.14);
+    tone(1046.5, 0.8, "triangle", 0.10, 0.28);
+  }
+  function crackSound() {
+    tone(180, 0.12, "sawtooth", 0.05, 0);
+    tone(120, 0.18, "sawtooth", 0.04, 0.05);
+  }
+  function musicStep() {
+    if (!musicOn) return;
+    var f = NOTE_SEQ[noteIdx % NOTE_SEQ.length];
+    noteIdx++;
+    tone(f, 0.7, "triangle", 0.05, 0);
+    if (noteIdx % 4 === 0) tone(f / 2, 0.9, "sine", 0.04, 0);
+  }
+  var musicBtn = document.getElementById("musicBtn");
+  musicBtn.addEventListener("click", function () {
+    ensureAudio();
+    musicOn = !musicOn;
+    musicBtn.innerHTML = musicOn ? "&#9834; Music: On" : "&#9834; Music: Off";
+    if (musicOn) { musicStep(); musicTimer = setInterval(musicStep, 480); }
+    else if (musicTimer) { clearInterval(musicTimer); musicTimer = null; }
+  });
+
+  /* ---------- wax seal breaks, crest shimmers ---------- */
+  var cover = document.getElementById("cover");
+  var main = document.getElementById("main");
+  var sealWrap = document.getElementById("sealWrap");
+  var sealed = true;
+  document.getElementById("sealBtn").addEventListener("click", function () {
+    if (!sealed) return;
+    sealed = false;
+    crackSound();
+    sealWrap.classList.add("broken");
+    setTimeout(function () {
+      chime();
+      cover.classList.add("opened");
+      main.classList.remove("hidden");
+    }, 1000);
+    setTimeout(function () { cover.style.display = "none"; }, 2300);
+  });
+
+  /* ---------- countdown ---------- */
+  var target = new Date("2027-05-23T19:00:00+05:00").getTime();
+  function tick() {
+    var diff = Math.max(0, target - Date.now());
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor(diff / 3600000) % 24;
+    var m = Math.floor(diff / 60000) % 60;
+    var s = Math.floor(diff / 1000) % 60;
+    document.getElementById("cd-d").textContent = d;
+    document.getElementById("cd-h").textContent = (h < 10 ? "0" : "") + h;
+    document.getElementById("cd-m").textContent = (m < 10 ? "0" : "") + m;
+    document.getElementById("cd-s").textContent = (s < 10 ? "0" : "") + s;
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ---------- RSVP ---------- */
+  document.getElementById("rsvpBtn").addEventListener("click", function () {
+    var r = document.getElementById("rsvp");
+    r.classList.toggle("hidden");
+    if (!r.classList.contains("hidden")) document.getElementById("guestName").focus();
+  });
+  function rsvp(attending) {
+    var name = document.getElementById("guestName").value.trim();
+    var count = document.getElementById("guestCount").value;
+    var msg = document.getElementById("rsvpMsg");
+    try {
+      var saved = JSON.parse(localStorage.getItem("demo-rsvp-royal-rose-crest") || "[]");
+      saved.push({ name: name, count: count, attending: attending, at: Date.now() });
+      localStorage.setItem("demo-rsvp-royal-rose-crest", JSON.stringify(saved));
+    } catch (err) { /* private mode: ignore */ }
+    if (attending) {
+      msg.textContent = name
+        ? "Shukriya, " + name + "! " + count + " guest(s) noted — hum intezaar karenge."
+        : "Shukriya! " + count + " guest(s) noted — hum intezaar karenge.";
+      chime();
+    } else {
+      msg.textContent = name
+        ? "Shukriya, " + name + " — aapki duaen hamare saath hain."
+        : "Shukriya — aapki duaen hamare saath hain.";
+    }
+  }
+  document.getElementById("attendYes").addEventListener("click", function () { rsvp(true); });
+  document.getElementById("attendNo").addEventListener("click", function () { rsvp(false); });
+
+  /* ---------- add to calendar (.ics) ---------- */
+  document.getElementById("calBtn").addEventListener("click", function () {
+    var ics = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Demo Invitation//EN",
+      "BEGIN:VEVENT", "UID:amina-tariq-nikah@demo",
+      "DTSTAMP:20261124T000000Z",
+      "DTSTART:20270523T140000Z", "DTEND:20270523T180000Z",
+      "SUMMARY:Amina & Tariq — Nikah",
+      "LOCATION:Crestwood Palace\\, Lahore",
+      "DESCRIPTION:Nikah ceremony of Amina & Tariq.",
+      "END:VEVENT", "END:VCALENDAR"
+    ].join("\r\n");
+    var blob = new Blob([ics], { type: "text/calendar" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Amina-Tariq-Nikah.ics";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  });
+})();
+</script>
+</body>
+</html>

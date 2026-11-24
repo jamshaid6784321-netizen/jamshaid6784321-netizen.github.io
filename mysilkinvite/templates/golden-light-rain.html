@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Noor &amp; Zain — Golden Light Rain Invitation (Demo)</title>
+<meta name="description" content="Demo: Golden Light Rain wedding invitation. A near-empty blush field, oversized script names and drifting golden light. HTML/CSS/JS only, no video.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@500;600&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { height:100%; }
+  body {
+    font-family:'Cormorant Garamond', Georgia, serif;
+    color:#6b4a50;
+    background:linear-gradient(180deg,#fbe9ec 0%,#fdf3f4 45%,#ffffff 100%);
+    background-attachment:fixed;
+    overflow-x:hidden; min-height:100vh;
+  }
+  #light { position:fixed; inset:0; z-index:1; pointer-events:none; }
+  .topbar {
+    position:fixed; top:0; left:0; right:0; z-index:7;
+    display:flex; justify-content:flex-end; align-items:center;
+    padding:10px 14px; pointer-events:none;
+  }
+  .topbar button {
+    pointer-events:auto; background:rgba(255,255,255,.9); border:1px solid #d4a0a7;
+    color:#8e5a62; font-size:14px; padding:6px 12px; border-radius:999px; cursor:pointer;
+    font-family:inherit;
+  }
+  main { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; padding:64px 14px 60px; }
+
+  /* ---------- COVER: near-empty blush field ---------- */
+  #cover {
+    position:fixed; inset:0; z-index:10; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:20px 14px;
+    background:linear-gradient(180deg,#fbe9ec 0%,#fdf6f7 60%,#ffffff 100%);
+    transition:transform 1.2s ease-in-out, opacity 1.2s ease-in-out;
+  }
+  #cover.opened { transform:translateY(-102%); opacity:0; pointer-events:none; }
+  #cover .mono { font-family:'Great Vibes', cursive; font-size:clamp(56px,14vw,110px); color:#a06a72; line-height:1.05; }
+  #cover .rule { width:120px; height:1px; background:#d4af37; margin:22px auto; }
+  #cover .sub { letter-spacing:.4em; text-transform:uppercase; font-size:12px; color:#b76e79; }
+  #openBtn {
+    margin-top:30px; padding:13px 30px; border-radius:999px; cursor:pointer;
+    border:1px solid #d4af37; font-family:'Playfair Display', serif; font-size:17px; letter-spacing:.06em;
+    background:linear-gradient(180deg,#e9b949,#c08a1e); color:#fff;
+    box-shadow:0 8px 22px rgba(150,100,40,.3); animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.05); } }
+
+  /* ---------- CARD ---------- */
+  .card {
+    width:100%; max-width:560px; background:rgba(255,255,255,.96);
+    border:1px solid #e8c9cd; border-radius:6px;
+    box-shadow:0 18px 50px rgba(140,80,90,.18);
+    padding:40px 22px 26px; text-align:center; position:relative;
+  }
+  .bismillah { font-family:'Noto Nastaliq Urdu', serif; font-size:26px; color:#a06a72; line-height:2; }
+  .eyebrow { letter-spacing:.32em; text-transform:uppercase; font-size:12px; color:#d4a0a7; margin:10px 0 4px; }
+  .names { font-family:'Great Vibes', cursive; font-size:clamp(58px,15vw,96px); color:#a06a72; line-height:1.1; margin:6px 0 2px; }
+  .names .amp { color:#d4a0a7; font-size:.7em; }
+  .rule { width:1px; height:44px; background:#d4af37; margin:16px auto; }
+  .invite-line { font-size:19px; font-style:italic; color:#7a5a60; margin:4px 0; }
+  .date-big { font-family:'Playfair Display', serif; font-size:22px; letter-spacing:.08em; color:#6b4a50; margin-top:14px; }
+  .venue { font-size:18px; color:#7a5a60; margin-top:4px; }
+  .dress { font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#d4a0a7; margin-top:8px; }
+  .divider { display:flex; align-items:center; gap:10px; margin:18px auto; max-width:340px; color:#d4a0a7; }
+  .divider::before,.divider::after { content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,#d4a0a7,transparent); }
+  .divider span { font-size:18px; }
+
+  /* countdown in small caps */
+  .count { display:flex; justify-content:center; gap:14px; margin:6px 0 2px; }
+  .count .box { min-width:58px; padding:8px 4px; }
+  .count .num { font-family:'Cormorant Garamond', serif; font-size:30px; color:#a06a72; font-variant-numeric:tabular-nums; }
+  .count .lbl { font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:#d4a0a7; }
+
+  /* timeline */
+  .events { text-align:left; margin:10px auto 0; max-width:420px; }
+  .event { display:flex; gap:12px; padding:12px 6px; border-top:1px solid #f0d5d8; }
+  .event:last-child { border-bottom:1px solid #f0d5d8; }
+  .event .day { font-family:'Playfair Display', serif; color:#a06a72; min-width:86px; }
+  .event .day b { display:block; font-size:20px; }
+  .event .day span { font-size:13px; color:#d4a0a7; }
+  .event p { font-size:17px; line-height:1.45; }
+  .event p small { display:block; font-size:14px; color:#a06a72; font-style:italic; }
+
+  /* buttons */
+  .actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px; }
+  .btn {
+    font-family:'Playfair Display', serif; font-size:16px; letter-spacing:.04em;
+    padding:11px 20px; border-radius:999px; cursor:pointer; border:1px solid #d4a0a7;
+    text-decoration:none; display:inline-block;
+  }
+  .btn.gold { background:linear-gradient(180deg,#e9b949,#c08a1e); color:#fff; box-shadow:0 6px 16px rgba(150,100,40,.3); }
+  .btn.ghost { background:transparent; color:#a06a72; }
+  .btn:active { transform:scale(.97); }
+
+  /* RSVP */
+  #rsvp { margin-top:18px; border-top:1px solid #f0d5d8; padding-top:16px; }
+  #rsvp h3 { font-family:'Playfair Display', serif; color:#a06a72; font-size:22px; margin-bottom:10px; }
+  #rsvp input, #rsvp select {
+    font-family:inherit; font-size:16px; padding:10px 12px; border:1px solid #e8c9cd;
+    border-radius:10px; background:#fff; color:#6b4a50; width:100%; max-width:320px; margin-bottom:10px;
+  }
+  .choice { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  #rsvpMsg { font-size:18px; font-style:italic; color:#a06a72; margin-top:6px; min-height:24px; }
+
+  .foot { text-align:center; font-size:14px; color:#a06a72; margin-top:20px; letter-spacing:.06em; }
+  .use-row { margin-top:18px; text-align:center; }
+  .use-row .btn { margin:4px; }
+  .hidden { display:none !important; }
+</style>
+</head>
+<body>
+  <canvas id="light"></canvas>
+
+  <div class="topbar">
+    <button id="musicBtn" type="button" aria-label="Toggle music">&#9834; Music: Off</button>
+  </div>
+
+  <!-- COVER -->
+  <div id="cover">
+    <div class="mono">Noor &amp; Zain</div>
+    <div class="rule"></div>
+    <div class="sub">Are Getting Married</div>
+    <button id="openBtn" type="button">Open the Invitation</button>
+  </div>
+
+  <main id="main" class="hidden">
+    <div class="card">
+      <div class="bismillah">بسم اللہ الرحمن الرحیم</div>
+      <div class="eyebrow">Together with their families</div>
+      <div class="names">Noor <span class="amp">&amp;</span> Zain</div>
+      <div class="rule"></div>
+      <p class="invite-line">request the honour of your presence<br>at the celebration of their Nikah</p>
+
+      <div class="date-big">Sunday, 2 May 2027</div>
+      <div class="venue">7:00 PM onwards &middot; Blush Garden Hall, Lahore</div>
+      <div class="dress">Dress Code &middot; Shades of Blush &amp; Rose Gold</div>
+
+      <div class="divider"><span>&hearts;</span></div>
+
+      <div class="count" id="countdown" aria-label="Countdown">
+        <div class="box"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
+        <div class="box"><div class="num" id="cd-h">--</div><div class="lbl">Hours</div></div>
+        <div class="box"><div class="num" id="cd-m">--</div><div class="lbl">Mins</div></div>
+        <div class="box"><div class="num" id="cd-s">--</div><div class="lbl">Secs</div></div>
+      </div>
+
+      <div class="events">
+        <div class="event">
+          <div class="day"><b>Sun 2 May</b><span>7:00 PM</span></div>
+          <p>Nikah Ceremony<small>Arrival of the groom, followed by dinner</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Mon 3 May</b><span>1:00 PM</span></div>
+          <p>Walima Reception<small>Lunch &amp; blessings with family and friends</small></p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn gold" id="rsvpBtn" type="button">RSVP Now</button>
+        <button class="btn ghost" id="calBtn" type="button">Add to Calendar</button>
+      </div>
+
+      <div id="rsvp" class="hidden">
+        <h3>Will you join us?</h3>
+        <input id="guestName" type="text" placeholder="Your name" maxlength="40" aria-label="Your name">
+        <select id="guestCount" aria-label="Number of guests">
+          <option value="1">1 guest</option>
+          <option value="2" selected>2 guests</option>
+          <option value="3">3 guests</option>
+          <option value="4">4 guests</option>
+          <option value="5">5+ guests</option>
+        </select>
+        <div class="choice">
+          <button class="btn gold" id="attendYes" type="button">Joyfully Accepts</button>
+          <button class="btn ghost" id="attendNo" type="button">Regretfully Declines</button>
+        </div>
+        <div id="rsvpMsg"></div>
+      </div>
+    </div>
+    <div class="use-row">
+      <a class="btn gold" href="../builder.html?template=golden-light-rain">Use this template</a>
+      <a class="btn ghost" href="../index.html#templates">All templates</a>
+    </div>
+    <div class="foot">Noor &hearts; Zain &middot; 02 . 05 . 2027 &middot; Demo invitation — no video, only code</div>
+  </main>
+<script>
+(function () {
+  "use strict";
+  var canvas = document.getElementById("light");
+  var ctx = canvas.getContext("2d");
+  var W = 0, H = 0, DPR = 1;
+  var motes = [], sparks = [];
+  var audioCtx = null, musicOn = false, musicTimer = null;
+  var NOTE_SEQ = [523.25, 587.33, 659.25, 783.99, 880.0, 783.99, 659.25, 587.33];
+  var noteIdx = 0;
+
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    canvas.style.width = W + "px"; canvas.style.height = H + "px";
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  /* ---------- drifting golden light motes / soft bokeh ---------- */
+  function makeMote() {
+    return {
+      x: rand(0, W), y: rand(0, H),
+      r: rand(2, 9), vy: rand(-0.18, -0.05), vx: rand(-0.08, 0.08),
+      sway: rand(0, 6.28), alpha: rand(0.12, 0.5),
+      color: pick(["#d4af37", "#e6c87a", "#f6d5a8", "#ffffff", "#e8c9a0"])
+    };
+  }
+  for (var i = 0; i < (W < 600 ? 16 : 26); i++) motes.push(makeMote());
+
+  function drawMote(m) {
+    var g = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r * 3);
+    g.addColorStop(0, m.color);
+    g.addColorStop(1, "rgba(255,255,255,0)");
+    ctx.globalAlpha = m.alpha;
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(m.x, m.y, m.r * 3, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+  function burst(x, y) {
+    for (var j = 0; j < 26; j++) {
+      var a = (j / 26) * Math.PI * 2 + rand(-0.2, 0.2);
+      var sp = rand(0.8, 3.2);
+      sparks.push({
+        x: x, y: y,
+        vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+        life: 1, decay: rand(0.012, 0.028),
+        size: rand(2, 6),
+        color: pick(["#d4af37", "#e6c87a", "#ffe9a8", "#ffffff", "#f6d5a8"])
+      });
+    }
+  }
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < motes.length; i++) {
+      var m = motes[i];
+      m.sway += 0.01;
+      m.x += m.vx + Math.sin(m.sway) * 0.15;
+      m.y += m.vy;
+      if (m.y < -14) { m.y = H + 14; m.x = rand(0, W); }
+      if (m.x < -14) m.x = W + 14;
+      if (m.x > W + 14) m.x = -14;
+      drawMote(m);
+    }
+    for (var k = sparks.length - 1; k >= 0; k--) {
+      var s = sparks[k];
+      s.life -= s.decay;
+      if (s.life <= 0) { sparks.splice(k, 1); continue; }
+      s.x += s.vx; s.y += s.vy;
+      s.vx *= 0.985; s.vy *= 0.985;
+      s.vy -= 0.008;
+      var g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.size * 3);
+      g.addColorStop(0, s.color);
+      g.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.globalAlpha = Math.max(0, s.life);
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.size * 3, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+
+  /* ---------- audio (created only after a tap) ---------- */
+  function ensureAudio() {
+    if (!audioCtx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) audioCtx = new AC();
+    }
+    if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+    return audioCtx;
+  }
+  function tone(freq, dur, type, vol, when) {
+    if (!ensureAudio()) return;
+    var t = audioCtx.currentTime + (when || 0);
+    var o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    o.type = type || "sine";
+    o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.12, t + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(t); o.stop(t + dur + 0.05);
+  }
+  function chime() {
+    tone(659.25, 0.5, "triangle", 0.12, 0);
+    tone(783.99, 0.5, "triangle", 0.12, 0.14);
+    tone(1046.5, 0.8, "triangle", 0.10, 0.28);
+  }
+  function musicStep() {
+    if (!musicOn) return;
+    var f = NOTE_SEQ[noteIdx % NOTE_SEQ.length];
+    noteIdx++;
+    tone(f, 0.7, "triangle", 0.05, 0);
+    if (noteIdx % 4 === 0) tone(f / 2, 0.9, "sine", 0.04, 0);
+  }
+  var musicBtn = document.getElementById("musicBtn");
+  musicBtn.addEventListener("click", function () {
+    ensureAudio();
+    musicOn = !musicOn;
+    musicBtn.innerHTML = musicOn ? "&#9834; Music: On" : "&#9834; Music: Off";
+    if (musicOn) { musicStep(); musicTimer = setInterval(musicStep, 480); }
+    else if (musicTimer) { clearInterval(musicTimer); musicTimer = null; }
+  });
+
+  /* ---------- golden light burst on tap ---------- */
+  window.addEventListener("pointerdown", function (e) {
+    if (e.target.closest("button, input, select, a")) return;
+    burst(e.clientX, e.clientY);
+    tone(1046.5, 0.4, "sine", 0.05, 0);
+    tone(1318.5, 0.5, "sine", 0.04, 0.1);
+  });
+
+  /* ---------- cover ---------- */
+  var cover = document.getElementById("cover");
+  var main = document.getElementById("main");
+  document.getElementById("openBtn").addEventListener("click", function () {
+    chime();
+    burst(window.innerWidth / 2, window.innerHeight * 0.4);
+    setTimeout(function () {
+      cover.classList.add("opened");
+      main.classList.remove("hidden");
+    }, 200);
+    setTimeout(function () { cover.style.display = "none"; }, 1500);
+  });
+
+  /* ---------- countdown ---------- */
+  var target = new Date("2027-05-02T19:00:00+05:00").getTime();
+  function tick() {
+    var diff = Math.max(0, target - Date.now());
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor(diff / 3600000) % 24;
+    var m = Math.floor(diff / 60000) % 60;
+    var s = Math.floor(diff / 1000) % 60;
+    document.getElementById("cd-d").textContent = d;
+    document.getElementById("cd-h").textContent = (h < 10 ? "0" : "") + h;
+    document.getElementById("cd-m").textContent = (m < 10 ? "0" : "") + m;
+    document.getElementById("cd-s").textContent = (s < 10 ? "0" : "") + s;
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ---------- RSVP ---------- */
+  document.getElementById("rsvpBtn").addEventListener("click", function () {
+    var r = document.getElementById("rsvp");
+    r.classList.toggle("hidden");
+    if (!r.classList.contains("hidden")) document.getElementById("guestName").focus();
+  });
+  function rsvp(attending) {
+    var name = document.getElementById("guestName").value.trim();
+    var count = document.getElementById("guestCount").value;
+    var msg = document.getElementById("rsvpMsg");
+    try {
+      var saved = JSON.parse(localStorage.getItem("demo-rsvp-golden-light-rain") || "[]");
+      saved.push({ name: name, count: count, attending: attending, at: Date.now() });
+      localStorage.setItem("demo-rsvp-golden-light-rain", JSON.stringify(saved));
+    } catch (err) { /* private mode: ignore */ }
+    if (attending) {
+      msg.textContent = name
+        ? "Shukriya, " + name + "! " + count + " guest(s) noted — hum intezaar karenge."
+        : "Shukriya! " + count + " guest(s) noted — hum intezaar karenge.";
+      burst(window.innerWidth / 2, window.innerHeight * 0.5);
+      chime();
+    } else {
+      msg.textContent = name
+        ? "Shukriya, " + name + " — aapki duaen hamare saath hain."
+        : "Shukriya — aapki duaen hamare saath hain.";
+    }
+  }
+  document.getElementById("attendYes").addEventListener("click", function () { rsvp(true); });
+  document.getElementById("attendNo").addEventListener("click", function () { rsvp(false); });
+
+  /* ---------- add to calendar (.ics) ---------- */
+  document.getElementById("calBtn").addEventListener("click", function () {
+    var ics = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Demo Invitation//EN",
+      "BEGIN:VEVENT", "UID:noor-zain-nikah@demo",
+      "DTSTAMP:20261124T000000Z",
+      "DTSTART:20270502T140000Z", "DTEND:20270502T180000Z",
+      "SUMMARY:Noor & Zain — Nikah",
+      "LOCATION:Blush Garden Hall\\, Lahore",
+      "DESCRIPTION:Nikah ceremony of Noor & Zain.",
+      "END:VEVENT", "END:VCALENDAR"
+    ].join("\r\n");
+    var blob = new Blob([ics], { type: "text/calendar" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Noor-Zain-Nikah.ics";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  });
+})();
+</script>
+</body>
+</html>

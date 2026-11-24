@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Mariam &amp; Asad — Minimal White Invitation (Demo)</title>
+<meta name="description" content="Demo: Minimal White wedding invitation. A single gold line draws the frame; nothing else moves. HTML/CSS/JS only, no video.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Cormorant Garamond',Georgia,serif;color:#1a1a1a;background:#fff;overflow-x:hidden;min-height:100vh}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:7;display:flex;justify-content:flex-end;align-items:center;padding:10px 14px;pointer-events:none}
+.topbar button{pointer-events:auto;background:#fff;border:1px solid #c9a227;color:#1a1a1a;font-size:13px;padding:5px 11px;border-radius:999px;cursor:pointer;font-family:inherit;letter-spacing:.06em}
+main{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;padding:70px 16px 60px}
+#cover{position:fixed;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:#fff;transition:opacity 1s ease-in-out,transform 1s ease-in-out}
+#cover.opened{opacity:0;pointer-events:none;transform:translateY(-3%)}
+.frame{position:relative;width:min(420px,88vw);height:300px;cursor:pointer}
+.frame svg{position:absolute;inset:0;width:100%;height:100%}
+.frame rect{fill:none;stroke:#c9a227;stroke-width:1.5;stroke-dasharray:1440;stroke-dashoffset:1440;animation:draw 2.4s ease-out .3s forwards}
+.frame.redraw rect{animation:draw2 1.6s ease-out forwards}
+.frame.redraw rect{stroke-dashoffset:1440}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes draw2{from{stroke-dashoffset:1440}to{stroke-dashoffset:0}}
+.frame .inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.frame .mono{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(34px,8vw,52px);color:#1a1a1a;line-height:1.2;letter-spacing:.02em}
+.frame .sub{letter-spacing:.4em;text-transform:uppercase;font-size:11px;color:#8a8a8a;margin-top:14px}
+#openBtn{margin-top:30px;padding:11px 28px;border-radius:999px;cursor:pointer;border:1px solid #1a1a1a;font-family:'Playfair Display',serif;font-size:15px;letter-spacing:.12em;background:#fff;color:#1a1a1a}
+#openBtn:hover{background:#1a1a1a;color:#fff}
+.card{width:100%;max-width:520px;text-align:center;padding:20px 10px;position:relative}
+.frame2{position:relative;border:1px solid #c9a227;padding:38px 22px 28px;cursor:pointer}
+.frame2 svg{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);pointer-events:none}
+.frame2 rect{fill:none;stroke:#c9a227;stroke-width:1;stroke-dasharray:1600;stroke-dashoffset:1600}
+.frame2.drawn rect{animation:draw 2s ease-out forwards}
+.frame2.redraw rect{animation:draw2 1.4s ease-out forwards}
+.frame2 .glint{position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 42%,rgba(201,162,39,.28) 50%,transparent 58%);background-size:250% 100%;background-position:120% 0;transition:background-position 1.2s ease}
+.frame2.redraw .glint{background-position:-20% 0}
+.eyebrow{letter-spacing:.32em;text-transform:uppercase;font-size:11px;color:#8a8a8a;margin:8px 0 4px}
+.names{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(36px,9vw,54px);color:#1a1a1a;line-height:1.2;margin:6px 0 2px}
+.names .amp{color:#c9a227;font-size:.7em}
+.invite-line{font-size:18px;font-style:italic;color:#555;margin:10px 0 4px}
+.rule{width:56px;height:1px;background:#c9a227;margin:20px auto}
+.date-big{font-family:'Playfair Display',serif;font-size:20px;letter-spacing:.1em;color:#1a1a1a;margin-top:10px}
+.venue{font-size:17px;color:#555;margin-top:4px}
+.dress{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#8a8a8a;margin-top:8px}
+.count{display:flex;justify-content:center;gap:18px;margin:18px 0 2px}
+.count .box{min-width:52px;padding:6px 4px}
+.count .num{font-family:'Playfair Display',serif;font-size:22px;color:#1a1a1a}
+.count .lbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8a8a8a}
+.events{text-align:left;margin:14px auto 0;max-width:400px}
+.event{display:flex;gap:12px;padding:11px 4px;border-top:1px solid #e5e5e5}
+.event:last-child{border-bottom:1px solid #e5e5e5}
+.event .day{font-family:'Playfair Display',serif;color:#1a1a1a;min-width:84px}
+.event .day b{display:block;font-size:17px;font-weight:500}
+.event .day span{font-size:12px;color:#8a8a8a}
+.event p{font-size:16px;line-height:1.45}
+.event p small{display:block;font-size:13px;color:#8a8a8a;font-style:italic}
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:20px}
+.btn{font-family:'Playfair Display',serif;font-size:15px;letter-spacing:.06em;padding:10px 20px;border-radius:999px;cursor:pointer;border:1px solid #1a1a1a;text-decoration:none;display:inline-block}
+.btn.gold{background:#1a1a1a;color:#fff}
+.btn.ghost{background:transparent;color:#1a1a1a}
+.btn:active{transform:scale(.97)}
+#rsvp{margin-top:18px;border-top:1px solid #e5e5e5;padding-top:16px}
+#rsvp h3{font-family:'Playfair Display',serif;color:#1a1a1a;font-size:20px;font-weight:500;margin-bottom:10px}
+#rsvp input,#rsvp select{font-family:inherit;font-size:15px;padding:9px 12px;border:1px solid #ccc;border-radius:0;background:#fff;color:#1a1a1a;width:100%;max-width:300px;margin-bottom:10px}
+.choice{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+#rsvpMsg{font-size:17px;font-style:italic;color:#1a1a1a;margin-top:6px;min-height:24px}
+.foot{text-align:center;font-size:13px;color:#8a8a8a;margin-top:20px;letter-spacing:.08em}
+.use-row{margin-top:18px;text-align:center}
+.use-row .btn{margin:4px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="topbar"><button id="musicBtn" type="button" aria-label="Music">&#9834; Music: Off</button></div>
+<div id="cover">
+  <div class="frame" id="coverFrame" aria-label="Gold frame">
+    <svg viewBox="0 0 420 300" preserveAspectRatio="none" aria-hidden="true"><rect x="4" y="4" width="412" height="292"/></svg>
+    <div class="inner"><div class="mono">Mariam &amp; Asad</div><div class="sub">Are Getting Married</div></div>
+  </div>
+  <button id="openBtn" type="button" aria-label="Open the invitation">Open the Invitation</button>
+</div>
+<main id="main" class="hidden">
+  <div class="card">
+    <div class="frame2 drawn" id="mainFrame" aria-label="Gold frame">
+      <svg viewBox="0 0 520 640" preserveAspectRatio="none" aria-hidden="true"><rect x="2" y="2" width="516" height="636"/></svg>
+      <span class="glint"></span>
+      <div class="eyebrow">Together with their families</div>
+      <div class="names">Mariam <span class="amp">&amp;</span> Asad</div>
+      <p class="invite-line">request the honour of your presence<br>at the celebration of their Nikah</p>
+      <div class="rule"></div>
+      <div class="date-big">Sunday, 22 August 2027</div>
+      <div class="venue">7:00 PM onwards &middot; The White Gallery, Karachi</div>
+      <div class="dress">Dress Code &middot; White &amp; Gold</div>
+      <div class="rule"></div>
+      <div class="count" id="countdown" aria-label="Countdown">
+        <div class="box"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
+        <div class="box"><div class="num" id="cd-h">--</div><div class="lbl">Hours</div></div>
+        <div class="box"><div class="num" id="cd-m">--</div><div class="lbl">Mins</div></div>
+        <div class="box"><div class="num" id="cd-s">--</div><div class="lbl">Secs</div></div>
+      </div>
+      <div class="events">
+        <div class="event"><div class="day"><b>Sun 22 Aug</b><span>7:00 PM</span></div><p>Nikah Ceremony<small>Arrival of the groom, followed by dinner</small></p></div>
+        <div class="event"><div class="day"><b>Mon 23 Aug</b><span>1:00 PM</span></div><p>Walima Reception<small>Lunch &amp; blessings with family and friends</small></p></div>
+      </div>
+      <div class="actions">
+        <button class="btn gold" id="rsvpBtn" type="button">RSVP Now</button>
+        <button class="btn ghost" id="calBtn" type="button">Add to Calendar</button>
+      </div>
+      <div id="rsvp" class="hidden">
+        <h3>Will you join us?</h3>
+        <input id="guestName" type="text" placeholder="Your name" maxlength="40" aria-label="Your name">
+        <select id="guestCount" aria-label="Number of guests">
+          <option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4 guests</option><option value="5">5+ guests</option>
+        </select>
+        <div class="choice">
+          <button class="btn gold" id="attendYes" type="button">Joyfully Accepts</button>
+          <button class="btn ghost" id="attendNo" type="button">Regretfully Declines</button>
+        </div>
+        <div id="rsvpMsg"></div>
+      </div>
+    </div>
+  </div>
+  <div class="use-row">
+    <a class="btn gold" href="../builder.html?template=minimal-white">Use this template</a>
+    <a class="btn ghost" href="../index.html#templates">All templates</a>
+  </div>
+  <div class="foot">Mariam &middot; Asad &middot; 22 . 08 . 2027 &middot; Demo invitation — no video, only code</div>
+</main>
+<script>
+(function(){"use strict";
+var audioCtx=null,musicOn=false,musicTimer=null,noteIdx=0;
+var NOTE_SEQ=[523.25,659.25,783.99,659.25,523.25,587.33];
+function ensureAudio(){if(!audioCtx){var AC=window.AudioContext||window.webkitAudioContext;if(AC)audioCtx=new AC()}if(audioCtx&&audioCtx.state==="suspended")audioCtx.resume();return audioCtx}
+function tone(f,d,type,vol,when){if(!ensureAudio())return;var t=audioCtx.currentTime+(when||0);var o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type||"sine";o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(vol||0.1,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+d);o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+d+0.05)}
+function chime(){tone(659.25,0.5,"sine",0.1,0);tone(987.99,0.7,"sine",0.08,0.16)}
+function musicStep(){if(!musicOn)return;var f=NOTE_SEQ[noteIdx%NOTE_SEQ.length];noteIdx++;tone(f,0.8,"sine",0.04,0)}
+var musicBtn=document.getElementById("musicBtn");
+musicBtn.addEventListener("click",function(){ensureAudio();musicOn=!musicOn;musicBtn.innerHTML=musicOn?"&#9834; Music: On":"&#9834; Music: Off";if(musicOn){musicStep();musicTimer=setInterval(musicStep,560)}else if(musicTimer){clearInterval(musicTimer);musicTimer=null}});
+var cover=document.getElementById("cover"),main=document.getElementById("main");
+document.getElementById("openBtn").addEventListener("click",function(){chime();cover.classList.add("opened");main.classList.remove("hidden");setTimeout(function(){cover.style.display="none"},1100)});
+function redraw(el){el.classList.remove("redraw");void el.offsetWidth;el.classList.add("redraw");tone(1046.5,0.4,"sine",0.05,0)}
+document.getElementById("coverFrame").addEventListener("click",function(){redraw(this)});
+document.getElementById("mainFrame").addEventListener("click",function(){redraw(this)});
+var target=new Date("2027-08-22T19:00:00+05:00").getTime();
+function tick(){var diff=Math.max(0,target-Date.now());var d=Math.floor(diff/86400000);var h=Math.floor(diff/3600000)%24;var m=Math.floor(diff/60000)%60;var s=Math.floor(diff/1000)%60;document.getElementById("cd-d").textContent=d;document.getElementById("cd-h").textContent=(h<10?"0":"")+h;document.getElementById("cd-m").textContent=(m<10?"0":"")+m;document.getElementById("cd-s").textContent=(s<10?"0":"")+s}
+tick();setInterval(tick,1000);
+document.getElementById("rsvpBtn").addEventListener("click",function(){var r=document.getElementById("rsvp");r.classList.toggle("hidden");if(!r.classList.contains("hidden"))document.getElementById("guestName").focus()});
+function rsvp(attending){var name=document.getElementById("guestName").value.trim();var count=document.getElementById("guestCount").value;var msg=document.getElementById("rsvpMsg");try{var saved=JSON.parse(localStorage.getItem("demo-rsvp-minimal-white")||"[]");saved.push({name:name,count:count,attending:attending,at:Date.now()});localStorage.setItem("demo-rsvp-minimal-white",JSON.stringify(saved))}catch(err){}if(attending){msg.textContent=name?"Shukriya, "+name+"! "+count+" guest(s) noted — hum intezaar karenge.":"Shukriya! "+count+" guest(s) noted — hum intezaar karenge.";chime()}else{msg.textContent=name?"Shukriya, "+name+" — aapki duaen hamare saath hain.":"Shukriya — aapki duaen hamare saath hain."}}
+document.getElementById("attendYes").addEventListener("click",function(){rsvp(true)});
+document.getElementById("attendNo").addEventListener("click",function(){rsvp(false)});
+document.getElementById("calBtn").addEventListener("click",function(){var ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Demo Invitation//EN","BEGIN:VEVENT","UID:mariam-asad-nikah@demo","DTSTAMP:20261124T000000Z","DTSTART:20270822T140000Z","DTEND:20270822T180000Z","SUMMARY:Mariam & Asad — Nikah","LOCATION:The White Gallery\\, Karachi","DESCRIPTION:Nikah ceremony of Mariam & Asad.","END:VEVENT","END:VCALENDAR"].join("\r\n");var blob=new Blob([ics],{type:"text/calendar"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="Mariam-Asad-Nikah.ics";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)});
+})();
+</script>
+</body>
+</html>
