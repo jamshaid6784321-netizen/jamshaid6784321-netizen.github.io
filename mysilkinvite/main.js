@@ -715,6 +715,39 @@
     });
   }
 
+  /* template carousels: slow auto-scroll, 4 at a time on desktop */
+  $all("[data-carousel]").forEach(function (car) {
+    var track = $(".tpl-track", car);
+    if (!track) return;
+    var prev = $(".tpl-nav.prev", car);
+    var next = $(".tpl-nav.next", car);
+    var timer = null;
+    function step() {
+      var card = $(".tpl-card", track);
+      return card ? card.offsetWidth + 16 : 0;
+    }
+    function advance(dir) {
+      var s = step();
+      if (!s) return;
+      var max = track.scrollWidth - track.clientWidth;
+      var target = track.scrollLeft + dir * s;
+      if (dir > 0 && target > max - 2) target = 0;
+      if (dir < 0 && target < 2) target = max;
+      track.scrollLeft = target;
+    }
+    function start() {
+      if (REDUCED) return;
+      stop();
+      timer = setInterval(function () { advance(1); }, 3500);
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    on(next, "click", function () { stop(); advance(1); start(); });
+    on(prev, "click", function () { stop(); advance(-1); start(); });
+    on(car, "mouseenter", stop);
+    on(car, "mouseleave", start);
+    start();
+  });
+
   /* ---------------- builder ---------------- */
   var builder = $("#builder");
   if (!builder) return;
@@ -1059,38 +1092,6 @@
     }
   });
 
-  /* template carousels: slow auto-scroll, 5 at a time on desktop */
-  $all("[data-carousel]").forEach(function (car) {
-    var track = $(".tpl-track", car);
-    if (!track) return;
-    var prev = $(".tpl-nav.prev", car);
-    var next = $(".tpl-nav.next", car);
-    var timer = null;
-    function step() {
-      var card = $(".tpl-card", track);
-      return card ? card.offsetWidth + 16 : 0;
-    }
-    function advance(dir) {
-      var s = step();
-      if (!s) return;
-      var max = track.scrollWidth - track.clientWidth;
-      var target = track.scrollLeft + dir * s;
-      if (dir > 0 && target > max - 2) target = 0;
-      if (dir < 0 && target < 2) target = max;
-      track.scrollLeft = target;
-    }
-    function start() {
-      if (REDUCED) return;
-      stop();
-      timer = setInterval(function () { advance(1); }, 3500);
-    }
-    function stop() { if (timer) { clearInterval(timer); timer = null; } }
-    on(next, "click", function () { stop(); advance(1); start(); });
-    on(prev, "click", function () { stop(); advance(-1); start(); });
-    on(car, "mouseenter", stop);
-    on(car, "mouseleave", start);
-    start();
-  });
 
   /* init */
   $all(".pick-card").forEach(function (c) {
