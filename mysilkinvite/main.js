@@ -194,8 +194,8 @@
         if (/kaise|kaisay|bna\w*|tareeq\w+|tarika|shuru/.test(s)) {
           return { text: "3 steps hain: 1) template chunein, 2) apne naam, tareekh, waqt aur venue likhein, 3) link aur QR code share karein. Sirf kuch minute lagte hain — try karne ke liye sign-up bhi nahi chahiye.", action: { label: "Open the builder", href: "builder.html" } };
         }
-        if (/template|design|shadi|shaadi|nikah|walima|mehndi|bird|lantern|butterfl|\bcard\b/.test(s)) {
-          return { text: "Hamare paas 2 live templates hain: Golden Birds — parinde par tap karein toh woh ur jata hai; aur Royal Night — roshan lanterns aur titliyan. 4 aur jald aa rahe hain: Blush Garden, Emerald Palace, Sunset Mehndi aur Golden Hour.", action: { label: "See templates", href: "#templates" } };
+        if (/template|design|shadi|shaadi|nikah|walima|mehndi|bird|lantern|butterfl|rose|gate|petal|\bcard\b/.test(s)) {
+          return { text: "Hamare paas 3 live templates hain: Golden Birds — parinde par tap karein toh woh ur jata hai; Royal Night — roshan lanterns aur titliyan; aur Rose Gold Gates — gates khulte hain aur chaandni raat mein mahal dikhta hai. 4 aur jald aa rahe hain: Blush Garden, Emerald Palace, Sunset Mehndi aur Golden Hour.", action: { label: "See templates", href: "#templates" } };
         }
         if (/rsvp|mehman\w+|countdown|calendar|qr|guest|includ|feature/.test(s)) {
           return { text: "Har invitation mein RSVP (mehmanon ki ginti ke saath), live countdown, Add to Calendar, paper card ke liye QR code aur har mehman ke liye alag link shamil hai. Ek wedding invitation mein Nikah aur Walima dono ek page par ho sakte hain." };
@@ -230,8 +230,8 @@
       if (/\bhow\b|creat\w*|mak(e|ing)|made|start|build|begin|\bsteps?\b/.test(s)) {
         return { text: "It's 3 steps: 1) pick a template, 2) add your names, date, time and venue, 3) share your link and QR code. It takes just a few minutes — no sign-up needed to try.", action: { label: "Open the builder", href: "builder.html" } };
       }
-      if (/template|design|theme|bird|lantern|butterfl|\bcard\b/.test(s)) {
-        return { text: "We have two live templates: Golden Birds — tap a bird and it flies away with a chirp; and Royal Night — glowing lanterns and butterflies. Four more are coming soon: Blush Garden, Emerald Palace, Sunset Mehndi and Golden Hour.", action: { label: "See templates", href: "#templates" } };
+      if (/template|design|theme|bird|lantern|butterfl|rose|gate|petal|\bcard\b/.test(s)) {
+        return { text: "We have three live templates: Golden Birds — tap a bird and it flies away with a chirp; Royal Night — glowing lanterns and butterflies; and Rose Gold Gates — gates open onto a moonlit balcony and castle. Four more are coming soon: Blush Garden, Emerald Palace, Sunset Mehndi and Golden Hour.", action: { label: "See templates", href: "#templates" } };
       }
       if (/rsvp|countdown|calendar|qr|guest|nikah|walima|includ|feature/.test(s)) {
         return { text: "Every invitation includes RSVP with guest count, a live countdown, Add to Calendar, a QR code for your paper card, and per-guest links. A wedding invitation can carry Nikah and Walima on one page." };
@@ -406,11 +406,37 @@
       ctx.globalAlpha = 1;
     }
 
+    /* ----- drifting rose petals (Rose Gold Gates) ----- */
+    function isRose() { return mode === "rose-gold-gates"; }
+    function makePetal(x, y) {
+      return {
+        x: (x !== undefined) ? x : rand(0, W), y: (y !== undefined) ? y : rand(0, H),
+        size: rand(10, 18), base: rand(0.3, 0.7), phase: rand(0, Math.PI * 2),
+        flap: rand(0.01, 0.03),
+        color: pick(["#f7d6de", "#e8a0b0", "#f6b8c8", "#ffffff", "#ffe9a8"]),
+        dir: 1, startled: 0, vy: rand(0.3, 0.7), _bx: 0,
+        rot: rand(0, 6.28), vr: rand(-0.02, 0.02)
+      };
+    }
+    function drawPetal(p) {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot + Math.sin(p.phase) * 0.3);
+      ctx.fillStyle = p.color; ctx.globalAlpha = 0.9;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, p.size * 0.55, p.size, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+      ctx.globalAlpha = 1;
+    }
+
     /* ----- particles ----- */
     function burst(x, y, kind) {
       var n = (kind === "star") ? 14 : 10;
       var colors = (mode === "birds")
         ? ["#ffffff", "#ffd9e6", "#e8c87e", "#f6b8c8"]
+        : isRose()
+        ? ["#f7d6de", "#e8a0b0", "#ffffff", "#d4af37", "#ffe9a8"]
         : ["#ffe9a8", "#ffffff", "#ffd700", "#ffb347", "#fff8d6"];
       for (var i = 0; i < n; i++) {
         parts.push({
@@ -451,7 +477,7 @@
     function seed() {
       creatures = [];
       var n = W < 600 ? 5 : 8;
-      for (var i = 0; i < n; i++) creatures.push(mode === "birds" ? makeBird() : makeFly());
+      for (var i = 0; i < n; i++) creatures.push(mode === "birds" ? makeBird() : isRose() ? makePetal() : makeFly());
       seedMotes();
     }
     function startle(c, tx, ty) {
@@ -462,11 +488,30 @@
       c.vy = -rand(1.2, 2.6);
       c._bx = (dx / d) * rand(3.2, 4.8);
       if (mode === "birds") { burst(c.x, c.y, "feather"); burst(c.x, c.y, "heart"); chirp(); }
+      else if (isRose()) { burst(c.x, c.y, "heart"); burst(c.x, c.y, "feather"); chime(); }
       else { burst(c.x, c.y, "spark"); chime(); }
     }
     function updateCreatures() {
       for (var i = 0; i < creatures.length; i++) {
         var c = creatures[i];
+        if (isRose()) {
+          /* drifting petal: slow fall + sway; a tap flutters it upward */
+          c.phase += c.flap;
+          if (c.startled > 0) {
+            c.startled--;
+            c.y += c.vy; c.vy *= 0.96; c.vy += 0.03;
+            c.x += (c._bx || 0); c._bx *= 0.94;
+          } else {
+            c.y += c.vy;
+            c.x += Math.sin(c.phase * 0.5) * 0.5;
+          }
+          c.rot += c.vr;
+          if (c.y > H + 20) { c.y = -20; c.x = rand(0, W); c.vy = rand(0.3, 0.7); }
+          if (c.x < -20) c.x = W + 20;
+          if (c.x > W + 20) c.x = -20;
+          drawPetal(c);
+          continue;
+        }
         var speed = c.base * (c.startled > 0 ? 3.5 : 1);
         c.phase += c.startled > 0 ? c.flap * 2.7 : c.flap;
         if (c.wob !== undefined) c.wob += 0.02;
@@ -555,10 +600,10 @@
       }
       if (best) startle(best, x, y);
       else {
-        if (mode === "birds") burst(x, y, "heart"); else burst(x, y, "star");
+        if (mode === "royal") burst(x, y, "star"); else burst(x, y, "heart");
         if (creatures.length < 10) {
           var dir = x < W / 2 ? 1 : -1;
-          var nb = (mode === "birds" ? makeBird : makeFly)(dir > 0 ? -30 : W + 30, Math.max(30, y), dir);
+          var nb = (mode === "birds" ? makeBird : isRose() ? makePetal : makeFly)(dir > 0 ? -30 : W + 30, Math.max(30, y), dir);
           nb.size = 19;
           creatures.push(nb);
         }
@@ -693,7 +738,8 @@
     template: "birds", name1: "", name2: "", event: "Wedding", customEvent: "",
     date: "", time: "19:00", venue: "", host: "Together with their families"
   };
-  if (params.get("template") === "royal" || params.get("template") === "birds") state.template = params.get("template");
+  var tParam = params.get("template");
+  if (tParam === "royal" || tParam === "birds" || tParam === "rose-gold-gates") state.template = tParam;
   if (params.get("event") && EVENT_LINES[params.get("event")]) state.event = params.get("event");
 
   var pvCard = $("#pvCard"), pvSky = lazySky($("#pvSky"), state.template);
@@ -761,8 +807,8 @@
     var iso = state.date && state.time ? state.date + "T" + state.time + ":00" : "";
     if (countTimer) { clearInterval(countTimer); countTimer = null; }
     countTimer = bindCountdown(pvCard, iso);
-    var theme = state.template === "royal" ? "theme-royal" : "theme-birds";
-    pvCard.classList.remove("theme-birds", "theme-royal");
+    var theme = state.template === "royal" ? "theme-royal" : state.template === "rose-gold-gates" ? "theme-rose" : "theme-birds";
+    pvCard.classList.remove("theme-birds", "theme-royal", "theme-rose");
     pvCard.classList.add(theme);
     if (pvSky) pvSky.setMode(state.template);
     updateShare();
