@@ -195,7 +195,7 @@
           return { text: "3 steps hain: 1) template chunein, 2) apne naam, tareekh, waqt aur venue likhein, 3) link aur QR code share karein. Sirf kuch minute lagte hain — try karne ke liye sign-up bhi nahi chahiye.", action: { label: "Open the builder", href: "builder.html" } };
         }
         if (/template|design|shadi|shaadi|nikah|walima|mehndi|bird|lantern|butterfl|rose|gate|petal|\bcard\b/.test(s)) {
-          return { text: "Hamare paas 30 wedding templates live hain — Golden Birds, Royal Night, Rose Gold Gates, Blush Garden, Emerald Palace, Sunset Mehndi aur 24 aur, har ek ka apna design aur rang. Builder mein koi ek chunein aur apne naamon ke saath preview dekhein.", action: { label: "See templates", href: "#templates" } };
+          return { text: "Hamare paas 31 wedding templates live hain — Golden Birds, Royal Night, Rose Gold Gates, Blush Garden, Emerald Palace, Sunset Mehndi aur 25 aur, har ek ka apna design aur rang. Builder mein koi ek chunein aur apne naamon ke saath preview dekhein.", action: { label: "See templates", href: "#templates" } };
         }
         if (/rsvp|mehman\w+|countdown|calendar|qr|guest|includ|feature/.test(s)) {
           return { text: "Har invitation mein RSVP (mehmanon ki ginti ke saath), live countdown, Add to Calendar, paper card ke liye QR code aur har mehman ke liye alag link shamil hai. Ek wedding invitation mein Nikah aur Walima dono ek page par ho sakte hain." };
@@ -231,7 +231,7 @@
         return { text: "It's 3 steps: 1) pick a template, 2) add your names, date, time and venue, 3) share your link and QR code. It takes just a few minutes — no sign-up needed to try.", action: { label: "Open the builder", href: "builder.html" } };
       }
       if (/template|design|theme|bird|lantern|butterfl|rose|gate|petal|\bcard\b/.test(s)) {
-        return { text: "We have 30 wedding templates live — Golden Birds, Royal Night, Rose Gold Gates, Blush Garden, Emerald Palace, Sunset Mehndi and 24 more, each with its own design and colours. Pick one in the builder and preview it with your own names.", action: { label: "See templates", href: "#templates" } };
+        return { text: "We have 31 wedding templates live — Golden Birds, Royal Night, Rose Gold Gates, Blush Garden, Emerald Palace, Sunset Mehndi and 25 more, each with its own design and colours. Pick one in the builder and preview it with your own names.", action: { label: "See templates", href: "#templates" } };
       }
       if (/rsvp|countdown|calendar|qr|guest|nikah|walima|includ|feature/.test(s)) {
         return { text: "Every invitation includes RSVP with guest count, a live countdown, Add to Calendar, a QR code for your paper card, and per-guest links. A wedding invitation can carry Nikah and Walima on one page." };
@@ -797,7 +797,7 @@
   }
   /* Data-driven preview palette: each pick-card carries its template's
      colours as data attributes; the preview card reads them as CSS custom
-     properties, so all 30 templates re-theme without a theme class each.
+     properties, so all 31 templates re-theme without a theme class each.
      The three original themes (birds / royal / rose) keep their classes. */
   function applyPalette(slug, useCustom) {
     if (!pvCard) return;
