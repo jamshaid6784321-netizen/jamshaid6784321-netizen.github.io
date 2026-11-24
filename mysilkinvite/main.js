@@ -99,6 +99,9 @@
       if (p) el.textContent = fmtPrice(cur, p[cur]);
     });
     $all("[data-cur-note]").forEach(function (el) { el.textContent = CUR_NOTES[cur]; });
+    $all("[data-faq-price]").forEach(function (el) {
+      el.textContent = fmtPrice(cur, PRICES.standard[cur]) + "\u2013" + fmtPrice(cur, PRICES.premium[cur]);
+    });
   }
   applyCurrency(detectCurrency());
   detectCurrencyByIP();
