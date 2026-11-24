@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Ayesha &amp; Bilal — Rose Gold Gates Invitation (Demo)</title>
+<meta name="description" content="Demo: Rose Gold Gates wedding invitation. Tap the gates to open them onto a moonlit balcony and castle across the water. HTML/CSS/JS only, no video.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@500;600&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { height:100%; }
+  body {
+    font-family:'Cormorant Garamond', Georgia, serif;
+    color:#5c2e35;
+    background:linear-gradient(180deg,#2e1622 0%,#5c2434 26%,#8e4457 48%,#c07a86 68%,#e8a0b0 84%,#f7d6de 100%);
+    background-attachment:fixed;
+    overflow-x:hidden;
+    min-height:100vh;
+  }
+  /* full moon */
+  .moon {
+    position:fixed; top:6vh; right:10vw; width:110px; height:110px; border-radius:50%;
+    background:radial-gradient(circle at 38% 35%, #fffdf4 0%, #ffefc4 45%, #f2cf8a 70%, rgba(242,207,138,0) 78%);
+    box-shadow:0 0 60px 24px rgba(255,240,200,.45), 0 0 120px 60px rgba(255,220,160,.18);
+    z-index:0; pointer-events:none;
+  }
+  .moon::after {
+    content:""; position:absolute; inset:0; border-radius:50%;
+    background:
+      radial-gradient(circle at 62% 30%, rgba(200,170,110,.35) 0 10px, transparent 11px),
+      radial-gradient(circle at 34% 62%, rgba(200,170,110,.3) 0 13px, transparent 14px),
+      radial-gradient(circle at 68% 66%, rgba(200,170,110,.28) 0 8px, transparent 9px);
+  }
+  /* stars */
+  .stars { position:fixed; inset:0; z-index:0; pointer-events:none; }
+  .stars i {
+    position:absolute; width:2px; height:2px; border-radius:50%; background:#fff;
+    animation:twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle { 0%,100% { opacity:.25; } 50% { opacity:1; } }
+  /* castle across the water */
+  .castle { position:fixed; left:0; right:0; bottom:0; z-index:0; pointer-events:none; line-height:0; }
+  .castle svg { width:100%; height:170px; display:block; }
+  .water {
+    position:fixed; left:0; right:0; bottom:0; height:64px; z-index:0; pointer-events:none;
+    background:linear-gradient(180deg, rgba(247,214,222,.0), rgba(183,110,121,.55) 55%, rgba(92,36,52,.85));
+    overflow:hidden;
+  }
+  .water::before {
+    content:""; position:absolute; inset:0;
+    background:repeating-linear-gradient(90deg, transparent 0 46px, rgba(255,233,168,.28) 46px 50px, transparent 50px 96px);
+    animation:shimmer 7s linear infinite;
+  }
+  @keyframes shimmer { from { transform:translateX(0); } to { transform:translateX(96px); } }
+
+  /* petals canvas floats above everything, never blocks taps */
+  #sky { position:fixed; inset:0; z-index:6; pointer-events:none; }
+
+  /* top bar */
+  .topbar {
+    position:fixed; top:0; left:0; right:0; z-index:7;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:10px 14px; pointer-events:none;
+  }
+  .topbar .hint {
+    pointer-events:auto; background:rgba(255,249,245,.82); border:1px solid #b76e79;
+    color:#8e4a54; font-size:14px; padding:6px 12px; border-radius:999px;
+    box-shadow:0 2px 10px rgba(90,20,40,.25); backdrop-filter:blur(4px);
+  }
+  .topbar button {
+    pointer-events:auto; background:rgba(255,249,245,.85); border:1px solid #b76e79;
+    color:#8e4a54; font-size:14px; padding:6px 12px; border-radius:999px; cursor:pointer;
+    font-family:inherit;
+  }
+
+  main { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; padding:74px 14px 190px; }
+
+  /* ---------- GATE COVER ---------- */
+  #cover {
+    position:fixed; inset:0; z-index:10; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:20px 14px;
+    background:linear-gradient(180deg, rgba(46,22,34,.55) 0%, rgba(92,36,52,.45) 45%, rgba(142,68,87,.5) 100%);
+    transition:transform 1.2s ease-in-out, opacity 1.2s ease-in-out;
+  }
+  #cover.opened { transform:translateY(-102%); opacity:0; pointer-events:none; }
+  #cover .mono { font-family:'Great Vibes', cursive; font-size:clamp(44px,11vw,84px); color:#fff5f7; text-shadow:0 0 24px rgba(255,190,210,.6), 0 2px 14px rgba(0,0,0,.45); line-height:1.05; }
+  #cover .sub { letter-spacing:.35em; text-transform:uppercase; font-size:13px; color:#ffd9e2; margin:12px 0 26px; }
+  /* the ornate gates */
+  .gate { display:flex; width:min(400px, 88vw); height:300px; margin:0 auto; position:relative; }
+  .leaf {
+    flex:1; position:relative; overflow:hidden;
+    background:linear-gradient(180deg,#fffdf8 0%,#fbeef0 60%,#f3dfe2 100%);
+    border:3px solid #d4af37;
+    transition:transform 1.2s ease-in-out;
+  }
+  .leaf.left { border-radius:150px 0 0 0; border-right-width:1.5px; }
+  .leaf.right { border-radius:0 150px 0 0; border-left-width:1.5px; }
+  .leaf::before {
+    content:""; position:absolute; inset:12px;
+    border:2px solid rgba(212,175,55,.75); border-radius:130px 130px 0 0;
+    background:repeating-linear-gradient(90deg, transparent 0 20px, rgba(183,110,121,.5) 20px 23px);
+  }
+  .leaf::after {
+    content:""; position:absolute; left:50%; top:38%; width:74px; height:74px; margin-left:-37px;
+    border:2px solid #d4af37; border-radius:50%;
+    background:radial-gradient(circle at 50% 35%, #fff, #f7d6de 60%, #e8a0b0);
+    box-shadow:0 0 0 6px rgba(255,253,248,.7), 0 0 18px rgba(212,175,55,.55);
+  }
+  .gate.open .leaf.left { transform:translateX(-112%) rotate(-3deg); }
+  .gate.open .leaf.right { transform:translateX(112%) rotate(3deg); }
+  /* flowers on the gate corners */
+  .gate .bloom { position:absolute; width:44px; height:44px; z-index:2; pointer-events:none; }
+  .gate .bloom i {
+    position:absolute; left:50%; top:50%; width:14px; height:20px; margin:-10px 0 0 -7px;
+    border-radius:50% 50% 50% 50%/60% 60% 40% 40%; transform-origin:50% 100%;
+    background:radial-gradient(circle at 50% 30%, #fff, #f6b8c8 70%, #e88aa5);
+  }
+  .gate .bloom i:nth-child(1){ transform:rotate(0deg) translateY(-3px); }
+  .gate .bloom i:nth-child(2){ transform:rotate(72deg) translateY(-3px); }
+  .gate .bloom i:nth-child(3){ transform:rotate(144deg) translateY(-3px); }
+  .gate .bloom i:nth-child(4){ transform:rotate(216deg) translateY(-3px); }
+  .gate .bloom i:nth-child(5){ transform:rotate(288deg) translateY(-3px); }
+  .gate .bloom b {
+    position:absolute; left:50%; top:50%; width:12px; height:12px; margin:-6px 0 0 -6px;
+    border-radius:50%; background:radial-gradient(circle at 40% 35%, #ffe9a8, #d4af37);
+  }
+  .gate .bloom.tl { top:-8px; left:-8px; }
+  .gate .bloom.tr { top:-8px; right:-8px; }
+  /* the bow at the centre seam */
+  .bow { position:absolute; left:50%; top:44%; width:110px; height:64px; margin:-32px 0 0 -55px; z-index:3; transition:opacity .6s, transform .6s; pointer-events:none; }
+  .bow .loop {
+    position:absolute; top:6px; width:46px; height:40px;
+    background:radial-gradient(circle at 50% 30%, #ffe3ea, #f6b8c8 60%, #e88aa5);
+    border:2px solid #d4af37;
+  }
+  .bow .loop.l { left:0; border-radius:50% 50% 50% 50%/60% 60% 40% 40%; transform:rotate(-28deg); }
+  .bow .loop.r { right:0; border-radius:50% 50% 50% 50%/60% 60% 40% 40%; transform:rotate(28deg); }
+  .bow .knot {
+    position:absolute; left:50%; top:50%; width:20px; height:20px; margin:-10px 0 0 -10px;
+    border-radius:50%; background:radial-gradient(circle at 40% 35%, #ffe9a8, #d4af37);
+    border:2px solid #b98a1d;
+  }
+  .bow .tail {
+    position:absolute; top:40px; width:14px; height:34px;
+    background:linear-gradient(#f6b8c8, #e88aa5); border:1px solid #d4af37;
+    clip-path:polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
+  }
+  .bow .tail.l { left:34px; transform:rotate(10deg); }
+  .bow .tail.r { right:34px; transform:rotate(-10deg); }
+  .gate.open .bow { opacity:0; transform:scale(.6); }
+  #openBtn {
+    margin-top:26px; padding:13px 30px; border-radius:999px; cursor:pointer;
+    border:1px solid #d4af37; font-family:'Playfair Display', serif; font-size:17px; letter-spacing:.06em;
+    background:linear-gradient(180deg,#e9b949,#c08a1e); color:#fff;
+    box-shadow:0 8px 22px rgba(0,0,0,.35); animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.05); } }
+  #cover .tap { margin-top:18px; font-size:15px; letter-spacing:.22em; text-transform:uppercase; color:#ffe3ea; animation:bob 1.6s ease-in-out infinite; }
+  @keyframes bob { 0%,100% { transform:translateY(0); opacity:.85; } 50% { transform:translateY(5px); opacity:1; } }
+
+  /* ---------- CARD ---------- */
+  .card {
+    width:100%; max-width:560px; background:rgba(255,249,245,.96);
+    border:1px solid #b76e79; border-radius:18px;
+    box-shadow:0 24px 60px rgba(40,10,20,.4), inset 0 0 0 6px #fffdf8, inset 0 0 0 7px #e8a0b0;
+    padding:34px 22px 26px; text-align:center; position:relative;
+  }
+  .card::before, .card::after {
+    content:""; position:absolute; width:52px; height:52px; z-index:2;
+    background-size:contain; background-repeat:no-repeat; background-position:center; pointer-events:none;
+  }
+  .card::before { background-image:url(../flower-tr.webp); top:-8px; right:-8px; }
+  .card::after { background-image:url(../flower-bl.webp); bottom:-8px; left:-8px; }
+  .bismillah { font-family:'Noto Nastaliq Urdu', serif; font-size:26px; color:#a05a66; line-height:2; }
+  .eyebrow { letter-spacing:.32em; text-transform:uppercase; font-size:12px; color:#b76e79; margin:10px 0 4px; }
+  .names { font-family:'Great Vibes', cursive; font-size:clamp(46px,12vw,72px); color:#8e4a54; line-height:1.15; margin:6px 0 2px; }
+  .names .amp { color:#b76e79; font-size:.7em; }
+  .invite-line { font-size:19px; font-style:italic; color:#7a4a52; margin:10px 0 4px; }
+  .date-big { font-family:'Playfair Display', serif; font-size:22px; letter-spacing:.08em; color:#6b3240; margin-top:14px; }
+  .venue { font-size:18px; color:#7a4a52; margin-top:4px; }
+  .dress { font-size:15px; letter-spacing:.14em; text-transform:uppercase; color:#b76e79; margin-top:8px; }
+  .divider { display:flex; align-items:center; gap:10px; margin:18px auto; max-width:340px; color:#b76e79; }
+  .divider::before,.divider::after { content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,#b76e79,transparent); }
+  .divider span { font-size:18px; }
+
+  /* scratch-to-reveal heart over the date */
+  .scratch-wrap { position:relative; max-width:420px; margin:14px auto 0; padding:12px 10px; }
+  .scratch-wrap canvas {
+    position:absolute; inset:0; width:100%; height:100%; border-radius:14px;
+    cursor:pointer; transition:opacity .8s ease; touch-action:none;
+  }
+  .scratch-wrap canvas.gone { opacity:0; pointer-events:none; }
+  .scratch-note { font-size:14px; font-style:italic; color:#a06a72; margin-top:6px; }
+
+  /* countdown */
+  .count { display:flex; justify-content:center; gap:10px; margin:6px 0 2px; }
+  .count .box { background:#fff5f7; border:1px solid #e8a0b0; border-radius:12px; min-width:64px; padding:10px 6px; }
+  .count .num { font-family:'Playfair Display', serif; font-size:26px; color:#8e4a54; }
+  .count .lbl { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#b76e79; }
+
+  /* timeline */
+  .events { text-align:left; margin:10px auto 0; max-width:420px; }
+  .event { display:flex; gap:12px; padding:12px 6px; border-top:1px dashed #d9a0aa; }
+  .event:last-child { border-bottom:1px dashed #d9a0aa; }
+  .event .day { font-family:'Playfair Display', serif; color:#8e4a54; min-width:86px; }
+  .event .day b { display:block; font-size:20px; }
+  .event .day span { font-size:13px; color:#b76e79; }
+  .event p { font-size:17px; line-height:1.45; }
+  .event p small { display:block; font-size:14px; color:#a06a72; font-style:italic; }
+
+  /* buttons */
+  .actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px; }
+  .btn {
+    font-family:'Playfair Display', serif; font-size:16px; letter-spacing:.04em;
+    padding:11px 20px; border-radius:999px; cursor:pointer; border:1px solid #b76e79;
+    text-decoration:none; display:inline-block;
+  }
+  .btn.gold { background:linear-gradient(180deg,#d98a9b,#b76e79); color:#fff; box-shadow:0 6px 16px rgba(140,60,80,.35); }
+  .btn.ghost { background:transparent; color:#8e4a54; }
+  .btn:active { transform:scale(.97); }
+
+  /* RSVP */
+  #rsvp { margin-top:18px; border-top:1px dashed #d9a0aa; padding-top:16px; }
+  #rsvp h3 { font-family:'Playfair Display', serif; color:#8e4a54; font-size:22px; margin-bottom:10px; }
+  #rsvp input, #rsvp select {
+    font-family:inherit; font-size:16px; padding:10px 12px; border:1px solid #d9a0aa;
+    border-radius:10px; background:#fff; color:#5c2e35; width:100%; max-width:320px; margin-bottom:10px;
+  }
+  .choice { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  #rsvpMsg { font-size:18px; font-style:italic; color:#8e4a54; margin-top:6px; min-height:24px; }
+
+  /* flowers */
+  .garden { display:flex; justify-content:center; gap:18px; margin-top:22px; }
+  .flower { background:none; border:none; cursor:pointer; width:56px; height:64px; position:relative; transition:transform .25s; }
+  .flower.bloom { transform:scale(1.3) rotate(-6deg); }
+  .flower .petal { position:absolute; left:50%; top:6px; width:18px; height:26px; margin-left:-9px; border-radius:50% 50% 50% 50%/60% 60% 40% 40%; transform-origin:50% 100%; background:radial-gradient(circle at 50% 30%, #fff, #f6b8c8 70%, #e88aa5); }
+  .flower .petal:nth-child(1){ transform:rotate(0deg) translateY(-4px); }
+  .flower .petal:nth-child(2){ transform:rotate(60deg) translateY(-4px); }
+  .flower .petal:nth-child(3){ transform:rotate(120deg) translateY(-4px); }
+  .flower .petal:nth-child(4){ transform:rotate(180deg) translateY(-4px); }
+  .flower .petal:nth-child(5){ transform:rotate(240deg) translateY(-4px); }
+  .flower .petal:nth-child(6){ transform:rotate(300deg) translateY(-4px); }
+  .flower .core { position:absolute; left:50%; top:24px; width:16px; height:16px; margin-left:-8px; border-radius:50%; background:radial-gradient(circle at 40% 35%, #ffe9a8, #d4af37); box-shadow:0 0 0 2px rgba(255,255,255,.6); }
+  .flower .stem { position:absolute; left:50%; top:38px; width:3px; height:24px; margin-left:-1.5px; background:#7a9a5e; border-radius:2px; }
+  .garden-note { font-size:15px; font-style:italic; color:#a06a72; margin-top:8px; }
+
+  .foot { text-align:center; font-size:14px; color:#ffd9e2; margin-top:20px; letter-spacing:.06em; text-shadow:0 1px 8px rgba(0,0,0,.4); }
+  .use-row { margin-top:18px; text-align:center; }
+  .use-row .btn { margin:4px; }
+  .hidden { display:none !important; }
+</style>
+</head>
+<body>
+  <div class="moon"></div>
+  <div class="stars" id="stars"></div>
+  <div class="castle" aria-hidden="true">
+    <svg viewBox="0 0 1200 220" preserveAspectRatio="xMidYMax slice">
+      <g fill="#3d1a28">
+        <rect x="0" y="150" width="1200" height="70"/>
+        <rect x="80" y="90" width="90" height="60"/>
+        <path d="M80 90 Q125 30 170 90 Z"/>
+        <rect x="230" y="110" width="60" height="40"/>
+        <path d="M230 110 Q260 70 290 110 Z"/>
+        <rect x="330" y="60" width="110" height="90"/>
+        <path d="M330 60 Q385 -10 440 60 Z"/>
+        <rect x="470" y="100" width="46" height="50"/>
+        <path d="M470 100 Q493 72 516 100 Z"/>
+        <rect x="540" y="40" width="26" height="110"/>
+        <path d="M540 40 Q553 8 566 40 Z"/>
+        <rect x="590" y="80" width="120" height="70"/>
+        <path d="M590 80 Q650 10 710 80 Z"/>
+        <rect x="740" y="105" width="52" height="45"/>
+        <path d="M740 105 Q766 76 792 105 Z"/>
+        <rect x="830" y="55" width="100" height="95"/>
+        <path d="M830 55 Q880 -5 930 55 Z"/>
+        <rect x="970" y="95" width="80" height="55"/>
+        <path d="M970 95 Q1010 40 1050 95 Z"/>
+        <rect x="1090" y="115" width="60" height="35"/>
+        <path d="M1090 115 Q1120 80 1150 115 Z"/>
+      </g>
+      <g fill="#ffd700">
+        <rect x="105" y="105" width="8" height="14" rx="4"/>
+        <rect x="130" y="105" width="8" height="14" rx="4"/>
+        <rect x="250" y="122" width="8" height="12" rx="4"/>
+        <rect x="360" y="85" width="9" height="15" rx="4"/>
+        <rect x="385" y="85" width="9" height="15" rx="4"/>
+        <rect x="410" y="85" width="9" height="15" rx="4"/>
+        <rect x="620" y="100" width="9" height="15" rx="4"/>
+        <rect x="645" y="100" width="9" height="15" rx="4"/>
+        <rect x="670" y="100" width="9" height="15" rx="4"/>
+        <rect x="860" y="80" width="9" height="15" rx="4"/>
+        <rect x="885" y="80" width="9" height="15" rx="4"/>
+        <rect x="995" y="110" width="8" height="13" rx="4"/>
+        <rect x="1020" y="110" width="8" height="13" rx="4"/>
+        <rect x="548" y="60" width="7" height="12" rx="3"/>
+      </g>
+      <g fill="#ffd700" opacity="0.35">
+        <rect x="105" y="168" width="8" height="10" rx="4"/>
+        <rect x="360" y="170" width="9" height="10" rx="4"/>
+        <rect x="620" y="172" width="9" height="10" rx="4"/>
+        <rect x="860" y="170" width="9" height="10" rx="4"/>
+      </g>
+    </svg>
+  </div>
+  <div class="water"></div>
+  <canvas id="sky"></canvas>
+
+  <div class="topbar">
+    <span class="hint">Tip: girti hui pankhudiyon ko chhoo kar dekho</span>
+    <button id="musicBtn" type="button" aria-label="Toggle music">&#9834; Music: Off</button>
+  </div>
+
+  <!-- GATE COVER -->
+  <div id="cover">
+    <div class="mono">Ayesha &amp; Bilal</div>
+    <div class="sub">Are Getting Married</div>
+    <div class="gate" id="gate">
+      <span class="bloom tl"><i></i><i></i><i></i><i></i><i></i><b></b></span>
+      <span class="bloom tr"><i></i><i></i><i></i><i></i><i></i><b></b></span>
+      <div class="leaf left"></div>
+      <div class="leaf right"></div>
+      <div class="bow"><span class="loop l"></span><span class="loop r"></span><span class="knot"></span><span class="tail l"></span><span class="tail r"></span></div>
+    </div>
+    <button id="openBtn" type="button" aria-label="Open the gates">Open the Gates</button>
+    <div class="tap">Tap to Open</div>
+  </div>
+
+  <main id="main" class="hidden">
+    <div class="card">
+      <div class="bismillah">بسم اللہ الرحمن الرحیم</div>
+      <div class="eyebrow">Together with their families</div>
+      <div class="names">Ayesha <span class="amp">&amp;</span> Bilal</div>
+      <p class="invite-line">request the honour of your presence<br>at the celebration of their Nikah</p>
+
+      <div class="divider"><span>&#10022;</span></div>
+
+      <div class="scratch-wrap" id="scratchWrap">
+        <div class="date-big">Saturday, 27 February 2027</div>
+        <canvas id="scratch"></canvas>
+      </div>
+      <div class="scratch-note">Scratch the heart to reveal the date</div>
+      <div class="venue">7:00 PM onwards &middot; The Rosewood Palace, Lahore</div>
+      <div class="dress">Dress Code &middot; Shades of Blush &amp; Rose Gold</div>
+
+      <div class="divider"><span>&hearts;</span></div>
+
+      <div class="count" id="countdown" aria-label="Countdown">
+        <div class="box"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
+        <div class="box"><div class="num" id="cd-h">--</div><div class="lbl">Hours</div></div>
+        <div class="box"><div class="num" id="cd-m">--</div><div class="lbl">Mins</div></div>
+        <div class="box"><div class="num" id="cd-s">--</div><div class="lbl">Secs</div></div>
+      </div>
+
+      <div class="events">
+        <div class="event">
+          <div class="day"><b>Sat 27 Feb</b><span>7:00 PM</span></div>
+          <p>Nikah Ceremony<small>Arrival of the groom, followed by dinner</small></p>
+        </div>
+        <div class="event">
+          <div class="day"><b>Sun 28 Feb</b><span>1:00 PM</span></div>
+          <p>Walima Reception<small>Lunch &amp; blessings with family and friends</small></p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn gold" id="rsvpBtn" type="button">RSVP Now</button>
+        <button class="btn ghost" id="calBtn" type="button">Add to Calendar</button>
+      </div>
+
+      <div id="rsvp" class="hidden">
+        <h3>Will you join us?</h3>
+        <input id="guestName" type="text" placeholder="Your name" maxlength="40" aria-label="Your name">
+        <select id="guestCount" aria-label="Number of guests">
+          <option value="1">1 guest</option>
+          <option value="2" selected>2 guests</option>
+          <option value="3">3 guests</option>
+          <option value="4">4 guests</option>
+          <option value="5">5+ guests</option>
+        </select>
+        <div class="choice">
+          <button class="btn gold" id="attendYes" type="button">Joyfully Accepts</button>
+          <button class="btn ghost" id="attendNo" type="button">Regretfully Declines</button>
+        </div>
+        <div id="rsvpMsg"></div>
+      </div>
+
+      <div class="garden" id="garden" aria-label="Tap a flower">
+        <button class="flower" type="button" aria-label="Flower 1"><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="core"></span><span class="stem"></span></button>
+        <button class="flower" type="button" aria-label="Flower 2"><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="core"></span><span class="stem"></span></button>
+        <button class="flower" type="button" aria-label="Flower 3"><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="core"></span><span class="stem"></span></button>
+        <button class="flower" type="button" aria-label="Flower 4"><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="core"></span><span class="stem"></span></button>
+        <button class="flower" type="button" aria-label="Flower 5"><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="core"></span><span class="stem"></span></button>
+      </div>
+      <div class="garden-note">Phoolon ko bhi chhoo kar dekho — woh khil jate hain</div>
+    </div>
+    <div class="use-row">
+      <a class="btn gold" href="../builder.html?template=rose-gold-gates">Use this template</a>
+      <a class="btn ghost" href="../index.html#templates" style="color:#ffe3ea;border-color:#e8a0b0;">All templates</a>
+    </div>
+    <div class="foot">Ayesha &hearts; Bilal &middot; 27 . 02 . 2027 &middot; Demo invitation — no video, only code</div>
+  </main>
+<script>
+(function () {
+  "use strict";
+  var canvas = document.getElementById("sky");
+  var ctx = canvas.getContext("2d");
+  var W = 0, H = 0, DPR = 1;
+  var petals = [], parts = [];
+  var audioCtx = null, musicOn = false, musicTimer = null;
+  var NOTE_SEQ = [523.25, 587.33, 659.25, 783.99, 880.0, 783.99, 659.25, 587.33];
+  var noteIdx = 0;
+
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    canvas.style.width = W + "px"; canvas.style.height = H + "px";
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  /* ---------- stars ---------- */
+  (function seedStars() {
+    var box = document.getElementById("stars");
+    for (var i = 0; i < 42; i++) {
+      var s = document.createElement("i");
+      s.style.left = rand(0, 100) + "%";
+      s.style.top = rand(0, 45) + "%";
+      s.style.animationDelay = rand(0, 3) + "s";
+      if (Math.random() < 0.3) { s.style.width = "3px"; s.style.height = "3px"; }
+      box.appendChild(s);
+    }
+  })();
+
+  /* ---------- falling rose petals ---------- */
+  function makePetal(x, y) {
+    return {
+      x: (x !== undefined) ? x : rand(0, W),
+      y: (y !== undefined) ? y : rand(0, H),
+      s: rand(6, 12), vy: rand(0.35, 0.85), sway: rand(0, 6.28),
+      rot: rand(0, 6.28), vr: rand(-0.02, 0.02),
+      color: pick(["#ffffff", "#f7d6de", "#f6b8c8", "#e8a0b0", "#ffe9a8"]),
+      startled: 0, vx: 0, vy2: 0
+    };
+  }
+  function seedPetals() {
+    petals = [];
+    var n = W < 600 ? 12 : 18;
+    for (var i = 0; i < n; i++) petals.push(makePetal());
+  }
+  seedPetals();
+
+  function drawPetal(p) {
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = 0.9;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, p.s * 0.55, p.s, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    ctx.globalAlpha = 1;
+  }
+  function drawHeart(x, y, s, color, alpha) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(s / 10, s / 10);
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(0, 3);
+    ctx.bezierCurveTo(-6, -3, -3, -8, 0, -4);
+    ctx.bezierCurveTo(3, -8, 6, -3, 0, 3);
+    ctx.fill();
+    ctx.restore();
+    ctx.globalAlpha = 1;
+  }
+  function burst(x, y, kind) {
+    for (var i = 0; i < 10; i++) {
+      parts.push({
+        x: x, y: y,
+        vx: rand(-1.6, 1.6), vy: rand(-2.4, -0.4),
+        life: 1, decay: rand(0.012, 0.025),
+        size: rand(3, 7), rot: rand(0, 6.28), vr: rand(-0.12, 0.12),
+        kind: kind || (Math.random() < 0.5 ? "petal" : "heart"),
+        color: pick(["#ffffff", "#f7d6de", "#e8a0b0", "#ffe9a8", "#d4af37"])
+      });
+    }
+  }
+  function flutter(p) {
+    p.startled = 45;
+    p.vy2 = -rand(1.4, 2.4);
+    p.vx = rand(-1.6, 1.6);
+    burst(p.x, p.y, "heart");
+    burst(p.x, p.y, "petal");
+    chime();
+  }
+  function updatePetals() {
+    for (var i = 0; i < petals.length; i++) {
+      var p = petals[i];
+      if (p.startled > 0) {
+        p.startled--;
+        p.y += p.vy2; p.vy2 *= 0.96; p.vy2 += 0.03;
+        p.x += p.vx; p.vx *= 0.94;
+      } else {
+        p.y += p.vy;
+        p.sway += 0.015;
+        p.x += Math.sin(p.sway) * 0.5;
+      }
+      p.rot += p.vr;
+      if (p.y > H + 14) { p.y = -14; p.x = rand(0, W); }
+      if (p.x < -16) p.x = W + 16;
+      if (p.x > W + 16) p.x = -16;
+      drawPetal(p);
+    }
+  }
+  function updateParts() {
+    for (var i = parts.length - 1; i >= 0; i--) {
+      var p = parts[i];
+      p.life -= p.decay;
+      if (p.life <= 0) { parts.splice(i, 1); continue; }
+      p.x += p.vx; p.y += p.vy;
+      p.vy += (p.kind === "heart" ? -0.02 : 0.045);
+      p.vx *= 0.985;
+      p.rot += p.vr;
+      if (p.kind === "heart") drawHeart(p.x, p.y, p.size * 1.6, "#e88aa5", Math.max(0, p.life));
+      else {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.globalAlpha = Math.max(0, p.life);
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, p.size * 0.5, p.size, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+        ctx.globalAlpha = 1;
+      }
+    }
+  }
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    updatePetals();
+    updateParts();
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+
+  /* ---------- audio (created only after a tap) ---------- */
+  function ensureAudio() {
+    if (!audioCtx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) audioCtx = new AC();
+    }
+    if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+    return audioCtx;
+  }
+  function tone(freq, dur, type, vol, when) {
+    if (!ensureAudio()) return;
+    var t = audioCtx.currentTime + (when || 0);
+    var o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    o.type = type || "sine";
+    o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.12, t + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(t); o.stop(t + dur + 0.05);
+  }
+  function chime() {
+    tone(659.25, 0.5, "triangle", 0.12, 0);
+    tone(783.99, 0.5, "triangle", 0.12, 0.14);
+    tone(1046.5, 0.8, "triangle", 0.10, 0.28);
+  }
+  function musicStep() {
+    if (!musicOn) return;
+    var f = NOTE_SEQ[noteIdx % NOTE_SEQ.length];
+    noteIdx++;
+    tone(f, 0.7, "triangle", 0.05, 0);
+    if (noteIdx % 4 === 0) tone(f / 2, 0.9, "sine", 0.04, 0);
+  }
+
+  var musicBtn = document.getElementById("musicBtn");
+  musicBtn.addEventListener("click", function () {
+    ensureAudio();
+    musicOn = !musicOn;
+    musicBtn.innerHTML = musicOn ? "&#9834; Music: On" : "&#9834; Music: Off";
+    if (musicOn) { musicStep(); musicTimer = setInterval(musicStep, 480); }
+    else if (musicTimer) { clearInterval(musicTimer); musicTimer = null; }
+  });
+
+  /* ---------- tap handling: petals respond ---------- */
+  window.addEventListener("pointerdown", function (e) {
+    if (e.target.closest("button, input, select, a, .flower, #openBtn, canvas#scratch")) return;
+    var x = e.clientX, y = e.clientY;
+    var best = null, bestD = 60;
+    for (var i = 0; i < petals.length; i++) {
+      var p = petals[i];
+      var d = Math.sqrt((p.x - x) * (p.x - x) + (p.y - y) * (p.y - y));
+      if (d < bestD + p.s) { best = p; bestD = d; }
+    }
+    if (best) {
+      flutter(best);
+    } else {
+      if (petals.length < 22) petals.push(makePetal(x, y));
+      burst(x, y, "heart");
+    }
+  });
+
+  /* ---------- gate open ---------- */
+  var cover = document.getElementById("cover");
+  var main = document.getElementById("main");
+  var gate = document.getElementById("gate");
+  document.getElementById("openBtn").addEventListener("click", function () {
+    chime();
+    gate.classList.add("open");
+    burst(W / 2, H * 0.4, "heart");
+    burst(W / 2, H * 0.4, "petal");
+    setTimeout(function () {
+      cover.classList.add("opened");
+      main.classList.remove("hidden");
+    }, 650);
+    setTimeout(function () { cover.style.display = "none"; }, 1900);
+  });
+
+  /* ---------- flowers ---------- */
+  var flowers = document.querySelectorAll(".flower");
+  flowers.forEach(function (f) {
+    f.addEventListener("click", function (e) {
+      var r = f.getBoundingClientRect();
+      var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      f.classList.add("bloom");
+      setTimeout(function () { f.classList.remove("bloom"); }, 700);
+      burst(cx, cy, "petal");
+      burst(cx, cy, "heart");
+      tone(880, 0.25, "sine", 0.06, 0);
+      tone(1174.66, 0.3, "sine", 0.05, 0.08);
+      e.stopPropagation();
+    });
+  });
+
+  /* ---------- scratch-to-reveal heart (the date) ---------- */
+  (function scratchHeart() {
+    var wrap = document.getElementById("scratchWrap");
+    var cv = document.getElementById("scratch");
+    var sctx = cv.getContext("2d");
+    var scratching = false, revealed = false;
+    function sizeCanvas() {
+      var r = wrap.getBoundingClientRect();
+      cv.width = Math.max(50, r.width);
+      cv.height = Math.max(50, r.height);
+      paint();
+    }
+    function paint() {
+      var w = cv.width, h = cv.height;
+      var g = sctx.createLinearGradient(0, 0, w, h);
+      g.addColorStop(0, "#e8a0b0");
+      g.addColorStop(0.55, "#b76e79");
+      g.addColorStop(1, "#8e4a54");
+      sctx.globalCompositeOperation = "source-over";
+      sctx.fillStyle = g;
+      sctx.fillRect(0, 0, w, h);
+      // heart
+      sctx.save();
+      sctx.translate(w / 2, h / 2 + 2);
+      var s = Math.min(w, h) * 0.26;
+      sctx.scale(s / 10, s / 10);
+      sctx.fillStyle = "rgba(255, 233, 168, 0.95)";
+      sctx.beginPath();
+      sctx.moveTo(0, 3);
+      sctx.bezierCurveTo(-6, -3, -3, -8, 0, -4);
+      sctx.bezierCurveTo(3, -8, 6, -3, 0, 3);
+      sctx.fill();
+      sctx.restore();
+      sctx.fillStyle = "rgba(255, 245, 247, 0.95)";
+      sctx.font = "600 13px Georgia, serif";
+      sctx.textAlign = "center";
+      sctx.fillText("Scratch the heart", w / 2, h - 10);
+    }
+    function pos(e) {
+      var r = cv.getBoundingClientRect();
+      var t = e.touches ? e.touches[0] : e;
+      return { x: t.clientX - r.left, y: t.clientY - r.top };
+    }
+    function erase(e) {
+      if (!scratching || revealed) return;
+      var p = pos(e);
+      sctx.globalCompositeOperation = "destination-out";
+      sctx.beginPath();
+      sctx.arc(p.x, p.y, 17, 0, Math.PI * 2);
+      sctx.fill();
+      check();
+    }
+    function check() {
+      try {
+        var d = sctx.getImageData(0, 0, cv.width, cv.height).data;
+        var clear = 0, total = 0;
+        for (var i = 3; i < d.length; i += 32) { total++; if (d[i] < 40) clear++; }
+        if (total && clear / total > 0.4) {
+          revealed = true;
+          cv.classList.add("gone");
+          setTimeout(function () { cv.style.display = "none"; }, 900);
+          chime();
+        }
+      } catch (err) { /* ignore */ }
+    }
+    cv.addEventListener("pointerdown", function (e) { scratching = true; erase(e); e.preventDefault(); });
+    window.addEventListener("pointermove", erase);
+    window.addEventListener("pointerup", function () { scratching = false; });
+    window.addEventListener("resize", function () { if (!revealed) sizeCanvas(); });
+    sizeCanvas();
+  })();
+
+  /* ---------- countdown ---------- */
+  var target = new Date("2027-02-27T19:00:00+05:00").getTime();
+  function tick() {
+    var diff = Math.max(0, target - Date.now());
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor(diff / 3600000) % 24;
+    var m = Math.floor(diff / 60000) % 60;
+    var s = Math.floor(diff / 1000) % 60;
+    document.getElementById("cd-d").textContent = d;
+    document.getElementById("cd-h").textContent = (h < 10 ? "0" : "") + h;
+    document.getElementById("cd-m").textContent = (m < 10 ? "0" : "") + m;
+    document.getElementById("cd-s").textContent = (s < 10 ? "0" : "") + s;
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ---------- RSVP ---------- */
+  document.getElementById("rsvpBtn").addEventListener("click", function () {
+    var r = document.getElementById("rsvp");
+    r.classList.toggle("hidden");
+    if (!r.classList.contains("hidden")) document.getElementById("guestName").focus();
+  });
+  function rsvp(attending) {
+    var name = document.getElementById("guestName").value.trim() || "Mehmaan";
+    var count = document.getElementById("guestCount").value;
+    var msg = document.getElementById("rsvpMsg");
+    try {
+      var saved = JSON.parse(localStorage.getItem("demo-rsvp-rose") || "[]");
+      saved.push({ name: name, count: count, attending: attending, at: Date.now() });
+      localStorage.setItem("demo-rsvp-rose", JSON.stringify(saved));
+    } catch (err) { /* private mode: ignore */ }
+    if (attending) {
+      msg.textContent = "Shukriya, " + name + "! " + count + " guest(s) noted — hum intezaar karenge.";
+      burst(window.innerWidth / 2, window.innerHeight * 0.5, "heart");
+      chime();
+    } else {
+      msg.textContent = "Shukriya, " + name + " — aapki duaen hamare saath hain.";
+    }
+  }
+  document.getElementById("attendYes").addEventListener("click", function () { rsvp(true); });
+  document.getElementById("attendNo").addEventListener("click", function () { rsvp(false); });
+
+  /* ---------- add to calendar (.ics) ---------- */
+  document.getElementById("calBtn").addEventListener("click", function () {
+    var ics = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Demo Invitation//EN",
+      "BEGIN:VEVENT", "UID:ayesha-bilal-nikah@demo",
+      "DTSTAMP:20261124T000000Z",
+      "DTSTART:20270227T140000Z", "DTEND:20270227T180000Z",
+      "SUMMARY:Ayesha & Bilal — Nikah",
+      "LOCATION:The Rosewood Palace\\, Lahore",
+      "DESCRIPTION:Nikah ceremony of Ayesha & Bilal.",
+      "END:VEVENT", "END:VCALENDAR"
+    ].join("\r\n");
+    var blob = new Blob([ics], { type: "text/calendar" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Ayesha-Bilal-Nikah.ics";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  });
+})();
+</script>
+</body>
+</html>
