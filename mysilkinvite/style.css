@@ -220,10 +220,10 @@ img, canvas { max-width: 100%; }
 .gallery { display: grid; gap: 16px; }
 @media (min-width: 760px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
 .tpl-card {
-  background: var(--silk); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  background: var(--silk); border: 1px solid var(--line); border-radius: 14px;
   display: flex; flex-direction: column;
 }
-.tpl-sw { height: 150px; position: relative; display: flex; align-items: flex-end; padding: 12px; }
+.tpl-sw { height: 150px; position: relative; display: flex; align-items: flex-end; padding: 12px; border-radius: 14px 14px 0 0; }
 .tpl-sw.birds { background: linear-gradient(160deg, #ffe9d6, #f7c9a8 55%, #d9a06f); }
 .tpl-sw.royal { background: linear-gradient(160deg, #04140d, #0a3d26 60%, #0d4a2e); }
 .tpl-sw.coming { background: linear-gradient(160deg, #efe6d2, #d9cba8); }
@@ -449,8 +449,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .plan::before { width: 56px; height: 56px; top: -9px; right: -9px; }
 .plan::after { width: 56px; height: 56px; bottom: -9px; left: -9px; }
 .plan .btn { position: relative; z-index: 1; }
-.tpl-card::before { width: 52px; height: 52px; top: 0; right: 0; z-index: 1; }
-.tpl-card::after { width: 52px; height: 52px; bottom: 0; left: 0; }
+.tpl-card::before { width: 52px; height: 52px; top: -8px; right: -8px; z-index: 1; }
+.tpl-card::after { width: 52px; height: 52px; bottom: -8px; left: -8px; }
 .tpl-body { padding-bottom: 30px; }
 .tpl-body .btn, .tpl-body .badge-soon { position: relative; z-index: 1; }
 .cat-card::before { width: 44px; height: 44px; top: -7px; right: -7px; }
@@ -463,6 +463,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .plan::before { top: -8px; right: -8px; }
   .plan::after { bottom: -8px; left: -8px; }
   .tpl-card::before, .tpl-card::after { width: 44px; height: 44px; }
+  .tpl-card::before { top: -7px; right: -7px; }
+  .tpl-card::after { bottom: -7px; left: -7px; }
   .cat-card::before, .cat-card::after { width: 36px; height: 36px; }
   .cat-card::before { top: -6px; right: -6px; }
   .cat-card::after { bottom: -6px; left: -6px; }
